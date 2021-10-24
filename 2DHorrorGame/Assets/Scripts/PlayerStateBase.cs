@@ -2,16 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerStateBase
 {
-    abstract void EnterState(PlayerStateMachine player)
-    {
-
-    }
-    abstract void UpdateState(PlayerStateMachine player)
-    {
-
-    }
-    abstract void OnCollisionEnter(PlayerStateMachine player)
-    {
-
-    }
+    public abstract void EnterState(PlayerStateMachine player);
+    public abstract void UpdateState(PlayerStateMachine player);
+    public abstract void OnCollisionEnter(PlayerStateMachine player);
 }
