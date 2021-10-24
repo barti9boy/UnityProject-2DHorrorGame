@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    PlayerStateBase currentState;
-    PlayerStateIdle idleState = new PlayerStateIdle();
-    PlayerStateMoving movingState = new PlayerStateMoving();
-    PlayerStateHiding hidingState = new PlayerStateHiding();
-    PlayerStateDead deadState = new PlayerStateDead();
+    public PlayerStateBase currentState;
+    public PlayerStateIdle idleState = new PlayerStateIdle();
+    public PlayerStateMoving movingState = new PlayerStateMoving();
+    public PlayerStateHiding hidingState = new PlayerStateHiding();
+    public PlayerStateDead deadState = new PlayerStateDead();
    
     void Start()
     {
@@ -20,5 +20,11 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+    }
+
+    public void SwitchState(PlayerStateBase state)
+    {
+        currentState = state;
+        state.EnterState(this);
     }
 }
