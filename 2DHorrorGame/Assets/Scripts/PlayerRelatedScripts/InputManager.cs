@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerActions : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float movementInputDirection;
