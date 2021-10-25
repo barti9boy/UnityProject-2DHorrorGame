@@ -4,7 +4,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateIdle : PlayerStateBase
 {
-    public PlayerStateIdle(GameObject playerObject) : base(playerObject) {}
+    public Rigidbody2D rb;
+    public PlayerInput playerInput;
+    public PlayerActions playerActions;
+
+    public PlayerStateIdle(GameObject playerObject) : base(playerObject) 
+    {
+        rb = playerObject.GetComponent<Rigidbody2D>();
+        playerInput = playerObject.GetComponent<PlayerInput>();
+        playerActions = playerObject.GetComponent<PlayerActions>();
+    }
 
     public event EventHandler OnEnterStateIdle;
     public override void EnterState(PlayerStateMachine player)
@@ -14,11 +23,11 @@ public class PlayerStateIdle : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player)
     {
-        if (Input.GetButtonDown("Jump"))
+        rb.velocity = new Vector2(0,0);
+        if(playerActions.facingDirection != 0)
         {
             player.SwitchState(player.movingState);
         }
-
     }
     public override void OnCollisionEnter(PlayerStateMachine player)
     {

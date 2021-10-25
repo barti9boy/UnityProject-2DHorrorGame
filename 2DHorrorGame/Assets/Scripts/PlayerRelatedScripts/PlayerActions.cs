@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerActions : MonoBehaviour
 {
     public Rigidbody2D rb;
-    [SerializeField] private float movmentSpeed;
+    public float facingDirection;
 
     public void Awake()
     {
@@ -18,8 +18,11 @@ public class PlayerActions : MonoBehaviour
         if(context.performed)
         {
             Debug.Log("" + context.ReadValue<float>());
+            facingDirection = context.ReadValue<float>();
         }
-        rb.velocity = new Vector2(movmentSpeed * context.ReadValue<float>(), 0);
-        
+        else
+        {
+            facingDirection = 0;
+        }
     }
 }

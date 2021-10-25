@@ -7,6 +7,9 @@ public class PlayerStateMoving : PlayerStateBase
     public Rigidbody2D rb;
     public PlayerInput playerInput;
     public PlayerActions playerActions;
+
+    public float movementSpeed = 5f;
+
     public PlayerStateMoving(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -22,7 +25,14 @@ public class PlayerStateMoving : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player)
     {
-
+        if(playerActions.facingDirection == 0)
+        {
+            player.SwitchState(player.idleState);
+        }
+        else
+        {
+            rb.velocity = new Vector2(movementSpeed * playerActions.facingDirection, 0);
+        }
     }
     public override void OnCollisionEnter(PlayerStateMachine player)
     {
