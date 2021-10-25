@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerStateBase
 {
-    public PlayerStateBase(UnityEngine.Object playerObject)
+    public PlayerStateBase(GameObject playerObject)
     {
 
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerStateDead : PlayerStateBase
 {
-    public PlayerStateDead(UnityEngine.Object playerObject) : base(playerObject) { }
+    public PlayerStateDead(GameObject playerObject) : base(playerObject) { }
 
     public event EventHandler OnEnterStateDead;
     public override void EnterState(PlayerStateMachine player)

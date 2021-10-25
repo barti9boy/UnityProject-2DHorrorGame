@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerActions;
 
 public class PlayerStateMoving : PlayerStateBase
 {
     public Rigidbody2D rb;
     public PlayerInput playerInput;
-    public PlayerStateMoving(UnityEngine.Object playerObject) : base(playerObject) 
+    public PlayerActions playerActions;
+    public PlayerStateMoving(GameObject playerObject) : base(playerObject) 
     {
-        rb = playerObject.Rigidbody2D;
+        rb = playerObject.GetComponent<Rigidbody2D>();
+        playerInput = playerObject.GetComponent<PlayerInput>();
+        playerActions = playerObject.GetComponent<PlayerActions>();
     }
 
     public event EventHandler OnEnterStateMoving;
@@ -17,7 +19,6 @@ public class PlayerStateMoving : PlayerStateBase
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
         Debug.Log("Hello from moving state");
-        Move();
     }
     public override void UpdateState(PlayerStateMachine player)
     {

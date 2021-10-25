@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateIdle : PlayerStateBase
 {
-    public PlayerStateIdle(UnityEngine.Object playerObject) : base(playerObject) {}
+    public PlayerStateIdle(GameObject playerObject) : base(playerObject) {}
 
     public event EventHandler OnEnterStateIdle;
     public override void EnterState(PlayerStateMachine player)

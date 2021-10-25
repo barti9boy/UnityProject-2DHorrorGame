@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-static class PlayerActions 
+public class PlayerActions : MonoBehaviour
 {
+    public Rigidbody2D rb;
+    [SerializeField] private float movmentSpeed;
 
-    public static void Move(InputAction.CallbackContext context, Rigidbody2D rb) 
+    public void Awake()
     {
-        Debug.Log(context);
+        rb = GetComponent<Rigidbody2D>();
+        
+    }
+    public Vector2 Movement(InputAction.CallbackContext context) 
+    {
+        if(context.performed)
+        {
+            Debug.Log("" + context.ReadValue<float>());
+        }
+        return new Vector2(movmentSpeed * context.ReadValue<float>(), 0);
+        
     }
 }

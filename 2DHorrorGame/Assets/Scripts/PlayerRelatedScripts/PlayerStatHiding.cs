@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerStateHiding : PlayerStateBase
 {
-    public PlayerStateHiding(UnityEngine.Object playerObject) : base(playerObject) { }
+    public PlayerStateHiding(GameObject playerObject) : base(playerObject) { }
 
     public event EventHandler OnEnterStateHiding;
     public override void EnterState(PlayerStateMachine player)
