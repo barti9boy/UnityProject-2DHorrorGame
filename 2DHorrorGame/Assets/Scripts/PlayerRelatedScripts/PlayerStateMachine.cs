@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerStateMachine : MonoBehaviour
 {
     public PlayerStateBase currentState;
-    public PlayerStateIdle idleState = new PlayerStateIdle();
-    public PlayerStateMoving movingState = new PlayerStateMoving();
-    public PlayerStateHiding hidingState = new PlayerStateHiding();
-    public PlayerStateDead deadState = new PlayerStateDead();
+    public PlayerStateIdle idleState;
+    public PlayerStateMoving movingState;
+    public PlayerStateHiding hidingState;
+    public PlayerStateDead deadState;
    
-    void Start()
+    void Awake()
     {
+        idleState = new PlayerStateIdle(gameObject);
+        movingState = new PlayerStateMoving(gameObject);
+        hidingState = new PlayerStateHiding(gameObject);
+        deadState = new PlayerStateDead(gameObject);
         currentState = idleState;
         currentState.EnterState(this);
     }
