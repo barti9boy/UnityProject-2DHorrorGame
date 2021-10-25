@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerActions : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float facingDirection;
+    public float movementInputDirection;
 
     public void Awake()
     {
@@ -18,11 +18,11 @@ public class PlayerActions : MonoBehaviour
         if(context.performed)
         {
             Debug.Log("" + context.ReadValue<float>());
-            facingDirection = context.ReadValue<float>();
+            movementInputDirection = context.ReadValue<float>();
         }
         else
         {
-            facingDirection = 0;
+            movementInputDirection = 0;
         }
     }
 }

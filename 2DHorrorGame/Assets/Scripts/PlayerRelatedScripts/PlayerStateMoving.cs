@@ -25,13 +25,13 @@ public class PlayerStateMoving : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player)
     {
-        if(playerActions.facingDirection == 0)
+        if(playerActions.movementInputDirection == 0)
         {
             player.SwitchState(player.idleState);
         }
         else
         {
-            rb.velocity = new Vector2(movementSpeed * playerActions.facingDirection, 0);
+            rb.velocity = new Vector2(movementSpeed * playerActions.movementInputDirection, 0);
         }
     }
     public override void OnCollisionEnter(PlayerStateMachine player)

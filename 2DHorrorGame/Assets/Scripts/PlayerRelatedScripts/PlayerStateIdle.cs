@@ -24,7 +24,7 @@ public class PlayerStateIdle : PlayerStateBase
     public override void UpdateState(PlayerStateMachine player)
     {
         rb.velocity = new Vector2(0,0);
-        if(playerActions.facingDirection != 0)
+        if(playerActions.movementInputDirection != 0)
         {
             player.SwitchState(player.movingState);
         }
