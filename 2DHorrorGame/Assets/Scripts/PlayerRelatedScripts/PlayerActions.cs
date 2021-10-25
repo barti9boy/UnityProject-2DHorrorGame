@@ -13,13 +13,13 @@ public class PlayerActions : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         
     }
-    public Vector2 Movement(InputAction.CallbackContext context) 
+    public void Movement(InputAction.CallbackContext context) 
     {
         if(context.performed)
         {
             Debug.Log("" + context.ReadValue<float>());
         }
-        return new Vector2(movmentSpeed * context.ReadValue<float>(), 0);
+        rb.velocity = new Vector2(movmentSpeed * context.ReadValue<float>(), 0);
         
     }
 }
