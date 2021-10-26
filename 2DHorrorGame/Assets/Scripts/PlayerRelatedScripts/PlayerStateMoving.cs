@@ -7,7 +7,9 @@ public class PlayerStateMoving : PlayerStateBase
     public Rigidbody2D rb;
     public PlayerInput playerInput;
     public InputManager inputManager;
+    public Transform playerTransform;
 
+    private bool isFacingRight = true;
     public float movementSpeed = 5f;
 
     public PlayerStateMoving(GameObject playerObject) : base(playerObject) 
@@ -15,6 +17,7 @@ public class PlayerStateMoving : PlayerStateBase
         rb = playerObject.GetComponent<Rigidbody2D>();
         playerInput = playerObject.GetComponent<PlayerInput>();
         inputManager = playerObject.GetComponent<InputManager>();
+        playerTransform = playerObject.GetComponent<Transform>();
     }
 
     public event EventHandler OnEnterStateMoving;
@@ -33,9 +36,23 @@ public class PlayerStateMoving : PlayerStateBase
         {
             rb.velocity = new Vector2(movementSpeed * inputManager.movementInputDirection, 0);
         }
+        Flip();
     }
     public override void OnCollisionEnter(PlayerStateMachine player)
     {
 
+    }
+    public void Flip()
+    {
+        if (inputManager.movementInputDirection == 1 && !isFacingRight)
+        {
+            playerTransform.Rotate(0.0f, 0.0f, 180.0f);
+            isFacingRight = true;
+        }
+        else if (inputManager.movementInputDirection == -1 && isFacingRight)
+        {
+            playerTransform.Rotate(0.0f, 0.0f, 180.0f);
+            isFacingRight = false;
+        }
     }
 }
