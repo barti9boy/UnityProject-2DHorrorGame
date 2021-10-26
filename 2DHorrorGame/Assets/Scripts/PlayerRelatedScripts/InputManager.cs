@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
     {
         if(context.performed)
         {
-            Debug.Log("" + context.ReadValue<float>());
+            //Debug.Log("" + context.ReadValue<float>());
             movementInputDirection = context.ReadValue<float>();
         }
         else
