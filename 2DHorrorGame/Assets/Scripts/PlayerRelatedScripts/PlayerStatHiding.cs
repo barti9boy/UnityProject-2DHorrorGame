@@ -14,7 +14,11 @@ public class PlayerStateHiding : PlayerStateBase
     {
 
     }
-    public override void OnCollisionEnter(PlayerStateMachine player)
+    public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
+    {
+
+    }
+    public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
 
     }

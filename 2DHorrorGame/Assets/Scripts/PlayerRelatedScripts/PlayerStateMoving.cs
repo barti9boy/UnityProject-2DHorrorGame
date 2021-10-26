@@ -35,20 +35,29 @@ public class PlayerStateMoving : PlayerStateBase
         Flip();
         Flashlight();
     }
-    public override void OnCollisionEnter(PlayerStateMachine player)
+    public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
 
+    }
+    public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
+    {
+        if (inputManager.isInteractionButtonClicked)
+        {
+
+            Debug.Log("key picked up!");
+
+        }
     }
     public void Flip()
     {
         if (inputManager.movementInputDirection == 1 && !isFacingRight)
         {
-            playerTransform.Rotate(0.0f, 0.0f, 180.0f);
+            playerTransform.Rotate(0.0f, 180.0f,0.0f);
             isFacingRight = true;
         }
         else if (inputManager.movementInputDirection == -1 && isFacingRight)
         {
-            playerTransform.Rotate(0.0f, 0.0f, 180.0f);
+            playerTransform.Rotate(0.0f, 180.0f, 0.0f);
             isFacingRight = false;
         }
     }

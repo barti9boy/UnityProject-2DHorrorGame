@@ -16,5 +16,6 @@ public abstract class PlayerStateBase
     }
     public abstract void EnterState(PlayerStateMachine player);
     public abstract void UpdateState(PlayerStateMachine player);
-    public abstract void OnCollisionEnter(PlayerStateMachine player);
+    public abstract void OnCollisionEnter(PlayerStateMachine player, Collision2D collision);
+    public abstract void OnTriggerStay(PlayerStateMachine player, Collider2D collision);
 }

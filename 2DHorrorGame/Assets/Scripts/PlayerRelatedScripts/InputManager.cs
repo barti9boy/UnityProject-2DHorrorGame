@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public Rigidbody2D rb;
     public float movementInputDirection;
     public bool isFlashlightButtonClicked;
+    public bool isInteractionButtonClicked;
 
     public void Awake()
     {
@@ -31,6 +32,17 @@ public class InputManager : MonoBehaviour
         if (context.started)
         {
             isFlashlightButtonClicked = !isFlashlightButtonClicked;
+        }
+    }
+    public void Interaction(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            isInteractionButtonClicked = true;
+        }
+        if(context.canceled)
+        {
+            isInteractionButtonClicked = false;
         }
     }
 }

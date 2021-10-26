@@ -31,4 +31,12 @@ public class PlayerStateMachine : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        currentState.OnCollisionEnter(this, collision);
+    }
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        currentState.OnTriggerStay(this, collision);
+    }
 }

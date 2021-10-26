@@ -28,10 +28,23 @@ public class PlayerStateIdle : PlayerStateBase
             player.SwitchState(player.movingState);
         }
         Flashlight();
-    }
-    public override void OnCollisionEnter(PlayerStateMachine player)
-    {
 
+    }
+    public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
+    {
+        
+    }
+    public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
+    {
+        if (inputManager.isInteractionButtonClicked)
+        {
+            if(collision.CompareTag("Key"))
+            {
+                inputManager.isInteractionButtonClicked = false;
+                collision.gameObject.SetActive(false);
+                //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
+            }
+        }
     }
     public void Flashlight()
     {
