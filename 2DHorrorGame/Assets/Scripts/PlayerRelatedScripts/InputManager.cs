@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float movementInputDirection;
+    public bool isFlashlightButtonClicked;
 
     public void Awake()
     {
@@ -23,6 +24,13 @@ public class InputManager : MonoBehaviour
         else
         {
             movementInputDirection = 0;
+        }
+    }
+    public void Flashlight(InputAction.CallbackContext context) 
+    {
+        if (context.started)
+        {
+            isFlashlightButtonClicked = !isFlashlightButtonClicked;
         }
     }
 }

@@ -1,7 +1,15 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayerStateBase
 {
+    public Rigidbody2D rb;
+    public PlayerInput playerInput;
+    public InputManager inputManager;
+    public Transform playerTransform;
+    public GameObject flashlight;
+
+    public bool isFacingRight = true;
     public PlayerStateBase(GameObject playerObject)
     {
 

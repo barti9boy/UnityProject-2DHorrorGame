@@ -4,15 +4,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateIdle : PlayerStateBase
 {
-    public Rigidbody2D rb;
-    public PlayerInput playerInput;
-    public InputManager inputManager;
 
     public PlayerStateIdle(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
         playerInput = playerObject.GetComponent<PlayerInput>();
         inputManager = playerObject.GetComponent<InputManager>();
+        playerTransform = playerObject.GetComponent<Transform>();
+        flashlight = playerObject.transform.GetChild(1).gameObject;
     }
 
     public event EventHandler OnEnterStateIdle;
@@ -28,9 +27,21 @@ public class PlayerStateIdle : PlayerStateBase
         {
             player.SwitchState(player.movingState);
         }
+        Flashlight();
     }
     public override void OnCollisionEnter(PlayerStateMachine player)
     {
 
+    }
+    public void Flashlight()
+    {
+        if (inputManager.isFlashlightButtonClicked)
+        {
+            flashlight.SetActive(true);
+        }
+        else if (!inputManager.isFlashlightButtonClicked)
+        {
+            flashlight.SetActive(false);
+        }
     }
 }

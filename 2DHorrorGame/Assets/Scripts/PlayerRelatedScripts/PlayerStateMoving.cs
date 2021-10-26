@@ -4,12 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateMoving : PlayerStateBase
 {
-    public Rigidbody2D rb;
-    public PlayerInput playerInput;
-    public InputManager inputManager;
-    public Transform playerTransform;
 
-    private bool isFacingRight = true;
     public float movementSpeed = 5f;
 
     public PlayerStateMoving(GameObject playerObject) : base(playerObject) 
@@ -18,6 +13,7 @@ public class PlayerStateMoving : PlayerStateBase
         playerInput = playerObject.GetComponent<PlayerInput>();
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
+        flashlight = playerObject.transform.GetChild(1).gameObject;
     }
 
     public event EventHandler OnEnterStateMoving;
@@ -37,6 +33,7 @@ public class PlayerStateMoving : PlayerStateBase
             rb.velocity = new Vector2(movementSpeed * inputManager.movementInputDirection, 0);
         }
         Flip();
+        Flashlight();
     }
     public override void OnCollisionEnter(PlayerStateMachine player)
     {
@@ -53,6 +50,18 @@ public class PlayerStateMoving : PlayerStateBase
         {
             playerTransform.Rotate(0.0f, 0.0f, 180.0f);
             isFacingRight = false;
+        }
+    }
+
+    public void Flashlight()
+    {
+        if(inputManager.isFlashlightButtonClicked)
+        {
+            flashlight.SetActive(true);
+        }
+        else if (!inputManager.isFlashlightButtonClicked )
+        {
+            flashlight.SetActive(false);
         }
     }
 }
