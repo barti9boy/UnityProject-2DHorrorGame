@@ -43,6 +43,7 @@ public class PlayerStateIdle : PlayerStateBase
                 inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.SetActive(false);
                 //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
+                Debug.Log(collision.gameObject.GetComponent<KeyScript>().ItemID);
             }
         }
     }
