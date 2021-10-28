@@ -14,6 +14,7 @@ public class PlayerStateMoving : PlayerStateBase
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
         flashlight = playerObject.transform.GetChild(1).gameObject;
+        playerInventory = playerObject.GetComponent<PlayerInventory>();
     }
 
     public event EventHandler OnEnterStateMoving;

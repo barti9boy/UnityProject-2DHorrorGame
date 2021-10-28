@@ -8,6 +8,7 @@ public abstract class PlayerStateBase
     public InputManager inputManager;
     public Transform playerTransform;
     public GameObject flashlight;
+    public PlayerInventory playerInventory;
 
     public bool isFacingRight = true;
     public PlayerStateBase(GameObject playerObject)

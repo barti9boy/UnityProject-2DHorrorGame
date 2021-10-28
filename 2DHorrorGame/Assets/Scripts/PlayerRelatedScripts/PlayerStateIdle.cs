@@ -12,6 +12,7 @@ public class PlayerStateIdle : PlayerStateBase
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
         flashlight = playerObject.transform.GetChild(1).gameObject;
+        playerInventory = playerObject.GetComponent<PlayerInventory>();
     }
 
     public event EventHandler OnEnterStateIdle;
@@ -41,9 +42,9 @@ public class PlayerStateIdle : PlayerStateBase
             if(collision.CompareTag("Key"))
             {
                 inputManager.isInteractionButtonClicked = false;
+                playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
                 collision.gameObject.SetActive(false);
-                //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
-                Debug.Log(collision.gameObject.GetComponent<KeyScript>().ItemID);
+                playerInventory.DebugLogInventory();
             }
         }
     }
