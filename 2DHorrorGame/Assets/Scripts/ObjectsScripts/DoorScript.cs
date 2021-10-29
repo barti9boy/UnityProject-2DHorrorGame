@@ -7,7 +7,7 @@ public class DoorScript : MonoBehaviour
     public bool isLocked;
     public bool isOpened;
 
-    [SerializeField] private int ItemIDtoUnlock;
+    [SerializeField] private int itemIDtoUnlock;
     private Collider2D doorCollider;
     private void Awake()
     {
@@ -17,7 +17,14 @@ public class DoorScript : MonoBehaviour
     {
         if(isLocked)
         {
-
+            foreach(int ID in itemIDs)
+            {
+                if(ID == itemIDtoUnlock)
+                {
+                    isLocked = false;
+                    isOpened = true;
+                }
+            }
         }
     }
 }

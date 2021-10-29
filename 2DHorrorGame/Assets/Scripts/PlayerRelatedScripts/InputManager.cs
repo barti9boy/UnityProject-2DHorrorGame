@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     public float movementInputDirection;
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
+    public bool isInteractionButtonHeld;
 
     public void Awake()
     {
@@ -38,10 +39,22 @@ public class InputManager : MonoBehaviour
         if(context.started)
         {
             isInteractionButtonClicked = true;
+            StartCoroutine(ClickDuration(0.1f));
+            //inspector sometimes does not register bool change and does not tick the box, but this works correctly
+            
+        }
+        if(context.performed)
+        {
+            isInteractionButtonHeld = true;
         }
         if(context.canceled)
         {
-            isInteractionButtonClicked = false;
+            isInteractionButtonHeld = false;
         }
+    }
+    IEnumerator ClickDuration(float s)
+    {
+        yield return new WaitForSeconds(s);
+        isInteractionButtonClicked = false;
     }
 }
