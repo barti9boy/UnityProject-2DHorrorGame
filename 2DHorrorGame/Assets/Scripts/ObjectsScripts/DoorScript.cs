@@ -7,11 +7,14 @@ public class DoorScript : MonoBehaviour
     public bool isLocked;
     public bool isOpened;
 
-    [SerializeField] private int itemIDtoUnlock;
+    [SerializeField] private int itemIdToUnlock;
+    [SerializeField] private float unlockingTimeRequired;
     private Collider2D doorCollider;
+     
     private void Awake()
     {
-        doorCollider = GetComponent<Collider2D>();
+        doorCollider = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
+        if (!isLocked) isOpened = false;
     }
     public void DoorInteraction(List<int> itemIDs)
     {
@@ -19,12 +22,18 @@ public class DoorScript : MonoBehaviour
         {
             foreach(int ID in itemIDs)
             {
-                if(ID == itemIDtoUnlock)
+                if(ID == itemIdToUnlock)
                 {
-                    isLocked = false;
-                    isOpened = true;
+                        isOpened = true;
+                        isLocked = false;
+                        doorCollider.enabled = false;
                 }
             }
+        }
+        else
+        {
+            isOpened = !isOpened;
+            doorCollider.enabled = !doorCollider.enabled;
         }
     }
 }

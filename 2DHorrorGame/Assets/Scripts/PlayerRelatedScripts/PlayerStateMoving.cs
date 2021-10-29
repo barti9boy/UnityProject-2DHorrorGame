@@ -50,6 +50,10 @@ public class PlayerStateMoving : PlayerStateBase
                 collision.gameObject.SetActive(false);
                 //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
             }
+            if (collision.CompareTag("Doors"))
+            {
+                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
+            }
         }
     }
     public void Flip()

@@ -41,10 +41,13 @@ public class PlayerStateIdle : PlayerStateBase
         {
             if(collision.CompareTag("Key"))
             {
-                inputManager.isInteractionButtonClicked = false;
                 playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
                 collision.gameObject.SetActive(false);
                 playerInventory.DebugLogInventory();
+            }
+            if(collision.CompareTag("Doors"))
+            {
+                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
             }
         }
     }
@@ -59,4 +62,8 @@ public class PlayerStateIdle : PlayerStateBase
             flashlight.SetActive(false);
         }
     }
+
 }
+
+
+

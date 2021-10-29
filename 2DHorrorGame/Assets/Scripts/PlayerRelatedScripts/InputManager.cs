@@ -10,10 +10,23 @@ public class InputManager : MonoBehaviour
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
     public bool isInteractionButtonHeld;
+    public float InteractionTime { get; private set; }
 
-    public void Awake()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+        InteractionTime = 0f;
+    }
+    private void Update()
+    {
+        if(isInteractionButtonHeld)
+        {
+            InteractionTime += Time.deltaTime;
+        }
+        else
+        {
+            InteractionTime = 0;
+        }
     }
     public void Movement(InputAction.CallbackContext context) 
     {
