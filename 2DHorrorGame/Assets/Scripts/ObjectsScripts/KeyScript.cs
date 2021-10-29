@@ -11,7 +11,7 @@ public class KeyScript : MonoBehaviour, IPickableObject
 
     public string DisplayName { get; private set; }
 
-    public void Awake()
+    private void Awake()
     {
         ItemID = itemID;
         DisplayName = displayName;

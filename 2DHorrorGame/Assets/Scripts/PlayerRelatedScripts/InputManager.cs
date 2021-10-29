@@ -12,8 +12,7 @@ public class InputManager : MonoBehaviour
 
     public void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        
+        rb = GetComponent<Rigidbody2D>(); 
     }
     public void Movement(InputAction.CallbackContext context) 
     {
