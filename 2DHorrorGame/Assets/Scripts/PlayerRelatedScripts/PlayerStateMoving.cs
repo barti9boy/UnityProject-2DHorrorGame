@@ -54,6 +54,7 @@ public class PlayerStateMoving : PlayerStateBase
             {
                 inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
+            }
             if (collision.CompareTag("Doors"))
             {
                 collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
