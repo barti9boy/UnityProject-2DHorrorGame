@@ -11,8 +11,9 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateHiding hidingState;
     public PlayerStateDead deadState;
     public Animator animator;
-    public bool isIdle;
-    public bool isMoving;
+    private bool isIdle;
+    private bool isMoving;
+    private bool isHidden;
 
     private void Start()
     {
@@ -34,13 +35,16 @@ public class PlayerGFXScript : MonoBehaviour
     {
         isMoving = false;
         isIdle = false;
+        isHidden = true;
         UpdateAnimations();
     }
 
     private void MovingState_OnEnterStateMoving(object sender, EventArgs e)
     {
+ 
         isMoving = true;
         isIdle = false;
+        isHidden = false;
         UpdateAnimations();
     }
 
@@ -48,6 +52,7 @@ public class PlayerGFXScript : MonoBehaviour
     {
         isMoving = false;
         isIdle = true ;
+        isHidden = false;
         UpdateAnimations();
     }
 
@@ -55,6 +60,7 @@ public class PlayerGFXScript : MonoBehaviour
     {
         animator.SetBool("isMoving", isMoving);
         animator.SetBool("isIdle", isIdle);
+        animator.SetBool("isHidden", isHidden);
     }
 
 }
