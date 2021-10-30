@@ -10,9 +10,14 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateMoving movingState;
     public PlayerStateHiding hidingState;
     public PlayerStateDead deadState;
+    public Animator animator;
+    public bool isIdle;
+    public bool isMoving;
 
-    private void Start()
+    private void Awake()
     {
+        animator = GetComponent<Animator>();
+
         playerSM = GetComponentInParent<PlayerStateMachine>();
         idleState = playerSM.idleState;
         movingState = playerSM.movingState;
@@ -26,12 +31,22 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void MovingState_OnEnterStateMoving(object sender, EventArgs e)
     {
-        Debug.Log("Playing Movement Animation!");
+        isMoving = true;
+        isIdle = false;
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isIdle", isIdle);
+        Debug.Log(isMoving);
+        Debug.Log(isIdle);
     }
 
     private void IdleState_OnEnterStateIdle(object sender, EventArgs e)
     {
-        Debug.Log("Playing Idle Animation!");
+        isMoving = false;
+        isIdle = true ;
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isIdle", isIdle);
+        Debug.Log(isMoving);
+        Debug.Log(isIdle);
     }
 
 }
