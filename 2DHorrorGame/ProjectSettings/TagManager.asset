@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Key
   - Hideout
+  - Doors
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1888270879
+    locked: 0
+  - name: Furnitures
+    uniqueID: 2213493147
+    locked: 0
+  - name: Player
+    uniqueID: 1768864685
+    locked: 0
+  - name: FrontOfPlayer
+    uniqueID: 4115758617
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

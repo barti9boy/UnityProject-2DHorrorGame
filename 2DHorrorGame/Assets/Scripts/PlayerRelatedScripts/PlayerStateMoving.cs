@@ -14,6 +14,7 @@ public class PlayerStateMoving : PlayerStateBase
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
         flashlight = playerObject.transform.GetChild(1).gameObject;
+        playerInventory = playerObject.GetComponent<PlayerInventory>();
     }
 
     public event EventHandler OnEnterStateMoving;
@@ -47,12 +48,15 @@ public class PlayerStateMoving : PlayerStateBase
             {
                 inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.SetActive(false);
-                //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
+                //collisio.gameObject get component jakiï¿½ skrypt w ktï¿½rym bï¿½dzie id przedmiotu
             }
-            else if (collision.CompareTag("Hideout"))
+            if (collision.CompareTag("Hideout"))
             {
                 inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
+            if (collision.CompareTag("Doors"))
+            {
+                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
             }
         }
     }

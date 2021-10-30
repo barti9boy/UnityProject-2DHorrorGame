@@ -10,6 +10,7 @@ public abstract class PlayerStateBase
     public GameObject flashlight;
     public GameObject playerGFX;
     public SpriteRenderer playerSpriteRenderer;
+    public PlayerInventory playerInventory;
 
     public bool isFacingRight = true;
     public PlayerStateBase(GameObject playerObject)

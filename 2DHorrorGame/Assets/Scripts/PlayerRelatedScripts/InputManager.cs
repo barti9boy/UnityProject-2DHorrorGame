@@ -9,11 +9,24 @@ public class InputManager : MonoBehaviour
     public float movementInputDirection;
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
+    public bool isInteractionButtonHeld;
+    public float InteractionTime { get; private set; }
 
-    public void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        InteractionTime = 0f;
+    }
+    private void Update()
+    {
+        if(isInteractionButtonHeld)
+        {
+            InteractionTime += Time.deltaTime;
+        }
+        else
+        {
+            InteractionTime = 0;
+        }
     }
     public void Movement(InputAction.CallbackContext context) 
     {
@@ -39,10 +52,22 @@ public class InputManager : MonoBehaviour
         if(context.performed)
         {
             isInteractionButtonClicked = true;
+            StartCoroutine(ClickDuration(0.1f));
+            //inspector sometimes does not register bool change and does not tick the box, but this works correctly
+            
+        }
+        if(context.performed)
+        {
+            isInteractionButtonHeld = true;
         }
         if (context.canceled)
         {
-            isInteractionButtonClicked = false;
+            isInteractionButtonHeld = false;
         }
+    }
+    IEnumerator ClickDuration(float s)
+    {
+        yield return new WaitForSeconds(s);
+        isInteractionButtonClicked = false;
     }
 }
