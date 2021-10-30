@@ -57,12 +57,10 @@ public class PlayerStateHiding : PlayerStateBase
         if (isFacingRight)
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
-            Debug.LogError(isFacingRight);
         }
         else if (!isFacingRight)
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
-            Debug.LogError(isFacingRight);
         }
         playerSpriteRenderer.sortingOrder = 0;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 0;

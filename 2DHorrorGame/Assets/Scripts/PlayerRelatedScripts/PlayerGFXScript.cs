@@ -27,20 +27,32 @@ public class PlayerGFXScript : MonoBehaviour
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
+        hidingState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
+    }
+
+    private void HidingState_OnEnterStateHiding(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        UpdateAnimations();
     }
 
     private void MovingState_OnEnterStateMoving(object sender, EventArgs e)
     {
         isMoving = true;
         isIdle = false;
-        animator.SetBool("isMoving", isMoving);
-        animator.SetBool("isIdle", isIdle);
+        UpdateAnimations();
     }
 
     private void IdleState_OnEnterStateIdle(object sender, EventArgs e)
     {
         isMoving = false;
         isIdle = true ;
+        UpdateAnimations();
+    }
+
+    private void UpdateAnimations()
+    {
         animator.SetBool("isMoving", isMoving);
         animator.SetBool("isIdle", isIdle);
     }
