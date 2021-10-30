@@ -12,6 +12,7 @@ public class PlayerStateIdle : PlayerStateBase
         playerTransform = playerObject.GetComponent<Transform>();
         flashlight = playerObject.transform.GetChild(1).gameObject;
         playerInventory = playerObject.GetComponent<PlayerInventory>();
+        
     }
 
     public event EventHandler OnEnterStateIdle;
@@ -29,7 +30,6 @@ public class PlayerStateIdle : PlayerStateBase
             player.SwitchState(player.movingState);
         }
         Flashlight();
-
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
