@@ -17,7 +17,7 @@ public class PlayerStateMachine : MonoBehaviour
         hidingState = new PlayerStateHiding(gameObject);
         deadState = new PlayerStateDead(gameObject);
         currentState = idleState;
-        currentState.EnterState(this);
+        currentState.EnterState(this); 
     }
 
 

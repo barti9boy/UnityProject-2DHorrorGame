@@ -43,9 +43,17 @@ public class PlayerStateMoving : PlayerStateBase
     {
         if (inputManager.isInteractionButtonClicked)
         {
-
-            Debug.Log("key picked up!");
-
+            if (collision.CompareTag("Key"))
+            {
+                inputManager.isInteractionButtonClicked = false;
+                collision.gameObject.SetActive(false);
+                //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
+            }
+            else if (collision.CompareTag("Hideout"))
+            {
+                inputManager.isInteractionButtonClicked = false;
+                player.SwitchState(player.hidingState);
+            }
         }
     }
     public void Flip()

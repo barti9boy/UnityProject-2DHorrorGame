@@ -36,11 +36,11 @@ public class InputManager : MonoBehaviour
     }
     public void Interaction(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.performed)
         {
             isInteractionButtonClicked = true;
         }
-        if(context.canceled)
+        if (context.canceled)
         {
             isInteractionButtonClicked = false;
         }

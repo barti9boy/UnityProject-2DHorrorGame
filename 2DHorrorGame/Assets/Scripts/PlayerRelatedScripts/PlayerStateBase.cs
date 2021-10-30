@@ -8,6 +8,8 @@ public abstract class PlayerStateBase
     public InputManager inputManager;
     public Transform playerTransform;
     public GameObject flashlight;
+    public GameObject playerGFX;
+    public SpriteRenderer playerSpriteRenderer;
 
     public bool isFacingRight = true;
     public PlayerStateBase(GameObject playerObject)

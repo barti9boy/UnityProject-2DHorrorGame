@@ -9,6 +9,7 @@ public class PlayerStateDead : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateDead?.Invoke(this, EventArgs.Empty);
+        isFacingRight = player.movingState.isFacingRight;
     }
     public override void UpdateState(PlayerStateMachine player)
     {

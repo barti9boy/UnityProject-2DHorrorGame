@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateIdle : PlayerStateBase
 {
-
     public PlayerStateIdle(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -18,6 +17,7 @@ public class PlayerStateIdle : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
+        isFacingRight = player.movingState.isFacingRight;
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player)
@@ -38,11 +38,16 @@ public class PlayerStateIdle : PlayerStateBase
     {
         if (inputManager.isInteractionButtonClicked)
         {
-            if(collision.CompareTag("Key"))
+            if (collision.CompareTag("Key"))
             {
                 inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.SetActive(false);
                 //collisio.gameObject get component jakiœ skrypt w którym bêdzie id przedmiotu
+            }
+            else if (collision.CompareTag("Hideout"))
+            {
+                inputManager.isInteractionButtonClicked = false;
+                player.SwitchState(player.hidingState);
             }
         }
     }
