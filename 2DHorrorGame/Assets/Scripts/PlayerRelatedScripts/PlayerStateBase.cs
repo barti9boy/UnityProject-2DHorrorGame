@@ -12,6 +12,7 @@ public abstract class PlayerStateBase
     public SpriteRenderer playerSpriteRenderer;
     public PlayerInventory playerInventory;
 
+
     public bool isFacingRight = true;
     public PlayerStateBase(GameObject playerObject)
     {
