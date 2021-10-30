@@ -14,7 +14,7 @@ public class PlayerGFXScript : MonoBehaviour
     public bool isIdle;
     public bool isMoving;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
 
@@ -35,8 +35,6 @@ public class PlayerGFXScript : MonoBehaviour
         isIdle = false;
         animator.SetBool("isMoving", isMoving);
         animator.SetBool("isIdle", isIdle);
-        Debug.Log(isMoving);
-        Debug.Log(isIdle);
     }
 
     private void IdleState_OnEnterStateIdle(object sender, EventArgs e)
@@ -45,8 +43,6 @@ public class PlayerGFXScript : MonoBehaviour
         isIdle = true ;
         animator.SetBool("isMoving", isMoving);
         animator.SetBool("isIdle", isIdle);
-        Debug.Log(isMoving);
-        Debug.Log(isIdle);
     }
 
 }
