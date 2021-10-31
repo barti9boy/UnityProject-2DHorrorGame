@@ -46,9 +46,9 @@ public class PlayerStateMoving : PlayerStateBase
         {
             if (collision.CompareTag("Key"))
             {
-                inputManager.isInteractionButtonClicked = false;
+                playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
                 collision.gameObject.SetActive(false);
-                //collisio.gameObject get component jaki� skrypt w kt�rym b�dzie id przedmiotu
+                playerInventory.DebugLogInventory();
             }
             if (collision.CompareTag("Hideout"))
             {
