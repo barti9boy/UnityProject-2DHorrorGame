@@ -14,6 +14,7 @@ public abstract class PlayerStateBase
 
 
     public bool isFacingRight = true;
+    public float interactionHoldTime = 0;
     public PlayerStateBase(GameObject playerObject)
     {
 

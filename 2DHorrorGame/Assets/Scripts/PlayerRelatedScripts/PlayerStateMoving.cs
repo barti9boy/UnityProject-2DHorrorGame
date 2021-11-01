@@ -57,7 +57,17 @@ public class PlayerStateMoving : PlayerStateBase
             }
             if (collision.CompareTag("Doors"))
             {
-                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
+                if (collision.gameObject.GetComponent<DoorScript>().isLocked)
+                {
+                    if (inputManager.InteractionTime >= collision.gameObject.GetComponent<DoorScript>().unlockTimeRequired)
+                    {
+                        collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs);
+                    }
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<DoorScript>().DoorOpenOrClose();
+                }
             }
         }
     }

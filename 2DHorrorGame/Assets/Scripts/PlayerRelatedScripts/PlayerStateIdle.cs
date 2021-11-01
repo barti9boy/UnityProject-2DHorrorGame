@@ -45,14 +45,30 @@ public class PlayerStateIdle : PlayerStateBase
                 collision.gameObject.SetActive(false);
                 playerInventory.DebugLogInventory();
             }
-            if(collision.CompareTag("Doors"))
-            {
-                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
-            }
             else if (collision.CompareTag("Hideout"))
             {
                 inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
+            }
+        }
+        if (collision.CompareTag("Doors"))
+        {
+            if (collision.gameObject.GetComponent<DoorScript>().isLocked)
+            {
+                if(inputManager.isInteractionButtonHeld)
+                {
+                    if (inputManager.InteractionTime >= collision.gameObject.GetComponent<DoorScript>().unlockTimeRequired)
+                    {
+                        collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs);
+                    }
+                }
+            }
+            else
+            {
+                if (inputManager.isInteractionButtonClicked)
+                {
+                    collision.gameObject.GetComponent<DoorScript>().DoorOpenOrClose();
+                }
             }
         }
     }
