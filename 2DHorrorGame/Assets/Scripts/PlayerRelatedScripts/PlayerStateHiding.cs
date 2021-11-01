@@ -62,8 +62,8 @@ public class PlayerStateHiding : PlayerStateBase
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
         }
-        playerSpriteRenderer.sortingOrder = 0;
-        flashlight.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        playerSpriteRenderer.sortingOrder = 1;
+        flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
     public void Flashlight()
     {

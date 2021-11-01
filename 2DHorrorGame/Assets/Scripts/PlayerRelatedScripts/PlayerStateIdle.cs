@@ -52,7 +52,15 @@ public class PlayerStateIdle : PlayerStateBase
             else if (collision.CompareTag("Hideout"))
             {
                 inputManager.isInteractionButtonClicked = false;
-                player.SwitchState(player.hidingState);
+                if (playerTransform.position.x != collision.transform.position.x)
+                {
+                    player.transform.position = Vector2.Lerp(player.transform.position, collision.transform.position, 1.0f);
+                    player.SwitchState(player.hidingState);
+                }
+                else
+                {
+                    player.SwitchState(player.hidingState);
+                }
             }
         }
     }
@@ -67,6 +75,7 @@ public class PlayerStateIdle : PlayerStateBase
             flashlight.SetActive(false);
         }
     }
+
 
 }
 
