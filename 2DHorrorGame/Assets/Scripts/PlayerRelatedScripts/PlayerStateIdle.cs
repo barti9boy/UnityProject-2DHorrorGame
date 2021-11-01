@@ -52,15 +52,13 @@ public class PlayerStateIdle : PlayerStateBase
             else if (collision.CompareTag("Hideout"))
             {
                 inputManager.isInteractionButtonClicked = false;
-                if (playerTransform.position.x != collision.transform.position.x)
+                do
                 {
                     player.transform.position = Vector2.Lerp(player.transform.position, collision.transform.position, 1.0f);
-                    player.SwitchState(player.hidingState);
                 }
-                else
-                {
-                    player.SwitchState(player.hidingState);
-                }
+                while (playerTransform.position.x != collision.transform.position.x);
+                player.SwitchState(player.hidingState);
+
             }
         }
     }
