@@ -55,7 +55,7 @@ public class PlayerStateMoving : PlayerStateBase
                 inputManager.isInteractionButtonClicked = false;
                 do
                 {
-                    player.transform.position = Vector2.Lerp(player.transform.position, collision.transform.position, 1.0f);
+                    player.transform.position = Vector2.MoveTowards(player.transform.position, collision.transform.position, 0.002f * Time.deltaTime);
                 }
                 while (playerTransform.position.x != collision.transform.position.x);
                 player.SwitchState(player.hidingState);
