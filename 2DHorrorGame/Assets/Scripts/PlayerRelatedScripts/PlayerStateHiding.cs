@@ -84,6 +84,7 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public void Leave()
     {
+        inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         if (isFacingRight)
         {
@@ -95,6 +96,7 @@ public class PlayerStateHiding : PlayerStateBase
         }
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        inputManager.inputEnabled = true;
     }
     public void Flashlight()
     {

@@ -52,8 +52,25 @@ public class PlayerStateMoving : PlayerStateBase
             }
             if (collision.CompareTag("Hideout"))
             {
-                inputManager.isInteractionButtonClicked = false;
+                inputManager.inputEnabled = false;
+                if (playerTransform.position.x - collision.transform.position.x < 0)
+                {
+                    if (!isFacingRight)
+                    {
+                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+                        isFacingRight = true;
+                    }
+                }
+                else if (playerTransform.position.x - collision.transform.position.x > 0)
+                {
+                    if (isFacingRight)
+                    {
+                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+                        isFacingRight = false;
+                    }
+                }
                 player.previousState = this;
+                inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
 
             }
