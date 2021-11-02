@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerStateMoving : PlayerStateBase
 {
 
-    public float movementSpeed = 5f;
-
     public PlayerStateMoving(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -21,12 +19,14 @@ public class PlayerStateMoving : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
+        isFacingRight = player.previousState.isFacingRight;
         //Debug.Log("Hello from moving state");
     }
     public override void UpdateState(PlayerStateMachine player)
     {
         if(inputManager.movementInputDirection == 0)
         {
+            player.previousState = this;
             player.SwitchState(player.idleState);
         }
         else
@@ -53,13 +53,8 @@ public class PlayerStateMoving : PlayerStateBase
             if (collision.CompareTag("Hideout"))
             {
                 inputManager.isInteractionButtonClicked = false;
-                do
-                {
-                    player.transform.position = Vector2.MoveTowards(player.transform.position, collision.transform.position, 0.002f * Time.deltaTime);
-                }
-                while (playerTransform.position.x != collision.transform.position.x);
+                player.previousState = this;
                 player.SwitchState(player.hidingState);
-
 
             }
             if (collision.CompareTag("Doors"))

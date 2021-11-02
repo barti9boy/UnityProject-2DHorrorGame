@@ -19,7 +19,7 @@ public class PlayerStateIdle : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.movingState.isFacingRight;
+        isFacingRight = player.previousState.isFacingRight;
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player)
@@ -27,6 +27,7 @@ public class PlayerStateIdle : PlayerStateBase
         rb.velocity = new Vector2(0,0);
         if(inputManager.movementInputDirection != 0)
         {
+            player.previousState = this;
             player.SwitchState(player.movingState);
         }
         Flashlight();
@@ -51,14 +52,25 @@ public class PlayerStateIdle : PlayerStateBase
             }
             else if (collision.CompareTag("Hideout"))
             {
-                inputManager.isInteractionButtonClicked = false;
-                do
+                if (playerTransform.position.x - collision.transform.position.x < 0)
                 {
-                    player.transform.position = Vector2.MoveTowards(player.transform.position, collision.transform.position, 0.002f * Time.deltaTime);
+                    if (!isFacingRight)
+                    {
+                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+                        isFacingRight = true;
+                    }
                 }
-                while (playerTransform.position.x != collision.transform.position.x);
+                else if (playerTransform.position.x - collision.transform.position.x > 0)
+                {
+                    if (isFacingRight)
+                    {
+                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+                        isFacingRight = false;
+                    }
+                }
+                player.previousState = this;
+                inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
-
             }
         }
     }
