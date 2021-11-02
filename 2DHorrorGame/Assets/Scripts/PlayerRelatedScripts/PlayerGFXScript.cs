@@ -62,5 +62,4 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isIdle", isIdle);
         animator.SetBool("isHidden", isHidden);
     }
-
 }

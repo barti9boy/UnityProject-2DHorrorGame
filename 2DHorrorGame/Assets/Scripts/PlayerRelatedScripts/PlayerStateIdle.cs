@@ -55,13 +55,7 @@ public class PlayerStateIdle : PlayerStateBase
         {
             if (collision.gameObject.GetComponent<DoorScript>().isLocked)
             {
-                if(inputManager.isInteractionButtonHeld)
-                {
-                    if (inputManager.InteractionTime >= collision.gameObject.GetComponent<DoorScript>().unlockTimeRequired)
-                    {
-                        collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs);
-                    }
-                }
+                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs, inputManager.isInteractionButtonHeld);
             }
             else
             {
