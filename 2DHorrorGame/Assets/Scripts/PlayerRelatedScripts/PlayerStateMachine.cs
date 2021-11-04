@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    public PlayerStateBase previousState;
     public PlayerStateBase currentState;
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
@@ -17,7 +16,6 @@ public class PlayerStateMachine : MonoBehaviour
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
         deadState = new PlayerStateDead(gameObject);
-        previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this); 
     }

@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
     public bool isInteractionButtonHeld;
-    public bool inputEnabled = true;
     public float InteractionTime { get; private set; }
 
     private void Awake()
@@ -31,7 +30,7 @@ public class InputManager : MonoBehaviour
     }
     public void Movement(InputAction.CallbackContext context) 
     {
-        if(context.performed && inputEnabled)
+        if(context.performed)
         {
             //Debug.Log("" + context.ReadValue<float>());
             movementInputDirection = context.ReadValue<float>();

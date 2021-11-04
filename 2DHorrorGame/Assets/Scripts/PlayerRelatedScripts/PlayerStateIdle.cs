@@ -19,7 +19,7 @@ public class PlayerStateIdle : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.movingState.isFacingRight;
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player)
@@ -27,7 +27,6 @@ public class PlayerStateIdle : PlayerStateBase
         rb.velocity = new Vector2(0,0);
         if(inputManager.movementInputDirection != 0)
         {
-            player.previousState = this;
             player.SwitchState(player.movingState);
         }
         Flashlight();
@@ -48,23 +47,6 @@ public class PlayerStateIdle : PlayerStateBase
             }
             else if (collision.CompareTag("Hideout"))
             {
-                if (playerTransform.position.x - collision.transform.position.x < 0)
-                {
-                    if (!isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = true;
-                    }
-                }
-                else if (playerTransform.position.x - collision.transform.position.x > 0)
-                {
-                    if (isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = false;
-                    }
-                }
-                player.previousState = this;
                 inputManager.isInteractionButtonClicked = false;
                 player.SwitchState(player.hidingState);
             }
@@ -95,7 +77,6 @@ public class PlayerStateIdle : PlayerStateBase
             flashlight.SetActive(false);
         }
     }
-
 
 }
 

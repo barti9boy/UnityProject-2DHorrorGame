@@ -11,10 +11,7 @@ public abstract class PlayerStateBase
     public GameObject playerGFX;
     public SpriteRenderer playerSpriteRenderer;
     public PlayerInventory playerInventory;
-    public Collider2D collider;
-    //public PlayerStateBase previousState;
 
-    public float movementSpeed = 5f;
 
     public bool isFacingRight = true;
     public float interactionHoldTime = 0;
