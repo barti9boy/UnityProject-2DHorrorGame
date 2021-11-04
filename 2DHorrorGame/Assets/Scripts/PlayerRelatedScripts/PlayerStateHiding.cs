@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateHiding : PlayerStateBase
 {
-
+    public bool isHidden = false;
     public PlayerStateHiding(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -20,19 +20,26 @@ public class PlayerStateHiding : PlayerStateBase
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.movingState.isFacingRight;
-        Hide();
-    }
+        isFacingRight = player.previousState.isFacingRight;
+        isHidden = false;
+
+}
     public override void UpdateState(PlayerStateMachine player)
     {
         if (inputManager.isInteractionButtonClicked)
         {
             inputManager.isInteractionButtonClicked = false;
             Leave();
+            player.previousState = this;
             player.SwitchState(player.idleState);
         }
         Flashlight();
-       // Flip();
+        // Flip();
+        if (collider != null)
+        {
+            Hiding(player, collider);
+        }
+
 
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
@@ -41,7 +48,31 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        
+        if (!isHidden)
+        {
+            collider = collision;
+            isHidden = true;
+        }
+    }
+    public void Hiding(PlayerStateMachine player, Collider2D collision)
+    {
+        if (playerTransform.position.x != collision.transform.position.x)
+        {
+            if (playerTransform.position.x - collision.transform.position.x < 0)
+            {
+                rb.velocity = new Vector2(movementSpeed * 1 / 2, 0);
+            }
+            else if (playerTransform.position.x - collision.transform.position.x > 0)
+            {
+                rb.velocity = new Vector2(movementSpeed * -1 / 2, 0);
+            }
+        }
+        if (Math.Abs(playerTransform.position.x - collision.transform.position.x) < 0.1)
+        {
+            collider = null;
+            Hide();
+        }
+
     }
     public void Hide()
     {
@@ -53,6 +84,7 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public void Leave()
     {
+        inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         if (isFacingRight)
         {
@@ -62,8 +94,9 @@ public class PlayerStateHiding : PlayerStateBase
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
         }
-        playerSpriteRenderer.sortingOrder = 0;
-        flashlight.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        playerSpriteRenderer.sortingOrder = 1;
+        flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        inputManager.inputEnabled = true;
     }
     public void Flashlight()
     {
