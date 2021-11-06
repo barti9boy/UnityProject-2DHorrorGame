@@ -74,9 +74,19 @@ public class PlayerStateMoving : PlayerStateBase
                 player.SwitchState(player.hidingState);
 
             }
-            if (collision.CompareTag("Doors"))
+        }
+        if (collision.CompareTag("Doors"))
+        {
+            if (collision.gameObject.GetComponent<DoorScript>().isLocked)
             {
-                collision.gameObject.GetComponent<DoorScript>().DoorInteraction(playerInventory.inventoryItemsIDs);
+                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs, inputManager.isInteractionButtonHeld);
+            }
+            else
+            {
+                if (inputManager.isInteractionButtonClicked)
+                {
+                    collision.gameObject.GetComponent<DoorScript>().DoorOpenOrClose();
+                }
             }
         }
     }
