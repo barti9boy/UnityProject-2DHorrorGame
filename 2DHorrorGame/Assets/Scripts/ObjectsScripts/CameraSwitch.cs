@@ -11,8 +11,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void Awake()
     {
-        playerCamera1.Priority = 1;
-        playerCamera2.Priority = 0;
+        middleOfTheTriggger = GetComponent<Transform>().position.x;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
