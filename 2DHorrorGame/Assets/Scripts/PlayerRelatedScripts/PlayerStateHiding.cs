@@ -16,7 +16,9 @@ public class PlayerStateHiding : PlayerStateBase
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
     }
 
+    
     public event EventHandler OnEnterStateHiding;
+    public event EventHandler OnPlayerHidden;
     public override void EnterState(PlayerStateMachine player)
     {
         OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
@@ -76,6 +78,7 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public void Hide()
     {
+        OnPlayerHidden?.Invoke(this, EventArgs.Empty);
         playerSpriteRenderer.sortingOrder = -7;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
         rb.velocity = new Vector2(0, 0);
