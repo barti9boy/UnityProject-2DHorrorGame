@@ -79,10 +79,8 @@ public class PlayerStateIdle : PlayerStateBase
             {
                 if (inputManager.isInteractionButtonClicked)
                 {
-                    collision.gameObject.GetComponent<DoorScript>().DoorOpen();
-                    collision.gameObject.GetComponent<DoorScript>().ChangeRoom(playerTransform ,rb, inputManager, player);
+                    collision.gameObject.GetComponent<DoorScript>().DoorOpenOrClose();
                 }
-
             }
         }
     }
@@ -97,6 +95,8 @@ public class PlayerStateIdle : PlayerStateBase
             flashlight.SetActive(false);
         }
     }
+
+
 }
 
 
