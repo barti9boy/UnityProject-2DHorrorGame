@@ -85,7 +85,8 @@ public class PlayerStateMoving : PlayerStateBase
             {
                 if (inputManager.isInteractionButtonClicked)
                 {
-                    collision.gameObject.GetComponent<DoorScript>().DoorOpenOrClose();
+                    collision.gameObject.GetComponent<DoorScript>().DoorOpen();
+                    collision.gameObject.GetComponent<DoorScript>().ChangeRoom(playerTransform, rb, inputManager, player);
                 }
             }
         }
