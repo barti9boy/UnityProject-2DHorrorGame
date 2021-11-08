@@ -52,7 +52,7 @@ public class PlayerStateMoving : PlayerStateBase
             }
             if (collision.CompareTag("Hideout"))
             {
-                inputManager.inputEnabled = false;
+                inputManager.movementInputEnabled = false;
                 if (playerTransform.position.x - collision.transform.position.x < 0)
                 {
                     if (!isFacingRight)

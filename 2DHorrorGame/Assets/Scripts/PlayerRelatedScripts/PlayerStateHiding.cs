@@ -96,7 +96,7 @@ public class PlayerStateHiding : PlayerStateBase
         }
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
-        inputManager.inputEnabled = true;
+        inputManager.movementInputEnabled = true;
     }
     public void Flashlight()
     {

@@ -10,7 +10,8 @@ public class InputManager : MonoBehaviour
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
     public bool isInteractionButtonHeld;
-    public bool inputEnabled = true;
+    public bool movementInputEnabled = true;
+    public bool interactionInputEnabled = true;
     public float InteractionTime { get; private set; }
 
     private void Awake()
@@ -20,7 +21,7 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
-        if(isInteractionButtonHeld)
+        if(isInteractionButtonHeld && interactionInputEnabled)
         {
             InteractionTime += Time.deltaTime;
         }
@@ -31,14 +32,21 @@ public class InputManager : MonoBehaviour
     }
     public void Movement(InputAction.CallbackContext context) 
     {
-        if(context.performed && inputEnabled)
+        if (!movementInputEnabled)
         {
-            //Debug.Log("" + context.ReadValue<float>());
-            movementInputDirection = context.ReadValue<float>();
+            movementInputDirection = 0;
         }
         else
         {
-            movementInputDirection = 0;
+            if(context.performed)
+            {
+                //Debug.Log("" + context.ReadValue<float>());
+                movementInputDirection = context.ReadValue<float>();
+            }
+            else
+            {
+                movementInputDirection = 0;
+            }
         }
     }
     public void Flashlight(InputAction.CallbackContext context) 
@@ -50,14 +58,14 @@ public class InputManager : MonoBehaviour
     }
     public void Interaction(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && interactionInputEnabled)
         {
             isInteractionButtonClicked = true;
             StartCoroutine(ClickDuration(0.1f));
             //inspector sometimes does not register bool change and does not tick the box, but this works correctly
             
         }
-        if(context.performed)
+        if(context.performed && interactionInputEnabled)
         {
             isInteractionButtonHeld = true;
         }

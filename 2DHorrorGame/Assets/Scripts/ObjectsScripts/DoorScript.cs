@@ -20,6 +20,7 @@ public class DoorScript : MonoBehaviour
     private Collider2D doorCollider;
     private Rigidbody2D playerRb;
     private Transform playerTransform;
+    private InputManager playerInputManager;
      
     private void Awake()
     {
@@ -44,9 +45,7 @@ public class DoorScript : MonoBehaviour
                     interactionTime += Time.deltaTime;
                     if(interactionTime >= unlockTimeRequired)
                     {
-                        isOpened = true;
                         isLocked = false;
-                        doorCollider.enabled = false;
                     }
                 }
                 else
@@ -81,10 +80,14 @@ public class DoorScript : MonoBehaviour
         }
     }
 
-    public void ChangeRoom(Transform transform ,Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
+    public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
     {
         playerRb = rb;
         playerTransform = transform;
+        playerInputManager = inputManager;
+        playerInputManager.movementInputEnabled = false;
+        playerInputManager.interactionInputEnabled = false;
+
         if(Math.Abs(rightPoint.transform.position.x - playerTransform.position.x) > Math.Abs(leftPoint.transform.position.x - playerTransform.position.x)) //jesteœmy po lewej
         {
             if (!player.currentState.isFacingRight)
@@ -119,6 +122,8 @@ public class DoorScript : MonoBehaviour
             {
                 isChangingRoom = false;
                 DoorClose();
+                playerInputManager.movementInputEnabled = true;
+                playerInputManager.interactionInputEnabled = true;
             }
         }
         if (velocityDirection == -1 && playerTransform.position.x > leftPoint.position.x)
@@ -128,6 +133,8 @@ public class DoorScript : MonoBehaviour
             {
                 isChangingRoom = false;
                 DoorClose();
+                playerInputManager.movementInputEnabled = true;
+                playerInputManager.interactionInputEnabled = true;
             }
         }
     }
