@@ -29,22 +29,13 @@ public class PlayerGFXScript : MonoBehaviour
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
-        hidingState.OnPlayerHidden += HidingState_OnPlayerHidden;
-    }
-
-    private void HidingState_OnPlayerHidden(object sender, EventArgs e)
-    {
-        isMoving = false;
-        isIdle = false;
-        isHidden = true;
-        UpdateAnimations();
     }
 
     private void HidingState_OnEnterStateHiding(object sender, EventArgs e)
     {
-        isMoving = true;
+        isMoving = false;
         isIdle = false;
-        isHidden = false;
+        isHidden = true;
         UpdateAnimations();
     }
 
