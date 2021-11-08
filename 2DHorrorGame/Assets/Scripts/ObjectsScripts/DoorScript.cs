@@ -34,6 +34,13 @@ public class DoorScript : MonoBehaviour
             MovePlayer();
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            interactionTime = 0;
+        }
+    }
     public void DoorUnlock(List<int> itemIDs, bool isInteractionButtonHeld)
     {
         foreach(int ID in itemIDs)
