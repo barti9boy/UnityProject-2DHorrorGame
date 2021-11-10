@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerActions;
 
 public class PlayerStateIdle : PlayerStateBase
 {
@@ -30,7 +31,7 @@ public class PlayerStateIdle : PlayerStateBase
             player.previousState = this;
             player.SwitchState(player.movingState);
         }
-        Flashlight();
+        PlayerActions.Flashlight(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
@@ -38,64 +39,7 @@ public class PlayerStateIdle : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        if (inputManager.isInteractionButtonClicked)
-        {
-            if (collision.CompareTag("Key"))
-            {
-                playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
-                collision.gameObject.SetActive(false);
-                playerInventory.DebugLogInventory();
-            }
-            else if (collision.CompareTag("Hideout"))
-            {
-                if (playerTransform.position.x - collision.transform.position.x < 0)
-                {
-                    if (!isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = true;
-                    }
-                }
-                else if (playerTransform.position.x - collision.transform.position.x > 0)
-                {
-                    if (isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = false;
-                    }
-                }
-                player.previousState = this;
-                inputManager.isInteractionButtonClicked = false;
-                player.SwitchState(player.hidingState);
-            }
-        }
-        if (collision.CompareTag("Doors"))
-        {
-            if (collision.gameObject.GetComponent<DoorScript>().isLocked)
-            {
-                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs, inputManager.isInteractionButtonHeld);
-            }
-            else
-            {
-                if (inputManager.isInteractionButtonClicked)
-                {
-                    collision.gameObject.GetComponent<DoorScript>().DoorOpen();
-                    collision.gameObject.GetComponent<DoorScript>().ChangeRoom(playerTransform ,rb, inputManager, player);
-                }
-
-            }
-        }
-    }
-    public void Flashlight()
-    {
-        if (inputManager.isFlashlightButtonClicked)
-        {
-            flashlight.SetActive(true);
-        }
-        else if (!inputManager.isFlashlightButtonClicked)
-        {
-            flashlight.SetActive(false);
-        }
+        PlayerActions.Interact(player, collision);
     }
 }
 

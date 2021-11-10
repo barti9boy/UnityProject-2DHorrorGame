@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerActions;
 
 public class PlayerStateMoving : PlayerStateBase
 {
@@ -33,8 +34,8 @@ public class PlayerStateMoving : PlayerStateBase
         {
             rb.velocity = new Vector2(movementSpeed * inputManager.movementInputDirection, 0);
         }
-        Flip();
-        Flashlight();
+        PlayerActions.Flip(player);
+        PlayerActions.Flashlight(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
@@ -42,78 +43,6 @@ public class PlayerStateMoving : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        if (inputManager.isInteractionButtonClicked)
-        {
-            if (collision.CompareTag("Key"))
-            {
-                playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
-                collision.gameObject.SetActive(false);
-                playerInventory.DebugLogInventory();
-            }
-            if (collision.CompareTag("Hideout"))
-            {
-                inputManager.movementInputEnabled = false;
-                if (playerTransform.position.x - collision.transform.position.x < 0)
-                {
-                    if (!isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = true;
-                    }
-                }
-                else if (playerTransform.position.x - collision.transform.position.x > 0)
-                {
-                    if (isFacingRight)
-                    {
-                        playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        isFacingRight = false;
-                    }
-                }
-                player.previousState = this;
-                inputManager.isInteractionButtonClicked = false;
-                player.SwitchState(player.hidingState);
-
-            }
-        }
-        if (collision.CompareTag("Doors"))
-        {
-            if (collision.gameObject.GetComponent<DoorScript>().isLocked)
-            {
-                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(playerInventory.inventoryItemsIDs, inputManager.isInteractionButtonHeld);
-            }
-            else
-            {
-                if (inputManager.isInteractionButtonClicked)
-                {
-                    collision.gameObject.GetComponent<DoorScript>().DoorOpen();
-                    collision.gameObject.GetComponent<DoorScript>().ChangeRoom(playerTransform, rb, inputManager, player);
-                }
-            }
-        }
-    }
-    public void Flip()
-    {
-        if (inputManager.movementInputDirection == 1 && !isFacingRight)
-        {
-            playerTransform.Rotate(0.0f, 180.0f,0.0f);
-            isFacingRight = true;
-        }
-        else if (inputManager.movementInputDirection == -1 && isFacingRight)
-        {
-            playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-            isFacingRight = false;
-        }
-    }
-
-    public void Flashlight()
-    {
-        if(inputManager.isFlashlightButtonClicked)
-        {
-            flashlight.SetActive(true);
-        }
-        else if (!inputManager.isFlashlightButtonClicked )
-        {
-            flashlight.SetActive(false);
-        }
+        PlayerActions.Interact(player, collision);
     }
 }

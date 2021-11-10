@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerActions;
 
 public class PlayerStateHiding : PlayerStateBase
 {
@@ -33,7 +34,7 @@ public class PlayerStateHiding : PlayerStateBase
             player.previousState = this;
             player.SwitchState(player.idleState);
         }
-        Flashlight();
+        PlayerActions.Flashlight(player);
         // Flip();
         if (collider != null)
         {
@@ -97,29 +98,5 @@ public class PlayerStateHiding : PlayerStateBase
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
         inputManager.movementInputEnabled = true;
-    }
-    public void Flashlight()
-    {
-        if (inputManager.isFlashlightButtonClicked)
-        {
-            flashlight.SetActive(true);
-        }
-        else if (!inputManager.isFlashlightButtonClicked)
-        {
-            flashlight.SetActive(false);
-        }
-    }
-    public void Flip()
-    {
-        if (inputManager.movementInputDirection == 1 && !isFacingRight)
-        {
-            playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-            isFacingRight = true;
-        }
-        else if (inputManager.movementInputDirection == -1 && isFacingRight)
-        {
-            playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-            isFacingRight = false;
-        }
     }
 }

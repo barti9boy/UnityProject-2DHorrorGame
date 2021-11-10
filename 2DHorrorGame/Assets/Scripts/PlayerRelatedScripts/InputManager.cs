@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public Rigidbody2D rb;
     public float movementInputDirection;
     public bool isFlashlightButtonClicked;
     public bool isInteractionButtonClicked;
@@ -16,7 +15,6 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         InteractionTime = 0f;
     }
     private void Update()
