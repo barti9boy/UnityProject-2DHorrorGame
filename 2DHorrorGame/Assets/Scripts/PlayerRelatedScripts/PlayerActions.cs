@@ -42,24 +42,9 @@ public static class PlayerActions
             if (collision.CompareTag("Hideout"))
             {
                 player.currentState.inputManager.movementInputEnabled = false;
-                if (player.currentState.playerTransform.position.x - collision.transform.position.x < 0)
-                {
-                    if (!player.currentState.isFacingRight)
-                    {
-                        player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        player.currentState.isFacingRight = true;
-                    }
-                }
-                else if (player.currentState.playerTransform.position.x - collision.transform.position.x > 0)
-                {
-                    if (player.currentState.isFacingRight)
-                    {
-                        player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-                        player.currentState.isFacingRight = false;
-                    }
-                }
                 player.previousState = player.currentState;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
+                collision.gameObject.GetComponent<HideoutScript>().StartHiding(player);
                 player.SwitchState(player.hidingState);
 
             }
@@ -79,6 +64,25 @@ public static class PlayerActions
                 }
             }
         }
+    }
+    public static void Hiding(PlayerStateMachine player, Collider2D collision, Transform playerTransform, float movementSpeed, Rigidbody2D rb, Collision2D collider)
+    {
+        if (playerTransform.position.x != collision.transform.position.x)
+        {
+            if (playerTransform.position.x - collision.transform.position.x < 0)
+            {
+                rb.velocity = new Vector2(movementSpeed * 1 / 2, 0);
+            }
+            else if (playerTransform.position.x - collision.transform.position.x > 0)
+            {
+                rb.velocity = new Vector2(movementSpeed * -1 / 2, 0);
+            }
+        }
+        if (Math.Abs(playerTransform.position.x - collision.transform.position.x) < 0.1)
+        {
+            collider = null;
+        }
+
     }
 
 }

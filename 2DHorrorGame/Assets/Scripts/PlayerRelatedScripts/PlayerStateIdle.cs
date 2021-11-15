@@ -12,8 +12,8 @@ public class PlayerStateIdle : PlayerStateBase
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
         flashlight = playerObject.transform.GetChild(1).gameObject;
-        playerInventory = playerObject.GetComponent<PlayerInventory>();
-        
+        playerGFX = playerObject.transform.GetChild(0).gameObject;
+        playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
     }
 
     public event EventHandler OnEnterStateIdle;
@@ -39,8 +39,9 @@ public class PlayerStateIdle : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        PlayerActions.Interact(player, collision);
+        PlayerActions.Interact(player, collision); // New function passing components
     }
+   
 }
 
 

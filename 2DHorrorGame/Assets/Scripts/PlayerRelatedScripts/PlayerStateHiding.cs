@@ -36,10 +36,7 @@ public class PlayerStateHiding : PlayerStateBase
         }
         PlayerActions.Flashlight(player);
         // Flip();
-        if (collider != null)
-        {
-            Hiding(player, collider);
-        }
+       
 
 
     }
@@ -49,40 +46,9 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        if (!isHidden)
-        {
-            collider = collision;
-            isHidden = true;
-        }
-    }
-    public void Hiding(PlayerStateMachine player, Collider2D collision)
-    {
-        if (playerTransform.position.x != collision.transform.position.x)
-        {
-            if (playerTransform.position.x - collision.transform.position.x < 0)
-            {
-                rb.velocity = new Vector2(movementSpeed * 1 / 2, 0);
-            }
-            else if (playerTransform.position.x - collision.transform.position.x > 0)
-            {
-                rb.velocity = new Vector2(movementSpeed * -1 / 2, 0);
-            }
-        }
-        if (Math.Abs(playerTransform.position.x - collision.transform.position.x) < 0.1)
-        {
-            collider = null;
-            Hide();
-        }
 
     }
-    public void Hide()
-    {
-        playerSpriteRenderer.sortingOrder = -7;
-        flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
-        rb.velocity = new Vector2(0, 0);
-        flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-        flashlight.transform.position = playerTransform.position;
-    }
+
     public void Leave()
     {
         inputManager.isInteractionButtonClicked = false;
