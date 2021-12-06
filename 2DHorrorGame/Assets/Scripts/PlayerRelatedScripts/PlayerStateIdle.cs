@@ -14,6 +14,8 @@ public class PlayerStateIdle : PlayerStateBase
         flashlight = playerObject.transform.GetChild(1).gameObject;
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+        playerInventory = playerObject.GetComponent<PlayerInventory>();
+
     }
 
     public event EventHandler OnEnterStateIdle;
