@@ -46,7 +46,11 @@ public static class PlayerActions
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.GetComponent<HideoutScript>().StartHiding(player);
                 player.SwitchState(player.hidingState);
-
+            }
+            if (collision.CompareTag("Switch"))
+            {
+                collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+                collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeCamera();
             }
         }
         if (collision.CompareTag("Doors"))

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraSwitch : MonoBehaviour
+public class CameraSwitchHorizontal : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera playerCamera1;
     [SerializeField] CinemachineVirtualCamera playerCamera2;
