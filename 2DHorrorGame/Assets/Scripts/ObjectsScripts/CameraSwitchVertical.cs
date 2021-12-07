@@ -13,6 +13,7 @@ public class CameraSwitchVertical : MonoBehaviour
     [SerializeField] private Transform stopPoint;
     [SerializeField] private float movementSpeed = 5.0f;
     private bool isChangingRoom = false;
+    private float velocityDirection;
 
     private Rigidbody2D playerRb;
     private Transform playerTransform;
@@ -38,22 +39,42 @@ public class CameraSwitchVertical : MonoBehaviour
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
         playerTransform.position = startPoint.position;
+
+        if (startPoint.position.x < stopPoint.position.x) //jesteœmy po lewej
+        {
+            if (!player.currentState.isFacingRight)
+            {
+                playerTransform.Rotate(0, 180, 0);
+                player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                Debug.Log(player.currentState.isFacingRight);
+                inputManager.isInteractionButtonClicked = false;
+            }
+            velocityDirection = 1;
+        }
+        else if (startPoint.position.x > stopPoint.position.x) // jesteœmy po prawej
+        {
+            if (player.currentState.isFacingRight)
+            {
+                playerTransform.Rotate(0, 180, 0);
+                player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                Debug.Log(player.currentState.isFacingRight);
+                inputManager.isInteractionButtonClicked = false;
+            }
+            velocityDirection = -1;
+        }
         isChangingRoom = true;
     }
 
     public void MovePlayer()
     {
-        if (playerTransform.position.x < stopPoint.position.x)
+        playerRb.velocity = new Vector2(movementSpeed * velocityDirection, 0);
+        Debug.Log("new vel");
+        if (Math.Abs(playerTransform.position.x - stopPoint.position.x) < 0.1)
         {
-            playerRb.velocity = new Vector2(movementSpeed, 0);
-            Debug.Log("new vel");
-            if (Math.Abs(playerTransform.position.x - stopPoint.position.x) < 0.1)
-            {
-                isChangingRoom = false;
-                playerInputManager.movementInputEnabled = true;
-                playerInputManager.interactionInputEnabled = true;
-                Debug.Log("finished");
-            }
+             isChangingRoom = false;
+             playerInputManager.movementInputEnabled = true;
+             playerInputManager.interactionInputEnabled = true;
+             Debug.Log("finished");
         }
     }
 }
