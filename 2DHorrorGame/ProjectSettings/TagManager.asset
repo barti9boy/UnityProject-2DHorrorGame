@@ -8,6 +8,7 @@ TagManager:
   - Hideout
   - Doors
   - Switch
+  - VentEntrance
   layers:
   - Default
   - TransparentFX
