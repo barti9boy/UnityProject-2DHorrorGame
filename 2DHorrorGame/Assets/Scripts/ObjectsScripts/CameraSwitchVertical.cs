@@ -11,13 +11,20 @@ public class CameraSwitchVertical : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera playerCamera2;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform stopPoint;
+    [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private float movementSpeed = 5.0f;
-    private bool isChangingRoom = false;
+    [SerializeField] private bool isChangingRoom = false;
     private float velocityDirection;
+    
 
-    private Rigidbody2D playerRb;
+    
     private Transform playerTransform;
     private InputManager playerInputManager;
+
+    private void Awake()
+    {
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -33,9 +40,9 @@ public class CameraSwitchVertical : MonoBehaviour
     }
     public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
     {
-        playerRb = rb;
         playerTransform = transform;
         playerInputManager = inputManager;
+        inputManager.isInteractionButtonClicked = false;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
         playerTransform.position = startPoint.position;
@@ -72,6 +79,7 @@ public class CameraSwitchVertical : MonoBehaviour
         if (Math.Abs(playerTransform.position.x - stopPoint.position.x) < 0.1)
         {
              isChangingRoom = false;
+             playerRb.velocity = new Vector2(0, 0);
              playerInputManager.movementInputEnabled = true;
              playerInputManager.interactionInputEnabled = true;
              Debug.Log("finished");
