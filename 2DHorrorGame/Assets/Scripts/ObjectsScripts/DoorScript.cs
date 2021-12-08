@@ -125,7 +125,7 @@ public class DoorScript : MonoBehaviour
         if(velocityDirection == 1 && playerTransform.position.x < rightPoint.position.x)
         {
             playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-            if(Math.Abs(playerTransform.position.x - rightPoint.transform.position.x) < 0.1)
+            if (Math.Abs(playerTransform.position.x - rightPoint.transform.position.x) < 0.1)
             {
                 isChangingRoom = false;
                 DoorClose();

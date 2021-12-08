@@ -6,33 +6,38 @@ using System;
 
 public class VentEntranceScript : MonoBehaviour
 {
+    public bool isInVent = false;
     public bool isChangingRoom = false;
+    public bool isMovingDown = false;
+    public bool isMovingUp = false;
     public int velocityDirection;
 
     private Rigidbody2D playerRb;
     private Transform playerTransform;
     private InputManager playerInputManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float movementSpeed = 5.0f;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(isChangingRoom)
+        {
+            MovePlayer();
+        }
+        if(isMovingDown)
+        {
+            MovePlayerDown();
+        }
     }
 
-    public void TransportToEntranceCenter(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
+    public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
     {
         playerRb = rb;
         playerTransform = transform;
         playerInputManager = inputManager;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
-        if (Math.Abs(rightPoint.transform.position.x - playerTransform.position.x) > Math.Abs(leftPoint.transform.position.x - playerTransform.position.x)) //jesteœmy po lewej
+        if (playerTransform.position.x < gameObject.transform.position.x) 
         {
             if (!player.currentState.isFacingRight)
             {
@@ -43,7 +48,7 @@ public class VentEntranceScript : MonoBehaviour
             }
             velocityDirection = 1;
         }
-        else if (Math.Abs(rightPoint.transform.position.x - playerTransform.position.x) < Math.Abs(leftPoint.transform.position.x - playerTransform.position.x)) // jesteœmy po prawej
+        else if (playerTransform.position.x > gameObject.transform.position.x)
         {
             if (player.currentState.isFacingRight)
             {
@@ -56,12 +61,34 @@ public class VentEntranceScript : MonoBehaviour
         }
         isChangingRoom = true;
     }
-}
-    public void TransportDown(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
+    public void MovePlayer()
+    {
+        
+        if (velocityDirection == 1 && playerTransform.position.x < gameObject.transform.position.x)
+        {
+            playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+            Debug.Log(playerRb.velocity.x);
+            if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
+            {
+                isChangingRoom = false;
+                isMovingDown = true;
+            }
+        }
+        if (velocityDirection == -1 && playerTransform.position.x > gameObject.transform.position.x)
+        {
+            playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+            if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
+            {
+                isChangingRoom = false;
+                isMovingDown = true;
+            }
+        }
+    }
+    public void MovePlayerDown()
     {
 
     }
-    public void TransportUp(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
+    public void MovePlayerUp()
     {
 
     }

@@ -64,6 +64,13 @@ public static class PlayerActions
                 }
             }
         }
+        if (collision.CompareTag("VentEntrance"))
+        {
+            if (player.currentState.inputManager.isInteractionButtonClicked)
+            {
+                collision.gameObject.GetComponent<VentEntranceScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+            }
+        }
     }
     public static void Hiding(PlayerStateMachine player, Collider2D collision, Transform playerTransform, float movementSpeed, Rigidbody2D rb, Collision2D collider)
     {
