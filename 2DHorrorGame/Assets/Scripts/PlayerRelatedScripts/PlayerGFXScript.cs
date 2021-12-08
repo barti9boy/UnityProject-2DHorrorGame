@@ -14,10 +14,13 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isIdle;
     private bool isMoving;
     private bool isHidden;
+    private bool isHiding;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+
 
         playerSM = GetComponentInParent<PlayerStateMachine>();
         idleState = playerSM.idleState;
@@ -28,13 +31,24 @@ public class PlayerGFXScript : MonoBehaviour
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
-        hidingState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
+        hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
+        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding; ;
+
     }
 
     private void HidingState_OnEnterStateHiding(object sender, EventArgs e)
     {
         isMoving = false;
         isIdle = false;
+        isHidden = false;
+        isHiding = true;
+        UpdateAnimations();
+    }
+    private void HidingState_OnEnterStateHidden(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        isHiding = false;
         isHidden = true;
         UpdateAnimations();
     }
@@ -61,5 +75,7 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
         animator.SetBool("isIdle", isIdle);
         animator.SetBool("isHidden", isHidden);
+        animator.SetBool("isHiding", isHiding);
+
     }
 }

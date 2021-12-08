@@ -8,6 +8,7 @@ using System;
 public class HideoutScript : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
+    PlayerStateMachine playerStateMachine;
     private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputManager inputManager;
@@ -17,6 +18,7 @@ public class HideoutScript : MonoBehaviour
     private SpriteRenderer playerSpriteRenderer;
     private Collider2D collider;
     [SerializeField] private Transform handle;
+    [SerializeField] private AnimationClip hiding;
 
 
     public bool isHiding = false;
@@ -24,7 +26,7 @@ public class HideoutScript : MonoBehaviour
     public int velocityDirection;
     [SerializeField] private float movementSpeed = 5.0f;
 
-
+    public event EventHandler OnEnterStateHiding;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +38,7 @@ public class HideoutScript : MonoBehaviour
         flashlight = playerObject.transform.GetChild(1).gameObject;
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+        playerStateMachine = playerObject.GetComponent<PlayerStateMachine>();
     }
 
     // Update is called once per frame
@@ -79,9 +82,10 @@ public class HideoutScript : MonoBehaviour
     {
         playerSpriteRenderer.sortingOrder = -7;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
-        rb.velocity = new Vector2(0, 0);
         flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
         flashlight.transform.position = playerTransform.position;
+        playerStateMachine.SwitchState(playerStateMachine.hidingState);
+
     }
     public void MovePlayer()
     {
@@ -92,7 +96,10 @@ public class HideoutScript : MonoBehaviour
             {
                 isTryingToHide = false;
                 inputManager.interactionInputEnabled = true;
-                Hide();
+                OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+                rb.velocity = new Vector2(0, 0);
+                StartCoroutine(WaitForAnimationTime());
+
             }
         }
         if (velocityDirection == -1 && playerTransform.position.x > handle.position.x)
@@ -102,8 +109,16 @@ public class HideoutScript : MonoBehaviour
             {
                 isTryingToHide = false;
                 inputManager.interactionInputEnabled = true;
-                Hide();
+                OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+                rb.velocity = new Vector2(0, 0);
+                StartCoroutine(WaitForAnimationTime());
             }
         }
+    }
+
+    private IEnumerator WaitForAnimationTime()
+    {
+        yield return new WaitForSeconds(hiding.length);
+        Hide();
     }
 }

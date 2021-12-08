@@ -17,10 +17,10 @@ public class PlayerStateHiding : PlayerStateBase
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
     }
 
-    public event EventHandler OnEnterStateHiding;
+    public event EventHandler OnEnterStateHidden;
     public override void EnterState(PlayerStateMachine player)
     {
-        OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+        OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isHidden = false;
 

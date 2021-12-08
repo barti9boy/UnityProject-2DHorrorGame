@@ -1085,7 +1085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.54084, y: -1.904007, z: 20.675442}
+  m_LocalPosition: {x: -35.21026, y: -1.904007, z: 20.675442}
   m_LocalScale: {x: 1.0008624, y: 1.0008624, z: 1.0008624}
   m_Children: []
   m_Father: {fileID: 1258850619}
@@ -3531,6 +3531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObject: {fileID: 1184542798}
   handle: {fileID: 1311304603}
+  hiding: {fileID: 7400000, guid: 3290bef9128e7234cad1c9d9e0bbb70f, type: 2}
   isHiding: 0
   isTryingToHide: 0
   velocityDirection: 0
