@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public static class PlayerActions
 {
     public static void Flip(PlayerStateMachine player)
@@ -45,6 +47,7 @@ public static class PlayerActions
                 player.previousState = player.currentState;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.GetComponent<HideoutScript>().StartHiding(player);
+
             }
             if (collision.CompareTag("Switch"))
             {
@@ -71,7 +74,9 @@ public static class PlayerActions
         {
             if (player.currentState.inputManager.isInteractionButtonClicked)
             {
-                collision.gameObject.GetComponent<LadderScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+                player.currentState.inputManager.isInteractionButtonClicked = false;
+                collision.gameObject.GetComponent<LadderScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player, player.gameObject.transform.GetChild(1).gameObject);
+                Debug.Log("1");
             }
         }
     }

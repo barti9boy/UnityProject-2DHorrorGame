@@ -6,7 +6,8 @@ using System;
 
 public class LadderScript : MonoBehaviour
 {
-    public bool isFirstTimeEntering = true;
+    public bool isFirstTimeGoingUp = true;
+    public bool isFirstTimeGoingDown = true;
     public bool isInVent = false;
     public bool isChangingRoom = false;
     public bool isMovingDown = false;
@@ -16,6 +17,7 @@ public class LadderScript : MonoBehaviour
     private Rigidbody2D playerRb;
     private Transform playerTransform;
     private InputManager playerInputManager;
+    private GameObject playerFlashlight;
 
     [SerializeField] private Transform DownPoint;
     [SerializeField] private Transform UpPoint;
@@ -37,19 +39,26 @@ public class LadderScript : MonoBehaviour
         }
     }
 
-    public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
+    public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player, GameObject flashlight)
     {
         
         playerRb = rb;
         playerTransform = transform;
         playerInputManager = inputManager;
+        playerFlashlight = flashlight;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
-        if (!isInVent && isFirstTimeEntering) //without isFirstTimeEntering the point moves slightly down
+        if (isFirstTimeGoingUp && playerTransform.position.y > transform.position.y) //without isFirstTimeEntering the point moves slightly down
         {
             UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
-            isFirstTimeEntering = false;
+            isFirstTimeGoingUp = false;
         }
+        if(isFirstTimeGoingDown && playerTransform.position.y < transform.position.y)
+        {
+            DownPoint.transform.position = new Vector2(DownPoint.transform.position.x, playerTransform.position.y);
+            isFirstTimeGoingDown = false;
+        }
+
         if (playerTransform.position.x < gameObject.transform.position.x) 
         {
             if (!player.currentState.isFacingRight)
@@ -73,6 +82,7 @@ public class LadderScript : MonoBehaviour
             velocityDirection = -1;
         }
         isChangingRoom = true;
+        playerFlashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
     }
     public void MovePlayer()
     {
@@ -83,8 +93,8 @@ public class LadderScript : MonoBehaviour
                 if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
                 {
                     isChangingRoom = false;
-                    if (!isInVent) isMovingDown = true;
-                    if (isInVent) isMovingUp = true;
+                    if (playerTransform.position.y > transform.position.y) isMovingDown = true;
+                    if (playerTransform.position.y < transform.position.y) isMovingUp = true;
                 }
             }
             if (velocityDirection == -1 && playerTransform.position.x > gameObject.transform.position.x)
@@ -93,8 +103,8 @@ public class LadderScript : MonoBehaviour
                 if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
                 {
                     isChangingRoom = false;
-                    if (!isInVent) isMovingDown = true;
-                    if (isInVent) isMovingUp = true;
+                    if (playerTransform.position.y > transform.position.y) isMovingDown = true;
+                    if (playerTransform.position.y < transform.position.y) isMovingUp = true;
                 }
             }
     }
@@ -111,7 +121,7 @@ public class LadderScript : MonoBehaviour
             isMovingDown = false;
             playerInputManager.movementInputEnabled = true;
             playerInputManager.interactionInputEnabled = true;
-            isInVent = true;
+            playerFlashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         }
     }
     public void MovePlayerUp()
@@ -126,7 +136,7 @@ public class LadderScript : MonoBehaviour
             isMovingUp = false;
             playerInputManager.movementInputEnabled = true;
             playerInputManager.interactionInputEnabled = true;
-            isInVent = false;
+            playerFlashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         }
     }
 }
