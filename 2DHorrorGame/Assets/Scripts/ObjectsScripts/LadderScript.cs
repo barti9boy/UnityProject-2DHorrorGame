@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 
-public class VentEntranceScript : MonoBehaviour
+public class LadderScript : MonoBehaviour
 {
     public bool isInVent = false;
     public bool isChangingRoom = false;
@@ -38,11 +38,13 @@ public class VentEntranceScript : MonoBehaviour
 
     public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player)
     {
+        
         playerRb = rb;
         playerTransform = transform;
         playerInputManager = inputManager;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
+        if (!isInVent) UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
         if (playerTransform.position.x < gameObject.transform.position.x) 
         {
             if (!player.currentState.isFacingRight)
@@ -73,7 +75,6 @@ public class VentEntranceScript : MonoBehaviour
             if (velocityDirection == 1 && playerTransform.position.x < gameObject.transform.position.x)
             {
                 playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                Debug.Log(playerRb.velocity.x);
                 if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
                 {
                     isChangingRoom = false;

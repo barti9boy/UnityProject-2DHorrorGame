@@ -71,7 +71,7 @@ public static class PlayerActions
         {
             if (player.currentState.inputManager.isInteractionButtonClicked)
             {
-                collision.gameObject.GetComponent<VentEntranceScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+                collision.gameObject.GetComponent<LadderScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
             }
         }
     }
