@@ -6,6 +6,7 @@ using System;
 
 public class LadderScript : MonoBehaviour
 {
+    public bool isFirstTimeEntering = true;
     public bool isInVent = false;
     public bool isChangingRoom = false;
     public bool isMovingDown = false;
@@ -44,7 +45,11 @@ public class LadderScript : MonoBehaviour
         playerInputManager = inputManager;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
-        if (!isInVent) UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
+        if (!isInVent && isFirstTimeEntering) //without isFirstTimeEntering the point moves slightly down
+        {
+            UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
+            isFirstTimeEntering = false;
+        }
         if (playerTransform.position.x < gameObject.transform.position.x) 
         {
             if (!player.currentState.isFacingRight)
