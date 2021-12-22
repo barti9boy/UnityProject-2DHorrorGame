@@ -46,7 +46,7 @@ public static class PlayerActions
                 player.currentState.inputManager.movementInputEnabled = false;
                 player.previousState = player.currentState;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
-                collision.gameObject.GetComponent<HideoutScript>().StartHiding(player);
+                collision.gameObject.GetComponent<HideoutScript>().CheckHideout(player);
 
             }
             if (collision.CompareTag("Switch"))

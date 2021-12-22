@@ -15,6 +15,7 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isMoving;
     private bool isHidden;
     private bool isHiding;
+    private bool isLeaving;
 
 
     private void Start()
@@ -33,6 +34,8 @@ public class PlayerGFXScript : MonoBehaviour
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding; ;
+        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding; ;
+
 
     }
 
@@ -42,6 +45,16 @@ public class PlayerGFXScript : MonoBehaviour
         isIdle = false;
         isHidden = false;
         isHiding = true;
+        isLeaving = false;
+        UpdateAnimations();
+    }
+    private void HidingState_OnLeaveStateHiding(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = true;
         UpdateAnimations();
     }
     private void HidingState_OnEnterStateHidden(object sender, EventArgs e)
@@ -50,6 +63,7 @@ public class PlayerGFXScript : MonoBehaviour
         isIdle = false;
         isHiding = false;
         isHidden = true;
+        isLeaving = false;
         UpdateAnimations();
     }
 
@@ -59,6 +73,7 @@ public class PlayerGFXScript : MonoBehaviour
         isMoving = true;
         isIdle = false;
         isHidden = false;
+        isLeaving = false;
         UpdateAnimations();
     }
 
@@ -67,6 +82,7 @@ public class PlayerGFXScript : MonoBehaviour
         isMoving = false;
         isIdle = true ;
         isHidden = false;
+        isLeaving = false;
         UpdateAnimations();
     }
 
@@ -76,6 +92,7 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isIdle", isIdle);
         animator.SetBool("isHidden", isHidden);
         animator.SetBool("isHiding", isHiding);
+        animator.SetBool("isLeaving", isLeaving);
 
     }
 }

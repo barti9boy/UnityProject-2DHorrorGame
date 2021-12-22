@@ -17,16 +17,19 @@ public class HideoutScript : MonoBehaviour
     private GameObject playerGFX;
     private SpriteRenderer playerSpriteRenderer;
     private Collider2D collider;
+    private Animator animator;
     [SerializeField] private Transform handle;
     [SerializeField] private AnimationClip hiding;
 
 
     public bool isHiding = false;
+    public bool isHidden = false;
     public bool isTryingToHide = false;
     public int velocityDirection;
     [SerializeField] private float movementSpeed = 5.0f;
 
     public event EventHandler OnEnterStateHiding;
+    public event EventHandler OnLeaveStateHiding;
 
     // Start is called before the first frame update
     void Awake()
@@ -39,6 +42,7 @@ public class HideoutScript : MonoBehaviour
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerStateMachine = playerObject.GetComponent<PlayerStateMachine>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,8 +54,21 @@ public class HideoutScript : MonoBehaviour
         }
     }
 
+    public void CheckHideout(PlayerStateMachine player)
+    {
+        if (isHidden == false)
+        {
+            StartHiding(player);
+        }
+        else if (isHidden == true)
+        {
+            StartLeaving(player);
+        }
+    }
+
     public void StartHiding(PlayerStateMachine player)
     {
+        animator.SetBool("isHiding", true);
         if (handle.transform.position.x > playerTransform.position.x) //jesteœmy po lewej
         {
             if (!player.currentState.isFacingRight)
@@ -85,6 +102,9 @@ public class HideoutScript : MonoBehaviour
         flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
         flashlight.transform.position = playerTransform.position;
         playerStateMachine.SwitchState(playerStateMachine.hidingState);
+        animator.SetBool("isHiding", false);
+        animator.SetBool("isHidden", true);
+        isHidden = true;
 
     }
     public void MovePlayer()
@@ -98,8 +118,8 @@ public class HideoutScript : MonoBehaviour
                 inputManager.interactionInputEnabled = true;
                 OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
                 rb.velocity = new Vector2(0, 0);
-                StartCoroutine(WaitForAnimationTime());
-
+                StartCoroutine(WaitForHidingTime());
+              
             }
         }
         if (velocityDirection == -1 && playerTransform.position.x > handle.position.x)
@@ -111,14 +131,68 @@ public class HideoutScript : MonoBehaviour
                 inputManager.interactionInputEnabled = true;
                 OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
                 rb.velocity = new Vector2(0, 0);
-                StartCoroutine(WaitForAnimationTime());
+                StartCoroutine(WaitForHidingTime());
             }
         }
     }
 
-    private IEnumerator WaitForAnimationTime()
+    private IEnumerator WaitForHidingTime()
     {
         yield return new WaitForSeconds(hiding.length);
         Hide();
+    }
+
+
+    private IEnumerator WaitForLeavingTime()
+    {
+        yield return new WaitForSeconds(hiding.length);
+        Leave();
+    }
+
+    public void StartLeaving(PlayerStateMachine player)
+    {
+        animator.SetBool("isHidden", false);
+        animator.SetBool("isLeaving", true);
+        playerSpriteRenderer.sortingOrder = 1;
+        flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        OnLeaveStateHiding?.Invoke(this, EventArgs.Empty);
+        StartCoroutine(WaitForLeavingTime());
+
+
+
+        /* inputManager.isInteractionButtonClicked = false;
+         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+         if (player.currentState.isFacingRight)
+         {
+             flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
+         }
+         else if (!player.currentState.isFacingRight)
+         {
+             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
+         }
+         playerSpriteRenderer.sortingOrder = 1;
+         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
+         inputManager.movementInputEnabled = true;
+         player.SwitchState(player.idleState);
+         isHidden = false;
+         animator.SetBool("isLeaving", false); */
+    }
+
+    public void Leave()
+    {
+        inputManager.isInteractionButtonClicked = false;
+        flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+        if (playerStateMachine.currentState.isFacingRight)
+        {
+            flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
+        }
+        else if (!playerStateMachine.currentState.isFacingRight)
+        {
+            flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
+        }
+        inputManager.movementInputEnabled = true;
+        playerStateMachine.SwitchState(playerStateMachine.idleState);
+        isHidden = false;
+        animator.SetBool("isLeaving", false);
     }
 }

@@ -29,10 +29,11 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (inputManager.isInteractionButtonClicked)
         {
-            inputManager.isInteractionButtonClicked = false;
-            Leave();
-            player.previousState = this;
-            player.SwitchState(player.idleState);
+            //Leave();
+            //player.previousState = this;
+            //player.SwitchState(player.idleState);
+            //inputManager.isInteractionButtonClicked = false;
+
         }
         PlayerActions.Flashlight(player);
         // Flip();
@@ -46,10 +47,10 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-
+        PlayerActions.Interact(player, collision);
     }
 
-    public void Leave()
+    /*public void Leave()
     {
         inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
@@ -64,5 +65,5 @@ public class PlayerStateHiding : PlayerStateBase
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
         inputManager.movementInputEnabled = true;
-    }
+    }*/
 }
