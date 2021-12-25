@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerGFXScript : MonoBehaviour
 {
-    public PlayerStateMachine playerSM;
+    public PlayerStateMachine playerStateMachine;
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
     public PlayerStateHiding hidingState;
@@ -16,6 +16,8 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isHidden;
     private bool isHiding;
     private bool isLeaving;
+    private bool isClimbingDown;
+    private bool isClimbingUp;
 
 
     private void Start()
@@ -23,20 +25,45 @@ public class PlayerGFXScript : MonoBehaviour
         animator = GetComponent<Animator>();
 
 
-        playerSM = GetComponentInParent<PlayerStateMachine>();
-        idleState = playerSM.idleState;
-        movingState = playerSM.movingState;
-        hidingState = playerSM.hidingState;
-        deadState = playerSM.deadState;
+        playerStateMachine = GetComponentInParent<PlayerStateMachine>();
+        idleState = playerStateMachine.idleState;
+        movingState = playerStateMachine.movingState;
+        hidingState = playerStateMachine.hidingState;
+        deadState = playerStateMachine.deadState;
 
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
-        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding; ;
-        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding; ;
+        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding;
+        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding;
+        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveDown += Climbing_OnLadderMoveDown;
+        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveUp += Climbing_OnLadderMoveUp;
 
 
+    }
+
+    private void Climbing_OnLadderMoveDown(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = false;
+        isClimbingDown = true;
+        isClimbingUp = false;
+        UpdateAnimations();
+    }
+    private void Climbing_OnLadderMoveUp(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = true;
+        UpdateAnimations();
     }
 
     private void HidingState_OnEnterStateHiding(object sender, EventArgs e)
@@ -46,6 +73,8 @@ public class PlayerGFXScript : MonoBehaviour
         isHidden = false;
         isHiding = true;
         isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
         UpdateAnimations();
     }
     private void HidingState_OnLeaveStateHiding(object sender, EventArgs e)
@@ -55,6 +84,8 @@ public class PlayerGFXScript : MonoBehaviour
         isHidden = false;
         isHiding = false;
         isLeaving = true;
+        isClimbingDown = false;
+        isClimbingUp = false;
         UpdateAnimations();
     }
     private void HidingState_OnEnterStateHidden(object sender, EventArgs e)
@@ -64,6 +95,8 @@ public class PlayerGFXScript : MonoBehaviour
         isHiding = false;
         isHidden = true;
         isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
         UpdateAnimations();
     }
 
@@ -73,7 +106,10 @@ public class PlayerGFXScript : MonoBehaviour
         isMoving = true;
         isIdle = false;
         isHidden = false;
+        isHiding = false;
         isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
         UpdateAnimations();
     }
 
@@ -82,7 +118,10 @@ public class PlayerGFXScript : MonoBehaviour
         isMoving = false;
         isIdle = true ;
         isHidden = false;
+        isHiding = false;
         isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
         UpdateAnimations();
     }
 
@@ -93,6 +132,7 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isHidden", isHidden);
         animator.SetBool("isHiding", isHiding);
         animator.SetBool("isLeaving", isLeaving);
-
+        animator.SetBool("isClimbingDown", isClimbingDown);
+        animator.SetBool("isClimbingUp", isClimbingUp);
     }
 }

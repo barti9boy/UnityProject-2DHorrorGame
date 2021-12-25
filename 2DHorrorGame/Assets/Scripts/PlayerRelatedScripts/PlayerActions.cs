@@ -70,7 +70,7 @@ public static class PlayerActions
                 }
             }
         }
-        if (collision.CompareTag("VentEntrance"))
+        if (collision.CompareTag("Ladder"))
         {
             if (player.currentState.inputManager.isInteractionButtonClicked)
             {

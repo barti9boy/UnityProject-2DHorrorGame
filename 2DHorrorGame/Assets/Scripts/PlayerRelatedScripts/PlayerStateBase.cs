@@ -17,6 +17,7 @@ public abstract class PlayerStateBase
     public float movementSpeed = 5f;
 
     public bool isFacingRight = true;
+    public bool isInVent = false;
     public float interactionHoldTime = 0;
     public PlayerStateBase(GameObject playerObject)
     {
