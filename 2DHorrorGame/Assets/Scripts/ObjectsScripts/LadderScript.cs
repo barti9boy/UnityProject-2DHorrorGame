@@ -26,6 +26,8 @@ public class LadderScript : MonoBehaviour
 
     public event EventHandler OnLadderMoveUp;
     public event EventHandler OnLadderMoveDown;
+    public event EventHandler OnVentEnterOrLeave;
+    public event EventHandler OnFinishClimbing;
 
     void Update()
     {
@@ -125,11 +127,14 @@ public class LadderScript : MonoBehaviour
             playerInputManager.movementInputEnabled = true;
             playerInputManager.interactionInputEnabled = true;
             playerFlashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+            if (isEntrance)
+            {
+                playerStateMachine.currentState.isInVent = !playerStateMachine.currentState.isInVent;
+                OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
+            }
+            OnFinishClimbing?.Invoke(this, EventArgs.Empty);
         }
-        if (isEntrance)
-        {
-            playerStateMachine.currentState.isInVent = !playerStateMachine.currentState.isInVent;
-        }
+        
     }
     public void MovePlayerUp()
     {
@@ -145,10 +150,13 @@ public class LadderScript : MonoBehaviour
             playerInputManager.movementInputEnabled = true;
             playerInputManager.interactionInputEnabled = true;
             playerFlashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+            if (isEntrance)
+            {
+                playerStateMachine.currentState.isInVent = !playerStateMachine.currentState.isInVent;
+                OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
+            }
+            OnFinishClimbing?.Invoke(this, EventArgs.Empty);
         }
-        if (isEntrance)
-        {
-            playerStateMachine.currentState.isInVent = !playerStateMachine.currentState.isInVent;
-        }
+        
     }
 }

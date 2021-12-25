@@ -18,6 +18,7 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isLeaving;
     private bool isClimbingDown;
     private bool isClimbingUp;
+    private bool isInVent;
 
 
     private void Start()
@@ -39,8 +40,25 @@ public class PlayerGFXScript : MonoBehaviour
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding;
         GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveDown += Climbing_OnLadderMoveDown;
         GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveUp += Climbing_OnLadderMoveUp;
+        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnFinishClimbing += OnFinishClimbing;
+        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnVentEnterOrLeave += OnVentEnterOrLeave;
 
 
+
+    }
+
+    private void OnFinishClimbing(object sender, EventArgs e)
+    {
+        isIdle = true;
+        isClimbingDown = false;
+        isClimbingUp = false;
+        UpdateAnimations();
+    }
+
+    private void OnVentEnterOrLeave(object sender, EventArgs e)
+    {
+        isInVent = playerStateMachine.currentState.isInVent;
+        UpdateAnimations();
     }
 
     private void Climbing_OnLadderMoveDown(object sender, EventArgs e)
@@ -134,5 +152,6 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isLeaving", isLeaving);
         animator.SetBool("isClimbingDown", isClimbingDown);
         animator.SetBool("isClimbingUp", isClimbingUp);
+        animator.SetBool("isInVent", isInVent);
     }
 }

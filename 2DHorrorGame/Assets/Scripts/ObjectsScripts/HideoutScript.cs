@@ -31,7 +31,6 @@ public class HideoutScript : MonoBehaviour
     public event EventHandler OnEnterStateHiding;
     public event EventHandler OnLeaveStateHiding;
 
-    // Start is called before the first frame update
     void Awake()
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -45,7 +44,6 @@ public class HideoutScript : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isTryingToHide)

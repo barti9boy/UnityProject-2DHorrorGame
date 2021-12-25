@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1584fbc79223e7f47b59b56b2f5d88a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSM: {fileID: 0}
+  playerStateMachine: {fileID: 0}
   animator: {fileID: 0}
 --- !u!212 &72075629
 SpriteRenderer:
@@ -1275,7 +1275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.66813, y: -1.904007, z: 20.675442}
+  m_LocalPosition: {x: -34.727345, y: -1.904007, z: 20.675442}
   m_LocalScale: {x: 1.0008624, y: 1.0008624, z: 1.0008624}
   m_Children: []
   m_Father: {fileID: 1258850619}
@@ -3233,7 +3233,7 @@ MonoBehaviour:
   isMovingDown: 0
   isMovingUp: 0
   velocityDirection: 0
-  isEntrance: 0
+  isEntrance: 1
   DownPoint: {fileID: 2037071146}
   UpPoint: {fileID: 1622003220}
   movementSpeed: 5
