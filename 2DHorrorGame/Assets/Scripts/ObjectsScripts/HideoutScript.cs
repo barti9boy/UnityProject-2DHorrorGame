@@ -56,6 +56,10 @@ public class HideoutScript : MonoBehaviour
 
     public void CheckHideout(PlayerStateMachine player)
     {
+        inputManager.movementInputEnabled = false;
+        inputManager.movementInputDirection = 0;
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+
         if (isHidden == false)
         {
             StartHiding(player);
