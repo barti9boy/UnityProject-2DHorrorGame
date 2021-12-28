@@ -23,6 +23,7 @@ public class PlayerStateIdle : PlayerStateBase
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
+        isInVent = player.previousState.isInVent;
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player)

@@ -21,6 +21,7 @@ public class PlayerStateMoving : PlayerStateBase
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
+        isInVent = player.previousState.isInVent;
         //Debug.Log("Hello from moving state");
     }
     public override void UpdateState(PlayerStateMachine player)
