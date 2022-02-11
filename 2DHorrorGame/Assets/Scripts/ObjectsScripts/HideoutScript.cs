@@ -70,7 +70,7 @@ public class HideoutScript : MonoBehaviour
 
     public void StartHiding(PlayerStateMachine player)
     {
-        animator.SetBool("isHiding", true);
+        
         if (handle.transform.position.x > playerTransform.position.x) //jesteœmy po lewej
         {
             if (!player.currentState.isFacingRight)
@@ -117,6 +117,7 @@ public class HideoutScript : MonoBehaviour
             rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - handle.transform.position.x) < 0.1)
             {
+                animator.SetBool("isHiding", true);
                 isTryingToHide = false;
                 inputManager.interactionInputEnabled = true;
                 OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
@@ -130,6 +131,7 @@ public class HideoutScript : MonoBehaviour
             rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - handle.transform.position.x) < 0.1)
             {
+                animator.SetBool("isHiding", true);
                 isTryingToHide = false;
                 inputManager.interactionInputEnabled = true;
                 OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
