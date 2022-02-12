@@ -20,6 +20,7 @@ public static class PlayerActions
             player.currentState.isFacingRight = false;
         }
     }
+
     public static void Flashlight(PlayerStateMachine player)
     {
         if (player.currentState.inputManager.isFlashlightButtonClicked)
@@ -99,5 +100,7 @@ public static class PlayerActions
         }
 
     }
+
+
 
 }
