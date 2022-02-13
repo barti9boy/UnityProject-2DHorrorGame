@@ -47,6 +47,7 @@ public class LadderScript : MonoBehaviour
 
     public void ChangeRoom(Transform transform, Rigidbody2D rb, InputManager inputManager, PlayerStateMachine player, GameObject flashlight)
     {
+        Debug.Log("1");
         playerStateMachine = player;
         playerRb = rb;
         playerTransform = transform;
@@ -54,16 +55,16 @@ public class LadderScript : MonoBehaviour
         playerFlashlight = flashlight;
         playerInputManager.movementInputEnabled = false;
         playerInputManager.interactionInputEnabled = false;
-        if (isFirstTimeGoingUp && playerTransform.position.y > transform.position.y) //without isFirstTimeEntering the point moves slightly down
-        {
-            UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
-            isFirstTimeGoingUp = false;
-        }
-        if(isFirstTimeGoingDown && playerTransform.position.y < transform.position.y)
-        {
-            DownPoint.transform.position = new Vector2(DownPoint.transform.position.x, playerTransform.position.y);
-            isFirstTimeGoingDown = false;
-        }
+        //if (isFirstTimeGoingUp && playerTransform.position.y > transform.position.y) //without isFirstTimeEntering the point moves slightly down
+        //{
+        //    UpPoint.transform.position = new Vector2(UpPoint.transform.position.x, playerTransform.position.y);
+        //    isFirstTimeGoingUp = false;
+        //}
+        //if(isFirstTimeGoingDown && playerTransform.position.y < transform.position.y)
+        //{
+        //    DownPoint.transform.position = new Vector2(DownPoint.transform.position.x, playerTransform.position.y);
+        //    isFirstTimeGoingDown = false;
+        //}
 
         if (playerTransform.position.x < gameObject.transform.position.x) 
         {
@@ -87,16 +88,19 @@ public class LadderScript : MonoBehaviour
             }
             velocityDirection = -1;
         }
+        Debug.Log("2");
         isChangingRoom = true;
-        playerFlashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
     }
     public void MovePlayer()
     {
+
         if (velocityDirection == 1 && playerTransform.position.x < gameObject.transform.position.x)
         {
+            Debug.Log("3");
             playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
             {
+                playerFlashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
                 isChangingRoom = false;
                 if (playerTransform.position.y > transform.position.y) isMovingDown = true;
                 if (playerTransform.position.y < transform.position.y) isMovingUp = true;
@@ -104,9 +108,11 @@ public class LadderScript : MonoBehaviour
         }
         if (velocityDirection == -1 && playerTransform.position.x > gameObject.transform.position.x)
         {
+            Debug.Log("3");
             playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
             {
+                playerFlashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
                 isChangingRoom = false;
                 if (playerTransform.position.y > transform.position.y) isMovingDown = true;
                 if (playerTransform.position.y < transform.position.y) isMovingUp = true;

@@ -77,7 +77,6 @@ public static class PlayerActions
             {
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 collision.gameObject.GetComponent<LadderScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player, player.gameObject.transform.GetChild(1).gameObject);
-                Debug.Log("1");
             }
         }
     }

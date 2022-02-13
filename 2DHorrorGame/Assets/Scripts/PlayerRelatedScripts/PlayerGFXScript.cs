@@ -38,11 +38,18 @@ public class PlayerGFXScript : MonoBehaviour
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding;
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding;
-        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveDown += Climbing_OnLadderMoveDown;
-        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveUp += Climbing_OnLadderMoveUp;
-        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnFinishClimbing += OnFinishClimbing;
-        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnVentEnterOrLeave += OnVentEnterOrLeave;
+        //GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveDown += Climbing_OnLadderMoveDown;
+        //GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnLadderMoveUp += Climbing_OnLadderMoveUp;
+        //GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnFinishClimbing += OnFinishClimbing;
+        //GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnVentEnterOrLeave += OnVentEnterOrLeave;
 
+        foreach(GameObject ladder in GameObject.FindGameObjectsWithTag("Ladder"))
+        {
+            ladder.GetComponent<LadderScript>().OnVentEnterOrLeave += OnVentEnterOrLeave;
+            ladder.GetComponent<LadderScript>().OnFinishClimbing += OnFinishClimbing;
+            ladder.GetComponent<LadderScript>().OnLadderMoveUp += Climbing_OnLadderMoveUp;
+            ladder.GetComponent<LadderScript>().OnLadderMoveDown += Climbing_OnLadderMoveDown;
+        }
 
 
     }
