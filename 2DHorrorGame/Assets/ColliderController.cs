@@ -11,7 +11,7 @@ public class ColliderController : MonoBehaviour
     {
         playerCollider = gameObject.GetComponent<CapsuleCollider2D>();
         isInVent = false;
-        GameObject.FindGameObjectWithTag("Ladder").GetComponent<LadderScript>().OnVentEnterOrLeave += OnVentEnterOrLeave;
+        gameObject.GetComponent<PlayerStateMachine>().usingLadderState.OnVentEnterOrLeave += OnVentEnterOrLeave;
     }
 
     private void OnVentEnterOrLeave(object sender, EventArgs e)

@@ -44,11 +44,11 @@ public class PlayerStateUsingLadder : PlayerStateBase
         isApproachingLadder = false;
         isGoingDown = false;
         isGoingDown = false;
-        isVentEntrance = collision.GetComponent<LadderScript>().isEntrance;
+        isVentEntrance = collision.GetComponent<LadderScript>().IsEntrance;
         ladderMiddleX = collision.gameObject.transform.position.x;
         ladderMiddleY = collision.gameObject.transform.position.y;
-        ladderUpPointY = collision.gameObject.transform.GetChild(0).gameObject.transform.position.y;
-        ladderDownPointY = collision.gameObject.transform.GetChild(1).gameObject.transform.position.y;
+        ladderUpPointY = collision.GetComponent<LadderScript>().UpPoint.transform.position.y;
+        ladderDownPointY = collision.GetComponent<LadderScript>().DownPoint.transform.position.y;
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
 
