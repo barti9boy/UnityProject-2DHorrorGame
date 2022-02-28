@@ -19,7 +19,7 @@ public class LadderScript : MonoBehaviour
     private GameObject playerFlashlight;
     private PlayerStateMachine playerStateMachine;
 
-    [SerializeField] private bool isEntrance;
+    public bool isEntrance;
     [SerializeField] private Transform DownPoint;
     [SerializeField] private Transform UpPoint;
     [SerializeField] private float movementSpeed = 5.0f;
@@ -96,7 +96,6 @@ public class LadderScript : MonoBehaviour
 
         if (velocityDirection == 1 && playerTransform.position.x < gameObject.transform.position.x)
         {
-            Debug.Log("3");
             playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
             {
@@ -108,7 +107,6 @@ public class LadderScript : MonoBehaviour
         }
         if (velocityDirection == -1 && playerTransform.position.x > gameObject.transform.position.x)
         {
-            Debug.Log("3");
             playerRb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - gameObject.transform.position.x) < 0.1)
             {

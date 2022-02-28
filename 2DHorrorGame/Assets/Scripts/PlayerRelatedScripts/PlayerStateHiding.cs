@@ -18,14 +18,14 @@ public class PlayerStateHiding : PlayerStateBase
     }
 
     public event EventHandler OnEnterStateHidden;
-    public override void EnterState(PlayerStateMachine player)
+    public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isHidden = false;
 
 }
-    public override void UpdateState(PlayerStateMachine player)
+    public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
         if (inputManager.isInteractionButtonClicked)
         {

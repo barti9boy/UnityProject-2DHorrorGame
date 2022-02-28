@@ -19,14 +19,14 @@ public class PlayerStateIdle : PlayerStateBase
     }
 
     public event EventHandler OnEnterStateIdle;
-    public override void EnterState(PlayerStateMachine player)
+    public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
         //Debug.Log("Hello from idle state");
     }
-    public override void UpdateState(PlayerStateMachine player)
+    public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0,0);
         if(inputManager.movementInputDirection != 0)
@@ -42,7 +42,7 @@ public class PlayerStateIdle : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
-        PlayerActions.Interact(player, collision); // New function passing components
+        PlayerActions.Interact(player, collision);
     }
    
 }

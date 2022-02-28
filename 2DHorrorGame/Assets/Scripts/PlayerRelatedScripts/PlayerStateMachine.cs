@@ -10,6 +10,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateMoving movingState;
     public PlayerStateHiding hidingState;
     public PlayerStateDead deadState;
+    public PlayerStateUsingLadder usingLadderState;
    
     void Awake()
     {
@@ -17,6 +18,7 @@ public class PlayerStateMachine : MonoBehaviour
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
         deadState = new PlayerStateDead(gameObject);
+        usingLadderState = new PlayerStateUsingLadder(gameObject);
         previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this); 
@@ -28,10 +30,10 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.UpdateState(this);
     }
 
-    public void SwitchState(PlayerStateBase state)
+    public void SwitchState(PlayerStateBase state, Collider2D collision = null)
     {
         currentState = state;
-        state.EnterState(this);
+        state.EnterState(this, collision);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {

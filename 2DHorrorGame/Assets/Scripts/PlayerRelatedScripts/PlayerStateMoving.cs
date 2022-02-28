@@ -17,14 +17,14 @@ public class PlayerStateMoving : PlayerStateBase
     }
 
     public event EventHandler OnEnterStateMoving;
-    public override void EnterState(PlayerStateMachine player)
+    public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
         //Debug.Log("Hello from moving state");
     }
-    public override void UpdateState(PlayerStateMachine player)
+    public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
         if(inputManager.movementInputDirection == 0)
         {

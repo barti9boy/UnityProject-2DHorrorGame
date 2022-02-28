@@ -14,17 +14,17 @@ public abstract class PlayerStateBase
     public Collider2D collider;
     //public PlayerStateBase previousState;
 
-    public float movementSpeed = 5f;
 
     public bool isFacingRight = true;
     public bool isInVent = false;
+    public float movementSpeed = 5f;
     public float interactionHoldTime = 0;
     public PlayerStateBase(GameObject playerObject)
     {
 
     }
-    public abstract void EnterState(PlayerStateMachine player);
-    public abstract void UpdateState(PlayerStateMachine player);
+    public abstract void EnterState(PlayerStateMachine player, Collider2D collision = null);
+    public abstract void UpdateState(PlayerStateMachine player, Collider2D collision = null);
     public abstract void OnCollisionEnter(PlayerStateMachine player, Collision2D collision);
     public abstract void OnTriggerStay(PlayerStateMachine player, Collider2D collision);
 }
