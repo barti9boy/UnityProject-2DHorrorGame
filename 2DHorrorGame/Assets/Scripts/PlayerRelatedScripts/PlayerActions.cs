@@ -66,8 +66,9 @@ public static class PlayerActions
             {
                 if (player.currentState.inputManager.isInteractionButtonClicked)
                 {
-                    collision.gameObject.GetComponent<DoorScript>().DoorOpen();
-                    collision.gameObject.GetComponent<DoorScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+                    player.currentState.inputManager.isInteractionButtonClicked = false;
+                    player.previousState = player.currentState;
+                    player.SwitchState(player.usingHorizontalDoorState, collision);
                 }
             }
         }
@@ -80,14 +81,6 @@ public static class PlayerActions
                 player.SwitchState(player.usingLadderState, collision);
             }
         }
-        //if (collision.CompareTag("Ladder"))
-        //{
-        //    if (player.currentState.inputManager.isInteractionButtonClicked)
-        //    {
-        //        player.currentState.inputManager.isInteractionButtonClicked = false;
-        //        collision.gameObject.GetComponent<LadderScript>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player, player.gameObject.transform.GetChild(1).gameObject);
-        //    }
-        //}
     }
     public static void Hiding(PlayerStateMachine player, Collider2D collision, Transform playerTransform, float movementSpeed, Rigidbody2D rb, Collision2D collider)
     {

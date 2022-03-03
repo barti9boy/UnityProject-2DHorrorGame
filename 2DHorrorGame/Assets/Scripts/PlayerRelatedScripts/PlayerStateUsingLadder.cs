@@ -75,7 +75,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
             velocityDirection = -1;
         }
         isApproachingLadder = true;
-        Debug.Log("ladderstate");
+        //Debug.Log("ladderstate");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {

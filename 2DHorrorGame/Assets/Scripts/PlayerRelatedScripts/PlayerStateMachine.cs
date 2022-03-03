@@ -11,6 +11,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateHiding hidingState;
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
+    public PlayerStateUsingHorizontalDoor usingHorizontalDoorState;
    
     void Awake()
     {
@@ -19,6 +20,7 @@ public class PlayerStateMachine : MonoBehaviour
         hidingState = new PlayerStateHiding(gameObject);
         deadState = new PlayerStateDead(gameObject);
         usingLadderState = new PlayerStateUsingLadder(gameObject);
+        usingHorizontalDoorState = new PlayerStateUsingHorizontalDoor(gameObject);
         previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this); 
