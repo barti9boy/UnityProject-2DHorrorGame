@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: 9990aee5080a8604eb81170d9246609a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2902074278492518646
+    second: All_rooms_test_level_0
+  - first:
+      213: -5012716660537754346
+    second: All_rooms_test_level_1
+  - first:
+      213: -5359976069894623619
+    second: All_rooms_test_level_2
+  - first:
+      213: -1722966872575552533
+    second: All_rooms_test_level_3
+  - first:
+      213: -447206586245092427
+    second: All_rooms_test_level_4
+  - first:
+      213: 2026233236745551030
+    second: All_rooms_test_level_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +59,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -137,7 +155,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: All_rooms_test_level_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 159
+        width: 124
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a07c7aec1d2c9b7d0800000000000000
+      internalID: -2902074278492518646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_rooms_test_level_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 159
+        width: 124
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61df6f871c04f6ab0800000000000000
+      internalID: -5012716660537754346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_rooms_test_level_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 106
+        width: 242
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e265da92a8d95b0800000000000000
+      internalID: -5359976069894623619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_rooms_test_level_3
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 53
+        width: 124
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be35e5012cac618e0800000000000000
+      internalID: -1722966872575552533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_rooms_test_level_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 53
+        width: 124
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb65adaaf33bc9f0800000000000000
+      internalID: -447206586245092427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_rooms_test_level_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 124
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bcfe44b460ae1c10800000000000000
+      internalID: 2026233236745551030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

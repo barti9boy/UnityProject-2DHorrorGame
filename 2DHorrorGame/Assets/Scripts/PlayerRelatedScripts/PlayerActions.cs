@@ -38,10 +38,13 @@ public static class PlayerActions
         {
             if (collision.CompareTag("Key"))
             {
-                player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>().ItemID);
-                collision.gameObject.SetActive(false);
+                if(player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>()))
+                {
+                    collision.gameObject.SetActive(false);
+                } 
                 player.currentState.playerInventory.DebugLogInventory();
             }
+
             if (collision.CompareTag("Hideout"))
             {
                 player.currentState.inputManager.movementInputEnabled = false;

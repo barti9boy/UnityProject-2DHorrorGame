@@ -13,5 +13,8 @@ public interface IPickableObject
     {
         get;
     }
-
+    public Sprite InventoryIcon
+    {
+        get;
+    }
 }
