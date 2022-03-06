@@ -17,4 +17,5 @@ public interface IPickableObject
     {
         get;
     }
+    public void ChangePosition(float x, float y);
 }

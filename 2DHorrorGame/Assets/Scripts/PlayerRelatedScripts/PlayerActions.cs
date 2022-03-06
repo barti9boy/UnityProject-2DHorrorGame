@@ -42,7 +42,15 @@ public static class PlayerActions
                 {
                     collision.gameObject.SetActive(false);
                 } 
-                player.currentState.playerInventory.DebugLogInventory();
+                //player.currentState.playerInventory.DebugLogInventory();
+            }
+            if (collision.CompareTag("Item"))
+            {
+                if (player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>()))
+                {
+                    collision.gameObject.SetActive(false);
+                }
+                //player.currentState.playerInventory.DebugLogInventory();
             }
 
             if (collision.CompareTag("Hideout"))
@@ -63,7 +71,7 @@ public static class PlayerActions
         {
             if (collision.gameObject.GetComponent<DoorScript>().isLocked)
             {
-                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(player.currentState.playerInventory.inventoryItemsIDs, player.currentState.inputManager.isInteractionButtonHeld);
+                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(player.currentState.playerInventory.items, player.currentState.inputManager.isInteractionButtonHeld);
             }
             else
             {

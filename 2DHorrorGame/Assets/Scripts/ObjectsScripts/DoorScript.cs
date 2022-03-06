@@ -31,11 +31,11 @@ public class DoorScript : MonoBehaviour
             interactionTime = 0;
         }
     }
-    public void DoorUnlock(List<int> itemIDs, bool isInteractionButtonHeld)
+    public void DoorUnlock(IPickableObject[] items, bool isInteractionButtonHeld)
     {
-        foreach(int ID in itemIDs)
+        foreach(IPickableObject item in items)
         {
-            if(ID == itemIdToUnlock)
+            if(item.ItemID == itemIdToUnlock)
             {
                 if (isInteractionButtonHeld)
                 {

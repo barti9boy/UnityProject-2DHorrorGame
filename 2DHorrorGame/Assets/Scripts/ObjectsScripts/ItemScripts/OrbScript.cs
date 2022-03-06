@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyScript : MonoBehaviour, IPickableObject
+public class OrbScript : MonoBehaviour, IPickableObject
 {
     [SerializeField] private int itemID;
     [SerializeField] private string displayName;
@@ -19,5 +19,10 @@ public class KeyScript : MonoBehaviour, IPickableObject
         ItemID = itemID;
         DisplayName = displayName;
         InventoryIcon = inventoryIcon;
+    }
+    public void ChangePosition(float x, float y)
+    {
+        this.gameObject.SetActive(true);
+        this.gameObject.transform.position = new Vector2(x, y);
     }
 }

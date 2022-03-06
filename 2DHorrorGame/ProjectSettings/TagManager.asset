@@ -10,6 +10,7 @@ TagManager:
   - Switch
   - Ladder
   - VentEntrance
+  - Item
   layers:
   - Default
   - TransparentFX
