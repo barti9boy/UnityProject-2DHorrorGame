@@ -11,6 +11,7 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateHiding hidingState;
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
+    public PlayerStateUsingHorizontalDoor usingHorizontalDoor;
     public Animator animator;
     private bool isIdle;
     private bool isMoving;
@@ -33,15 +34,18 @@ public class PlayerGFXScript : MonoBehaviour
         hidingState = playerStateMachine.hidingState;
         deadState = playerStateMachine.deadState;
         usingLadderState = playerStateMachine.usingLadderState;
+        usingHorizontalDoor = playerStateMachine.usingHorizontalDoorState;
 
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
+        usingLadderState.OnStartMoving += MovingState_OnEnterStateMoving;
         usingLadderState.OnLadderMoveDown += Climbing_OnLadderMoveDown;
         usingLadderState.OnLadderMoveUp += Climbing_OnLadderMoveDown;
         usingLadderState.OnFinishClimbing += OnFinishClimbing;
         usingLadderState.OnVentEnterOrLeave += OnVentEnterOrLeave;
+        usingHorizontalDoor.OnStartMoving += MovingState_OnEnterStateMoving;
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding;
         GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding;
         

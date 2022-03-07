@@ -7,6 +7,8 @@ using System;
 
 public class PlayerStateUsingHorizontalDoor : PlayerStateBase
 {
+    public event EventHandler OnStartMoving;
+
     //----------door variables----------//
     private int itemIdToUnlock;
     private float unlockTimeRequired;
@@ -18,6 +20,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     //----------door interaction variables----------//
     private bool isChangingRoom;
     private float velocityDirection;
+
 
     public PlayerStateUsingHorizontalDoor(GameObject playerObject) : base(playerObject)
     {
@@ -64,6 +67,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
             velocityDirection = -1;
         }
         doorCollider.enabled = false;
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
         isChangingRoom = true;
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)

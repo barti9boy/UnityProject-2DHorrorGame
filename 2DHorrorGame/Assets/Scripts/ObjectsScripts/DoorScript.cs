@@ -33,23 +33,26 @@ public class DoorScript : MonoBehaviour
     }
     public void DoorUnlock(IPickableObject[] items, bool isInteractionButtonHeld)
     {
-        foreach(IPickableObject item in items)
+        if (isInteractionButtonHeld)
         {
-            if(item.ItemID == itemIdToUnlock)
+            foreach (IPickableObject item in items)
             {
-                if (isInteractionButtonHeld)
+                if (item != null && item.ItemID == itemIdToUnlock)
                 {
+
+
                     interactionTime += Time.deltaTime;
-                    if(interactionTime >= unlockTimeRequired)
+                    if (interactionTime >= unlockTimeRequired)
                     {
                         isLocked = false;
                     }
+                    
                 }
-                else
-                {
-                    interactionTime = 0;
-                } 
             }
+        }
+        else
+        {
+            interactionTime = 0;
         }
     }
     public void DoorOpen()
