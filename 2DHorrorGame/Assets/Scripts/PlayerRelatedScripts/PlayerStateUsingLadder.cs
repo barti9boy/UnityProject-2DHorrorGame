@@ -21,10 +21,12 @@ public class PlayerStateUsingLadder : PlayerStateBase
     private float velocityDirection;
 
     //------------player gfx events------------//
+    public event EventHandler OnStartMoving;
     public event EventHandler OnLadderMoveUp;
     public event EventHandler OnLadderMoveDown;
     public event EventHandler OnVentEnterOrLeave;
     public event EventHandler OnFinishClimbing;
+
 
     public PlayerStateUsingLadder(GameObject playerObject) : base(playerObject)
     {
@@ -75,6 +77,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
             velocityDirection = -1;
         }
         isApproachingLadder = true;
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
         //Debug.Log("ladderstate");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)

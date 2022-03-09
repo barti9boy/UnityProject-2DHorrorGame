@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class PlayerInventory : MonoBehaviour
@@ -12,12 +13,15 @@ public class PlayerInventory : MonoBehaviour
     public Image[] inventoryItems;
     public Sprite itemContainer;
 
+    public TextMeshProUGUI notificationText;
+
     private int inventorySlotCount = 3;
-    private int currentInventoryItemCount;
+    public int currentInventoryItemCount;
     private InventoryItemScript inventoryItemScript;
 
     public void Awake()
     {
+        notificationText.text = "";
         currentInventoryItemCount = 0;
         items = new IPickableObject[inventorySlotCount];
         for(int i = 0; i< inventorySlotCount; i++)
@@ -28,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         {
             image.enabled = false;
             inventoryItemScript = image.GetComponent<InventoryItemScript>();
-            inventoryItemScript.OnItemDrop += OnRemoveItemFromInventory;
+            inventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         }
     }
 
@@ -36,36 +40,54 @@ public class PlayerInventory : MonoBehaviour
     {
         if (currentInventoryItemCount < inventorySlotCount)
         {
-            inventoryItems[currentInventoryItemCount].sprite = item.InventoryIcon;
-            inventoryItems[currentInventoryItemCount].enabled = true;
-            inventoryItems[currentInventoryItemCount].GetComponent<InventoryItemScript>().isEmpty = false;
-            items[currentInventoryItemCount] = item;
-            Debug.Log(items[currentInventoryItemCount].ItemID);
-            currentInventoryItemCount++;
-            return true;
+            for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
+            {
+                if (inventoryItems[slotNumber].sprite == null)
+                {
+                    inventoryItems[slotNumber].sprite = item.InventoryIcon;
+                    inventoryItems[slotNumber].enabled = true;
+                    inventoryItems[slotNumber].GetComponent<InventoryItemScript>().isEmpty = false;
+                    items[slotNumber] = item;
+                    Debug.Log(items[slotNumber].ItemID);
+                    currentInventoryItemCount++;
+                    return true;
+                }
+            }
+            return false;
         }
         else
         {
             //send info to UI probably idk
+            notificationText.text = "Could not pick up " + item.DisplayName + ", inventory full!";
+            StartCoroutine(MessageNotification());
             return false;
         }
     }
 
-    public void OnRemoveItemFromInventory(object sender, EventArgs e)
+    public void RemoveItemFromInventory(object sender, EventArgs e)
     {
         for(int slotNumber = 0; slotNumber <inventorySlotCount; slotNumber++)
         {
-            if (inventoryItems[slotNumber].GetComponent<InventoryItemScript>().isEmpty == true)
+            if (items[slotNumber] != null && inventoryItems[slotNumber].GetComponent<InventoryItemScript>().isEmpty == true)
             {
                 inventoryItems[slotNumber].sprite = null;
                 inventoryItems[slotNumber].enabled = false;
                 if (currentInventoryItemCount > 0) currentInventoryItemCount--;
-                items[slotNumber].ChangePosition(gameObject.transform.position.x, gameObject.transform.position.y - 1.07f);
-                return;
+                items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f);
+                items[slotNumber] = null;
             }
         }
 
     }
+
+    IEnumerator MessageNotification()
+    {
+        yield return new WaitForSeconds(1f);
+        notificationText.text = "";
+    }
+
+
+
 
 
     public void DebugLogInventory()
@@ -74,6 +96,5 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log(i.ItemID.ToString() + ", ");
         }
-
     }
 }
