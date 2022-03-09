@@ -6,6 +6,8 @@ using static PlayerActions;
 public class PlayerStateHiding : PlayerStateBase
 {
     public bool isHidden = false;
+    Collider2D hideoutCollider;
+
     public PlayerStateHiding(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -20,6 +22,8 @@ public class PlayerStateHiding : PlayerStateBase
     public event EventHandler OnEnterStateHidden;
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        hideoutCollider = collision;
+
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isHidden = false;
@@ -29,10 +33,10 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (inputManager.isInteractionButtonClicked)
         {
-            //Leave();
-            //player.previousState = this;
-            //player.SwitchState(player.idleState);
-            //inputManager.isInteractionButtonClicked = false;
+            player.previousState = this;
+            Debug.Log(hideoutCollider);
+            player.SwitchState(player.leavingHideoutState, hideoutCollider);
+            inputManager.isInteractionButtonClicked = false;
 
         }
         PlayerActions.Flashlight(player);

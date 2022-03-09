@@ -9,6 +9,8 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
     public PlayerStateHiding hidingState;
+    public PlayerStateTryingToHide tryingToHideState;
+    public PlayerStateLeavingHideout leavingHideoutState;
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
     public PlayerStateUsingHorizontalDoor usingHorizontalDoorState;
@@ -18,6 +20,8 @@ public class PlayerStateMachine : MonoBehaviour
         idleState = new PlayerStateIdle(gameObject);
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
+        tryingToHideState = new PlayerStateTryingToHide(gameObject);
+        leavingHideoutState = new PlayerStateLeavingHideout(gameObject);
         deadState = new PlayerStateDead(gameObject);
         usingLadderState = new PlayerStateUsingLadder(gameObject);
         usingHorizontalDoorState = new PlayerStateUsingHorizontalDoor(gameObject);

@@ -9,20 +9,41 @@ public class HideoutScript : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
     PlayerStateMachine playerStateMachine;
-    private Rigidbody2D rb;
+    /*private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputManager inputManager;
     private Transform playerTransform;
     private GameObject flashlight;
     private GameObject playerGFX;
     private SpriteRenderer playerSpriteRenderer;
-    private Collider2D collider;
-    private Animator animator;
-    [SerializeField] private Transform handle;
-    [SerializeField] private AnimationClip hiding;
+    private Collider2D collider;*/
+    public bool finishedOpening = false;
+    public Animator animator;
+    [SerializeField] public Transform handle;
+    [SerializeField] public AnimationClip hiding;
 
 
-    public bool isHiding = false;
+    /* private void Awake()
+     {
+         playerObject.GetComponent<PlayerStateMachine>().tryingToHideState.OnEnterStateHiding += TryingToHideState_OnEnterStateHiding; ;
+
+     }
+
+     private void TryingToHideState_OnEnterStateHiding(object sender, EventArgs e)
+     {
+         WaitForHidingTime();
+         playerObject.GetComponent<PlayerStateMachine>().tryingToHideState.isHiding = true;
+         Debug.Log(playerObject.GetComponent<PlayerStateMachine>().tryingToHideState.isHiding);
+     }
+
+     private IEnumerator WaitForHidingTime()
+     {
+         yield return new WaitForSeconds(hiding.length);
+         finishedOpening = true;
+     } /*
+
+
+    /*public bool isHiding = false;
     public bool isHidden = false;
     public bool isTryingToHide = false;
     public int velocityDirection;
@@ -42,11 +63,11 @@ public class HideoutScript : MonoBehaviour
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerStateMachine = playerObject.GetComponent<PlayerStateMachine>();
         animator = gameObject.GetComponent<Animator>();
-    }
+    }*/
 
-    void Update()
-    {
-        if (isTryingToHide)
+    /* void Update()
+     {
+       if (isTryingToHide)
         {
             MovePlayer();
         }
@@ -70,7 +91,7 @@ public class HideoutScript : MonoBehaviour
 
     public void StartHiding(PlayerStateMachine player)
     {
-        
+
         if (handle.transform.position.x > playerTransform.position.x) //jesteœmy po lewej
         {
             if (!player.currentState.isFacingRight)
@@ -123,7 +144,7 @@ public class HideoutScript : MonoBehaviour
                 OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
                 rb.velocity = new Vector2(0, 0);
                 StartCoroutine(WaitForHidingTime());
-              
+
             }
         }
         if (velocityDirection == -1 && playerTransform.position.x > handle.position.x)
@@ -141,11 +162,7 @@ public class HideoutScript : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForHidingTime()
-    {
-        yield return new WaitForSeconds(hiding.length);
-        Hide();
-    }
+
 
 
     private IEnumerator WaitForLeavingTime()
@@ -161,43 +178,43 @@ public class HideoutScript : MonoBehaviour
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
         OnLeaveStateHiding?.Invoke(this, EventArgs.Empty);
-        StartCoroutine(WaitForLeavingTime());
+        StartCoroutine(WaitForLeavingTime()); */
 
 
 
-        /* inputManager.isInteractionButtonClicked = false;
+    /* inputManager.isInteractionButtonClicked = false;
+     flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+     if (player.currentState.isFacingRight)
+     {
+         flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
+     }
+     else if (!player.currentState.isFacingRight)
+     {
+         flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
+     }
+     playerSpriteRenderer.sortingOrder = 1;
+     flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
+     inputManager.movementInputEnabled = true;
+     player.SwitchState(player.idleState);
+     isHidden = false;
+     animator.SetBool("isLeaving", false); 
+}*/
+
+    /* public void Leave()
+     {
+         inputManager.isInteractionButtonClicked = false;
          flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
-         if (player.currentState.isFacingRight)
+         if (playerStateMachine.currentState.isFacingRight)
          {
              flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
          }
-         else if (!player.currentState.isFacingRight)
+         else if (!playerStateMachine.currentState.isFacingRight)
          {
              flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
          }
-         playerSpriteRenderer.sortingOrder = 1;
-         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
          inputManager.movementInputEnabled = true;
-         player.SwitchState(player.idleState);
+         playerStateMachine.SwitchState(playerStateMachine.idleState);
          isHidden = false;
-         animator.SetBool("isLeaving", false); */
-    }
-
-    public void Leave()
-    {
-        inputManager.isInteractionButtonClicked = false;
-        flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
-        if (playerStateMachine.currentState.isFacingRight)
-        {
-            flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
-        }
-        else if (!playerStateMachine.currentState.isFacingRight)
-        {
-            flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
-        }
-        inputManager.movementInputEnabled = true;
-        playerStateMachine.SwitchState(playerStateMachine.idleState);
-        isHidden = false;
-        animator.SetBool("isLeaving", false);
-    }
+         animator.SetBool("isLeaving", false);
+     }*/
 }
