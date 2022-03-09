@@ -14,6 +14,7 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
     public PlayerStateUsingHorizontalDoor usingHorizontalDoor;
+    public PlayerStateUsingVerticalDoor usingVerticalDoorState;
     public Animator animator;
     private bool isIdle;
     private bool isMoving;
@@ -39,6 +40,7 @@ public class PlayerGFXScript : MonoBehaviour
         usingLadderState = playerStateMachine.usingLadderState;
         leavingHideoutState = playerStateMachine.leavingHideoutState;
         usingHorizontalDoor = playerStateMachine.usingHorizontalDoorState;
+        usingVerticalDoorState = playerStateMachine.usingVerticalDoorState;
 
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
@@ -52,6 +54,8 @@ public class PlayerGFXScript : MonoBehaviour
         tryingToHideState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
         leavingHideoutState.OnLeaveStateHiding += LeavingState_OnLeaveStateHiding;
         usingHorizontalDoor.OnStartMoving += MovingState_OnEnterStateMoving;
+        usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
+
 
 
     }

@@ -62,7 +62,7 @@ public static class PlayerActions
             }
             if (collision.CompareTag("Switch"))
             {
-                collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
+                //collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
                 collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeCamera();
             }
         }
@@ -82,7 +82,16 @@ public static class PlayerActions
                 }
             }
         }
-        if (player.currentState.inputManager.isInteractionButtonClicked)
+        if (collision.CompareTag("vDoors"))
+        {
+            if (player.currentState.inputManager.isInteractionButtonClicked)
+            {
+                player.currentState.inputManager.isInteractionButtonClicked = false;
+                player.previousState = player.currentState;
+                player.SwitchState(player.usingVerticalDoorState, collision);
+            }
+        }
+            if (player.currentState.inputManager.isInteractionButtonClicked)
         {
             if (collision.CompareTag("Ladder"))
             {
