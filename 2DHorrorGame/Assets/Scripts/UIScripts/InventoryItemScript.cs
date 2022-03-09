@@ -8,20 +8,18 @@ using System;
 public class InventoryItemScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool isEmpty;
+    public int slotNumber;
     [SerializeField] private bool isBeingClicked;
     [SerializeField] private float requiredHoldTime;
     [SerializeField] private float currentHoldTime;
-    [SerializeField] private Image image;
 
-    public event EventHandler OnItemDrop;
+    public event EventHandler<int> OnItemDrop;
 
     public void Awake()
     {
-        isEmpty = true;
         isBeingClicked = false;
         currentHoldTime = 0;
-        requiredHoldTime = 1f;
-        image = this.gameObject.GetComponent<Image>();
+        requiredHoldTime = 1.2f;
     }
     private void Update()
     {
@@ -30,8 +28,7 @@ public class InventoryItemScript : MonoBehaviour, IPointerDownHandler, IPointerU
             currentHoldTime += Time.deltaTime;
             if (currentHoldTime >= requiredHoldTime)
             {
-                isEmpty = true;
-                OnItemDrop?.Invoke(this, EventArgs.Empty);
+                OnItemDrop?.Invoke(this, slotNumber);
                 isBeingClicked = false;
             }
         }

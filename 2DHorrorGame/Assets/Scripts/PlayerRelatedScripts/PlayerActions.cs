@@ -38,10 +38,12 @@ public static class PlayerActions
         {
             if (collision.CompareTag("Key"))
             {
+
                 if(player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>()))
                 {
                     collision.gameObject.SetActive(false);
-                } 
+                }
+                player.currentState.inputManager.isInteractionButtonClicked = false;
                 //player.currentState.playerInventory.DebugLogInventory();
             }
             if (collision.CompareTag("Item"))
@@ -50,6 +52,7 @@ public static class PlayerActions
                 {
                     collision.gameObject.SetActive(false);
                 }
+                player.currentState.inputManager.isInteractionButtonClicked = false;
                 //player.currentState.playerInventory.DebugLogInventory();
             }
 
