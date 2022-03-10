@@ -12,7 +12,6 @@ public class PlayerInventory : MonoBehaviour
     public Image[] inventoryItems;
 
     private int inventorySlotCount = 3;
-    private int currentInventoryItemCount;
 
     public event EventHandler<int> OnItemAdd;
 

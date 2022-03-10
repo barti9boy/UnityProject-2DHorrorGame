@@ -17,14 +17,13 @@ public class PlayerUIScript : MonoBehaviour
     public TextMeshProUGUI notificationText;
 
     private int inventorySlotCount = 3;
-    private int currentInventoryItemCount;
 
     void Awake()
     {
         
         player.GetComponent<PlayerInventory>().OnItemAdd += AddItemToInventory;
         items = player.GetComponent<PlayerInventory>().items;
-        notificationText.text = "";
+        notificationText.text = "text box";
         for (int i = 0; i < inventorySlotCount; i++)
         {
             inventorySlots[i].sprite = itemContainer;
