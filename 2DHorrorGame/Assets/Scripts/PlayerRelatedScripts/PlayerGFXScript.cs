@@ -9,9 +9,12 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
     public PlayerStateHiding hidingState;
+    public PlayerStateTryingToHide tryingToHideState;
+    public PlayerStateLeavingHideout leavingHideoutState;
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
     public PlayerStateUsingHorizontalDoor usingHorizontalDoor;
+    public PlayerStateUsingVerticalDoor usingVerticalDoorState;
     public Animator animator;
     private bool isIdle;
     private bool isMoving;
@@ -31,10 +34,13 @@ public class PlayerGFXScript : MonoBehaviour
         playerStateMachine = GetComponentInParent<PlayerStateMachine>();
         idleState = playerStateMachine.idleState;
         movingState = playerStateMachine.movingState;
+        tryingToHideState = playerStateMachine.tryingToHideState;
         hidingState = playerStateMachine.hidingState;
         deadState = playerStateMachine.deadState;
         usingLadderState = playerStateMachine.usingLadderState;
+        leavingHideoutState = playerStateMachine.leavingHideoutState;
         usingHorizontalDoor = playerStateMachine.usingHorizontalDoorState;
+        usingVerticalDoorState = playerStateMachine.usingVerticalDoorState;
 
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
@@ -45,10 +51,11 @@ public class PlayerGFXScript : MonoBehaviour
         usingLadderState.OnLadderMoveUp += Climbing_OnLadderMoveDown;
         usingLadderState.OnFinishClimbing += OnFinishClimbing;
         usingLadderState.OnVentEnterOrLeave += OnVentEnterOrLeave;
+        tryingToHideState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
+        leavingHideoutState.OnLeaveStateHiding += LeavingState_OnLeaveStateHiding;
         usingHorizontalDoor.OnStartMoving += MovingState_OnEnterStateMoving;
-        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnEnterStateHiding += HidingState_OnEnterStateHiding;
-        GameObject.FindGameObjectWithTag("Hideout").GetComponent<HideoutScript>().OnLeaveStateHiding += HidingState_OnLeaveStateHiding;
-        
+        usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
+
 
 
     }
@@ -101,7 +108,7 @@ public class PlayerGFXScript : MonoBehaviour
         isClimbingUp = false;
         UpdateAnimations();
     }
-    private void HidingState_OnLeaveStateHiding(object sender, EventArgs e)
+    private void LeavingState_OnLeaveStateHiding(object sender, EventArgs e)
     {
         isMoving = false;
         isIdle = false;

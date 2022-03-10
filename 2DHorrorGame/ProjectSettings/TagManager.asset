@@ -11,6 +11,7 @@ TagManager:
   - Ladder
   - VentEntrance
   - Item
+  - vDoors
   layers:
   - Default
   - TransparentFX
