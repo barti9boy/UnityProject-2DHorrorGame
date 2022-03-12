@@ -8,22 +8,24 @@ using TMPro;
 public class PlayerUIScript : MonoBehaviour
 {
     public GameObject player;
-
-    public IPickableObject[] items;
+    //----------Inventory elements----------//
     public Image[] inventorySlots;
     public Image[] inventoryItems;
     public Sprite itemContainer;
-
-    public TextMeshProUGUI notificationText;
-
     private int inventorySlotCount = 3;
+    //----------Notification textbox elements----------//
+    public TextMeshProUGUI notificationText;
+    private static float notificationTime = 1.15f;
+    public float currentTime;
+
+
 
     void Awake()
     {
-        
+        currentTime = 0;
         player.GetComponent<PlayerInventory>().OnItemAdd += AddItemToInventory;
-        items = player.GetComponent<PlayerInventory>().items;
-        notificationText.text = "text box";
+        player.GetComponent<PlayerInventory>().OnItemSendNotification += ShowNotification;
+        notificationText.text = "";
         for (int i = 0; i < inventorySlotCount; i++)
         {
             inventorySlots[i].sprite = itemContainer;
@@ -34,30 +36,32 @@ public class PlayerUIScript : MonoBehaviour
             image.GetComponent<InventoryItemScript>().OnItemDrop += RemoveItemFromInventory;
         }
     }
-
-    void Update()
+    private void Update()
     {
-        
+        if(notificationText.text != "")
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime >= notificationTime) notificationText.text = "";
+        }
     }
 
-    public void AddItemToInventory(object sender, int slotNumber)
+    private void ShowNotification(object sender, string e)
     {
-        items = player.GetComponent<PlayerInventory>().items;
-        if (inventoryItems[slotNumber].sprite == null)
+        currentTime = 0;
+        notificationText.text = e;
+    }
+
+    public void AddItemToInventory(object sender, ItemEventArgs args)
+    {
+        if (inventoryItems[args.inventorySlotNumber].sprite == null)
         {
-            inventoryItems[slotNumber].sprite = items[slotNumber].InventoryIcon;
-            inventoryItems[slotNumber].enabled = true;
+            inventoryItems[args.inventorySlotNumber].sprite = args.inventoryItem.InventoryIcon;
+            inventoryItems[args.inventorySlotNumber].enabled = true;
         }
     }
     public void RemoveItemFromInventory(object sender, int slotNumber)
     {
             inventoryItems[slotNumber].sprite = null;
             inventoryItems[slotNumber].enabled = false;
-    }
-
-    IEnumerator MessageNotification()
-    {
-        yield return new WaitForSeconds(1f);
-        notificationText.enabled = false;
     }
 }
