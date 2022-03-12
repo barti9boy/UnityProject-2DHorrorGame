@@ -1,7 +1,151 @@
 fileFormatVersion: 2
 guid: f0751f74210179f4989c894523f84b2a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7694819599453909517
+    second: door
+  - first:
+      213: 3116513314566639952
+    second: shelf
+  - first:
+      213: 2971767157903306593
+    second: locker
+  - first:
+      213: 4236041462545258643
+    second: shelf2
+  - first:
+      213: -4373282214513275264
+    second: table_short
+  - first:
+      213: 7002884107557448655
+    second: barrel1
+  - first:
+      213: -5407508854408891513
+    second: barrel2
+  - first:
+      213: 7386867778723611901
+    second: shelf3
+  - first:
+      213: -5408910005252252828
+    second: window1
+  - first:
+      213: -4648555801546561887
+    second: cleaning_equipment
+  - first:
+      213: -4247023818564286872
+    second: lamp
+  - first:
+      213: 6575155208916509259
+    second: stairs
+  - first:
+      213: 5100918009340808224
+    second: Test_room_assets_12
+  - first:
+      213: -2666565811922657286
+    second: painting1
+  - first:
+      213: -6887617505867358116
+    second: painting2
+  - first:
+      213: -7790225962412086422
+    second: standing_lamp
+  - first:
+      213: 6082984200055786203
+    second: broken_decorations
+  - first:
+      213: 6910861746816306463
+    second: radiator
+  - first:
+      213: -943786035418801160
+    second: Test_room_assets_18
+  - first:
+      213: 3537066389464423324
+    second: Test_room_assets_19
+  - first:
+      213: -7179381242054417229
+    second: chair
+  - first:
+      213: 3421077481549346251
+    second: Test_room_assets_21
+  - first:
+      213: -6429782893938741347
+    second: Test_room_assets_22
+  - first:
+      213: 6177182501448641904
+    second: Test_room_assets_23
+  - first:
+      213: 5964567581160684992
+    second: Test_room_assets_24
+  - first:
+      213: 4012450463463126985
+    second: Test_room_assets_25
+  - first:
+      213: 6273731426584193494
+    second: Test_room_assets_26
+  - first:
+      213: -8898174781658327442
+    second: Test_room_assets_27
+  - first:
+      213: -8851260087144775046
+    second: chair_fallen
+  - first:
+      213: -4453405221193628491
+    second: table_wide
+  - first:
+      213: 2958154432987482476
+    second: closet
+  - first:
+      213: -6959904688868361452
+    second: standing_lamp1
+  - first:
+      213: 6043793738030644354
+    second: Test_room_assets_32
+  - first:
+      213: 7832595293589654956
+    second: bed
+  - first:
+      213: -3876492470020881825
+    second: Test_room_assets_34
+  - first:
+      213: -1111883273495827789
+    second: lamp2
+  - first:
+      213: 1436045991342145564
+    second: gas_lamp
+  - first:
+      213: -6984822999679641634
+    second: lamp3
+  - first:
+      213: 1542061360049363210
+    second: courtain1
+  - first:
+      213: -5722301146539785288
+    second: courtain2
+  - first:
+      213: 6916219781225538897
+    second: courtain3
+  - first:
+      213: -41070826970239114
+    second: courtain4
+  - first:
+      213: 4936751608626716157
+    second: lamp4
+  - first:
+      213: 220164903037585638
+    second: Test_room_assets_43
+  - first:
+      213: -8360240097024817219
+    second: spiral_staircase
+  - first:
+      213: -7015013377373320518
+    second: junk_pile_big
+  - first:
+      213: 7541046380450617455
+    second: Test_room_assets_46
+  - first:
+      213: -8381776787190815059
+    second: junk_pile_small
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +185,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -137,7 +281,994 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: door
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 151
+        width: 13
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fd06dbd752863590800000000000000
+      internalID: -7694819599453909517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shelf
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 166
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051158cf854104b20800000000000000
+      internalID: 3116513314566639952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: locker
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 151
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16faff92c76dd3920800000000000000
+      internalID: 2971767157903306593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shelf2
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 161
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39816d4444179ca30800000000000000
+      internalID: 4236041462545258643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: table_short
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 151
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08e076d1ffafe43c0800000000000000
+      internalID: -4373282214513275264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: barrel1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 151
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcba0323efd3f2160800000000000000
+      internalID: 7002884107557448655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: barrel2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 151
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783bd2dd85ba4f4b0800000000000000
+      internalID: -5407508854408891513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shelf3
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 151
+        width: 28
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df489918b1d638660800000000000000
+      internalID: 7386867778723611901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: window1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 119
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46b12e20201bfe4b0800000000000000
+      internalID: -5408910005252252828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cleaning_equipment
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 104
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a66c3aa0230d7fb0800000000000000
+      internalID: -4648555801546561887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lamp
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 126
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8664ad5b65a8f05c0800000000000000
+      internalID: -4247023818564286872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stairs
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 104
+        width: 9
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b42278a63d4af3b50800000000000000
+      internalID: 6575155208916509259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_12
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 105
+        width: 13
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02cc62757e91ac640800000000000000
+      internalID: 5100918009340808224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: painting1
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 120
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff162aa5847efad0800000000000000
+      internalID: -2666565811922657286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: painting2
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 120
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c50a30ede544a60a0800000000000000
+      internalID: -6887617505867358116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standing_lamp
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 104
+        width: 11
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6be666f2ce83e390800000000000000
+      internalID: -7790225962412086422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: broken_decorations
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 119
+        width: 13
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bda83a2a6e91b6450800000000000000
+      internalID: 6082984200055786203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: radiator
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 109
+        width: 23
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d42d6b42058ef50800000000000000
+      internalID: 6910861746816306463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_19
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 104
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9b100b142f261130800000000000000
+      internalID: 3537066389464423324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chair
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 104
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b46e306cc6bd5c90800000000000000
+      internalID: -7179381242054417229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_21
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 104
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc536d408db1a7f20800000000000000
+      internalID: 3421077481549346251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_22
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 104
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9fe5ef3682d4c6a0800000000000000
+      internalID: -6429782893938741347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_23
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 104
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07dea97c1c2c9b550800000000000000
+      internalID: 6177182501448641904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_24
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 104
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cdb4e90d9666c250800000000000000
+      internalID: 5964567581160684992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_25
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 104
+        width: 37
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c7329900761fa730800000000000000
+      internalID: 4012450463463126985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_26
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 104
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d961c92e75c01750800000000000000
+      internalID: 6273731426584193494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_27
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 104
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e669aed3e25538480800000000000000
+      internalID: -8898174781658327442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chair_fallen
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 104
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a728423c8d10a2580800000000000000
+      internalID: -8851260087144775046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: table_wide
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 62
+        width: 37
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b442e5eb835232c0800000000000000
+      internalID: -4453405221193628491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: closet
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 63
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6947f8a8c97d0920800000000000000
+      internalID: 2958154432987482476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standing_lamp1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 64
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41bfc658f83796f90800000000000000
+      internalID: -6959904688868361452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_32
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 65
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28cfb03226edfd350800000000000000
+      internalID: 6043793738030644354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 64
+        width: 26
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cadcecfabe7f2bc60800000000000000
+      internalID: 7832595293589654956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_34
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 70
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f52cde513aee33ac0800000000000000
+      internalID: -3876492470020881825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lamp2
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 71
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ba2593cd0cc190f0800000000000000
+      internalID: -1111883273495827789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gas_lamp
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 65
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c10821b783cdde310800000000000000
+      internalID: 1436045991342145564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lamp3
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 71
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed7dd1d2d7ce01f90800000000000000
+      internalID: -6984822999679641634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: courtain1
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 59
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a09199303a0866510800000000000000
+      internalID: 1542061360049363210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: courtain2
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 61
+        width: 15
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b38faedc6d4690b0800000000000000
+      internalID: -5722301146539785288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: courtain3
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 60
+        width: 6
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1556a705f395bff50800000000000000
+      internalID: 6916219781225538897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: courtain4
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 60
+        width: 6
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67faecbec461e6ff0800000000000000
+      internalID: -41070826970239114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lamp4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd98889e6dd28440800000000000000
+      internalID: 4936751608626716157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_43
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 12
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e8409510de2e0300800000000000000
+      internalID: 220164903037585638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spiral_staircase
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 29
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db7cbdb1de57afb80800000000000000
+      internalID: -8360240097024817219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: junk_pile_big
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 31
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abacc0b108aa5ae90800000000000000
+      internalID: -7015013377373320518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Test_room_assets_46
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6811859abd27a860800000000000000
+      internalID: 7541046380450617455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: junk_pile_small
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 0
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da660ecab62fdab80800000000000000
+      internalID: -8381776787190815059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
