@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class Monster1StateIdle : Monster1StateBase
 {
+   //[SerializeField] private AnimationClip idleAnimation;
+    public float timer;
+    private bool canChangeState = false;
+    private bool spottedPlayer;
+    private RaycastHit2D hitPlayer;
+
+    public event EventHandler OnEnterStateIdle;
+
     public Monster1StateIdle(GameObject monster1Object) : base(monster1Object)
     {
         rb = monster1Object.GetComponent<Rigidbody2D>();
@@ -14,16 +22,34 @@ public class Monster1StateIdle : Monster1StateBase
         
     }
 
-    public event EventHandler OnEnterStateIdle;
 
     public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
         isFacingRight = monster1.previousState.isFacingRight;
+        timer = 0;
+
     }
     public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0, 0);
+
+        if (isFacingRight)
+        {
+            hitPlayer = Physics2D.Raycast(monster1Transform.position, monster1Transform.right , playerCheckDistance, 8);
+
+        }
+        else if (!isFacingRight)
+        {
+            hitPlayer = Physics2D.Raycast(monster1Transform.position,-monster1Transform.right, playerCheckDistance, 8);
+        }
+        if (hitPlayer.collider != null)
+        {
+            Debug.Log(isFacingRight);
+            Debug.Log("spotted player idle");
+        }
+            WaitUntilAnimated(monster1);
+
     }
     public override void OnCollisionEnter(Monster1StateMachine monster1, Collision2D collision)
     {
@@ -32,5 +58,14 @@ public class Monster1StateIdle : Monster1StateBase
     public override void OnTriggerStay(Monster1StateMachine monster1, Collider2D collision)
     {
 
+    }
+    public void WaitUntilAnimated(Monster1StateMachine monster1)
+    {
+        timer += Time.deltaTime;
+        if (timer >= 2)
+        {
+            monster1.previousState = this;
+            monster1.SwitchState(monster1.patrollingState);
+        }
     }
 }

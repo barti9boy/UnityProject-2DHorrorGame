@@ -7,11 +7,13 @@ public class Monster1StateMachine : MonoBehaviour
     public Monster1StateBase previousState;
     public Monster1StateBase currentState;
     public Monster1StateIdle idleState;
+    public Monster1StatePatrolling patrollingState;
 
 
     void Awake()
     {
         idleState = new Monster1StateIdle(gameObject);
+        patrollingState = new Monster1StatePatrolling(gameObject);
         previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this);

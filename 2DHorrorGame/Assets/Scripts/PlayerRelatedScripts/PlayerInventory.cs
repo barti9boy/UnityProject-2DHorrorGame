@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void Awake()
     {
-        currentInventoryItemCount = 0;
+        //currentInventoryItemCount = 0;
         items = new IPickableObject[inventorySlotCount];
         for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
         {

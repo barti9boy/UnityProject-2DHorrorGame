@@ -11,7 +11,8 @@ public abstract class Monster1StateBase
     public Collider2D collider;
 
     public bool isFacingRight = true;
-    public float movementSpeed = 5f;
+    public float movementSpeed = 3f;
+    public float playerCheckDistance = 8.0f;
 
 
     public Monster1StateBase(GameObject monster1Object)

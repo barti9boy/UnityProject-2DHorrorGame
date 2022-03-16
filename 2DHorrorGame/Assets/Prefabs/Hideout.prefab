@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3216959961953356648}
   - component: {fileID: 3216959961953356650}
   - component: {fileID: 3216959961953356651}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: InteractionHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 3216959963318332777}
   - component: {fileID: 3216959963318332776}
   - component: {fileID: 3216959963318332779}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hideout
   m_TagString: Hideout
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   - {x: -0.5821875, y: 1.3401396, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 20872
+  m_InstanceId: -1300
 --- !u!114 &3216959963318332776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3216959963444551238}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
