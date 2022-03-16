@@ -3,7 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-using TMPro;
+
+public class ItemEventArgs
+{
+    public int inventorySlotNumber;
+    public IPickableObject inventoryItem;
+}
+
+//public class ItemNotificationEventArgs
+//{
+//    public string notificationText;
+//    public IPickableObject inventoryItem;
+//}
 
 
 public class PlayerInventory : MonoBehaviour
@@ -12,12 +23,14 @@ public class PlayerInventory : MonoBehaviour
     public Image[] inventoryItems;
 
     private int inventorySlotCount = 3;
+    private ItemEventArgs args;
 
-    public event EventHandler<int> OnItemAdd;
+    public event EventHandler<ItemEventArgs> OnItemAdd;
+    public event EventHandler<string> OnItemSendNotification;
 
     public void Awake()
     {
-        //currentInventoryItemCount = 0;
+        args = new ItemEventArgs();
         items = new IPickableObject[inventorySlotCount];
         for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
         {
@@ -34,12 +47,14 @@ public class PlayerInventory : MonoBehaviour
             if (items[slotNumber] == null)
             {
                 items[slotNumber] = item;
-                OnItemAdd?.Invoke(this, slotNumber);
-                Debug.Log("hi");
+                args.inventorySlotNumber = slotNumber;
+                args.inventoryItem = item;
+                OnItemAdd?.Invoke(this, args);
+                OnItemSendNotification?.Invoke(this, "picked up " + args.inventoryItem.DisplayName);
                 return true;
             }
         }
-
+        OnItemSendNotification?.Invoke(this, "inventory full");
         return false;
 
     }
