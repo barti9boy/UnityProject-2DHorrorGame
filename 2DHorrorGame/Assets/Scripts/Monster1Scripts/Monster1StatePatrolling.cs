@@ -15,9 +15,8 @@ public class Monster1StatePatrolling : Monster1StateBase
 
     int m_PreviousWaypointIndex = -1;
     int m_CurrentWaypointIndex;
-    private bool spottedPlayer;
 
-    int movementDirection;
+    
     public event EventHandler OnEnterStatePatrolling;
 
 
@@ -29,16 +28,17 @@ public class Monster1StatePatrolling : Monster1StateBase
         monster1SpriteRenderer = monster1GFX.GetComponent<SpriteRenderer>();
         waypointsStorage = monster1Object.GetComponent<Monster1WaypointsStorage>();
         waypoints = waypointsStorage.waypoints;
-      
+        rayStartTransform = monster1Object.transform.GetChild(2).transform;
+        //spottedPlayer = monster1Object.GetComponent<PlayerDetectorScript>().playerDetected;
     }
     //public event EventHandler OnEnterStatePatrolling;
 
-    public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
+    public override void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
     {
         playerLayer = LayerMask.NameToLayer("Player");
-        spottedPlayer = false;
         OnEnterStatePatrolling?.Invoke(this, EventArgs.Empty);
         isFacingRight = monster1.previousState.isFacingRight;
+        //hitPlayer = monster1.previousState.hitPlayer;
         m_CurrentWaypointIndex = (m_PreviousWaypointIndex + 1) % waypoints.Length;
         currentWaypoint = waypoints[m_CurrentWaypointIndex].position;
         if (currentWaypoint.x < monster1Transform.position.x) //Waypoint is on the left 
@@ -58,7 +58,7 @@ public class Monster1StatePatrolling : Monster1StateBase
             movementDirection = 1;
         }
     }
-    public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
+    public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
     {
         raycastRange = new Vector2(monster1Transform.position.x - playerCheckDistance, 0);
         rb.velocity = new Vector2(movementDirection * movementSpeed, 0);
@@ -66,17 +66,15 @@ public class Monster1StatePatrolling : Monster1StateBase
         {
             m_PreviousWaypointIndex = m_CurrentWaypointIndex;
             monster1.previousState = this;
-            monster1.SwitchState(monster1.idleState);
+            monster1.SwitchState(monster1.idleState, hitPlayer);
         }
-        RaycastHit2D hitPlayer = Physics2D.Raycast(monster1Transform.position, Vector2.right * movementDirection, playerCheckDistance, LayerMask.NameToLayer("Player"));
-        Debug.DrawRay(monster1Transform.position, Vector2.right * movementDirection * playerCheckDistance);
-       // Debug.Log(LayerMask.LayerToName(8));
 
         if (hitPlayer.collider != null)
         {
-            Debug.Log(isFacingRight);
             Debug.Log("spotted player patrolling");
-            Debug.Log(hitPlayer.collider.tag) ;
+
+            //Switch to chasing state
+            monster1.SwitchState(monster1.chasingState, hitPlayer);
 
         }
 

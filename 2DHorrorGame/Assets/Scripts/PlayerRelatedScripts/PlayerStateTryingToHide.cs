@@ -57,7 +57,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
             {
                 playerTransform.Rotate(0, 180, 0);
                 player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
                 player.currentState.inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = 1;
@@ -68,8 +67,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
             {
                 playerTransform.Rotate(0, 180, 0);
                 player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
-
                 player.currentState.inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = -1;
@@ -111,7 +108,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
         {
             hideoutAnimator.SetBool("isHiding", true);
             OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
-            Debug.Log("HI1");
             WaitUntilAnimated();
         }
         if (isHiding)
@@ -124,7 +120,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
             hideoutAnimator.SetBool("isHidden", true);
             player.previousState = this;
             player.SwitchState(player.hidingState, hideoutCollider);
-            Debug.Log(hideoutCollider);
             isHiding = false;
         }
     }
@@ -132,13 +127,11 @@ public class PlayerStateTryingToHide : PlayerStateBase
     public void WaitUntilAnimated()
     {
         timer += Time.deltaTime;
-        Debug.Log(hidingAnimation.length);
-        Debug.Log(timer);
+
         if (timer >= hidingAnimation.length)
         {
             isTryingToHide = false;
             isHiding = true;
-            Debug.Log("HI2");
         }
     }
 

@@ -42,7 +42,6 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         hideoutCollider = collision;
         timer = 0;
 
-        Debug.Log(hideoutCollider);
         hideoutAnimator = collision.GetComponent<Animator>();
         hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
 
@@ -64,8 +63,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     public void WaitUntilAnimated(PlayerStateMachine player)
     {
         timer += Time.deltaTime;
-        Debug.Log(hidingAnimation.length);
-        Debug.Log(timer);
+
         if (timer >= hidingAnimation.length)
         {
             Leave(player);
