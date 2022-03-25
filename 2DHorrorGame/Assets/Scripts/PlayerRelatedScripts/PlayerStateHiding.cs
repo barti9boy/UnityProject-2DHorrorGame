@@ -7,6 +7,7 @@ public class PlayerStateHiding : PlayerStateBase
 {
     public bool isHidden = false;
     Collider2D hideoutCollider;
+    Collider2D playerCollider;
 
     public PlayerStateHiding(GameObject playerObject) : base(playerObject) 
     {
@@ -22,8 +23,10 @@ public class PlayerStateHiding : PlayerStateBase
     public event EventHandler OnEnterStateHidden;
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        playerCollider = player.GetComponent<CapsuleCollider2D>();
         hideoutCollider = collision;
 
+        playerCollider.enabled = false;
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isHidden = false;
@@ -33,6 +36,7 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (inputManager.isInteractionButtonClicked)
         {
+            playerCollider.enabled = true;
             player.previousState = this;
             Debug.Log(hideoutCollider);
             player.SwitchState(player.leavingHideoutState, hideoutCollider);

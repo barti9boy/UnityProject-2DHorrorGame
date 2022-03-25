@@ -8,9 +8,6 @@ public class Monster1StateIdle : Monster1StateBase
    //[SerializeField] private AnimationClip idleAnimation;
     public float timer;
     private bool canChangeState = false;
-    private bool spottedPlayer;
-    private RaycastHit2D hitPlayer;
-
     public event EventHandler OnEnterStateIdle;
 
     public Monster1StateIdle(GameObject monster1Object) : base(monster1Object)
@@ -23,32 +20,45 @@ public class Monster1StateIdle : Monster1StateBase
     }
 
 
-    public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
+    public override void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
+        //hitPlayer = monster1.previousState.hitPlayer;
         isFacingRight = monster1.previousState.isFacingRight;
         timer = 0;
 
     }
-    public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
+    public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0, 0);
 
-        if (isFacingRight)
-        {
-            hitPlayer = Physics2D.Raycast(monster1Transform.position, monster1Transform.right , playerCheckDistance, 8);
+        //if (isFacingRight)
+        //{
+        //    hitPlayer = Physics2D.Raycast(monster1Transform.position, monster1Transform.right , playerCheckDistance, 8);
 
-        }
-        else if (!isFacingRight)
-        {
-            hitPlayer = Physics2D.Raycast(monster1Transform.position,-monster1Transform.right, playerCheckDistance, 8);
-        }
+        //}
+        //else if (!isFacingRight)
+        //{
+        //    hitPlayer = Physics2D.Raycast(monster1Transform.position,-monster1Transform.right, playerCheckDistance, 8);
+        //}
+        //if (hitPlayer.collider != null)
+        //{
+        //    Debug.Log(isFacingRight);
+        //    Debug.Log("spotted player idle");
+        //}
         if (hitPlayer.collider != null)
         {
-            Debug.Log(isFacingRight);
-            Debug.Log("spotted player idle");
+            Debug.Log("Spotted player idle");
+            //Switch to chasing state
+            monster1.SwitchState(monster1.chasingState, hitPlayer);
+
         }
-            WaitUntilAnimated(monster1);
+        else
+        {
+            WaitUntilAnimated(monster1, hitPlayer);
+        }
+
+
 
     }
     public override void OnCollisionEnter(Monster1StateMachine monster1, Collision2D collision)
@@ -59,13 +69,13 @@ public class Monster1StateIdle : Monster1StateBase
     {
 
     }
-    public void WaitUntilAnimated(Monster1StateMachine monster1)
+    public void WaitUntilAnimated(Monster1StateMachine monster1, RaycastHit2D hitPlayer)
     {
         timer += Time.deltaTime;
         if (timer >= 2)
         {
             monster1.previousState = this;
-            monster1.SwitchState(monster1.patrollingState);
+            monster1.SwitchState(monster1.patrollingState, hitPlayer);
         }
     }
 }
