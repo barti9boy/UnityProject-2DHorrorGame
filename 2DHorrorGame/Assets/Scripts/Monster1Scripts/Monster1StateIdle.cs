@@ -6,8 +6,7 @@ using UnityEngine;
 public class Monster1StateIdle : Monster1StateBase
 {
    //[SerializeField] private AnimationClip idleAnimation;
-    public float timer;
-    private bool canChangeState = false;
+    private float timer;
     public event EventHandler OnEnterStateIdle;
 
     public Monster1StateIdle(GameObject monster1Object) : base(monster1Object)
@@ -50,6 +49,7 @@ public class Monster1StateIdle : Monster1StateBase
         {
             Debug.Log("Spotted player idle");
             //Switch to chasing state
+            monster1.previousState = this;
             monster1.SwitchState(monster1.chasingState, hitPlayer);
 
         }

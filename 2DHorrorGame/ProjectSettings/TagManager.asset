@@ -12,6 +12,7 @@ TagManager:
   - VentEntrance
   - Item
   - vDoors
+  - Monster
   layers:
   - Default
   - TransparentFX

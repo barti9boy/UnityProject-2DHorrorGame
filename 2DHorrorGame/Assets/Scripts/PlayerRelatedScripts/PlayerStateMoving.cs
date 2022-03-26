@@ -40,7 +40,10 @@ public class PlayerStateMoving : PlayerStateBase
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
-
+        if (collision.collider.tag == "Monster")
+        {
+            player.SwitchState(player.deadState);
+        }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {

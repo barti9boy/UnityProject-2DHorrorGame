@@ -74,6 +74,7 @@ public class Monster1StatePatrolling : Monster1StateBase
             Debug.Log("spotted player patrolling");
 
             //Switch to chasing state
+            monster1.previousState = this;
             monster1.SwitchState(monster1.chasingState, hitPlayer);
 
         }

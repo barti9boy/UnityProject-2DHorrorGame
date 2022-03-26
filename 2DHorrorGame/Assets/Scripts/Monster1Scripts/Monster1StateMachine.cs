@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Monster1StateMachine : MonoBehaviour
 {
+    [SerializeField] GameObject flashlight;
     [SerializeField] LayerMask playerMask;
     public Monster1StateBase previousState;
     public Monster1StateBase currentState;
@@ -25,13 +26,27 @@ public class Monster1StateMachine : MonoBehaviour
 
     void Update()
     {
-        hitPlayer = Physics2D.Raycast(this.transform.position , this.transform.right, 8.0f, playerMask);
-        Debug.DrawRay(this.transform.position , this.transform.right * 8.0f);
-        if (hitPlayer.collider != null)
+        if (flashlight.activeSelf == true) 
         {
-          //  Debug.Log(hitPlayer.transform.position);
+            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
+            Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
+            if (hitPlayer.collider != null)
+            {
+                //  Debug.Log(hitPlayer.transform.position);
+            }
+            currentState.UpdateState(this, hitPlayer);
         }
-        currentState.UpdateState(this, hitPlayer);
+        else
+        {
+            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 4.0f, playerMask);
+            Debug.DrawRay(this.transform.position, this.transform.right * 4.0f);
+            if (hitPlayer.collider != null)
+            {
+                //  Debug.Log(hitPlayer.transform.position);
+            }
+            currentState.UpdateState(this, hitPlayer);
+        }
+ 
     }
 
     public void SwitchState(Monster1StateBase state, RaycastHit2D hitPlayer, Collider2D collision = null)

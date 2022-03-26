@@ -5,6 +5,7 @@ using static PlayerActions;
 
 public class PlayerStateHiding : PlayerStateBase
 {
+    private float timer;
     public bool isHidden = false;
     Collider2D hideoutCollider;
     Collider2D playerCollider;
@@ -23,17 +24,24 @@ public class PlayerStateHiding : PlayerStateBase
     public event EventHandler OnEnterStateHidden;
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        timer = 0;
         playerCollider = player.GetComponent<CapsuleCollider2D>();
         hideoutCollider = collision;
-
-        playerCollider.enabled = false;
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isHidden = false;
-
 }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
+        if (!flashlight.activeSelf)
+        {
+            WaitBeforeDisactivatingCollider(player, 1);
+        }
+        else if (flashlight.activeSelf)
+        {
+            playerCollider.enabled = true;
+        }
+
         if (inputManager.isInteractionButtonClicked)
         {
             playerCollider.enabled = true;
@@ -51,11 +59,24 @@ public class PlayerStateHiding : PlayerStateBase
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
-
+        if (collision.collider.tag == "Monster")
+        {
+            player.SwitchState(player.deadState);
+        }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
         PlayerActions.Interact(player, collision);
+    }
+
+    public void WaitBeforeDisactivatingCollider(PlayerStateMachine player, float timeOfAnimation)
+    {
+        timer += Time.deltaTime;
+        if (timer >= timeOfAnimation)
+        {
+            playerCollider.enabled = false;
+            timer = 0;
+        }
     }
 
     /*public void Leave()
