@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    public GameOverScript GameOverScreen;
     public PlayerStateBase previousState;
     public PlayerStateBase currentState;
     public PlayerStateIdle idleState;
@@ -36,6 +37,10 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        if(currentState == deadState)
+        {
+            GameOverScreen.GameOver();
+        }
     }
 
     public void SwitchState(PlayerStateBase state, Collider2D collision = null)

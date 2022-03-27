@@ -91,7 +91,15 @@ public class Monster1StateChasing : Monster1StateBase
             Debug.Log("KILLED PLAYER");
             Debug.Log(rb.velocity);
             playerhit = true;
-            Debug.Log(collision.gameObject.GetComponent<PlayerStateMachine>().currentState); //U¯YÆ DO WYKRYWANIA CZY SIÊ CHOWA
+ 
+            if (collision.gameObject.GetComponent<PlayerStateMachine>().currentState == collision.gameObject.GetComponent<PlayerStateMachine>().hidingState) 
+            {
+                Debug.Log("Pulled out of the hideout");
+            }
+            else
+            {
+                Debug.Log("Killed in: " + collision.gameObject.GetComponent<PlayerStateMachine>().currentState);
+            }
         }
     }
     public override void OnTriggerStay(Monster1StateMachine monster1, Collider2D collision)
