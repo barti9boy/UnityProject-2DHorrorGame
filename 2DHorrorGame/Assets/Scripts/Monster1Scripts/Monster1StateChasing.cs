@@ -30,7 +30,7 @@ public class Monster1StateChasing : Monster1StateBase
         {
             if (isFacingRight)
             {
-               // Flip();
+                Flip();
             }
             movementDirection = -1;
         }
@@ -38,7 +38,7 @@ public class Monster1StateChasing : Monster1StateBase
         {
             if (!isFacingRight)
             {
-              //  Flip();
+                Flip();
             }
             movementDirection = 1;
         }
