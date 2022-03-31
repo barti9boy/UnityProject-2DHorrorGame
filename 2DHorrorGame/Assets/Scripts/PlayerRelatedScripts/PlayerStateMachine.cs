@@ -16,6 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateUsingLadder usingLadderState;
     public PlayerStateUsingHorizontalDoor usingHorizontalDoorState;
     public PlayerStateUsingVerticalDoor usingVerticalDoorState;
+    public PlayerStateItemPickup itemPickupState;
    
     void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerStateMachine : MonoBehaviour
         usingLadderState = new PlayerStateUsingLadder(gameObject);
         usingHorizontalDoorState = new PlayerStateUsingHorizontalDoor(gameObject);
         usingVerticalDoorState = new PlayerStateUsingVerticalDoor(gameObject);
+        itemPickupState = new PlayerStateItemPickup(gameObject);
         previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this); 

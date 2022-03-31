@@ -17,5 +17,10 @@ public interface IPickableObject
     {
         get;
     }
+    public AnimationClip PickupAnimationClip
+    {
+        get;
+    }
     public void ChangePosition(float x, float y);
+    public void DestroyItem();
 }

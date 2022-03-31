@@ -20,12 +20,16 @@ public class PlayerStateUsingLadder : PlayerStateBase
     private bool isGoingDown;
     private float velocityDirection;
 
-    //------------player gfx events------------//
+    //------------player gfx events and variables------------//
     public event EventHandler OnStartMoving;
     public event EventHandler OnLadderMoveUp;
     public event EventHandler OnLadderMoveDown;
     public event EventHandler OnVentEnterOrLeave;
     public event EventHandler OnFinishClimbing;
+    public event EventHandler OnGoIntoVents;
+    private float timer;
+    private bool isTimerOn;
+    public AnimationClip usingVentEntranceAnimation;
 
 
     public PlayerStateUsingLadder(GameObject playerObject) : base(playerObject)
@@ -42,9 +46,11 @@ public class PlayerStateUsingLadder : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        timer = 0;
+        usingVentEntranceAnimation = collision.GetComponent<LadderScript>().usingVentEntraceAnimation;
         //on EnterState get ladder components, set up ladder and player variables 
         isApproachingLadder = false;
-        isGoingDown = false;
+        isGoingUp = false;
         isGoingDown = false;
         isVentEntrance = collision.GetComponent<LadderScript>().isEntrance;
         ladderMiddleX = collision.gameObject.transform.position.x;
@@ -82,6 +88,10 @@ public class PlayerStateUsingLadder : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
+        if(isTimerOn)
+        {
+            WaitUntilAnimated();
+        }
         if(isApproachingLadder)
         {
             if (velocityDirection == 1 && playerTransform.position.x < ladderMiddleX)
@@ -89,11 +99,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.1)
                 {
-                    flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-                    isApproachingLadder = false;
-                    if (playerTransform.position.y > ladderMiddleY) isGoingDown = true;
-                    if (playerTransform.position.y < ladderMiddleY) isGoingUp = true;
-                    rb.velocity = new Vector2(0f, 0f);
+                    PrepareToUseLadder();
                 }
             }
             if (velocityDirection == -1 && playerTransform.position.x > ladderMiddleX)
@@ -101,11 +107,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.1)
                 {
-                    flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-                    isApproachingLadder = false;
-                    if (playerTransform.position.y > ladderMiddleY) isGoingDown = true;
-                    if (playerTransform.position.y < ladderMiddleY) isGoingUp = true;
-                    rb.velocity = new Vector2(0f, 0f);
+                    PrepareToUseLadder();
                 }
             }
         }
@@ -158,9 +160,44 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 player.previousState = this;
                 player.SwitchState(player.idleState);
             }
-
         }
     }
+    public void PrepareToUseLadder()
+    {
+        flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+        isApproachingLadder = false;
+        if (playerTransform.position.y > ladderMiddleY)
+        {
+            if (isVentEntrance) 
+            {
+                OnGoIntoVents?.Invoke(this, EventArgs.Empty);
+                isTimerOn = true;
+
+
+            }
+            else
+            { 
+                isGoingDown = true;
+            }
+            
+        }
+        if (playerTransform.position.y < ladderMiddleY) isGoingUp = true;
+        rb.velocity = new Vector2(0f, 0f);
+    }
+
+
+    public void WaitUntilAnimated()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= usingVentEntranceAnimation.length)
+        {
+            isGoingDown = true;
+            timer = 0;
+            isTimerOn = false;
+        }
+    }
+
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
         

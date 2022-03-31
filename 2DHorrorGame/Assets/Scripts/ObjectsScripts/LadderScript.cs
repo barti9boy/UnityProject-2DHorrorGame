@@ -9,4 +9,6 @@ public class LadderScript : MonoBehaviour
     public bool isEntrance;
     [SerializeField] public Transform DownPoint;
     [SerializeField] public Transform UpPoint;
+    public AnimationClip usingVentEntraceAnimation;
+    public AnimationClip usingVentExitAnimation;
 }
