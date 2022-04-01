@@ -13,8 +13,9 @@ public class PlayerGFXScript : MonoBehaviour
     public PlayerStateLeavingHideout leavingHideoutState;
     public PlayerStateDead deadState;
     public PlayerStateUsingLadder usingLadderState;
-    public PlayerStateUsingHorizontalDoor usingHorizontalDoor;
+    public PlayerStateUsingHorizontalDoor usingHorizontalDoorState;
     public PlayerStateUsingVerticalDoor usingVerticalDoorState;
+    public PlayerStateItemPickup itemPickupState;
     public Animator animator;
     private bool isIdle;
     private bool isMoving;
@@ -24,6 +25,9 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isClimbingDown;
     private bool isClimbingUp;
     private bool isInVent;
+    private bool isEnteringVent;
+    private bool isExitingVents;
+    private bool isPickingUpItem;
 
 
     private void Start()
@@ -39,25 +43,73 @@ public class PlayerGFXScript : MonoBehaviour
         deadState = playerStateMachine.deadState;
         usingLadderState = playerStateMachine.usingLadderState;
         leavingHideoutState = playerStateMachine.leavingHideoutState;
-        usingHorizontalDoor = playerStateMachine.usingHorizontalDoorState;
+        usingHorizontalDoorState = playerStateMachine.usingHorizontalDoorState;
         usingVerticalDoorState = playerStateMachine.usingVerticalDoorState;
+        itemPickupState = playerStateMachine.itemPickupState;
 
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
         usingLadderState.OnStartMoving += MovingState_OnEnterStateMoving;
+        usingLadderState.OnGoIntoVents += UsingLadderState_OnGoIntoVents;
         usingLadderState.OnLadderMoveDown += Climbing_OnLadderMoveDown;
         usingLadderState.OnLadderMoveUp += Climbing_OnLadderMoveDown;
         usingLadderState.OnFinishClimbing += OnFinishClimbing;
         usingLadderState.OnVentEnterOrLeave += OnVentEnterOrLeave;
         tryingToHideState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
         leavingHideoutState.OnLeaveStateHiding += LeavingState_OnLeaveStateHiding;
-        usingHorizontalDoor.OnStartMoving += MovingState_OnEnterStateMoving;
+        usingHorizontalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
+        itemPickupState.OnEnterStateItemPickup += ItemPickupState_OnEnterStateItemPickup;
 
 
 
+    }
+
+    private void ItemPickupState_OnEnterStateItemPickup(object sender, EventArgs e)
+    {
+        isPickingUpItem = true;
+        isEnteringVent = false;
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
+        UpdateAnimations();
+    }
+
+    private void UsingLadderState_OnExitVents(object sender, EventArgs e)
+    {
+
+        isExitingVents = true;
+        isEnteringVent = false;
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
+        isPickingUpItem = false;
+        UpdateAnimations();
+    }
+
+    private void UsingLadderState_OnGoIntoVents(object sender, EventArgs e)
+    {
+        isEnteringVent = true;
+        isExitingVents = false;
+        isMoving = false;
+        isIdle = false;
+        isHidden = false;
+        isHiding = false;
+        isLeaving = false;
+        isClimbingDown = false;
+        isClimbingUp = false;
+        isPickingUpItem = false;
+        UpdateAnimations();
     }
 
     private void OnFinishClimbing(object sender, EventArgs e)
@@ -76,6 +128,7 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void Climbing_OnLadderMoveDown(object sender, EventArgs e)
     {
+        isEnteringVent = false;
         isMoving = false;
         isIdle = false;
         isHidden = false;
@@ -83,10 +136,12 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = true;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
     private void Climbing_OnLadderMoveUp(object sender, EventArgs e)
     {
+        isEnteringVent = false;
         isMoving = false;
         isIdle = false;
         isHidden = false;
@@ -94,6 +149,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = false;
         isClimbingUp = true;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
 
@@ -106,6 +162,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = false;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
     private void LeavingState_OnLeaveStateHiding(object sender, EventArgs e)
@@ -117,6 +174,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = true;
         isClimbingDown = false;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
     private void HidingState_OnEnterStateHidden(object sender, EventArgs e)
@@ -128,6 +186,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = false;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
 
@@ -141,6 +200,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = false;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
 
@@ -153,6 +213,7 @@ public class PlayerGFXScript : MonoBehaviour
         isLeaving = false;
         isClimbingDown = false;
         isClimbingUp = false;
+        isPickingUpItem = false;
         UpdateAnimations();
     }
 
@@ -166,5 +227,8 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isClimbingDown", isClimbingDown);
         animator.SetBool("isClimbingUp", isClimbingUp);
         animator.SetBool("isInVent", isInVent);
+        animator.SetBool("isEnteringVent", isEnteringVent);
+        animator.SetBool("isExitingVent", isExitingVents);
+        animator.SetBool("isPickingUpItem", isPickingUpItem);
     }
 }

@@ -36,18 +36,20 @@ public static class PlayerActions
     {
         if (player.currentState.inputManager.isInteractionButtonClicked)
         {
-            if (collision.CompareTag("Key"))
-            {
-
-                if(player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<KeyScript>()))
-                {
-                    collision.gameObject.SetActive(false);
-                }
-                player.currentState.inputManager.isInteractionButtonClicked = false;
-                //player.currentState.playerInventory.DebugLogInventory();
-            }
+            //if (collision.CompareTag("Key"))
+            //{
+            //    player.SwitchState(player.itemPickupState);
+            //    if (player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>()))
+            //    {
+            //        collision.gameObject.SetActive(false);
+            //    }
+            //    player.currentState.inputManager.isInteractionButtonClicked = false;
+                
+            //}
             if (collision.CompareTag("Item"))
             {
+                Debug.Log("hi");
+                player.SwitchState(player.itemPickupState, collision);
                 if (player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>()))
                 {
                     collision.gameObject.SetActive(false);
