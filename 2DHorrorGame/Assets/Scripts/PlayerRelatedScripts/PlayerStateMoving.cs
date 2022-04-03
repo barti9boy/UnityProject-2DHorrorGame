@@ -26,6 +26,7 @@ public class PlayerStateMoving : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
+        Debug.Log(isFacingRight);
         if(inputManager.movementInputDirection == 0)
         {
             player.previousState = this;

@@ -25,11 +25,10 @@ public class PlayerStateItemPickup : PlayerStateBase
     public event EventHandler OnEnterStateItemPickup;
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
-        Debug.Log(collision);
         pickupAnimation = collision.GetComponent<IPickableObject>().PickupAnimationClip;
         timer = 0f;
+        inputManager.movementInputEnabled = false;
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
-        player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f); //animation is in the wrong direction, that is why we need to flip
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
     }
@@ -37,17 +36,21 @@ public class PlayerStateItemPickup : PlayerStateBase
     {
         rb.velocity = new Vector2(0, 0);
         timer += Time.deltaTime;
+        Debug.Log(isFacingRight);
+        Debug.Log(player.previousState);
         if (timer >= pickupAnimation.length)
         {
-            player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
             player.SwitchState(player.previousState);
+            inputManager.movementInputEnabled = true;
         }
         PlayerActions.Flashlight(player);
+        PlayerActions.Flip(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
         if (collision.collider.tag == "Monster")
         {
+            inputManager.movementInputEnabled = true;
             player.SwitchState(player.deadState);
         }
     }
