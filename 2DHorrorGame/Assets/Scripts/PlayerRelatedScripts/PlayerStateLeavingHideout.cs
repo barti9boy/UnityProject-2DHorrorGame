@@ -24,6 +24,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
 
     //player GFX events
     public event EventHandler OnLeaveStateHiding;
+    public event EventHandler OnTurnOffFurnitureTag;
 
     public PlayerStateLeavingHideout(GameObject playerObject) : base(playerObject)
     {
@@ -56,7 +57,6 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnLeaveStateHiding?.Invoke(this, EventArgs.Empty);
-
         WaitUntilAnimated(player);
     }
 
@@ -81,6 +81,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
         }
+        OnTurnOffFurnitureTag?.Invoke(this, EventArgs.Empty);
         inputManager.movementInputEnabled = true;
         player.SwitchState(player.idleState);
         isHidden = false;

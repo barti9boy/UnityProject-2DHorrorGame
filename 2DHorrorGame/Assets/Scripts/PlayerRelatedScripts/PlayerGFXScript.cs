@@ -28,6 +28,9 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isEnteringVent;
     private bool isExitingVents;
     private bool isPickingUpItem;
+    private bool isHideout;
+    private bool isCloset;
+    private bool isTable;
 
 
     private void Start()
@@ -59,6 +62,7 @@ public class PlayerGFXScript : MonoBehaviour
         usingLadderState.OnVentEnterOrLeave += OnVentEnterOrLeave;
         tryingToHideState.OnEnterStateHiding += HidingState_OnEnterStateHiding;
         leavingHideoutState.OnLeaveStateHiding += LeavingState_OnLeaveStateHiding;
+        leavingHideoutState.OnTurnOffFurnitureTag += LeavingState_OnTurnOffFurnitureTag;
         usingHorizontalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         itemPickupState.OnEnterStateItemPickup += ItemPickupState_OnEnterStateItemPickup;
@@ -153,7 +157,7 @@ public class PlayerGFXScript : MonoBehaviour
         UpdateAnimations();
     }
 
-    private void HidingState_OnEnterStateHiding(object sender, EventArgs e)
+    private void HidingState_OnEnterStateHiding(object sender, PlayerStateTryingToHide.OnEnterStateHidingEventArgs e)
     {
         isMoving = false;
         isIdle = false;
@@ -163,6 +167,19 @@ public class PlayerGFXScript : MonoBehaviour
         isClimbingDown = false;
         isClimbingUp = false;
         isPickingUpItem = false;
+        Debug.Log(e.hideoutFurnitureTag);
+        if (e.hideoutFurnitureTag == "Closet")
+        {
+            isCloset = true;
+        }
+        else if (e.hideoutFurnitureTag == "Hideout")
+        {
+            isHideout = true;
+        }
+        else if (e.hideoutFurnitureTag == "Table")
+        {
+            isTable = true;
+        }
         UpdateAnimations();
     }
     private void LeavingState_OnLeaveStateHiding(object sender, EventArgs e)
@@ -175,6 +192,14 @@ public class PlayerGFXScript : MonoBehaviour
         isClimbingDown = false;
         isClimbingUp = false;
         isPickingUpItem = false;
+
+        UpdateAnimations();
+    }
+    private void LeavingState_OnTurnOffFurnitureTag(object sender, EventArgs e)
+    {
+        isHideout = false;
+        isCloset = false;
+        isTable = false;
         UpdateAnimations();
     }
     private void HidingState_OnEnterStateHidden(object sender, EventArgs e)
@@ -230,5 +255,9 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isEnteringVent", isEnteringVent);
         animator.SetBool("isExitingVent", isExitingVents);
         animator.SetBool("isPickingUpItem", isPickingUpItem);
+        animator.SetBool("isHideout", isHideout);
+        animator.SetBool("isCloset", isCloset);
+        animator.SetBool("isTable", isTable);
+
     }
 }
