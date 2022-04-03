@@ -841,7 +841,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isHiding
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isCloset
+    m_ConditionEvent: isTable
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6889550205496177325}
