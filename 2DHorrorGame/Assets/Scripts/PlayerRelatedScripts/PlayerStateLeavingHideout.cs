@@ -20,6 +20,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     //hiding phases variables
     private bool isHidden;
     private float timer;
+    private string hideoutTag;
 
 
     //player GFX events
@@ -41,6 +42,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         hideoutCollider = collision;
+        hideoutTag = collision.tag;
         timer = 0;
 
         hideoutAnimator = collision.GetComponent<Animator>();
@@ -71,6 +73,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     }
     public void Leave(PlayerStateMachine player)
     {
+
         inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         if (player.currentState.isFacingRight)

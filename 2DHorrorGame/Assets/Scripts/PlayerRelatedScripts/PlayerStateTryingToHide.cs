@@ -118,15 +118,29 @@ public class PlayerStateTryingToHide : PlayerStateBase
         }
         if (isHiding)
         {
-            playerSpriteRenderer.sortingOrder = -7;
-            flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
-            flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-            flashlight.transform.position = playerTransform.position;
-            hideoutAnimator.SetBool("isHiding", false);
-            hideoutAnimator.SetBool("isHidden", true);
-            player.previousState = this;
-            player.SwitchState(player.hidingState, hideoutCollider);
-            isHiding = false;
+            if(hideoutTag == "Table")
+            {
+                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+                flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
+                hideoutAnimator.SetBool("isHiding", false);
+                hideoutAnimator.SetBool("isHidden", true);
+                player.previousState = this;
+                player.SwitchState(player.hidingState, hideoutCollider);
+                isHiding = false;
+            }
+            else
+            {
+                playerSpriteRenderer.sortingOrder = -7;
+                flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
+                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+                flashlight.transform.position = playerTransform.position;
+                hideoutAnimator.SetBool("isHiding", false);
+                hideoutAnimator.SetBool("isHidden", true);
+                player.previousState = this;
+                player.SwitchState(player.hidingState, hideoutCollider);
+                isHiding = false;
+            }
+
         }
     }
 

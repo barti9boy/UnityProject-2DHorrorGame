@@ -58,7 +58,7 @@ public static class PlayerActions
                 //player.currentState.playerInventory.DebugLogInventory();
             }
 
-            if (collision.CompareTag("Hideout") || collision.CompareTag("Closet")) //|| collision.CompareTag("Table"))
+            if (collision.CompareTag("Hideout") || collision.CompareTag("Closet") || collision.CompareTag("Table"))
             {
                 player.currentState.inputManager.movementInputEnabled = false;
                 player.previousState = player.currentState;
