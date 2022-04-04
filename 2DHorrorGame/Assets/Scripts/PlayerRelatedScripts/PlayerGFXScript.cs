@@ -28,6 +28,7 @@ public class PlayerGFXScript : MonoBehaviour
     private bool isEnteringVent;
     private bool isExitingVents;
     private bool isPickingUpItem;
+    private bool isOpeningHorizontalDoor;
     private bool isHideout;
     private bool isCloset;
     private bool isTable;
@@ -64,11 +65,20 @@ public class PlayerGFXScript : MonoBehaviour
         leavingHideoutState.OnLeaveStateHiding += LeavingState_OnLeaveStateHiding;
         leavingHideoutState.OnTurnOffFurnitureTag += LeavingState_OnTurnOffFurnitureTag;
         usingHorizontalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
+        usingHorizontalDoorState.OnOpeningHorizontalDoor += UsingHorizontalDoorState_OnOpeningHorizontalDoor;
         usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         itemPickupState.OnEnterStateItemPickup += ItemPickupState_OnEnterStateItemPickup;
 
 
 
+    }
+
+    private void UsingHorizontalDoorState_OnOpeningHorizontalDoor(object sender, EventArgs e)
+    {
+        isMoving = false;
+        isIdle = false;
+        isOpeningHorizontalDoor = true;
+        UpdateAnimations();
     }
 
     private void ItemPickupState_OnEnterStateItemPickup(object sender, EventArgs e)
@@ -217,7 +227,7 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void MovingState_OnEnterStateMoving(object sender, EventArgs e)
     {
- 
+        isOpeningHorizontalDoor = false;
         isMoving = true;
         isIdle = false;
         isHidden = false;
@@ -231,6 +241,7 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void IdleState_OnEnterStateIdle(object sender, EventArgs e)
     {
+        isOpeningHorizontalDoor = false;
         isMoving = false;
         isIdle = true ;
         isHidden = false;
@@ -255,6 +266,7 @@ public class PlayerGFXScript : MonoBehaviour
         animator.SetBool("isEnteringVent", isEnteringVent);
         animator.SetBool("isExitingVent", isExitingVents);
         animator.SetBool("isPickingUpItem", isPickingUpItem);
+        animator.SetBool("isOpeningHorizontalDoor", isOpeningHorizontalDoor);
         animator.SetBool("isHideout", isHideout);
         animator.SetBool("isCloset", isCloset);
         animator.SetBool("isTable", isTable);

@@ -16,7 +16,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.8977024, z: 0.95049435, w: 0}
+    m_Value: {x: 1, y: 0.9111843, z: 0.9508071, w: 0}
   gamma:
     m_OverrideState: 0
     m_Value: {x: 0.9813911, y: 0.9860438, z: 1, w: 0.020408163}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.3
+    m_Value: -0.4
     min: -1
     max: 1
   xMultiplier:
@@ -70,8 +70,8 @@ MonoBehaviour:
     min: 0
     max: 1
   center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.4}
   scale:
     m_OverrideState: 1
     m_Value: 1
@@ -92,16 +92,16 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   type:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 8
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.7
     min: 0
     max: 1
   response:
-    m_OverrideState: 0
-    m_Value: 0.8
+    m_OverrideState: 1
+    m_Value: 1
     min: 0
     max: 1
   texture:

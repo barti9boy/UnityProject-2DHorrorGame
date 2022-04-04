@@ -7,7 +7,9 @@ using System;
 
 public class PlayerStateUsingHorizontalDoor : PlayerStateBase
 {
+
     public event EventHandler OnStartMoving;
+    public event EventHandler OnOpeningHorizontalDoor;
 
     //----------door variables----------//
     private int itemIdToUnlock;
@@ -15,11 +17,14 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     private float rightPointX;
     private float leftPointX;
     private Collider2D doorCollider;
+    private Animator doorAnimator;
 
 
     //----------door interaction variables----------//
     private bool isChangingRoom;
     private float velocityDirection;
+    public AnimationClip openingAnimation;
+    private float timer;
 
 
     public PlayerStateUsingHorizontalDoor(GameObject playerObject) : base(playerObject)
@@ -36,6 +41,9 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        timer = 0;
+        doorAnimator = collision.GetComponent<Animator>();
+        openingAnimation = collision.GetComponent<DoorScript>().doorOpeningAnimation;
         itemIdToUnlock = collision.GetComponent<DoorScript>().itemIdToUnlock;
         unlockTimeRequired = collision.GetComponent<DoorScript>().unlockTimeRequired;
         doorCollider = collision.gameObject.transform.GetChild(0).GetComponent<Collider2D>();
@@ -66,13 +74,15 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
             }
             velocityDirection = -1;
         }
-        doorCollider.enabled = false;
-        OnStartMoving?.Invoke(this, EventArgs.Empty);
-        isChangingRoom = true;
+        OnOpeningHorizontalDoor.Invoke(this, EventArgs.Empty);
+        doorAnimator.SetBool("isOpened", true);
+        
+
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
-        if(isChangingRoom)
+        WaitUntilAnimated();
+        if (isChangingRoom)
         {
             if (velocityDirection == 1 && playerTransform.position.x < rightPointX)
             {
@@ -80,6 +90,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 if (Math.Abs(playerTransform.position.x - rightPointX) < 0.1)
                 {
                     isChangingRoom = false;
+                    doorAnimator.SetBool("isOpened", false);
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
@@ -93,6 +104,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 if (Math.Abs(playerTransform.position.x - leftPointX) < 0.1)
                 {
                     isChangingRoom = false;
+                    doorAnimator.SetBool("isOpened", false);
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
@@ -110,5 +122,17 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
 
+    }
+
+    public void WaitUntilAnimated()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= openingAnimation.length)
+        {
+            doorCollider.enabled = false;
+            OnStartMoving?.Invoke(this, EventArgs.Empty);
+            isChangingRoom = true;
+        }
     }
 }
