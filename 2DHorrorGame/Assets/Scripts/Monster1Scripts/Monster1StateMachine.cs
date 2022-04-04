@@ -34,7 +34,7 @@ public class Monster1StateMachine : MonoBehaviour
             {
                 hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
                 Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
-                Debug.Log(hitPlayer.collider);
+                //Debug.Log(hitPlayer.collider);
             }
             currentState.UpdateState(this, hitPlayer);
         }
@@ -46,7 +46,7 @@ public class Monster1StateMachine : MonoBehaviour
             {
                 hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 2.0f, playerMask);
                 Debug.DrawRay(this.transform.position, -this.transform.right * 2.0f);
-                Debug.Log(hitPlayer.collider);
+                //Debug.Log(hitPlayer.collider);
             }
             currentState.UpdateState(this, hitPlayer);
         }

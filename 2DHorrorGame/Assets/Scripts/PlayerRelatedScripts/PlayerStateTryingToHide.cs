@@ -22,11 +22,15 @@ public class PlayerStateTryingToHide : PlayerStateBase
     public bool isTryingToHide = false;
     private float velocityDirection;
     private float timer;
+    private string hideoutTag;
 
 
     //player GFX events
-    public event EventHandler OnEnterStateHiding;
-    public event EventHandler OnLeaveStateHiding;
+    public event EventHandler<OnEnterStateHidingEventArgs> OnEnterStateHiding;
+    public class OnEnterStateHidingEventArgs : EventArgs
+    {
+        public string hideoutFurnitureTag;
+    }
 
     public PlayerStateTryingToHide(GameObject playerObject) : base(playerObject)
     {
@@ -46,8 +50,10 @@ public class PlayerStateTryingToHide : PlayerStateBase
         hideoutEntrence = collision.GetComponent<HideoutScript>().handle.transform.position.x;
         hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
         hideoutAnimator = collision.GetComponent<Animator>();
+        hideoutTag = collision.tag;
         isFacingRight = player.previousState.isFacingRight;
         timer = 0;
+        Debug.Log(hideoutTag);
 
         hideoutCollider = collision;
 
@@ -85,7 +91,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 {
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
-                    OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+                    OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag});
                     rb.velocity = new Vector2(0, 0);
                     isTryingToHide = true;
 
@@ -98,7 +104,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 {
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
-                    OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+                    OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
                     rb.velocity = new Vector2(0, 0);
                     isTryingToHide = true;
                 }
@@ -107,20 +113,34 @@ public class PlayerStateTryingToHide : PlayerStateBase
         if (isTryingToHide)
         {
             hideoutAnimator.SetBool("isHiding", true);
-            OnEnterStateHiding?.Invoke(this, EventArgs.Empty);
+            OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
             WaitUntilAnimated();
         }
         if (isHiding)
         {
-            playerSpriteRenderer.sortingOrder = -7;
-            flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
-            flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-            flashlight.transform.position = playerTransform.position;
-            hideoutAnimator.SetBool("isHiding", false);
-            hideoutAnimator.SetBool("isHidden", true);
-            player.previousState = this;
-            player.SwitchState(player.hidingState, hideoutCollider);
-            isHiding = false;
+            if(hideoutTag == "Table")
+            {
+                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+                flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
+                hideoutAnimator.SetBool("isHiding", false);
+                hideoutAnimator.SetBool("isHidden", true);
+                player.previousState = this;
+                player.SwitchState(player.hidingState, hideoutCollider);
+                isHiding = false;
+            }
+            else
+            {
+                playerSpriteRenderer.sortingOrder = -7;
+                flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
+                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+                flashlight.transform.position = playerTransform.position;
+                hideoutAnimator.SetBool("isHiding", false);
+                hideoutAnimator.SetBool("isHidden", true);
+                player.previousState = this;
+                player.SwitchState(player.hidingState, hideoutCollider);
+                isHiding = false;
+            }
+
         }
     }
 
