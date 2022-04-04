@@ -9,6 +9,7 @@ public class DoorScript : MonoBehaviour
     public bool isOpened;
     public bool isChangingRoom = false;
     public int velocityDirection;
+    public AnimationClip doorOpeningAnimation;
 
     public float interactionTime;
     public float unlockTimeRequired;
