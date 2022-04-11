@@ -33,9 +33,15 @@ public class PlayerStateItemPickup : PlayerStateBase
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
-        canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
         item = collision;
-
+        if (!collision.CompareTag("Battery"))
+        {
+            canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
+        }
+        else
+        {
+            player.batteryTimer += 60;
+        }
 
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)

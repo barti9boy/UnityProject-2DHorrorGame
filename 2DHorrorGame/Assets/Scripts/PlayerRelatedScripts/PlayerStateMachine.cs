@@ -17,9 +17,16 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateUsingHorizontalDoor usingHorizontalDoorState;
     public PlayerStateUsingVerticalDoor usingVerticalDoorState;
     public PlayerStateItemPickup itemPickupState;
+
+    public GameObject flashlight;
+    public bool flashlightOutOfBattery;
+    public float batteryTimer;
+    private float timeOfBattery;
+
    
     void Awake()
     {
+        flashlight = transform.GetChild(1).gameObject;
         idleState = new PlayerStateIdle(gameObject);
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
@@ -32,7 +39,10 @@ public class PlayerStateMachine : MonoBehaviour
         itemPickupState = new PlayerStateItemPickup(gameObject);
         previousState = idleState;
         currentState = idleState;
-        currentState.EnterState(this); 
+        currentState.EnterState(this);
+        flashlightOutOfBattery = false;
+        timeOfBattery = 5;
+        batteryTimer = 0;
     }
 
 
@@ -43,7 +53,18 @@ public class PlayerStateMachine : MonoBehaviour
         {
             GameOverScreen.GameOver();
         }
+        if (flashlight.activeSelf == true)
+        {
+            batteryTimer += Time.deltaTime;
+            if (batteryTimer >= timeOfBattery)
+            {
+                flashlightOutOfBattery = true;
+                currentState.flashlight.SetActive(false);
+            }
+        }
+
     }
+
 
     public void SwitchState(PlayerStateBase state, Collider2D collision = null)
     {

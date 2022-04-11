@@ -23,7 +23,7 @@ public static class PlayerActions
 
     public static void Flashlight(PlayerStateMachine player)
     {
-        if (player.currentState.inputManager.isFlashlightButtonClicked)
+        if (player.currentState.inputManager.isFlashlightButtonClicked && !player.flashlightOutOfBattery)
         {
             player.currentState.flashlight.SetActive(true);
         }
@@ -46,7 +46,7 @@ public static class PlayerActions
             //    player.currentState.inputManager.isInteractionButtonClicked = false;
                 
             //}
-            if (collision.CompareTag("Item"))
+            if (collision.CompareTag("Item") || collision.CompareTag("Battery"))
             {
                 player.SwitchState(player.itemPickupState, collision);
                 player.currentState.inputManager.isInteractionButtonClicked = false;
