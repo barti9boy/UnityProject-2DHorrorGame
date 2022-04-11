@@ -41,7 +41,7 @@ public class PlayerStateMachine : MonoBehaviour
         currentState = idleState;
         currentState.EnterState(this);
         flashlightOutOfBattery = false;
-        timeOfBattery = 5;
+        timeOfBattery = 120;
         batteryTimer = 0;
     }
 
