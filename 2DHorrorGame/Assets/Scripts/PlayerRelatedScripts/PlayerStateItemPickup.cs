@@ -8,6 +8,8 @@ using static PlayerActions;
 public class PlayerStateItemPickup : PlayerStateBase
 {
     private float timer;
+    private bool canPickupItem;
+    private Collider2D item;
     private AnimationClip pickupAnimation;
     public PlayerStateItemPickup(GameObject playerObject) : base(playerObject)
     {
@@ -31,13 +33,16 @@ public class PlayerStateItemPickup : PlayerStateBase
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
+        canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
+        item = collision;
+
+
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0, 0);
         timer += Time.deltaTime;
-        Debug.Log(isFacingRight);
-        Debug.Log(player.previousState);
+        if(timer >= pickupAnimation.length/1.66 && canPickupItem) item.gameObject.SetActive(false);
         if (timer >= pickupAnimation.length)
         {
             player.SwitchState(player.previousState);
@@ -56,6 +61,14 @@ public class PlayerStateItemPickup : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
+        
+    }
+    public void AddToInventory(PlayerStateMachine player, Collider2D collision)
+    {
+        if (player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>()))
+        {
+            collision.gameObject.SetActive(false);
+        }
         
     }
 

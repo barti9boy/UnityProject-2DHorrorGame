@@ -25,6 +25,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     private float velocityDirection;
     public AnimationClip openingAnimation;
     private float timer;
+    private IInteractible interactible;
 
 
     public PlayerStateUsingHorizontalDoor(GameObject playerObject) : base(playerObject)
@@ -37,7 +38,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerInventory = playerObject.GetComponent<PlayerInventory>();
-
+        
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
@@ -49,6 +50,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
         doorCollider = collision.gameObject.transform.GetChild(0).GetComponent<Collider2D>();
         rightPointX = collision.gameObject.transform.GetChild(1).transform.position.x;
         leftPointX = collision.gameObject.transform.GetChild(2).transform.position.x;
+        interactible = collision.gameObject.GetComponent<IInteractible>();
         isChangingRoom = false;
         isFacingRight = player.previousState.isFacingRight;
 
@@ -81,7 +83,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
-        WaitUntilAnimated();
+        WaitUntilAnimated(); // wait for the door opening animation to finish
         if (isChangingRoom)
         {
             if (velocityDirection == 1 && playerTransform.position.x < rightPointX)
@@ -90,6 +92,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 if (Math.Abs(playerTransform.position.x - rightPointX) < 0.1)
                 {
                     isChangingRoom = false;
+                    interactible.EnableInteractionHighlight();
                     doorAnimator.SetBool("isOpened", false);
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
@@ -104,6 +107,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 if (Math.Abs(playerTransform.position.x - leftPointX) < 0.1)
                 {
                     isChangingRoom = false;
+                    interactible.EnableInteractionHighlight();
                     doorAnimator.SetBool("isOpened", false);
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;

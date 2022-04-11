@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour
+public class DoorScript : MonoBehaviour, IInteractible
 {
     public bool isLocked;
     public bool isOpened;
     public bool isChangingRoom = false;
     public int velocityDirection;
     public AnimationClip doorOpeningAnimation;
+    public GameObject interactionHighlight;
 
     public float interactionTime;
     public float unlockTimeRequired;
     public int itemIdToUnlock;
     [SerializeField] private Transform rightPoint;
     [SerializeField] private Transform leftPoint;
+    private Transform unlockingCanvasImageTransform;
 
     private Collider2D doorCollider;
      
@@ -23,6 +25,7 @@ public class DoorScript : MonoBehaviour
     {
         doorCollider = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
         if (!isLocked) isOpened = false;
+        unlockingCanvasImageTransform = gameObject.transform.GetChild(3).GetChild(0);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -56,26 +59,26 @@ public class DoorScript : MonoBehaviour
             interactionTime = 0;
         }
     }
-    public void DoorOpen()
+    public void ChangeInteractionCanvasTransform(float playerX, float doorX)
     {
-        isOpened = true;
-        doorCollider.enabled = false;
-    }
 
-    public void DoorClose()
-    {
-        isOpened = false;
-        doorCollider.enabled = true;
-    }
-    public void DoorInteractionTimer(bool isInteractionButtonHeld)
-    {
-        if(isInteractionButtonHeld)
+        if(playerX > doorX)
         {
-            interactionTime += Time.deltaTime;
+            unlockingCanvasImageTransform.localPosition = new Vector3(1, 0, 0);
         }
         else
         {
-            interactionTime = 0;
+            unlockingCanvasImageTransform.localPosition = new Vector3(-1, 0, 0);
         }
+    }
+
+    public void EnableInteractionHighlight()
+    {
+        interactionHighlight.SetActive(true);
+    }
+
+    public void DisableInteractionHighlight()
+    {
+        interactionHighlight.SetActive(false);
     }
 }

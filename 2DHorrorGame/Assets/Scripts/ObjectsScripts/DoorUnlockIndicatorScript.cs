@@ -10,6 +10,7 @@ public class DoorUnlockIndicatorScript : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private float timeToUnlock;
     [SerializeField] private Image radialIndicatorUI;
+    [SerializeField] private bool indicatorDirection;
 
 
     private void Awake()

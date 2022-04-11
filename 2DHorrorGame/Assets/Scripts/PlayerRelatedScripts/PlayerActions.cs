@@ -48,12 +48,7 @@ public static class PlayerActions
             //}
             if (collision.CompareTag("Item"))
             {
-                Debug.Log("hi");
                 player.SwitchState(player.itemPickupState, collision);
-                if (player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>()))
-                {
-                    collision.gameObject.SetActive(false);
-                }
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 //player.currentState.playerInventory.DebugLogInventory();
             }
@@ -75,12 +70,14 @@ public static class PlayerActions
         {
             if (collision.gameObject.GetComponent<DoorScript>().isLocked)
             {
+                collision.gameObject.GetComponent<DoorScript>().ChangeInteractionCanvasTransform(player.transform.position.x, collision.transform.position.x);
                 collision.gameObject.GetComponent<DoorScript>().DoorUnlock(player.currentState.playerInventory.items, player.currentState.inputManager.isInteractionButtonHeld);
             }
             else
             {
                 if (player.currentState.inputManager.isInteractionButtonClicked)
                 {
+                    collision.GetComponent<IInteractible>().DisableInteractionHighlight();
                     player.currentState.inputManager.isInteractionButtonClicked = false;
                     player.previousState = player.currentState;
                     player.SwitchState(player.usingHorizontalDoorState, collision);
