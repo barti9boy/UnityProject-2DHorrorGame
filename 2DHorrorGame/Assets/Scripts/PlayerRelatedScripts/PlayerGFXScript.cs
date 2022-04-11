@@ -177,7 +177,7 @@ public class PlayerGFXScript : MonoBehaviour
         isClimbingDown = false;
         isClimbingUp = false;
         isPickingUpItem = false;
-        Debug.Log(e.hideoutFurnitureTag);
+        //Debug.Log(e.hideoutFurnitureTag);
         if (e.hideoutFurnitureTag == "Closet")
         {
             isCloset = true;

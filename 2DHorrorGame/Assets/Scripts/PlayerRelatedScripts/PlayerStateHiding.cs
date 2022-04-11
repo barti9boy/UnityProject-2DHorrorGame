@@ -46,7 +46,6 @@ public class PlayerStateHiding : PlayerStateBase
         {
             playerCollider.enabled = true;
             player.previousState = this;
-            Debug.Log(hideoutCollider);
             player.SwitchState(player.leavingHideoutState, hideoutCollider);
             inputManager.isInteractionButtonClicked = false;
 

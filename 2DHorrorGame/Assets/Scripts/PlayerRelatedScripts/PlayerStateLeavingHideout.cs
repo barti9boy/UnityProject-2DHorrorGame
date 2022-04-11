@@ -41,6 +41,8 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        isFacingRight = player.previousState.isFacingRight;
+
         hideoutCollider = collision;
         hideoutTag = collision.tag;
         timer = 0;
@@ -86,6 +88,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         }
         OnTurnOffFurnitureTag?.Invoke(this, EventArgs.Empty);
         inputManager.movementInputEnabled = true;
+        player.previousState = this;
         player.SwitchState(player.idleState);
         isHidden = false;
         hideoutAnimator.SetBool("isLeaving", false);
