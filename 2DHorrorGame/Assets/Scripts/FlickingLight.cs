@@ -20,6 +20,11 @@ public class FlickingLight : MonoBehaviour
     public Light2D objectLight;
     private float baseIntensity;
 
+    public bool flickInnerRadius;
+    public float minChangeTime;
+    public float maxChangeTime;
+    public float radiusRange;
+    private float baseInnerRadius;
 
     private Color _baseColor;
     private Color _color;
@@ -27,16 +32,38 @@ public class FlickingLight : MonoBehaviour
     void Start()
     {
         //objectLight = gameObject.GetComponent<Light2D>();
+        baseInnerRadius = objectLight.pointLightInnerRadius;
         baseIntensity = objectLight.intensity;
         _baseColor = objectLight.color;
         flickIntensity = true;
         StartCoroutine(FlickIntensity());
         StartCoroutine(FlickColor());
+        StartCoroutine(FlickInnerRadius());
     }
 
     void Update()
     {
         
+    }
+    private IEnumerator FlickInnerRadius()
+    {
+        float t0 = Time.time;
+        float t = t0;
+        WaitUntil wait = new WaitUntil(() => Time.time > t0 + t);
+        yield return new WaitForSeconds(Random.Range(0.01f, 0.5f));
+
+        while (true)
+        {
+            if (flickInnerRadius)
+            {
+                t0 = Time.time;
+                float r = Random.Range(baseInnerRadius - radiusRange, baseInnerRadius + radiusRange);
+                objectLight.pointLightInnerRadius = r;
+                t = Random.Range(minChangeTime, maxChangeTime);
+                yield return wait;
+            }
+            else yield return null;
+        }
     }
     private IEnumerator FlickIntensity()
     {
