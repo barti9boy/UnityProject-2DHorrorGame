@@ -21,7 +21,7 @@ public class PlayerStateMachine : MonoBehaviour
     public GameObject flashlight;
     public bool flashlightOutOfBattery;
     public float batteryTimer;
-    private float timeOfBattery;
+    public float timeOfBattery;
 
    
     void Awake()
