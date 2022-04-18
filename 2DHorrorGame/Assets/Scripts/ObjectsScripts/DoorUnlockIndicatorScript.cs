@@ -7,28 +7,38 @@ public class DoorUnlockIndicatorScript : MonoBehaviour
 {
 
     [SerializeField] private float currentProgress;
-    [SerializeField] private GameObject door;
+    private DoorScript doorScript;
     [SerializeField] private float timeToUnlock;
-    [SerializeField] private Image radialIndicatorUI;
+    [SerializeField] private Image indicatorUI;
+    [SerializeField] private Image indicatorUIBackground;
     [SerializeField] private bool indicatorDirection;
 
 
     private void Awake()
     {
-        door = transform.parent.parent.gameObject;
+        doorScript = transform.parent.parent.gameObject.GetComponent<DoorScript>();
         currentProgress = 0;
-        timeToUnlock = door.GetComponent<DoorScript>().unlockTimeRequired;
+        timeToUnlock = doorScript.unlockTimeRequired;
+
     }
     private void Update()
     {
-        if (door.GetComponent<DoorScript>().isLocked)
+        if (doorScript.isLocked)
         {
-            currentProgress = door.GetComponent<DoorScript>().interactionTime / timeToUnlock;
-            radialIndicatorUI.fillAmount = currentProgress;
+            currentProgress = doorScript.interactionTime / timeToUnlock;
+            if(currentProgress > 0)
+            {
+                indicatorUIBackground.enabled = true;
+            }
+            else
+            {
+                indicatorUIBackground.enabled = false;
+            }
+            indicatorUI.fillAmount = currentProgress;
         }
         else
         {
-
+            indicatorUIBackground.enabled = false;
             this.gameObject.SetActive(false);
         }
     }

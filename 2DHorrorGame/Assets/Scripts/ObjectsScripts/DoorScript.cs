@@ -18,6 +18,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     [SerializeField] private Transform rightPoint;
     [SerializeField] private Transform leftPoint;
     private Transform unlockingCanvasImageTransform;
+    private Transform unlockingCanvasBackgroundTransform;
 
     private Collider2D doorCollider;
      
@@ -26,6 +27,7 @@ public class DoorScript : MonoBehaviour, IInteractible
         doorCollider = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
         if (!isLocked) isOpened = false;
         unlockingCanvasImageTransform = gameObject.transform.GetChild(3).GetChild(0);
+        unlockingCanvasBackgroundTransform = gameObject.transform.GetChild(3).GetChild(1);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -64,11 +66,13 @@ public class DoorScript : MonoBehaviour, IInteractible
 
         if(playerX > doorX)
         {
-            unlockingCanvasImageTransform.localPosition = new Vector3(1, 0, 0);
+            unlockingCanvasImageTransform.localPosition = new Vector3(0.75f, 0, 0);
+            unlockingCanvasBackgroundTransform.localPosition = new Vector3(0.75f, 0, 0);
         }
         else
         {
-            unlockingCanvasImageTransform.localPosition = new Vector3(-1, 0, 0);
+            unlockingCanvasImageTransform.localPosition = new Vector3(-0.75f, 0, 0);
+            unlockingCanvasBackgroundTransform.localPosition = new Vector3(-0.75f, 0, 0);
         }
     }
 
