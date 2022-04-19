@@ -15,8 +15,8 @@ public class DoorScript : MonoBehaviour, IInteractible
     public float interactionTime;
     public float unlockTimeRequired;
     public int itemIdToUnlock;
-    [SerializeField] private Transform rightPoint;
-    [SerializeField] private Transform leftPoint;
+    //[SerializeField] private Transform rightPoint;
+    //[SerializeField] private Transform leftPoint;
     private Transform unlockingCanvasImageTransform;
     private Transform unlockingCanvasBackgroundTransform;
 

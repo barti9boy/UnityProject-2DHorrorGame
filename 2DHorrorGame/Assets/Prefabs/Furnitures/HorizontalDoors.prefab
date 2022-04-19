@@ -295,8 +295,6 @@ MonoBehaviour:
   interactionTime: 0
   unlockTimeRequired: 1.5
   itemIdToUnlock: 1
-  rightPoint: {fileID: 2760549562623732195}
-  leftPoint: {fileID: 2760549562643715471}
 --- !u!114 &2760549563417407602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +320,7 @@ MonoBehaviour:
   - {x: -0.12497902, y: 1.6874887, z: 0}
   m_ShapePathHash: 1862948973
   m_Mesh: {fileID: 0}
-  m_InstanceId: 53812
+  m_InstanceId: 53844
 --- !u!95 &2760549563417407601
 Animator:
   serializedVersion: 3
