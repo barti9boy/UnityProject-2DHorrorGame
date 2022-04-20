@@ -86,11 +86,20 @@ public static class PlayerActions
         }
         if (collision.CompareTag("vDoors"))
         {
-            if (player.currentState.inputManager.isInteractionButtonClicked)
+            if (collision.gameObject.GetComponent<DoorScript>().isLocked)
             {
-                player.currentState.inputManager.isInteractionButtonClicked = false;
-                player.previousState = player.currentState;
-                player.SwitchState(player.usingVerticalDoorState, collision);
+                collision.gameObject.GetComponent<DoorScript>().ChangeInteractionCanvasTransform(player.transform.position.x, collision.transform.position.x);
+                collision.gameObject.GetComponent<DoorScript>().DoorUnlock(player.currentState.playerInventory.items, player.currentState.inputManager.isInteractionButtonHeld);
+            }
+            else 
+            { 
+                if (player.currentState.inputManager.isInteractionButtonClicked)
+                {
+                    collision.GetComponent<IInteractible>().DisableInteractionHighlight();
+                    player.currentState.inputManager.isInteractionButtonClicked = false;
+                    player.previousState = player.currentState;
+                    player.SwitchState(player.usingVerticalDoorState, collision);
+                }
             }
         }
             if (player.currentState.inputManager.isInteractionButtonClicked)
