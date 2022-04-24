@@ -67,6 +67,7 @@ public class PlayerGFXScript : MonoBehaviour
         leavingHideoutState.OnTurnOffFurnitureTag += LeavingState_OnTurnOffFurnitureTag;
         usingHorizontalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         usingHorizontalDoorState.OnOpeningHorizontalDoor += UsingHorizontalDoorState_OnOpeningHorizontalDoor;
+        usingVerticalDoorState.OnOpeningHorizontalDoor += UsingHorizontalDoorState_OnOpeningHorizontalDoor;
         usingVerticalDoorState.OnStartMoving += MovingState_OnEnterStateMoving;
         itemPickupState.OnEnterStateItemPickup += ItemPickupState_OnEnterStateItemPickup;
 

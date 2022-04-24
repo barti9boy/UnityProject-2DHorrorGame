@@ -8,6 +8,8 @@ using System;
 public class PlayerStateUsingVerticalDoor : PlayerStateBase
 {
     public event EventHandler OnStartMoving;
+    public event EventHandler OnOpeningHorizontalDoor;
+
 
     //----------door variables----------//
     private int itemIdToUnlock;
@@ -18,10 +20,16 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     private Collider2D doorCollider;
 
     //----------door interaction variables----------//
+    private float timer;
+
     private bool isChangingRoomUsingVerticalDoor;
     private bool isChangingRoomUsingHorizontalDoor;
     private bool isEnteringAnotherRoom;
     private float velocityDirection;
+    private Animator horizontalDoorAnimator;
+    private Collider2D horizontalDoorCollider;
+    private AnimationClip openingAnimation;
+
 
     public PlayerStateUsingVerticalDoor(GameObject playerObject) : base(playerObject)
     {
@@ -37,11 +45,15 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
-       // itemIdToUnlock = collision.GetComponent<DoorScript>().itemIdToUnlock;
-       //s unlockTimeRequired = collision.GetComponent<DoorScript>().unlockTimeRequired;
+        // itemIdToUnlock = collision.GetComponent<DoorScript>().itemIdToUnlock;
+        //s unlockTimeRequired = collision.GetComponent<DoorScript>().unlockTimeRequired;
+        timer = 0;
         verticalDoorPoint = collision.gameObject.transform.GetChild(0).transform.position;
         horizontalDoorPointIn = collision.gameObject.transform.GetChild(1).transform.position;
         horizontalDoorPointOut = collision.gameObject.transform.GetChild(2).transform.position;
+        horizontalDoorAnimator = collision.gameObject.transform.GetChild(5).gameObject.GetComponent<Animator>() ;
+        horizontalDoorCollider = collision.gameObject.transform.GetChild(5).gameObject.transform.GetChild(0).gameObject.GetComponent<Collider2D>();
+        openingAnimation = collision.GetComponent<DoorScript>().doorOpeningAnimation;
         isChangingRoomUsingVerticalDoor = false;
         isChangingRoomUsingHorizontalDoor = false;
         isEnteringAnotherRoom = false;
@@ -153,6 +165,8 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                 //    player.SwitchState(player.idleState);
                 //}
             }
+            horizontalDoorCollider.enabled = false;
+            horizontalDoorAnimator.SetBool("isOpened", true);
             if (isEnteringAnotherRoom)
             {
 
@@ -167,11 +181,16 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     //sdoorCollider.enabled = true;
                     player.previousState = this;
                     player.SwitchState(player.idleState);
+                    horizontalDoorCollider.enabled = true;
+                    horizontalDoorAnimator.SetBool("isOpened", false);
                 }
             }
         }
         else if (isChangingRoomUsingHorizontalDoor)
         {
+            OnOpeningHorizontalDoor.Invoke(this, EventArgs.Empty);
+            horizontalDoorAnimator.SetBool("isOpened", true);
+            WaitUntilAnimated();
             rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.1)
             {
@@ -182,11 +201,22 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                 isChangingRoomUsingHorizontalDoor = false;
                 inputManager.movementInputEnabled = true;
                 inputManager.interactionInputEnabled = true;
-               // doorCollider.enabled = true;
+                horizontalDoorCollider.enabled = true;
+                horizontalDoorAnimator.SetBool("isOpened", false);
+                // doorCollider.enabled = true;
             }
         }
     }
+    public void WaitUntilAnimated()
+    {
+        timer += Time.deltaTime;
 
+        if (timer >= openingAnimation.length)
+        {
+            horizontalDoorCollider.enabled = false;
+            OnStartMoving?.Invoke(this, EventArgs.Empty);
+        }
+    }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
 
