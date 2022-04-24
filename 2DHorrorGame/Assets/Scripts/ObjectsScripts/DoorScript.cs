@@ -21,6 +21,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     private Transform unlockingCanvasBackgroundTransform;
 
     private Collider2D doorCollider;
+    private string doorTag;
      
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class DoorScript : MonoBehaviour, IInteractible
         if (!isLocked) isOpened = false;
         unlockingCanvasImageTransform = gameObject.transform.GetChild(3).GetChild(0);
         unlockingCanvasBackgroundTransform = gameObject.transform.GetChild(3).GetChild(1);
+        doorTag = gameObject.tag;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -63,16 +65,23 @@ public class DoorScript : MonoBehaviour, IInteractible
     }
     public void ChangeInteractionCanvasTransform(float playerX, float doorX)
     {
-
-        if(playerX > doorX)
+        if(doorTag == "vDoor")
         {
-            unlockingCanvasImageTransform.localPosition = new Vector3(0.75f, 0, 0);
-            unlockingCanvasBackgroundTransform.localPosition = new Vector3(0.75f, 0, 0);
+            unlockingCanvasImageTransform.localPosition = new Vector3(0, 0, 0);
+            unlockingCanvasBackgroundTransform.localPosition = new Vector3(0, 0, 0);
         }
-        else
-        {
-            unlockingCanvasImageTransform.localPosition = new Vector3(-0.75f, 0, 0);
-            unlockingCanvasBackgroundTransform.localPosition = new Vector3(-0.75f, 0, 0);
+        else if(doorTag == "door")
+        { 
+            if (playerX > doorX)
+            {
+                unlockingCanvasImageTransform.localPosition = new Vector3(0.75f, 0, 0);
+                unlockingCanvasBackgroundTransform.localPosition = new Vector3(0.75f, 0, 0);
+            }
+            else
+            {
+                unlockingCanvasImageTransform.localPosition = new Vector3(-0.75f, 0, 0);
+                unlockingCanvasBackgroundTransform.localPosition = new Vector3(-0.75f, 0, 0);
+            }
         }
     }
 

@@ -54,6 +54,7 @@ public class PlayerGFXScript : MonoBehaviour
         //subscribing to events
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         movingState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
+        tryingToHideState.OnEnterStateMoving += MovingState_OnEnterStateMoving;
         hidingState.OnEnterStateHidden += HidingState_OnEnterStateHidden;
         usingLadderState.OnStartMoving += MovingState_OnEnterStateMoving;
         usingLadderState.OnGoIntoVents += UsingLadderState_OnGoIntoVents;

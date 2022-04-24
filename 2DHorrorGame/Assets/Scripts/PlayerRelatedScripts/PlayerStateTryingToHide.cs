@@ -26,6 +26,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
 
 
     //player GFX events
+    public event EventHandler OnEnterStateMoving;
     public event EventHandler<OnEnterStateHidingEventArgs> OnEnterStateHiding;
     public class OnEnterStateHidingEventArgs : EventArgs
     {
@@ -77,6 +78,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
             velocityDirection = -1;
         }
         isApproachingHideout = true;
+        OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
+
     }
 
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
@@ -90,7 +93,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.1)
                 {
-                    if (hideoutTag == "Hideout" && isFacingRight)
+                    if (hideoutTag == "Hideout" && !isFacingRight)
                     {
                         playerTransform.Rotate(0, 180, 0);
                         isFacingRight = !isFacingRight;
@@ -113,7 +116,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
                         playerTransform.Rotate(0, 180, 0);
                         isFacingRight = !isFacingRight;
                     }
-                    else if (hideoutTag == "Hideout"  && isFacingRight)
+                    else if (hideoutTag == "Hideout"  && !isFacingRight)
                     {
                         playerTransform.Rotate(0, 180, 0);
                         isFacingRight = !isFacingRight;
