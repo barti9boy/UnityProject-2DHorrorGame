@@ -132,7 +132,19 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     inputManager.interactionInputEnabled = true;
                     rb.velocity = new Vector2(0, 0);
                     player.transform.position = horizontalDoorPointOut;
-                    rb.velocity = new Vector2(1 * movementSpeed, 0);
+                    if (horizontalDoorPointIn.x > horizontalDoorPointOut.x)
+                    {
+                        
+                        velocityDirection = 1;
+                        rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+                    }
+                    else if (horizontalDoorPointIn.x < horizontalDoorPointOut.x)
+                    {
+                        playerTransform.Rotate(0, 180, 0);
+                        player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                        velocityDirection = -1;
+                        rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+                    }
                     OnStartMoving?.Invoke(this, EventArgs.Empty);
                     isEnteringAnotherRoom = true;
 
@@ -147,9 +159,20 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     inputManager.interactionInputEnabled = true;
                     rb.velocity = new Vector2(0, 0);
                     player.transform.position = horizontalDoorPointOut;
-                    playerTransform.Rotate(0, 180, 0);
-                    player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                    rb.velocity = new Vector2(1 * movementSpeed, 0);
+                    if (horizontalDoorPointIn.x > horizontalDoorPointOut.x)
+                    {
+                        playerTransform.Rotate(0, 180, 0);
+                        player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                        velocityDirection = 1;
+                        rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+                    }
+                    else if (horizontalDoorPointIn.x < horizontalDoorPointOut.x)
+                    {
+                        
+                        velocityDirection = -1;
+                        rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
+                    }
+
                     OnStartMoving?.Invoke(this, EventArgs.Empty);
                     isEnteringAnotherRoom = true;
                 }
