@@ -18,7 +18,6 @@ public class PopupTriggerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Time.timeScale = 0f;
             popup.SetActive(true);
             popupScript.PopupSetMessage(message);
             popupScript.PopupIn();

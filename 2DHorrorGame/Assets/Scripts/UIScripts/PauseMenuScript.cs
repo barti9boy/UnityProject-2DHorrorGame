@@ -9,15 +9,11 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Pause()
     {
-        isGamePaused = true;
         this.gameObject.SetActive(true);
-        Time.timeScale = 0f;
     }
     public void Resume()
     {
-        isGamePaused = false;
         this.gameObject.SetActive(false);
-        Time.timeScale = 1f;
     }
 
     public void GoToMenu()

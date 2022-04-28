@@ -60,7 +60,6 @@ public class PopupScript : MonoBehaviour
     }
     public void PopupSetInactive()
     {
-        Time.timeScale = 1f;
         popupText.text = "";
         this.gameObject.SetActive(false);
     }
