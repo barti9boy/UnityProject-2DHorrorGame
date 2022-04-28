@@ -205,7 +205,7 @@ MonoBehaviour:
   - {x: -1.4090466, y: 1.8649249, z: 0}
   m_ShapePathHash: -1098224103
   m_Mesh: {fileID: 0}
-  m_InstanceId: 66904
+  m_InstanceId: -143058
 --- !u!1001 &4741166646921228084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +213,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8166846045867108056}
     m_Modifications:
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7207430236281552418, guid: 2b61fd84fc2a6d74c847ea68e2f980a7, type: 3}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4581462191820861375, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_Name
       value: InteractionHighlight (1)

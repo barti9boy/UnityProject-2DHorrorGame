@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3216959963318332782}
   - component: {fileID: 3216959963318332780}
   - component: {fileID: 3216959963318332783}
-  - component: {fileID: 3216959963318332777}
   - component: {fileID: 3216959963318332776}
   - component: {fileID: 3216959963318332779}
   m_Layer: 0
@@ -114,32 +113,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3216959963318332777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3216959963318332781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 1fba8c70
-  m_ShapePath:
-  - {x: -0.5821875, y: -1.3401396, z: 0}
-  - {x: 0.5821875, y: -1.3401396, z: 0}
-  - {x: 0.5821875, y: 1.3401396, z: 0}
-  - {x: -0.5821875, y: 1.3401396, z: 0}
-  m_ShapePathHash: 0
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 52492
 --- !u!114 &3216959963318332776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,8 +207,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1768864685
       objectReference: {fileID: 0}
     - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_WasSpriteAssigned

@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4373282214513275264, guid: f0751f74210179f4989c894523f84b2a, type: 3}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4581462191820861375, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_Name
       value: InteractionHighlight
