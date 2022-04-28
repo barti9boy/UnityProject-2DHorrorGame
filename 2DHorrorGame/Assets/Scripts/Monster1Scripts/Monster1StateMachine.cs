@@ -12,6 +12,7 @@ public class Monster1StateMachine : MonoBehaviour
     public Monster1StatePatrolling patrollingState;
     public Monster1StateChasing chasingState;
     public RaycastHit2D hitPlayer;
+    public bool isFacingRightOnAwake;
 
 
     void Awake()
@@ -22,6 +23,11 @@ public class Monster1StateMachine : MonoBehaviour
         previousState = idleState;
         currentState = idleState;
         currentState.EnterState(this, hitPlayer);
+        currentState.isFacingRight = isFacingRightOnAwake;
+        if (!isFacingRightOnAwake)
+        {
+            transform.Rotate(0,180,0);
+        }
     }
 
     void Update()

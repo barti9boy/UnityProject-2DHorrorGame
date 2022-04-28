@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1cc1e5dfcf859743aae21f89f329a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocked: 1
+  isLocked: 0
   isOpened: 0
   isChangingRoom: 0
   velocityDirection: 0
@@ -316,11 +316,11 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -0.124996185, y: -1.6874993, z: 0}
   - {x: 0.12502098, y: -1.6874304, z: 0}
-  - {x: 0.125, y: 1.6874999, z: 0}
-  - {x: -0.12497902, y: 1.6874887, z: 0}
-  m_ShapePathHash: 1862948973
+  - {x: 0.08577919, y: 4.276085, z: 0}
+  - {x: -0.16419983, y: 4.2368526, z: 0}
+  m_ShapePathHash: 1748745933
   m_Mesh: {fileID: 0}
-  m_InstanceId: 53844
+  m_InstanceId: -1582
 --- !u!95 &2760549563417407601
 Animator:
   serializedVersion: 3

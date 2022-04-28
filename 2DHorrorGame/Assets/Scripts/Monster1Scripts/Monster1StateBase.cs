@@ -11,7 +11,7 @@ public abstract class Monster1StateBase
     public SpriteRenderer monster1SpriteRenderer;
     public Collider2D collider;
 
-    public bool isFacingRight = true;
+    public bool isFacingRight;
     //public RaycastHit2D hitPlayer;
     public float movementSpeed = 3f;
     public float playerCheckDistance = 8.0f;
