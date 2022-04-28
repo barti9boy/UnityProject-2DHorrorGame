@@ -58,7 +58,6 @@ public class InputManager : MonoBehaviour
     public void FlashlightButton()
     {
         isFlashlightButtonClicked = !isFlashlightButtonClicked;
-        Debug.Log("XD");
     }
     public void Interaction(InputAction.CallbackContext context)
     {
