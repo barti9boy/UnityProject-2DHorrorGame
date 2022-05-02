@@ -8,6 +8,7 @@ public class CameraSwitchVents : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera playerCamera1;
     [SerializeField] CinemachineVirtualCamera playerCamera2;
     [SerializeField] float middleOfTheTriggger;
+    [SerializeField] GameObject monster;
 
     private void Awake()
     {
@@ -27,6 +28,10 @@ public class CameraSwitchVents : MonoBehaviour
             {
                 playerCamera1.Priority = 1;
                 playerCamera2.Priority = 0;
+            }
+            if (monster.activeSelf == false)
+            {
+                monster.SetActive(true);
             }
         }
     }

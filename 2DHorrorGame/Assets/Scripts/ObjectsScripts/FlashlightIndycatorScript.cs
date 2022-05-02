@@ -27,7 +27,6 @@ public class FlashlightIndycatorScript : MonoBehaviour
         {
             indycator.SetActive(true);
             currentBettery = 1 - (playerObject.GetComponent<PlayerStateMachine>().batteryTimer / playerObject.GetComponent<PlayerStateMachine>().timeOfBattery);
-            Debug.Log(currentBettery);
             radialIndicatorUI.fillAmount = currentBettery;
         }
         else 
