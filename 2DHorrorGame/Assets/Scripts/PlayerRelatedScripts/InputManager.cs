@@ -58,7 +58,14 @@ public class InputManager : MonoBehaviour
     public void FlashlightButton()
     {
         isFlashlightButtonClicked = !isFlashlightButtonClicked;
-        Debug.Log("XD");
+    }
+    public void MoveLeftButton()
+    {
+        movementInputDirection = -1;
+    }
+    public void MoveRightButton()
+    {
+        movementInputDirection = 1;
     }
     public void Interaction(InputAction.CallbackContext context)
     {

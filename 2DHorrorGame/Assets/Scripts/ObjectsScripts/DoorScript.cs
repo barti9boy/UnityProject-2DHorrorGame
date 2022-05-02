@@ -65,12 +65,12 @@ public class DoorScript : MonoBehaviour, IInteractible
     }
     public void ChangeInteractionCanvasTransform(float playerX, float doorX)
     {
-        if(doorTag == "vDoor")
+        if(doorTag  == "vDoor")
         {
             unlockingCanvasImageTransform.localPosition = new Vector3(0, 0, 0);
             unlockingCanvasBackgroundTransform.localPosition = new Vector3(0, 0, 0);
         }
-        else if(doorTag == "door")
+        else if(doorTag == "Doors")
         { 
             if (playerX > doorX)
             {
