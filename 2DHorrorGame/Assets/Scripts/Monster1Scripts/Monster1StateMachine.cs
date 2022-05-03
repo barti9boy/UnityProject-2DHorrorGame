@@ -13,6 +13,7 @@ public class Monster1StateMachine : MonoBehaviour
     public Monster1StateChasing chasingState;
     public RaycastHit2D hitPlayer;
     public bool isFacingRightOnAwake;
+    public bool isLookingForAPlayer;
 
 
     void Awake()
@@ -28,35 +29,72 @@ public class Monster1StateMachine : MonoBehaviour
         {
             transform.Rotate(0,180,0);
         }
+        isLookingForAPlayer = false;
     }
 
     void Update()
     {
-        if (flashlight.activeSelf == true) 
+        if (isLookingForAPlayer)
         {
-            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
-            Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
-            if (hitPlayer.collider == null)
+
+            if (flashlight.activeSelf == true)
             {
-                hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
-                Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
-                //Debug.Log(hitPlayer.collider);
+                if (currentState == chasingState)
+                {
+                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 10.0f, playerMask);
+                    Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
+                    if (hitPlayer.collider == null)
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
+                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
+                        //Debug.Log(hitPlayer.collider);
+                    }
+                }
+                else
+                {
+                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
+                    Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
+                    if (hitPlayer.collider == null)
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
+                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
+                        //Debug.Log(hitPlayer.collider);
+                    }
+                }
             }
-            currentState.UpdateState(this, hitPlayer);
+            else
+            {
+                if (currentState == chasingState)
+                {
+                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
+                    Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
+                    if (hitPlayer.collider == null)
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
+                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
+                        //Debug.Log(hitPlayer.collider);
+                    }
+                }
+                else
+                {
+                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 4.0f, playerMask);
+                    Debug.DrawRay(this.transform.position, this.transform.right * 4.0f);
+                    if (hitPlayer.collider == null)
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 2.0f, playerMask);
+                        Debug.DrawRay(this.transform.position, -this.transform.right * 2.0f);
+                        //Debug.Log(hitPlayer.collider);
+                    }
+
+                }
+            }
         }
         else
         {
-            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 4.0f, playerMask);
-            Debug.DrawRay(this.transform.position, this.transform.right * 4.0f);
-            if (hitPlayer.collider == null)
-            {
-                hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 2.0f, playerMask);
-                Debug.DrawRay(this.transform.position, -this.transform.right * 2.0f);
-                //Debug.Log(hitPlayer.collider);
-            }
-            currentState.UpdateState(this, hitPlayer);
+            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right,0.5f, playerMask);
+            Debug.DrawRay(this.transform.position, this.transform.right * 0.5f);
         }
- 
+        currentState.UpdateState(this, hitPlayer);
     }
 
     public void SwitchState(Monster1StateBase state, RaycastHit2D hitPlayer, Collider2D collision = null)

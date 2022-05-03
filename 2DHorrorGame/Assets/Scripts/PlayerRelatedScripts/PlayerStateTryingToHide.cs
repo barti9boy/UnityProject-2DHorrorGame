@@ -178,7 +178,11 @@ public class PlayerStateTryingToHide : PlayerStateBase
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
-
+        if (collision.collider.tag == "Monster")
+        {
+            inputManager.movementInputEnabled = true;
+            player.SwitchState(player.deadState);
+        }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {

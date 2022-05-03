@@ -41,9 +41,9 @@ public class PlayerStateItemPickup : PlayerStateBase
         else
         {
             Debug.Log("Battery picked up");
-            if(player.batteryTimer >= 60) 
+            if(player.batteryTimer >= 40) 
             {
-                player.batteryTimer -= 60;
+                player.batteryTimer -= 20;
             }
             else
             {

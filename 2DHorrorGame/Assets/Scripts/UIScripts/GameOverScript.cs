@@ -12,7 +12,7 @@ public class GameOverScript : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("DemoLevel");
     }
     public void ExitButton()
     {

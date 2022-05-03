@@ -9,11 +9,16 @@ public class CameraSwitchHorizontal : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera playerCamera2;
     [SerializeField] float middleOfTheTriggger;
     [SerializeField] GameObject monster;
+    private Monster1StateMachine monsterScript;
 
 
     private void Awake()
     {
         middleOfTheTriggger = GetComponent<Transform>().position.x;
+        if (monster != null)
+        {
+            monsterScript = monster.GetComponent<Monster1StateMachine>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,10 +35,15 @@ public class CameraSwitchHorizontal : MonoBehaviour
                 playerCamera1.Priority = 1;
                 playerCamera2.Priority = 0;
             }
-            if (monster.activeSelf == false)
+            if(monster != null)
             {
-                monster.SetActive(true);
+                if (monster.activeSelf == false)
+                {
+                    monster.SetActive(true);
+                }
+                monsterScript.isLookingForAPlayer = !monsterScript.isLookingForAPlayer;
             }
+
         }
     }
 

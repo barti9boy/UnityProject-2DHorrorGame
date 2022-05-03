@@ -70,7 +70,7 @@ public class DoorScript : MonoBehaviour, IInteractible
             unlockingCanvasImageTransform.localPosition = new Vector3(0, 0, 0);
             unlockingCanvasBackgroundTransform.localPosition = new Vector3(0, 0, 0);
         }
-        else if(doorTag == "door")
+        else if(doorTag == "Doors")
         { 
             if (playerX > doorX)
             {

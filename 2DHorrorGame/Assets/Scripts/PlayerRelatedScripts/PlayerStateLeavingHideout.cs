@@ -80,11 +80,11 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         if (player.currentState.isFacingRight)
         {
-            flashlight.transform.position = new Vector3(playerTransform.position.x + 0.2f, playerTransform.position.y, playerTransform.position.z);
+            flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.5f, playerTransform.position.z);
         }
         else if (!player.currentState.isFacingRight)
         {
-            flashlight.transform.position = new Vector3(playerTransform.position.x - 0.2f, playerTransform.position.y, playerTransform.position.z);
+            flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.5f, playerTransform.position.z);
         }
         OnTurnOffFurnitureTag?.Invoke(this, EventArgs.Empty);
         inputManager.movementInputEnabled = true;
@@ -96,7 +96,11 @@ public class PlayerStateLeavingHideout : PlayerStateBase
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
-
+        if (collision.collider.tag == "Monster")
+        {
+            inputManager.movementInputEnabled = true;
+            player.SwitchState(player.deadState);
+        }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {

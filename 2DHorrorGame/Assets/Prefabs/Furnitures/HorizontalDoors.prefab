@@ -320,7 +320,7 @@ MonoBehaviour:
   - {x: -0.16419983, y: 4.2368526, z: 0}
   m_ShapePathHash: 1748745933
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1582
+  m_InstanceId: 329546
 --- !u!95 &2760549563417407601
 Animator:
   serializedVersion: 3
@@ -610,6 +610,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 3757186260297626329, guid: 2366ecc4db3965144b463f776b7a380f, type: 3}
+    - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1314820866014153715, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_SortingLayer
       value: -1

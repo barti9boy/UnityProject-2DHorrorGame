@@ -132,6 +132,14 @@ public class PlayerStateUsingLadder : PlayerStateBase
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
+                if (player.currentState.isFacingRight)
+                {
+                    flashlight.transform.position = new Vector3(playerTransform.position.x + 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
+                }
+                else if (!player.currentState.isFacingRight)
+                {
+                    flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
+                }
                 player.previousState = this;
                 player.SwitchState(player.idleState);
             }
@@ -157,6 +165,14 @@ public class PlayerStateUsingLadder : PlayerStateBase
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
+                if (player.currentState.isFacingRight)
+                {
+                    flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
+                }
+                else if (!player.currentState.isFacingRight)
+                {
+                    flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
+                }
                 player.previousState = this;
                 player.SwitchState(player.idleState);
             }
@@ -200,7 +216,10 @@ public class PlayerStateUsingLadder : PlayerStateBase
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {
-        
+        if (collision.collider.tag == "Monster")
+        {
+            player.SwitchState(player.deadState);
+        }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
