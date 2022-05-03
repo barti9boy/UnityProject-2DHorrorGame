@@ -10,12 +10,6 @@ public class ItemEventArgs
     public IPickableObject inventoryItem;
 }
 
-//public class ItemNotificationEventArgs
-//{
-//    public string notificationText;
-//    public IPickableObject inventoryItem;
-//}
-
 
 public class PlayerInventory : MonoBehaviour
 {
