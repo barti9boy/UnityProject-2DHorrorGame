@@ -12,7 +12,6 @@ public class InteractionHighlight : MonoBehaviour
         spriteRenderer.sprite = GetComponentInParent<SpriteRenderer>().sprite;
         spriteRenderer.sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder + 1;
         spriteRenderer.sortingLayerName = GetComponentInParent<SpriteRenderer>().sortingLayerName;
-        spriteRenderer.color = new Color(255,255,255, 0.35f);
         spriteRenderer.material = material;
     }
     private void OnTriggerEnter2D(Collider2D collision)
