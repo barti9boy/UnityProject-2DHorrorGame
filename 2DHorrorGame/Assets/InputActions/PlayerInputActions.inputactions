@@ -66,6 +66,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4dfe95dd-0846-414a-b0e5-a404b6c13bbf",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a09fa20d-ea44-4ebd-8385-76ace4828d5b",
                     "path": "<Keyboard>/f",
                     "interactions": "",
