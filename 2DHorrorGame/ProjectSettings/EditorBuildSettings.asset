@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DemoLevel.unity
     guid: 8cb1b9b98e914954fa24463abb30277e
+  - enabled: 1
+    path: Assets/Scenes/TutorialFloor.unity
+    guid: 873cf47d93a2d0f4380ee4b336969acd
   m_configObjects: {}
