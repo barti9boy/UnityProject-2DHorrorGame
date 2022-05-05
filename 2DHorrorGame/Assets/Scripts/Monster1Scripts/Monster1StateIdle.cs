@@ -47,7 +47,6 @@ public class Monster1StateIdle : Monster1StateBase
         //}
         if (hitPlayer.collider != null)
         {
-            Debug.Log("Spotted player idle");
             //Switch to chasing state
             monster1.previousState = this;
             monster1.SwitchState(monster1.chasingState, hitPlayer);
