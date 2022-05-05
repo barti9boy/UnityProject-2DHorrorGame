@@ -97,7 +97,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
             if (velocityDirection == 1 && playerTransform.position.x < ladderMiddleX)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.1)
+                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
                 {
                     PrepareToUseLadder();
                 }
@@ -105,7 +105,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
             if (velocityDirection == -1 && playerTransform.position.x > ladderMiddleX)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.1)
+                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
                 {
                     PrepareToUseLadder();
                 }

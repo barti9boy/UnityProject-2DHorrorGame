@@ -91,7 +91,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
             if (velocityDirection == 1 && playerTransform.position.x < hideoutEntrence)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.1)
+                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
                 {
                     if (hideoutTag == "Hideout" && !isFacingRight)
                     {
@@ -100,7 +100,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
                     }
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
-                    //OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag});
                     rb.velocity = new Vector2(0, 0);
                     isTryingToHide = true;
 
@@ -109,7 +108,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
             if (velocityDirection == -1 && playerTransform.position.x > hideoutEntrence)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.1)
+                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
                 {
                     if( hideoutTag == "Closet" && !isFacingRight)
                     {
@@ -123,7 +122,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
                     }
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
-                   // OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
                     rb.velocity = new Vector2(0, 0);
                     isTryingToHide = true;
                 }

@@ -126,7 +126,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
             if (velocityDirection == 1 && playerTransform.position.x < verticalDoorPoint.x)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - verticalDoorPoint.x) < 0.1)
+                if (Math.Abs(playerTransform.position.x - verticalDoorPoint.x) < 0.25)
                 {
 
                     inputManager.interactionInputEnabled = true;
@@ -154,7 +154,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
             else if (velocityDirection == -1 && playerTransform.position.x > verticalDoorPoint.x)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - verticalDoorPoint.x) < 0.1)
+                if (Math.Abs(playerTransform.position.x - verticalDoorPoint.x) < 0.25)
                 {
                     inputManager.interactionInputEnabled = true;
                     rb.velocity = new Vector2(0, 0);
@@ -215,7 +215,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
             horizontalDoorAnimator.SetBool("isOpened", true);
             WaitUntilAnimated();
             rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-            if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.1)
+            if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.25)
             {
                 rb.velocity = new Vector2(0, 0);
                 player.previousState = this;

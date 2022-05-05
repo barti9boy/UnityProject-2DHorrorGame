@@ -273,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52911b8eb779a5d41804a43b0f96cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
   finishedOpening: 0
   animator: {fileID: 8968996086238982554}
   handle: {fileID: 8968996086147261800}

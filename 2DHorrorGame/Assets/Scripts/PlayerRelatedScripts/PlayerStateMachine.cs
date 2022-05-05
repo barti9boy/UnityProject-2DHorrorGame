@@ -46,7 +46,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         currentState.UpdateState(this);
         if(currentState == deadState)

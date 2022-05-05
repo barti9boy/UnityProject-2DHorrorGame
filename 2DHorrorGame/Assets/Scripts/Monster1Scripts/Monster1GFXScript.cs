@@ -26,6 +26,7 @@ public class Monster1GFXScript : MonoBehaviour
         idleState.OnEnterStateIdle += IdleState_OnEnterStateIdle;
         patrollingState.OnEnterStatePatrolling += PatrollingState_OnEnterStatePatrolling;
         chasingState.OnEnterStateChasing += ChasingState_OnEnterStateChasing;
+        chasingState.OnExitStateChasing += IdleState_OnEnterStateIdle;
     }
     private void IdleState_OnEnterStateIdle(object sender, EventArgs e)
     {

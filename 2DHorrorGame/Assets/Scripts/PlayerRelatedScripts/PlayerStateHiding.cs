@@ -35,7 +35,7 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (!flashlight.activeSelf)
         {
-            WaitBeforeDisactivatingCollider(player, 1);
+            WaitBeforeDisactivatingCollider(player, 0.5f);
         }
         else if (flashlight.activeSelf)
         {

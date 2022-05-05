@@ -10,6 +10,7 @@ public class Monster1StateChasing : Monster1StateBase
     private bool playerhit;
     private bool doorHit;
     public event EventHandler OnEnterStateChasing;
+    public event EventHandler OnExitStateChasing;
     public Monster1StateChasing(GameObject monster1Object) : base(monster1Object)
     {
         rb = monster1Object.GetComponent<Rigidbody2D>();
@@ -66,11 +67,11 @@ public class Monster1StateChasing : Monster1StateBase
         //Check if player is still in range, if not wait for a few seconds and come back to patrolling 
         if (hitPlayer.collider == null)
         {
-            Debug.Log(playerTransformX);
             if (Mathf.Abs(monster1Transform.position.x - playerTransformX) < 1.5 ) 
             {
                 //WaitBeforeStopping(monster1, hitPlayer, 1);
                 rb.velocity = new Vector2(0.0f, 0.0f);
+                OnExitStateChasing?.Invoke(this, EventArgs.Empty);
                 doorHit = false;
                 WaitUntilAnimated(monster1, hitPlayer, 5);
             }
@@ -78,6 +79,7 @@ public class Monster1StateChasing : Monster1StateBase
         if(doorHit == true)
         {
             doorHit = false;
+            OnExitStateChasing?.Invoke(this, EventArgs.Empty);
             WaitUntilAnimated(monster1, hitPlayer, 5);
         }
 
@@ -100,7 +102,6 @@ public class Monster1StateChasing : Monster1StateBase
     }
     public override void OnCollisionEnter(Monster1StateMachine monster1, Collision2D collision)
     {
-        Debug.Log(collision.collider.tag);
         if (collision.collider.tag == "Doors")
         {
             doorHit = true;
@@ -108,18 +109,8 @@ public class Monster1StateChasing : Monster1StateBase
         else if (collision.collider.tag == "Player")
         {
             rb.velocity = new Vector2(0f, 0f);
-            Debug.Log("KILLED PLAYER");
-            Debug.Log(rb.velocity);
             playerhit = true;
  
-            if (collision.gameObject.GetComponent<PlayerStateMachine>().currentState == collision.gameObject.GetComponent<PlayerStateMachine>().hidingState) 
-            {
-                Debug.Log("Pulled out of the hideout");
-            }
-            else
-            {
-                Debug.Log("Killed in: " + collision.gameObject.GetComponent<PlayerStateMachine>().currentState);
-            }
         }
     }
     public override void OnTriggerStay(Monster1StateMachine monster1, Collider2D collision)

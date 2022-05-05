@@ -7,8 +7,6 @@ using System;
 
 public class HideoutScript : MonoBehaviour
 {
-    [SerializeField] private GameObject playerObject;
-    PlayerStateMachine playerStateMachine;
     /*private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputManager inputManager;

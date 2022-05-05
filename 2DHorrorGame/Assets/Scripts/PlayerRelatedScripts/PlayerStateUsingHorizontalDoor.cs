@@ -89,7 +89,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
             if (velocityDirection == 1 && playerTransform.position.x < rightPointX)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - rightPointX) < 0.1)
+                if (Math.Abs(playerTransform.position.x - rightPointX) < 0.25)
                 {
                     isChangingRoom = false;
                     interactible.EnableInteractionHighlight();
@@ -104,7 +104,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
             if (velocityDirection == -1 && playerTransform.position.x > leftPointX)
             {
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - leftPointX) < 0.1)
+                if (Math.Abs(playerTransform.position.x - leftPointX) < 0.25)
                 {
                     isChangingRoom = false;
                     interactible.EnableInteractionHighlight();
