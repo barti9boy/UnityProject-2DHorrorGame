@@ -140,6 +140,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
                 }
+                playerTransform.position = new Vector2(playerTransform.position.x, ladderDownPointY);
                 player.previousState = this;
                 player.SwitchState(player.idleState);
             }
@@ -173,6 +174,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
                 }
+                playerTransform.position = new Vector2(playerTransform.position.x, ladderUpPointY);
                 player.previousState = this;
                 player.SwitchState(player.idleState);
             }

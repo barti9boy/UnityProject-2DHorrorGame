@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Monster1StateChasing : Monster1StateBase
 {
-    private float timer;
+    private float timer1, timer2, timer3;
     private float playerTransformX;
-    private bool playerhit;
+    private bool playerCollision;
     private bool doorHit;
+    private bool waited;
     public event EventHandler OnEnterStateChasing;
     public event EventHandler OnExitStateChasing;
     public Monster1StateChasing(GameObject monster1Object) : base(monster1Object)
@@ -23,12 +24,16 @@ public class Monster1StateChasing : Monster1StateBase
     {
         //Get player position and flip if needed
         //hitPlayer = monster1.previousState.hitPlayer;
-        playerhit = false;
+        waited = false;
+        playerCollision = false;
         doorHit = false;
         playerTransformX = hitPlayer.transform.position.x;
         isFacingRight = monster1.previousState.isFacingRight;
-        timer = 0;
+        timer1 = 0;
+        timer2 = 0;
+        timer3 = 0;
         rb.velocity = new Vector2(0f, 0f);
+        OnExitStateChasing?.Invoke(this, EventArgs.Empty);
 
         if (playerTransformX < monster1Transform.position.x) //Player is on the left 
         {
@@ -52,64 +57,31 @@ public class Monster1StateChasing : Monster1StateBase
     }
     public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
     {
-        if (hitPlayer) 
-        {
-            playerTransformX = hitPlayer.transform.position.x;
-        }
-        
-
-        if (!playerhit)
+        if (!waited)
         {
             WaitBeforeChasing(monster1, hitPlayer, 2);
-
         }
+
 
         //Check if player is still in range, if not wait for a few seconds and come back to patrolling 
-        if (hitPlayer.collider == null)
+        if (!hitPlayer && waited)
         {
-            if (Mathf.Abs(monster1Transform.position.x - playerTransformX) < 1.5 ) 
-            {
-                //WaitBeforeStopping(monster1, hitPlayer, 1);
-                rb.velocity = new Vector2(0.0f, 0.0f);
-                OnExitStateChasing?.Invoke(this, EventArgs.Empty);
-                doorHit = false;
-                WaitUntilAnimated(monster1, hitPlayer, 5);
-            }
-        }
-        if(doorHit == true)
-        {
-            doorHit = false;
-            OnExitStateChasing?.Invoke(this, EventArgs.Empty);
-            WaitUntilAnimated(monster1, hitPlayer, 5);
+            //rb.velocity = new Vector2(movementDirection * movementSpeed * 1.8f, 0);
+            WaitBeforeStopping(monster1, hitPlayer, 1.5f);
+            WaitUntilAnimated(monster1, hitPlayer, 4.5f);
+
         }
 
-        else
-        {
-            //Check if position of the player is colse enough to play killing animation
-            //playerTransformX = hitPlayer.transform.position.x;
-
-            //if (Mathf.Abs(monster1Transform.position.x - playerTransformX) < 1)
-            //{
-            //    rb.velocity = new Vector2(0f, 0f);
-            //    Debug.Log("KILLED PLAYER");
-            //    WaitUntilAnimated(monster1, hitPlayer, 5);
-            //}
-            if (playerhit)
-            {
-                rb.velocity = new Vector2(0f, 0f);
-            }
-        }
     }
     public override void OnCollisionEnter(Monster1StateMachine monster1, Collision2D collision)
     {
         if (collision.collider.tag == "Doors")
         {
-            doorHit = true;
+            rb.velocity = new Vector2(0f, 0f);
         }
         else if (collision.collider.tag == "Player")
         {
             rb.velocity = new Vector2(0f, 0f);
-            playerhit = true;
  
         }
     }
@@ -124,32 +96,35 @@ public class Monster1StateChasing : Monster1StateBase
     }
     public void WaitUntilAnimated(Monster1StateMachine monster1, RaycastHit2D hitPlayer, float timeOfAnimation)
     {
-        rb.velocity = new Vector2(0f, 0f);
-        timer += Time.deltaTime;
-        if (timer >= timeOfAnimation)
+        timer1 += Time.deltaTime;
+        if (timer1 >= timeOfAnimation)
         {
             monster1.previousState = this;
             monster1.SwitchState(monster1.idleState, hitPlayer);
+            timer1 = 0;
         }
     }
     public void WaitBeforeChasing(Monster1StateMachine monster1, RaycastHit2D hitPlayer, float timeOfAnimation)
     {
-        timer += Time.deltaTime;
-        if (timer >= timeOfAnimation)
+        timer2 += Time.deltaTime;
+        if (timer2 >= timeOfAnimation)
         {
             //Play chasing animation and start running
             OnEnterStateChasing?.Invoke(this, EventArgs.Empty);
-            rb.velocity = new Vector2(movementDirection * movementSpeed * 2, 0);
+            rb.velocity = new Vector2(movementDirection * movementSpeed * 1.8f, 0);
+            waited = true;
+            timer2 = 0;
         }
     }
     public void WaitBeforeStopping(Monster1StateMachine monster1, RaycastHit2D hitPlayer, float timeOfAnimation)
     {
-        timer += Time.deltaTime;
-        if (timer >= timeOfAnimation)
+        timer3 += Time.deltaTime;
+        if (timer3 >= timeOfAnimation)
         {
             //Play chasing animation and start running
-           // OnEnterStateChasing?.Invoke(this, EventArgs.Empty);
             rb.velocity = new Vector2(0.0f, 0.0f);
+            OnExitStateChasing?.Invoke(this, EventArgs.Empty);
+            timer3 = 0;
         }
     }
 }
