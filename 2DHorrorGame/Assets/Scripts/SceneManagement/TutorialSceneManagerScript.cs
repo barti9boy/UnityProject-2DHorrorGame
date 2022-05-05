@@ -34,6 +34,7 @@ public class TutorialSceneManagerScript : MonoBehaviour
     }
     private void Start()
     {
+        tutorialPopups[5].SetActive(false);
         tutorialPopups[3].SetActive(false);
         tutorialPopups[4].SetActive(false);
         InteractionButton.SetActive(false);
@@ -89,6 +90,7 @@ public class TutorialSceneManagerScript : MonoBehaviour
         if(!tutorialPopups[3].activeSelf && monsterPopupActive)
         {
             monster.SetActive(true);
+            tutorialPopups[5].SetActive(true);
         }
     }
 
