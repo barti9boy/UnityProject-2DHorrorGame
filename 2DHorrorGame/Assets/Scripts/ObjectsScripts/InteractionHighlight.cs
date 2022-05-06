@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 //NOTE: when adding this prefab you have to set sorting layer and sprite  manually in inspector
 public class InteractionHighlight : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Material material;
-
     private float colorAlpha = 0.15f;
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class InteractionHighlight : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            spriteRenderer.enabled = true;
+            spriteRenderer.enabled = true;   
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

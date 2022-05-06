@@ -27,6 +27,7 @@ public class TutorialSceneManagerScript : MonoBehaviour
     private bool doorPopupActive = false;
     private bool monsterPopupActive = false;
     private bool lightPopupActive = false;
+    private bool unlockPopupActive = false;
     private void Awake()
     {
         player.GetComponent<PlayerStateMachine>();
@@ -87,10 +88,11 @@ public class TutorialSceneManagerScript : MonoBehaviour
             FlashlightButton.SetActive(true);
             lightPopupActive = true;
         }
-        if(!tutorialPopups[3].activeSelf && monsterPopupActive)
+        if(!tutorialPopups[3].activeSelf && monsterPopupActive && !unlockPopupActive)
         {
             monster.SetActive(true);
             tutorialPopups[5].SetActive(true);
+            unlockPopupActive = true;
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DemoSceneManager : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject popup;
 
 
     // Start is called before the first frame update
@@ -16,7 +17,7 @@ public class DemoSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pauseMenu.activeInHierarchy)
+        if (pauseMenu.activeInHierarchy || popup.activeInHierarchy)
         {
             StopGame();
         }

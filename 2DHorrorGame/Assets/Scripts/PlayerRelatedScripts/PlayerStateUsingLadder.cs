@@ -66,7 +66,6 @@ public class PlayerStateUsingLadder : PlayerStateBase
             {
                 playerTransform.Rotate(0, 180, 0);
                 player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = 1;
@@ -77,7 +76,6 @@ public class PlayerStateUsingLadder : PlayerStateBase
             {
                 playerTransform.Rotate(0, 180, 0);
                 player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = -1;

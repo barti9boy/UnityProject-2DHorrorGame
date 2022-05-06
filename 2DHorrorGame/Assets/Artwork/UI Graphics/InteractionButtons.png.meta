@@ -4,28 +4,28 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5574270929901488674
-    second: InteractionButtons_0
+    second: Default
   - first:
       213: -1831753752528891948
-    second: InteractionButtons_1
+    second: GoDown
   - first:
       213: -7395139992181200477
-    second: InteractionButtons_2
+    second: GoRight
   - first:
       213: 1532577370668115510
-    second: InteractionButtons_3
+    second: GoLeft
   - first:
       213: 5225472756141155118
-    second: InteractionButtons_4
+    second: GoUp
   - first:
       213: -8938917124673213226
-    second: InteractionButtons_5
+    second: Unlock
   - first:
       213: -6716542866362781680
-    second: InteractionButtons_6
+    second: Hide
   - first:
       213: 7866919599185651173
-    second: InteractionButtons_7
+    second: Pickup
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,7 +163,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InteractionButtons_0
+      name: Default
       rect:
         serializedVersion: 2
         x: 6
@@ -171,7 +171,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_1
+      name: GoDown
       rect:
         serializedVersion: 2
         x: 38
@@ -192,7 +192,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_2
+      name: GoRight
       rect:
         serializedVersion: 2
         x: 70
@@ -213,7 +213,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,7 +226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_3
+      name: GoLeft
       rect:
         serializedVersion: 2
         x: 102
@@ -234,7 +234,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,7 +247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_4
+      name: GoUp
       rect:
         serializedVersion: 2
         x: 134
@@ -255,7 +255,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_5
+      name: Unlock
       rect:
         serializedVersion: 2
         x: 166
@@ -276,7 +276,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,7 +289,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_6
+      name: Hide
       rect:
         serializedVersion: 2
         x: 198
@@ -297,7 +297,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,7 +310,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractionButtons_7
+      name: Pickup
       rect:
         serializedVersion: 2
         x: 230
@@ -318,7 +318,7 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

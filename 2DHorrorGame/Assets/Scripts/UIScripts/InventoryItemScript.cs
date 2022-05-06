@@ -19,7 +19,7 @@ public class InventoryItemScript : MonoBehaviour, IPointerDownHandler, IPointerU
     {
         isBeingClicked = false;
         currentHoldTime = 0;
-        requiredHoldTime = 1.2f;
+        requiredHoldTime = 1.1f;
     }
     private void Update()
     {
