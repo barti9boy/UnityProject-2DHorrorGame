@@ -42,11 +42,12 @@ public class InteractionButtonHighlightDoors : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isLocked = GetComponentInParent<DoorScript>().isLocked;
+            if (!isLocked)
+            {
+                interactionButtonImage.sprite = openButtonSprite;
+            }
         }
-        if(!isLocked)
-        {
-            interactionButtonImage.sprite = openButtonSprite;
-        }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
