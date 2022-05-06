@@ -40,7 +40,6 @@ public class PlayerStateItemPickup : PlayerStateBase
         }
         else
         {
-            
             if(player.batteryTimer >= 40) 
             {
                 player.batteryTimer -= 20;
