@@ -55,7 +55,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveItemFromInventory(object sender, int slotNumber)
     {
-        items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is about the distance from playerObject to floor
+        items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
         items[slotNumber] = null;
         return;
 

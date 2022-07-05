@@ -24,7 +24,7 @@ public class KeyScript : MonoBehaviour, IPickableObject
         InventoryIcon = inventoryIcon;
         PickupAnimationClip = pickupAnimationClip;
     }
-    public void ChangePosition(float x, float y)
+    public void ChangePosition(float x, float y) //function used to drop item from inventory in correct place
     {
         this.gameObject.SetActive(true);
         this.gameObject.transform.position = new Vector2(x, y);
