@@ -13,7 +13,7 @@ public class InventoryItemScript : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] private float requiredHoldTime;
     [SerializeField] private float currentHoldTime;
 
-    public event EventHandler<int> OnItemDrop;
+    public static Action<int> OnItemDrop;
 
     public void Awake()
     {
@@ -28,7 +28,7 @@ public class InventoryItemScript : MonoBehaviour, IPointerDownHandler, IPointerU
             currentHoldTime += Time.deltaTime;
             if (currentHoldTime >= requiredHoldTime)
             {
-                OnItemDrop?.Invoke(this, slotNumber);
+                OnItemDrop?.Invoke(slotNumber);
                 isBeingClicked = false;
             }
         }

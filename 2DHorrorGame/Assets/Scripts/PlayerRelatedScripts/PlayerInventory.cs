@@ -29,9 +29,16 @@ public class PlayerInventory : MonoBehaviour
         for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
         {
             inventoryItems[slotNumber].enabled = false;
-            inventoryItems[slotNumber].GetComponent<InventoryItemScript>().OnItemDrop += RemoveItemFromInventory;
             inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
         }
+        InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
+        DoorScript.OnDoorUnlocked += DestroyItemFromInventory;
+    }
+
+    public void OnDestroy()
+    {
+        InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
+        DoorScript.OnDoorUnlocked -= DestroyItemFromInventory;
     }
 
     public bool AddItemToInventory(IPickableObject item)
@@ -53,12 +60,16 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    public void RemoveItemFromInventory(object sender, int slotNumber)
+    public void RemoveItemFromInventory(int slotNumber)
     {
         items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
         items[slotNumber] = null;
         return;
+    }
 
+    public void DestroyItemFromInventory(int slotNumber)
+    {
+        items[slotNumber].DestroyItem();
     }
 
 

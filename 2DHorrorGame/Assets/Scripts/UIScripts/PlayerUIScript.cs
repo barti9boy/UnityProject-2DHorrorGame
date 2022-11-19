@@ -33,8 +33,17 @@ public class PlayerUIScript : MonoBehaviour
         foreach (Image image in inventoryItems)
         {
             image.enabled = false;
-            image.GetComponent<InventoryItemScript>().OnItemDrop += RemoveItemFromInventory;
         }
+        InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
+        DoorScript.OnDoorUnlocked += RemoveItemFromInventory;
+    }
+
+    private void OnDestroy()
+    {
+        player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
+        player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+        InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
+        DoorScript.OnDoorUnlocked -= RemoveItemFromInventory;
     }
     private void Update()
     {
@@ -59,7 +68,7 @@ public class PlayerUIScript : MonoBehaviour
             inventoryItems[args.inventorySlotNumber].enabled = true;
         }
     }
-    public void RemoveItemFromInventory(object sender, int slotNumber)
+    public void RemoveItemFromInventory(int slotNumber)
     {
             inventoryItems[slotNumber].sprite = null;
             inventoryItems[slotNumber].enabled = false;

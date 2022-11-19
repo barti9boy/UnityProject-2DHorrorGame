@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour, IInteractible
 {
+    public static Action<int> OnDoorUnlocked;
     public bool isLocked;
     public bool isOpened;
     public bool isChangingRoom = false;
@@ -43,19 +44,19 @@ public class DoorScript : MonoBehaviour, IInteractible
     {
         if (isInteractionButtonHeld)
         {
-            foreach (IPickableObject item in items)
+            int slotPosition = 0; ;
+            foreach (IPickableObject item in items) //numer itemu w items
             {
                 if (item != null && item.ItemID == itemIdToUnlock)
                 {
-
-
                     interactionTime += Time.deltaTime;
                     if (interactionTime >= unlockTimeRequired)
                     {
                         isLocked = false;
-                    }
-                    
+                        OnDoorUnlocked?.Invoke(slotPosition);
+                    }  
                 }
+                slotPosition++;
             }
         }
         else
