@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &517351970889781198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4310947616519054498}
+  m_Layer: 8
+  m_Name: SitingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4310947616519054498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517351970889781198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4129317723426024658}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412985717253211632
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,8 @@ GameObject:
   - component: {fileID: 1412985717253211633}
   - component: {fileID: 1412985717253211634}
   - component: {fileID: 1412985717253211635}
-  m_Layer: 0
+  - component: {fileID: 8031757334689842023}
+  m_Layer: 8
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412985717253211632}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.20000076, y: 0, z: 0}
+  m_LocalPosition: {x: 1.192, y: -0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412985718357133976}
@@ -124,6 +155,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8031757334689842023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412985717253211632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f3592fa3aac01438ce60409f3c0946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashlightPositions:
+  - {fileID: 1305193836758510660}
+  - {fileID: 5140165302880893625}
+  - {fileID: 4310947616519054498}
 --- !u!1 &1412985717255173026
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +183,7 @@ GameObject:
   - component: {fileID: 1412985717255173028}
   - component: {fileID: 1412985717255173029}
   - component: {fileID: 1412985717255173030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412985717827928658}
   - component: {fileID: 1412985717827928659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerVision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +335,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.6
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.4
+  m_Intensity: 0.2
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 1fba8c709b39ef83adbb6e69197e51f500000000
   m_LightCookieSprite: {fileID: 0}
@@ -329,7 +376,7 @@ GameObject:
   - component: {fileID: 1412985718357133981}
   - component: {fileID: 1412985718357133982}
   - component: {fileID: 1412985718357133978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -351,6 +398,7 @@ Transform:
   - {fileID: 1412985717253211633}
   - {fileID: 1412985717827928658}
   - {fileID: 1412985718996638988}
+  - {fileID: 4129317723426024658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -404,9 +452,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 0}
-  flashlight: {fileID: 1412985717253211632}
+  flashlight: {fileID: 8031757334689842023}
   flashlightOutOfBattery: 1
-  batteryTimer: 0
+  batteryTimer: 30
   timeOfBattery: 0
 --- !u!114 &1412985718357133979
 MonoBehaviour:
@@ -541,7 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1412985718996638988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteractionCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,4 +609,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1412985718357133976}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3107571280793059178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305193836758510660}
+  m_Layer: 8
+  m_Name: StandingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1305193836758510660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107571280793059178}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.43, y: -0.691, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4129317723426024658}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3449836168010888120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4129317723426024658}
+  m_Layer: 8
+  m_Name: FlashlightPositions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4129317723426024658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3449836168010888120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5140165302880893625}
+  - {fileID: 1305193836758510660}
+  - {fileID: 4310947616519054498}
+  m_Father: {fileID: 1412985718357133976}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3670666922466981445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5140165302880893625}
+  m_Layer: 8
+  m_Name: WalkingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5140165302880893625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670666922466981445}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.671, y: -0.547, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4129317723426024658}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -24,6 +24,7 @@ public class PlayerStateIdle : PlayerStateBase
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
         isFacingRight = player.previousState.isFacingRight;
         isInVent = player.previousState.isInVent;
+        player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.StandingPosition);
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
