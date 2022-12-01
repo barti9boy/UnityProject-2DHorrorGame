@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
 
     private int inventorySlotCount = 3;
     private ItemEventArgs args;
+    public int PlayerBatteries { get; private set; } = 0;
 
     public event EventHandler<ItemEventArgs> OnItemAdd;
     public event EventHandler<string> OnItemSendNotification;
@@ -32,12 +33,14 @@ public class PlayerInventory : MonoBehaviour
             inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
         }
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
+        InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += DestroyItemFromInventory;
     }
 
     public void OnDestroy()
     {
         InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
+        InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked -= DestroyItemFromInventory;
     }
 
@@ -59,18 +62,30 @@ public class PlayerInventory : MonoBehaviour
         return false;
 
     }
-
+    public void AddBateryToInventory()
+    {
+        PlayerBatteries++;
+        //Update Batteries UI
+    }
+    public void ChangeBattery()
+    {
+        PlayerBatteries--;
+        //Update Batteries UI
+    }
     public void RemoveItemFromInventory(int slotNumber)
     {
+        if(items[slotNumber] != null)
+        {
         items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
         items[slotNumber] = null;
-        return;
+        }
     }
 
     public void DestroyItemFromInventory(int slotNumber)
     {
         items[slotNumber].DestroyItem();
     }
+
 
 
 

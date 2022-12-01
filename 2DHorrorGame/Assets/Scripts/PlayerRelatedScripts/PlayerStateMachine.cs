@@ -45,7 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         currentState.UpdateState(this);
         if(currentState == deadState)
@@ -57,8 +57,17 @@ public class PlayerStateMachine : MonoBehaviour
             batteryTimer += Time.deltaTime;
             if (batteryTimer >= timeOfBattery)
             {
-                flashlightOutOfBattery = true;
-                currentState.flashlight.SetActive(false);
+                if(currentState.playerInventory.PlayerBatteries != 0)
+                {
+                    currentState.playerInventory.ChangeBattery();
+                    batteryTimer = 0;
+                }
+                else
+                {
+                    flashlightOutOfBattery = true;
+                    currentState.flashlight.SetActive(false);
+                }
+
             }
         }
 

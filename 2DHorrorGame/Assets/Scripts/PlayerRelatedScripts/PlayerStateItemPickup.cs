@@ -40,14 +40,7 @@ public class PlayerStateItemPickup : PlayerStateBase
         }
         else
         {
-            if(player.batteryTimer >= 40) 
-            {
-                player.batteryTimer -= 20;
-            }
-            else
-            {
-                player.batteryTimer = 0;
-            }
+            player.currentState.playerInventory.AddBateryToInventory();
             collision.gameObject.SetActive(false);
             player.flashlightOutOfBattery = false;
         }

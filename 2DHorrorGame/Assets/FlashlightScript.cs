@@ -16,4 +16,5 @@ public class FlashlightScript : MonoBehaviour
     {
         transform.position = flashlightPositions[((byte)position)].position;
     }
+
 }

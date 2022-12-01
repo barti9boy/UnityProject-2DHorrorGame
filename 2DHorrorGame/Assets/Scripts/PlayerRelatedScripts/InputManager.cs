@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,11 @@ public class InputManager : MonoBehaviour
     public bool isInteractionButtonHeld;
     public bool movementInputEnabled = true;
     public bool interactionInputEnabled = true;
+    private bool isInventory1ButtonClicked;
     public float InteractionTime { get; private set; }
+
+    public static Action<int> OnInventoryButtonClicked;
+
 
     private void Awake()
     {
@@ -61,6 +66,7 @@ public class InputManager : MonoBehaviour
     }
     public void Interaction(InputAction.CallbackContext context)
     {
+        Debug.Log("Interaction performed");
         if(context.performed && interactionInputEnabled)
         {
             isInteractionButtonClicked = true;
@@ -75,6 +81,33 @@ public class InputManager : MonoBehaviour
         if (context.canceled)
         {
             isInteractionButtonHeld = false;
+        }
+    }
+
+    public void Inventory1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnInventoryButtonClicked?.Invoke(0);
+            Debug.Log("Item1 dropped");
+        }
+    }
+
+    public void Inventory2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnInventoryButtonClicked?.Invoke(1);
+            Debug.Log("Item2 dropped");
+        }
+    }
+
+    public void Inventory3(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnInventoryButtonClicked?.Invoke(2);
+            Debug.Log("Item3 dropped");
         }
     }
     IEnumerator ClickDuration(float s)

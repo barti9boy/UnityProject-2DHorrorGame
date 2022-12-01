@@ -35,6 +35,7 @@ public class PlayerUIScript : MonoBehaviour
             image.enabled = false;
         }
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
+        InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += RemoveItemFromInventory;
     }
 
@@ -42,6 +43,7 @@ public class PlayerUIScript : MonoBehaviour
     {
         player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
         player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+        InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
         InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked -= RemoveItemFromInventory;
     }
@@ -70,7 +72,10 @@ public class PlayerUIScript : MonoBehaviour
     }
     public void RemoveItemFromInventory(int slotNumber)
     {
+        if(inventoryItems[slotNumber] != null)
+        {
             inventoryItems[slotNumber].sprite = null;
             inventoryItems[slotNumber].enabled = false;
+        }
     }
 }
