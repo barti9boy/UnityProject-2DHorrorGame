@@ -5,24 +5,36 @@ using UnityEngine.UI;
 
 public class FlashlightIndycatorScript : MonoBehaviour
 {
-    [SerializeField] private GameObject playerObject;
+    
+    [SerializeField] private GameObject gameManger;
     [SerializeField] private Image radialIndicatorUI;
 
     private float currentBettery;
+    private GameObject playerObject;
     private GameObject flashlight;
     private GameObject indycator;
     
     void Awake()
     {
+        gameManger.GetComponent<GameManagerScript>().OnAfterPlayerLoaded += FlashlightIndycatorScript_OnAfterPlayerLoaded;
         indycator = gameObject.transform.GetChild(0).gameObject;
-        flashlight = playerObject.transform.GetChild(1).gameObject;
         indycator.SetActive(false);
 
+    }
+
+    private void FlashlightIndycatorScript_OnAfterPlayerLoaded(object sender, GameObject e)
+    {
+        playerObject = e;
+        flashlight = playerObject.transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(flashlight)
+        {
+
+        
         if (flashlight.activeSelf == true)
         {
             indycator.SetActive(true);
@@ -33,6 +45,6 @@ public class FlashlightIndycatorScript : MonoBehaviour
         {
             indycator.SetActive(false);
         }
-
+        }
     }
 }

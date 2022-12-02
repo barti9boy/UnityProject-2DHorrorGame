@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class TutorialSceneManagerScript : MonoBehaviour
 {
+    [SerializeField] private GameObject gameManger;
+
     public GameObject pauseMenu;
     public GameObject popup;
     public GameObject introduction;
 
-    public GameObject player;
-    public PlayerStateMachine playerStateMachine;
+    private GameObject player;
     public GameObject playerUI;
     public PlayerUIScript playerUIScript;
 
@@ -23,16 +25,25 @@ public class TutorialSceneManagerScript : MonoBehaviour
     public DoorScript exitDoor;
     public List<GameObject> lights;
 
-    private bool diplayedIntro = false;
+    private bool displayedIntro = false;
     private bool doorPopupActive = false;
     private bool monsterPopupActive = false;
     private bool lightPopupActive = false;
     private bool unlockPopupActive = false;
+
+
+
     private void Awake()
     {
-        player.GetComponent<PlayerStateMachine>();
+        gameManger.GetComponent<GameManagerScript>().OnAfterPlayerLoaded += TutorialSceneManagerScript_OnAfterPlayerLoaded;
         playerUIScript = playerUI.GetComponent<PlayerUIScript>();
     }
+
+    private void TutorialSceneManagerScript_OnAfterPlayerLoaded(object sender, GameObject e)
+    {
+        player = e;
+    }
+
     private void Start()
     {
         tutorialPopups[5].SetActive(false);
@@ -49,11 +60,11 @@ public class TutorialSceneManagerScript : MonoBehaviour
         }
         else ResumeGame();
 
-        if(!introduction.activeInHierarchy && !diplayedIntro)
+        if(!introduction.activeInHierarchy && !displayedIntro)
         {
             playerUIScript.notificationText.text = "ESCAPE THE BASEMENT";
             playerUIScript.currentTime = -0.6f;
-            diplayedIntro = true;
+            displayedIntro = true;
         }
         if(key.activeSelf && !tutorialPopups[1].activeSelf)
         {

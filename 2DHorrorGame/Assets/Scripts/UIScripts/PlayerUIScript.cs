@@ -7,6 +7,7 @@ using TMPro;
 
 public class PlayerUIScript : MonoBehaviour
 {
+    [SerializeField] private GameObject gameManger;
     public GameObject player;
     //----------Inventory elements----------//
     public Image[] inventorySlots;
@@ -22,9 +23,9 @@ public class PlayerUIScript : MonoBehaviour
 
     void Awake()
     {
+        gameManger.GetComponent<GameManagerScript>().OnAfterPlayerLoaded += PlayerUIScript_OnAfterPlayerLoaded;
         currentTime = 0;
-        player.GetComponent<PlayerInventory>().OnItemAdd += AddItemToInventory;
-        player.GetComponent<PlayerInventory>().OnItemSendNotification += ShowNotification;
+        
         notificationText.text = "";
         for (int i = 0; i < inventorySlotCount; i++)
         {
@@ -36,6 +37,14 @@ public class PlayerUIScript : MonoBehaviour
             image.GetComponent<InventoryItemScript>().OnItemDrop += RemoveItemFromInventory;
         }
     }
+
+    private void PlayerUIScript_OnAfterPlayerLoaded(object sender, GameObject e)
+    {
+        player = e;
+        player.GetComponent<PlayerInventory>().OnItemAdd += AddItemToInventory;
+        player.GetComponent<PlayerInventory>().OnItemSendNotification += ShowNotification;
+    }
+
     private void Update()
     {
         if(notificationText.text != "")

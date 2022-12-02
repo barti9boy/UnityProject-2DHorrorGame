@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
 public class InputManager : MonoBehaviour
 {
@@ -13,45 +14,60 @@ public class InputManager : MonoBehaviour
     public bool interactionInputEnabled = true;
     public float InteractionTime { get; private set; }
 
+    private PhotonView view;
+
     private void Awake()
     {
         InteractionTime = 0f;
     }
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
     private void Update()
     {
-        if(isInteractionButtonHeld && interactionInputEnabled)
+        if(view.IsMine)
         {
-            InteractionTime += Time.deltaTime;
-        }
-        else
-        {
-            InteractionTime = 0;
+            if(isInteractionButtonHeld && interactionInputEnabled)
+            {
+                InteractionTime += Time.deltaTime;
+            }
+            else
+            {
+                InteractionTime = 0;
+            }
         }
     }
     public void Movement(InputAction.CallbackContext context) 
     {
-        if (!movementInputEnabled)
+        if (view.IsMine)
         {
-            movementInputDirection = 0;
-        }
-        else
-        {
-            if(context.performed)
+            if (!movementInputEnabled)
             {
-                //Debug.Log("" + context.ReadValue<float>());
-                movementInputDirection = context.ReadValue<float>();
+                movementInputDirection = 0;
             }
             else
             {
-                movementInputDirection = 0;
+                if(context.performed)
+                {
+                    //Debug.Log("" + context.ReadValue<float>());
+                    movementInputDirection = context.ReadValue<float>();
+                }
+                else
+                {
+                    movementInputDirection = 0;
+                }
             }
         }
     }
     public void Flashlight(InputAction.CallbackContext context) 
     {
-        if (context.started)
+        if(view.IsMine)
         {
-            isFlashlightButtonClicked = !isFlashlightButtonClicked;
+            if (context.started)
+            {
+                isFlashlightButtonClicked = !isFlashlightButtonClicked;
+            }
         }
     }
 
@@ -61,20 +77,23 @@ public class InputManager : MonoBehaviour
     }
     public void Interaction(InputAction.CallbackContext context)
     {
-        if(context.performed && interactionInputEnabled)
+        if(view.IsMine)
         {
-            isInteractionButtonClicked = true;
-            StartCoroutine(ClickDuration(0.1f));
-            //inspector sometimes does not register bool change and does not tick the box, but this works correctly
+            if(context.performed && interactionInputEnabled)
+            {
+                isInteractionButtonClicked = true;
+                StartCoroutine(ClickDuration(0.1f));
+                //inspector sometimes does not register bool change and does not tick the box, but this works correctly
             
-        }
-        if(context.performed && interactionInputEnabled)
-        {
-            isInteractionButtonHeld = true;
-        }
-        if (context.canceled)
-        {
-            isInteractionButtonHeld = false;
+            }
+            if(context.performed && interactionInputEnabled)
+            {
+                isInteractionButtonHeld = true;
+            }
+            if (context.canceled)
+            {
+                isInteractionButtonHeld = false;
+            }
         }
     }
     IEnumerator ClickDuration(float s)

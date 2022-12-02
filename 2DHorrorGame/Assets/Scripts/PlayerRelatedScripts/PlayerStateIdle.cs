@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 using static PlayerActions;
 
 public class PlayerStateIdle : PlayerStateBase
@@ -45,6 +46,7 @@ public class PlayerStateIdle : PlayerStateBase
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
     {
+        
         PlayerActions.Interact(player, collision);
     }
    
