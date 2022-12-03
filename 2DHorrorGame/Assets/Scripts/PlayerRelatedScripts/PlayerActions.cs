@@ -10,15 +10,15 @@ public static class PlayerActions
 {
     public static void Flip(PlayerStateMachine player)
     {
-        if (player.currentState.inputManager.movementInputDirection == 1 && !player.currentState.isFacingRight)
+        if (player.currentState.inputManager.movementInputDirection == 1 && !player.isFacingRight)
         {
             player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-            player.currentState.isFacingRight = true;
+            player.isFacingRight = true;
         }
-        else if (player.currentState.inputManager.movementInputDirection == -1 && player.currentState.isFacingRight)
+        else if (player.currentState.inputManager.movementInputDirection == -1 && player.isFacingRight)
         {
             player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
-            player.currentState.isFacingRight = false;
+            player.isFacingRight = false;
         }
     }
 
@@ -49,7 +49,7 @@ public static class PlayerActions
             //}
             if (collision.CompareTag("Item") || collision.CompareTag("Battery"))
             {
-                player.SwitchState(player.itemPickupState, collision);
+                player.SwitchState(States.itemPickup, collision);
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 //player.currentState.playerInventory.DebugLogInventory();
             }
@@ -57,9 +57,9 @@ public static class PlayerActions
             if (collision.CompareTag("Hideout") || collision.CompareTag("Closet") || collision.CompareTag("Table"))
             {
                 player.currentState.inputManager.movementInputEnabled = false;
-                player.previousState = player.currentState;
+                player.previousState = States.idle;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
-                player.SwitchState(player.tryingToHideState, collision);
+                player.SwitchState(States.tryingToHide, collision);
             }
             if (collision.CompareTag("Switch"))
             {
@@ -80,8 +80,8 @@ public static class PlayerActions
                 {
                     collision.GetComponent<IInteractible>().DisableInteractionHighlight();
                     player.currentState.inputManager.isInteractionButtonClicked = false;
-                    player.previousState = player.currentState;
-                    player.SwitchState(player.usingHorizontalDoorState, collision);
+                    player.previousState = States.idle;
+                    player.SwitchState(States.usingHorizontalDoor, collision);
                 }
             }
         }
@@ -98,8 +98,8 @@ public static class PlayerActions
                 {
                     collision.GetComponent<IInteractible>().DisableInteractionHighlight();
                     player.currentState.inputManager.isInteractionButtonClicked = false;
-                    player.previousState = player.currentState;
-                    player.SwitchState(player.usingVerticalDoorState, collision);
+                    player.previousState = States.idle;
+                    player.SwitchState(States.usingVerticalDoor, collision);
                 }
             }
         }
@@ -108,8 +108,8 @@ public static class PlayerActions
             if (collision.CompareTag("Ladder"))
             {
                 player.currentState.inputManager.isInteractionButtonClicked = false;
-                player.previousState = player.currentState;
-                player.SwitchState(player.usingLadderState, collision);
+                player.previousState = States.idle;
+                player.SwitchState(States.usingLadder, collision);
             }
         }
     }

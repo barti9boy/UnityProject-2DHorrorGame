@@ -28,7 +28,7 @@ public class PlayerStateHiding : PlayerStateBase
         playerCollider = player.GetComponent<CapsuleCollider2D>();
         hideoutCollider = collision;
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.isFacingRight;
         isHidden = false;
 }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
@@ -45,8 +45,8 @@ public class PlayerStateHiding : PlayerStateBase
         if (inputManager.isInteractionButtonClicked)
         {
             playerCollider.enabled = true;
-            player.previousState = this;
-            player.SwitchState(player.leavingHideoutState, hideoutCollider);
+            player.previousState = States.hiding;
+            player.SwitchState(States.leavingHideout, hideoutCollider);
             inputManager.isInteractionButtonClicked = false;
 
         }
@@ -60,7 +60,7 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

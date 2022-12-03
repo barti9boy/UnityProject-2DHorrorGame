@@ -20,8 +20,8 @@ public class PlayerStateMoving : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.previousState.isFacingRight;
-        isInVent = player.previousState.isInVent;
+        isFacingRight = player.isFacingRight;
+        isInVent = player.isInVent;
         player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.WalkingPosition);
         //Debug.Log("Hello from moving state");
     }
@@ -29,8 +29,8 @@ public class PlayerStateMoving : PlayerStateBase
     {
         if(inputManager.movementInputDirection == 0)
         {
-            player.previousState = this;
-            player.SwitchState(player.idleState);
+            player.previousState = States.moving;
+            player.SwitchState(States.idle);
         }
         else
         {
@@ -43,7 +43,7 @@ public class PlayerStateMoving : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

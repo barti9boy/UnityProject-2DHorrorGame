@@ -52,7 +52,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
         leftPointX = collision.gameObject.transform.GetChild(2).transform.position.x;
         interactible = collision.gameObject.GetComponent<IInteractible>();
         isChangingRoom = false;
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.isFacingRight;
 
         if (player.transform.position.x < collision.transform.position.x) //jesteœmy po lewej
         {
@@ -97,8 +97,8 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
-                    player.previousState = this;
-                    player.SwitchState(player.idleState);
+                    player.previousState = States.tryingToHide;
+                    player.SwitchState(States.idle);
                 }
             }
             if (velocityDirection == -1 && playerTransform.position.x > leftPointX)
@@ -112,8 +112,8 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
-                    player.previousState = this;
-                    player.SwitchState(player.idleState);
+                    player.previousState = States.tryingToHide;
+                    player.SwitchState(States.idle);
                 }
             }
         }
@@ -123,7 +123,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

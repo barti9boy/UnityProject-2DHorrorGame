@@ -57,7 +57,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
         isChangingRoomUsingVerticalDoor = false;
         isChangingRoomUsingHorizontalDoor = false;
         isEnteringAnotherRoom = false;
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.isFacingRight;
 
         if (Math.Abs(player.transform.position.y - verticalDoorPoint.y) < Math.Abs(player.transform.position.y - horizontalDoorPointIn.y)) //we are using vertical door
         {
@@ -202,8 +202,8 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     //sdoorCollider.enabled = true;
-                    player.previousState = this;
-                    player.SwitchState(player.idleState);
+                    player.previousState = States.usingVerticalDoor;
+                    player.SwitchState(States.idle);
                     horizontalDoorCollider.enabled = true;
                     horizontalDoorAnimator.SetBool("isOpened", false);
                 }
@@ -218,8 +218,8 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
             if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.25)
             {
                 rb.velocity = new Vector2(0, 0);
-                player.previousState = this;
-                player.SwitchState(player.idleState);
+                player.previousState = States.usingVerticalDoor;
+                player.SwitchState(States.idle);
                 player.transform.position = verticalDoorPoint;
                 isChangingRoomUsingHorizontalDoor = false;
                 inputManager.movementInputEnabled = true;
@@ -244,7 +244,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

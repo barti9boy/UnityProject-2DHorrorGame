@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+public enum States
+{
+    idle,
+    moving,
+    hiding,
+    tryingToHide,
+    leavingHideout,
+    dead,
+    usingLadder,
+    usingHorizontalDoor,
+    usingVerticalDoor,
+    itemPickup
+}
+
 public class PlayerStateMachine : MonoBehaviour
 {
     public GameOverScript GameOverScreen;
-    public PlayerStateBase previousState;
+    public States previousState;
     public PlayerStateBase currentState;
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
@@ -23,6 +37,8 @@ public class PlayerStateMachine : MonoBehaviour
     public bool flashlightOutOfBattery;
     public float batteryTimer;
     public float timeOfBattery;
+    public bool isFacingRight = true;
+    public bool isInVent = false;
 
     private PhotonView photonView;
 
@@ -41,7 +57,7 @@ public class PlayerStateMachine : MonoBehaviour
         usingHorizontalDoorState = new PlayerStateUsingHorizontalDoor(gameObject);
         usingVerticalDoorState = new PlayerStateUsingVerticalDoor(gameObject);
         itemPickupState = new PlayerStateItemPickup(gameObject);
-        previousState = idleState;
+        previousState = States.idle;
         currentState = idleState;
         currentState.EnterState(this);
         flashlightOutOfBattery = false;
@@ -78,11 +94,80 @@ public class PlayerStateMachine : MonoBehaviour
 
     }
 
-
-    public void SwitchState(PlayerStateBase state, Collider2D collision = null)
+    //[PunRPC]
+    //private void RPC_SwitchState(int photonView, )
+    //{
+        
+    //}
+    public PlayerStateBase GetState(States state)
     {
-        currentState = state;
-        state.EnterState(this, collision);
+        PlayerStateBase newState;
+        switch (state)
+        {
+            case States.idle:
+                {
+                    newState = idleState;
+                    break;
+                }
+            case States.moving:
+                {
+                    newState = movingState;
+                    break;
+                }
+            case States.hiding:
+                {
+                    newState = hidingState;
+                    break;
+                }
+            case States.tryingToHide:
+                {
+                    newState = tryingToHideState;
+                    break;
+                }
+            case States.leavingHideout:
+                {
+                    newState = leavingHideoutState;
+                    break;
+                }
+            case States.dead:
+                {
+                    newState = deadState;
+                    break;
+                }
+            case States.usingLadder:
+                {
+                    newState = usingLadderState;
+                    break;
+                }
+            case States.usingHorizontalDoor:
+                {
+                    newState = usingHorizontalDoorState;
+                    break;
+                }
+            case States.usingVerticalDoor:
+                {
+                    newState = usingVerticalDoorState;
+                    break;
+                }
+            case States.itemPickup:
+                {
+                    newState = itemPickupState;
+                    break;
+                }
+            default:
+                {
+                    newState = idleState;
+                    break;
+                }
+
+        }
+        return newState;
+    }
+    public void SwitchState(States state, Collider2D collision = null)
+    {
+        var newState = GetState(state);
+        currentState = newState;
+        newState.EnterState(this, collision);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {

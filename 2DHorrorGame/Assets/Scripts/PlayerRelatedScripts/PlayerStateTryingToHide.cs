@@ -52,7 +52,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
         hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
         hideoutAnimator = collision.GetComponent<Animator>();
         hideoutTag = collision.tag;
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.isFacingRight;
         timer = 0;
 
         hideoutCollider = collision;
@@ -141,8 +141,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
                 hideoutAnimator.SetBool("isHiding", false);
                 hideoutAnimator.SetBool("isHidden", true);
-                player.previousState = this;
-                player.SwitchState(player.hidingState, hideoutCollider);
+                player.previousState = States.tryingToHide;
+                player.SwitchState(States.hiding, hideoutCollider);
                 isHiding = false;
             }
             else
@@ -153,8 +153,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 flashlight.transform.position = playerTransform.position;
                 hideoutAnimator.SetBool("isHiding", false);
                 hideoutAnimator.SetBool("isHidden", true);
-                player.previousState = this;
-                player.SwitchState(player.hidingState, hideoutCollider);
+                player.previousState = States.tryingToHide;
+                player.SwitchState(States.hiding, hideoutCollider);
                 isHiding = false;
             }
 
@@ -179,7 +179,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

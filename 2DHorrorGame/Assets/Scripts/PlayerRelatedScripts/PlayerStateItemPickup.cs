@@ -31,8 +31,8 @@ public class PlayerStateItemPickup : PlayerStateBase
         timer = 0f;
         inputManager.movementInputEnabled = false;
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.previousState.isFacingRight;
-        isInVent = player.previousState.isInVent;
+        isFacingRight = player.isFacingRight;
+        isInVent = player.isInVent;
         item = collision;
         if (!collision.CompareTag("Battery"))
         {
@@ -64,7 +64,7 @@ public class PlayerStateItemPickup : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

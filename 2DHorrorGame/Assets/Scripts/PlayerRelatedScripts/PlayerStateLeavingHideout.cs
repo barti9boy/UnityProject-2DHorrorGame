@@ -41,7 +41,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
-        isFacingRight = player.previousState.isFacingRight;
+        isFacingRight = player.isFacingRight;
 
         hideoutCollider = collision;
         hideoutTag = collision.tag;
@@ -78,18 +78,18 @@ public class PlayerStateLeavingHideout : PlayerStateBase
 
         inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
-        if (player.currentState.isFacingRight)
+        if (player.isFacingRight)
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.5f, playerTransform.position.z);
         }
-        else if (!player.currentState.isFacingRight)
+        else if (!player.isFacingRight)
         {
             flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.5f, playerTransform.position.z);
         }
         OnTurnOffFurnitureTag?.Invoke(this, EventArgs.Empty);
         inputManager.movementInputEnabled = true;
-        player.previousState = this;
-        player.SwitchState(player.idleState);
+        player.previousState = States.leavingHideout;
+        player.SwitchState(States.idle);
         isHidden = false;
         hideoutAnimator.SetBool("isLeaving", false);
     }
@@ -99,7 +99,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

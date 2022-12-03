@@ -23,8 +23,8 @@ public class PlayerStateIdle : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.previousState.isFacingRight;
-        isInVent = player.previousState.isInVent;
+        isFacingRight = player.isFacingRight;
+        isInVent = player.isInVent;
         player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.StandingPosition);
         //Debug.Log("Hello from idle state");
     }
@@ -33,8 +33,8 @@ public class PlayerStateIdle : PlayerStateBase
         rb.velocity = new Vector2(0,0);
         if(inputManager.movementInputDirection != 0)
         {
-            player.previousState = this;
-            player.SwitchState(player.movingState);
+            player.previousState = States.idle;
+            player.SwitchState(States.moving);
         }
         PlayerActions.Flashlight(player);
     }
@@ -42,7 +42,7 @@ public class PlayerStateIdle : PlayerStateBase
     {
         if(collision.collider.tag == "Monster")
         {
-            player.SwitchState(player.deadState);
+            player.SwitchState(States.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
