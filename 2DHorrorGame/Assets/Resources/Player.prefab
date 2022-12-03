@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 1412985717255173028}
   - component: {fileID: 1412985717255173029}
   - component: {fileID: 1412985717255173030}
+  - component: {fileID: 5266940842357380667}
   m_Layer: 8
   m_Name: PlayerGFX
   m_TagString: Untagged
@@ -288,6 +289,69 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5266940842357380667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412985717255173026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: isIdle
+  - Type: 4
+    SynchronizeType: 1
+    Name: isMoving
+  - Type: 4
+    SynchronizeType: 1
+    Name: isHidden
+  - Type: 4
+    SynchronizeType: 1
+    Name: isHiding
+  - Type: 4
+    SynchronizeType: 1
+    Name: isLeaving
+  - Type: 4
+    SynchronizeType: 1
+    Name: isClimbingDown
+  - Type: 4
+    SynchronizeType: 1
+    Name: isClimbingUp
+  - Type: 4
+    SynchronizeType: 1
+    Name: isInVent
+  - Type: 4
+    SynchronizeType: 1
+    Name: isEnteringVent
+  - Type: 4
+    SynchronizeType: 1
+    Name: isExitingVent
+  - Type: 4
+    SynchronizeType: 1
+    Name: isPickingUpItem
+  - Type: 4
+    SynchronizeType: 1
+    Name: isOpeningHorizontalDoor
+  - Type: 4
+    SynchronizeType: 1
+    Name: isHideout
+  - Type: 4
+    SynchronizeType: 1
+    Name: isCloset
+  - Type: 4
+    SynchronizeType: 1
+    Name: isTable
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &1412985717827928657
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +440,8 @@ GameObject:
   - component: {fileID: 1412985718357133981}
   - component: {fileID: 1412985718357133982}
   - component: {fileID: 1412985718357133978}
+  - component: {fileID: -5983186469399619505}
+  - component: {fileID: 5440199670764070947}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -575,11 +641,79 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae5c36de-bc8e-4539-ace4-c731bf7cd582
     m_ActionName: PlayerActionMap/Interaction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 506a58be-0073-4937-9712-261767953d7f
+    m_ActionName: PlayerActionMap/Inventory1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b145d6dc-2507-4fdb-b7a0-00707ae0baa3
+    m_ActionName: PlayerActionMap/Inventory2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c33caacb-d80a-4174-98d2-ef4af560b450
+    m_ActionName: PlayerActionMap/Inventory3[/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-5983186469399619505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412985718357133958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5440199670764070947}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5440199670764070947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412985718357133958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &1412985718996638987
 GameObject:
   m_ObjectHideFlags: 0
