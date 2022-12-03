@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -23,9 +24,13 @@ public class PlayerStateMachine : MonoBehaviour
     public float batteryTimer;
     public float timeOfBattery;
 
+    private PhotonView photonView;
+
    
     void Awake()
     {
+        photonView = GetComponent<PhotonView>();
+        flashlight = transform.GetChild(1).gameObject;
         idleState = new PlayerStateIdle(gameObject);
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
