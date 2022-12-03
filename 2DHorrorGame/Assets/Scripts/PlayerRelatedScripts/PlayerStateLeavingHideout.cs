@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static PlayerActions;
 using System;
+using Photon.Pun;
 
 public class PlayerStateLeavingHideout : PlayerStateBase
 {
     Collider2D hideoutCollider;
-
+    PlayerStateMachine playerStateMachine;
 
     //hideout variables
     private float hideoutEntrence;
@@ -27,6 +28,10 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     public event EventHandler OnLeaveStateHiding;
     public event EventHandler OnTurnOffFurnitureTag;
 
+
+    //Photon
+    private PhotonView photonView;
+
     public PlayerStateLeavingHideout(GameObject playerObject) : base(playerObject)
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -37,7 +42,8 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerInventory = playerObject.GetComponent<PlayerInventory>();
-
+        photonView = playerObject.GetComponent<PhotonView>();
+        playerStateMachine = playerObject.GetComponent<PlayerStateMachine>();
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
@@ -68,10 +74,25 @@ public class PlayerStateLeavingHideout : PlayerStateBase
 
         if (timer >= hidingAnimation.length)
         {
+            if(photonView.IsMine)
+            {
+                photonView.RPC("RPC_Leave", RpcTarget.Others, photonView.ViewID);
+                Debug.Log("Leave RPC sent");
+            }
             Leave(player);
         }
     }
-    public void Leave(PlayerStateMachine player)
+    [PunRPC]
+    private void RPC_Leave(int viewId)
+    {
+        if (viewId == photonView.ViewID)
+        {
+            Debug.Log("Leave RPC recieved");
+            Leave(playerStateMachine);
+        }
+    }
+    
+    private void Leave(PlayerStateMachine player)
     {
 
         inputManager.isInteractionButtonClicked = false;
