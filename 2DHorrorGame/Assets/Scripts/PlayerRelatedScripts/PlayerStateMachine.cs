@@ -95,11 +95,21 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     [PunRPC]
-    private void RPC_SwitchState(int photonID, int state)
+    private void RPC_SwitchState(int photonID, int state, int colliderID = 0)
     {
         if(photonID == photonView.ViewID)
         {
-            SwitchState((States) state);
+            Collider2D collider;
+            if (colliderID != 0)
+            {
+                collider = PhotonView.Find(colliderID).GetComponent<Collider2D>();
+                Debug.Log($"Collider hit {collider.gameObject.name}");
+                SwitchState((States)state, collider);
+            }
+            else
+                SwitchState((States) state);
+
+            Debug.Log($"Recieved state {(States)state}, colliderID {colliderID}");
         }
     }
     public PlayerStateBase GetState(States state)
@@ -166,15 +176,19 @@ public class PlayerStateMachine : MonoBehaviour
         }
         return newState;
     }
-    public void SwitchState(States state, Collider2D collision = null)
+    public void SwitchState(States state, Collider2D collider = null)
     {
         var newState = GetState(state);
 
         if (photonView.IsMine)
-            photonView.RPC("RPC_SwitchState", RpcTarget.Others, photonView.GetInstanceID(), (int)state);
+        {
+            int colliderID = collider == null ? 0 : collider.gameObject.GetPhotonView().ViewID;
+            photonView.RPC("RPC_SwitchState", RpcTarget.Others, photonView.ViewID, (int)state, colliderID);
+            Debug.Log($"Sent state {state}, colliderID {colliderID}");
+        }
 
         currentState = newState;
-        newState.EnterState(this, collision);
+        newState.EnterState(this, collider);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
