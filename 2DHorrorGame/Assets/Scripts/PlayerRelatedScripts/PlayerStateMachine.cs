@@ -30,7 +30,7 @@ public class PlayerStateMachine : MonoBehaviour
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
-        flashlight = transform.GetChild(1).gameObject;
+        flashlight = transform.GetComponentInChildren<FlashlightScript>();
         idleState = new PlayerStateIdle(gameObject);
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
