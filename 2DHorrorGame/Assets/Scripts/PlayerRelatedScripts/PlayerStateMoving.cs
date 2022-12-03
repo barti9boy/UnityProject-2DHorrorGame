@@ -20,8 +20,6 @@ public class PlayerStateMoving : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.isFacingRight;
-        isInVent = player.isInVent;
         player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.WalkingPosition);
         //Debug.Log("Hello from moving state");
     }

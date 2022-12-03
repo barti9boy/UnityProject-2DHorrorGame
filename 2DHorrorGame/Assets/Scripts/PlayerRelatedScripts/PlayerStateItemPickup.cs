@@ -31,8 +31,6 @@ public class PlayerStateItemPickup : PlayerStateBase
         timer = 0f;
         inputManager.movementInputEnabled = false;
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.isFacingRight;
-        isInVent = player.isInVent;
         item = collision;
         if (!collision.CompareTag("Battery"))
         {

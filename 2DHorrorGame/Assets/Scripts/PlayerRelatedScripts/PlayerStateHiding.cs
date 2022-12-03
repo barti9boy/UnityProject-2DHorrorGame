@@ -28,7 +28,6 @@ public class PlayerStateHiding : PlayerStateBase
         playerCollider = player.GetComponent<CapsuleCollider2D>();
         hideoutCollider = collision;
         OnEnterStateHidden?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.isFacingRight;
         isHidden = false;
 }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)

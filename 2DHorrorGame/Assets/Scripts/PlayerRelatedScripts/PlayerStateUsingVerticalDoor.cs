@@ -57,28 +57,27 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
         isChangingRoomUsingVerticalDoor = false;
         isChangingRoomUsingHorizontalDoor = false;
         isEnteringAnotherRoom = false;
-        isFacingRight = player.isFacingRight;
 
         if (Math.Abs(player.transform.position.y - verticalDoorPoint.y) < Math.Abs(player.transform.position.y - horizontalDoorPointIn.y)) //we are using vertical door
         {
             if (player.transform.position.x < verticalDoorPoint.x) //we're on left
             {
-                if (!player.currentState.isFacingRight)
+                if (!player.isFacingRight)
                 {
                     playerTransform.Rotate(0, 180, 0);
-                    player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                    Debug.Log(player.currentState.isFacingRight);
+                    player.isFacingRight = !player.isFacingRight;
+                    Debug.Log(player.isFacingRight);
                     inputManager.isInteractionButtonClicked = false;
                 }
                 velocityDirection = 1;
             }
             else if (player.transform.position.x > verticalDoorPoint.x) //we're on right
             {
-                if (player.currentState.isFacingRight)
+                if (player.isFacingRight)
                 {
                     playerTransform.Rotate(0, 180, 0);
-                    player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                    Debug.Log(player.currentState.isFacingRight);
+                    player.isFacingRight = !player.isFacingRight;
+                    Debug.Log(player.isFacingRight);
                     inputManager.isInteractionButtonClicked = false;
                 }
                 velocityDirection = -1;
@@ -92,22 +91,22 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
         {
             if (player.transform.position.x < horizontalDoorPointOut.x) //we're on left
             {
-                if (!player.currentState.isFacingRight)
+                if (!player.isFacingRight)
                 {
                     playerTransform.Rotate(0, 180, 0);
-                    player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                    Debug.Log(player.currentState.isFacingRight);
+                    player.isFacingRight = !player.isFacingRight;
+                    Debug.Log(player.isFacingRight);
                     inputManager.isInteractionButtonClicked = false;
                 }
                 velocityDirection = 1;
             }
             else if (player.transform.position.x > horizontalDoorPointOut.x) //we're on right
             {
-                if (player.currentState.isFacingRight)
+                if (player.isFacingRight)
                 {
                     playerTransform.Rotate(0, 180, 0);
-                    player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                    Debug.Log(player.currentState.isFacingRight);
+                    player.isFacingRight = !player.isFacingRight;
+                    Debug.Log(player.isFacingRight);
                     inputManager.isInteractionButtonClicked = false;
                 }
                 velocityDirection = -1;
@@ -141,7 +140,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     else if (horizontalDoorPointIn.x < horizontalDoorPointOut.x)
                     {
                         playerTransform.Rotate(0, 180, 0);
-                        player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                        player.isFacingRight = !player.isFacingRight;
                         velocityDirection = -1;
                         rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                     }
@@ -162,7 +161,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     if (horizontalDoorPointIn.x > horizontalDoorPointOut.x)
                     {
                         playerTransform.Rotate(0, 180, 0);
-                        player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                        player.isFacingRight = !player.isFacingRight;
                         velocityDirection = 1;
                         rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                     }

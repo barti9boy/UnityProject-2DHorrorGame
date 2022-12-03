@@ -12,12 +12,12 @@ public static class PlayerActions
     {
         if (player.currentState.inputManager.movementInputDirection == 1 && !player.isFacingRight)
         {
-            player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+            player.transform.Rotate(0.0f, 180.0f, 0.0f);
             player.isFacingRight = true;
         }
         else if (player.currentState.inputManager.movementInputDirection == -1 && player.isFacingRight)
         {
-            player.currentState.playerTransform.Rotate(0.0f, 180.0f, 0.0f);
+            player.transform.Rotate(0.0f, 180.0f, 0.0f);
             player.isFacingRight = false;
         }
     }

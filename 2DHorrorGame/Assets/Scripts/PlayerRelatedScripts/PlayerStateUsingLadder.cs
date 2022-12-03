@@ -57,25 +57,23 @@ public class PlayerStateUsingLadder : PlayerStateBase
         ladderMiddleY = collision.gameObject.transform.position.y;
         ladderUpPointY = collision.GetComponent<LadderScript>().UpPoint.transform.position.y;
         ladderDownPointY = collision.GetComponent<LadderScript>().DownPoint.transform.position.y;
-        isFacingRight = player.isFacingRight;
-        isInVent = player.isInVent;
 
         if (playerTransform.position.x < ladderMiddleX)
         {
-            if (!player.currentState.isFacingRight)
+            if (!player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                player.isFacingRight = !player.isFacingRight;
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = 1;
         }
         else if (playerTransform.position.x > ladderMiddleX)
         {
-            if (player.currentState.isFacingRight)
+            if (player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                player.currentState.isFacingRight = !player.currentState.isFacingRight;
+                player.isFacingRight = !player.isFacingRight;
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = -1;
@@ -126,15 +124,15 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
                 if (isVentEntrance)
                 {
-                    isInVent = !isInVent;
+                    player.isInVent = !player.isInVent;
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
-                if (player.currentState.isFacingRight)
+                if (player.isFacingRight)
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x + 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
                 }
-                else if (!player.currentState.isFacingRight)
+                else if (!player.isFacingRight)
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
                 }
@@ -160,15 +158,15 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
                 if (isVentEntrance)
                 {
-                    isInVent = !isInVent;
+                    player.isInVent = !player.isInVent;
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
-                if (player.currentState.isFacingRight)
+                if (player.isFacingRight)
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
                 }
-                else if (!player.currentState.isFacingRight)
+                else if (!player.isFacingRight)
                 {
                     flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
                 }

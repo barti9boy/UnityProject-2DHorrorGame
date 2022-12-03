@@ -41,8 +41,6 @@ public class PlayerStateLeavingHideout : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
-        isFacingRight = player.isFacingRight;
-
         hideoutCollider = collision;
         hideoutTag = collision.tag;
         timer = 0;

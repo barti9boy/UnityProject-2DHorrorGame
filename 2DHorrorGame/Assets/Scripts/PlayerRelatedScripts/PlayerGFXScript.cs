@@ -138,7 +138,7 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void OnVentEnterOrLeave(object sender, EventArgs e)
     {
-        isInVent = playerStateMachine.currentState.isInVent;
+        isInVent = playerStateMachine.isInVent;
         UpdateAnimations();
     }
 

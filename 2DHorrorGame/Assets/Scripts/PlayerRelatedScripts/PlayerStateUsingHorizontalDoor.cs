@@ -52,26 +52,25 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
         leftPointX = collision.gameObject.transform.GetChild(2).transform.position.x;
         interactible = collision.gameObject.GetComponent<IInteractible>();
         isChangingRoom = false;
-        isFacingRight = player.isFacingRight;
 
         if (player.transform.position.x < collision.transform.position.x) //jesteœmy po lewej
         {
-            if (!player.currentState.isFacingRight)
+            if (!player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
+                player.isFacingRight = !player.isFacingRight;
+                Debug.Log(player.isFacingRight);
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = 1;
         }
         else if (player.transform.position.x > collision.transform.position.x) // jesteœmy po prawej
         {
-            if (player.currentState.isFacingRight)
+            if (player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                player.currentState.isFacingRight = !player.currentState.isFacingRight;
-                Debug.Log(player.currentState.isFacingRight);
+                player.isFacingRight = !player.isFacingRight;
+                Debug.Log(player.isFacingRight);
                 inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = -1;

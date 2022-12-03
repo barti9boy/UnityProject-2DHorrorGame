@@ -18,7 +18,6 @@ public class PlayerStateDead : PlayerStateBase
     {
         rb.velocity = new Vector2(0f, 0f);
         OnEnterStateDead?.Invoke(this, EventArgs.Empty);
-        isFacingRight = player.movingState.isFacingRight;
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {

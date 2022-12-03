@@ -52,27 +52,26 @@ public class PlayerStateTryingToHide : PlayerStateBase
         hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
         hideoutAnimator = collision.GetComponent<Animator>();
         hideoutTag = collision.tag;
-        isFacingRight = player.isFacingRight;
         timer = 0;
 
         hideoutCollider = collision;
 
         if (hideoutEntrence > playerTransform.position.x) //jesteœmy po lewej
         {
-            if (!player.currentState.isFacingRight)
+            if (!player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                isFacingRight = !isFacingRight;
+                player.isFacingRight = !player.isFacingRight;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = 1;
         }
         else if (hideoutEntrence < playerTransform.position.x) // jesteœmy po prawej
         {
-            if (player.currentState.isFacingRight)
+            if (player.isFacingRight)
             {
                 playerTransform.Rotate(0, 180, 0);
-                isFacingRight = !isFacingRight;
+                player.isFacingRight = !player.isFacingRight;
                 player.currentState.inputManager.isInteractionButtonClicked = false;
             }
             velocityDirection = -1;
@@ -93,10 +92,10 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
                 {
-                    if (hideoutTag == "Hideout" && !isFacingRight)
+                    if (hideoutTag == "Hideout" && !player.isFacingRight)
                     {
                         playerTransform.Rotate(0, 180, 0);
-                        isFacingRight = !isFacingRight;
+                        player.isFacingRight = !player.isFacingRight;
                     }
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
@@ -110,15 +109,15 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
                 {
-                    if( hideoutTag == "Closet" && !isFacingRight)
+                    if( hideoutTag == "Closet" && !player.isFacingRight)
                     {
                         playerTransform.Rotate(0, 180, 0);
-                        isFacingRight = !isFacingRight;
+                        player.isFacingRight = !player.isFacingRight;
                     }
-                    else if (hideoutTag == "Hideout"  && !isFacingRight)
+                    else if (hideoutTag == "Hideout"  && !player.isFacingRight)
                     {
                         playerTransform.Rotate(0, 180, 0);
-                        isFacingRight = !isFacingRight;
+                        player.isFacingRight = !player.isFacingRight;
                     }
                     isApproachingHideout = false;
                     inputManager.interactionInputEnabled = true;
