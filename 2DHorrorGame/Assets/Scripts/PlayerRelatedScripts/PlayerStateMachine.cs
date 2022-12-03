@@ -94,11 +94,14 @@ public class PlayerStateMachine : MonoBehaviour
 
     }
 
-    //[PunRPC]
-    //private void RPC_SwitchState(int photonView, )
-    //{
-        
-    //}
+    [PunRPC]
+    private void RPC_SwitchState(int photonID, int state)
+    {
+        if(photonID == photonView.ViewID)
+        {
+            SwitchState((States) state);
+        }
+    }
     public PlayerStateBase GetState(States state)
     {
         PlayerStateBase newState;
@@ -166,6 +169,10 @@ public class PlayerStateMachine : MonoBehaviour
     public void SwitchState(States state, Collider2D collision = null)
     {
         var newState = GetState(state);
+
+        if (photonView.IsMine)
+            photonView.RPC("RPC_SwitchState", RpcTarget.Others, photonView.GetInstanceID(), (int)state);
+
         currentState = newState;
         newState.EnterState(this, collision);
     }
