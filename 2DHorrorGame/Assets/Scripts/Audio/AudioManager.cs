@@ -21,12 +21,11 @@ public class AudioManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Instance = this;
-
+            Destroy(this);
         }
         else
         {
-            Destroy(this);
+            Instance = this;
         }
 
         OnPlaySoundAtPosition += PlaySoundAtPosition;
