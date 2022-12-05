@@ -41,8 +41,9 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isInVent = false;
 
     public PhotonView photonView;
+    private Dictionary<States, PlayerStateBase> states =
+    new Dictionary<States, PlayerStateBase>();
 
-   
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -63,13 +64,14 @@ public class PlayerStateMachine : MonoBehaviour
         flashlightOutOfBattery = false;
         timeOfBattery = 40;
         batteryTimer = 0;
+        CreateDictionary();
     }
 
 
     void Update()
     {
         currentState.UpdateState(this);
-        if(currentState == deadState)
+        if (currentState == deadState)
         {
             GameOverScreen.GameOver();
         }
@@ -78,7 +80,7 @@ public class PlayerStateMachine : MonoBehaviour
             batteryTimer += Time.deltaTime;
             if (batteryTimer >= timeOfBattery)
             {
-                if(currentState.playerInventory.PlayerBatteries != 0)
+                if (currentState.playerInventory.PlayerBatteries != 0)
                 {
                     currentState.playerInventory.ChangeBattery();
                     batteryTimer = 0;
@@ -97,7 +99,7 @@ public class PlayerStateMachine : MonoBehaviour
     [PunRPC]
     private void RPC_SwitchState(int photonID, int state, int colliderID = 0)
     {
-        if(photonID == photonView.ViewID)
+        if (photonID == photonView.ViewID)
         {
             Collider2D collider;
             if (colliderID != 0)
@@ -107,78 +109,14 @@ public class PlayerStateMachine : MonoBehaviour
                 SwitchState((States)state, collider);
             }
             else
-                SwitchState((States) state);
+                SwitchState((States)state);
 
             Debug.Log($"Recieved state {(States)state}, colliderID {colliderID}");
         }
     }
-    public PlayerStateBase GetState(States state)
-    {
-        PlayerStateBase newState;
-        switch (state)
-        {
-            case States.idle:
-                {
-                    newState = idleState;
-                    break;
-                }
-            case States.moving:
-                {
-                    newState = movingState;
-                    break;
-                }
-            case States.hiding:
-                {
-                    newState = hidingState;
-                    break;
-                }
-            case States.tryingToHide:
-                {
-                    newState = tryingToHideState;
-                    break;
-                }
-            case States.leavingHideout:
-                {
-                    newState = leavingHideoutState;
-                    break;
-                }
-            case States.dead:
-                {
-                    newState = deadState;
-                    break;
-                }
-            case States.usingLadder:
-                {
-                    newState = usingLadderState;
-                    break;
-                }
-            case States.usingHorizontalDoor:
-                {
-                    newState = usingHorizontalDoorState;
-                    break;
-                }
-            case States.usingVerticalDoor:
-                {
-                    newState = usingVerticalDoorState;
-                    break;
-                }
-            case States.itemPickup:
-                {
-                    newState = itemPickupState;
-                    break;
-                }
-            default:
-                {
-                    newState = idleState;
-                    break;
-                }
-
-        }
-        return newState;
-    }
     public void SwitchState(States state, Collider2D collider = null)
     {
-        var newState = GetState(state);
+        var newState = states[state];
 
         if (photonView.IsMine)
         {
@@ -198,4 +136,20 @@ public class PlayerStateMachine : MonoBehaviour
     {
         currentState.OnTriggerStay(this, collision);
     }
+
+    private void CreateDictionary()
+    {
+        states.Add(States.idle, idleState);
+        states.Add(States.moving, movingState);
+        states.Add(States.hiding, hidingState);
+        states.Add(States.tryingToHide, tryingToHideState);
+        states.Add(States.leavingHideout, leavingHideoutState);
+        states.Add(States.dead, deadState);
+        states.Add(States.usingLadder, usingLadderState);
+        states.Add(States.usingHorizontalDoor, usingHorizontalDoorState);
+        states.Add(States.usingVerticalDoor, usingVerticalDoorState);
+        states.Add(States.itemPickup, itemPickupState);
+    }
 }
+
+
