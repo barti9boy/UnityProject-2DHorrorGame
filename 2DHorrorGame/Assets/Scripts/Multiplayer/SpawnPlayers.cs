@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using System;
+using Cinemachine;
 
 public class SpawnPlayers : MonoBehaviour
 {
@@ -21,14 +22,22 @@ public class SpawnPlayers : MonoBehaviour
     public Image itemImage1;
     public Image itemImage2;
 
+    /*-----Cameras-----*/
+    public GameObject roomCamerasPrefab;
+    private GameObject roomCameras;
 
     private void Awake()
     {
+        roomCameras = PhotonNetwork.Instantiate(roomCamerasPrefab.name, Vector2.zero, Quaternion.identity);
         Vector2 randomSpawnPosition = new Vector2(UnityEngine.Random.Range(minX, maxX), playerSpawnHeight);
         player = PhotonNetwork.Instantiate(playerPrefab.name, randomSpawnPosition, Quaternion.identity);
         player.GetComponent<PlayerInventory>().inventoryItems[0] = itemImage0;
         player.GetComponent<PlayerInventory>().inventoryItems[1] = itemImage1;
         player.GetComponent<PlayerInventory>().inventoryItems[2] = itemImage2;
+        foreach(CinemachineVirtualCamera cam in roomCameras.GetComponentsInChildren<CinemachineVirtualCamera>())
+        {
+            cam.Follow = player.transform;
+        }
     }
     private void Start()
     {
