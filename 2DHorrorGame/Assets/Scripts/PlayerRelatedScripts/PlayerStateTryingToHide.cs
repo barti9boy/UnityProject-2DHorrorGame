@@ -11,8 +11,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
 
     //hideout variables
     private float hideoutEntrence;
-    private Animator hideoutAnimator;
-    public AnimationClip hidingAnimation;
+    private HideoutScript hideout;
+    
 
 
     //hiding phases variables
@@ -48,9 +48,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         //on EnterState get hideout components, set up hideout and player variables 
-        hideoutEntrence = collision.GetComponent<HideoutScript>().handle.transform.position.x;
-        hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
-        hideoutAnimator = collision.GetComponent<Animator>();
+        hideout = collision.GetComponent<HideoutScript>();
+        hideoutEntrence = hideout.handle.transform.position.x;
         hideoutTag = collision.tag;
         timer = 0;
 
@@ -128,18 +127,21 @@ public class PlayerStateTryingToHide : PlayerStateBase
         }
         if (isTryingToHide)
         {
-            hideoutAnimator.SetBool("isHiding", true);
+            if (player.photonView.IsMine)
+                hideout.PlayHidingAnim();
+
             OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
             WaitUntilAnimated();
         }
         if (isHiding)
         {
-            if(hideoutTag == "Table")
+            if (player.photonView.IsMine)
+                hideout.PlayHiddenAnim();
+
+            if (hideoutTag == "Table")
             {
                 flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
                 flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
-                hideoutAnimator.SetBool("isHiding", false);
-                hideoutAnimator.SetBool("isHidden", true);
                 player.previousState = States.tryingToHide;
                 player.SwitchState(States.hiding, hideoutCollider);
                 isHiding = false;
@@ -150,8 +152,6 @@ public class PlayerStateTryingToHide : PlayerStateBase
                 flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
                 flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
                 flashlight.transform.position = playerTransform.position;
-                hideoutAnimator.SetBool("isHiding", false);
-                hideoutAnimator.SetBool("isHidden", true);
                 player.previousState = States.tryingToHide;
                 player.SwitchState(States.hiding, hideoutCollider);
                 isHiding = false;
@@ -164,7 +164,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
     {
         timer += Time.deltaTime;
 
-        if (timer >= hidingAnimation.length)
+        if (timer >= hideout.hiding.length)
         {
             isTryingToHide = false;
             isHiding = true;
