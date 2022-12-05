@@ -525,6 +525,7 @@ MonoBehaviour:
   timeOfBattery: 0
   isFacingRight: 1
   isInVent: 0
+  photonView: {fileID: 0}
 --- !u!114 &1412985718357133979
 MonoBehaviour:
   m_ObjectHideFlags: 0
