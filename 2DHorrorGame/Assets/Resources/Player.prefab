@@ -518,10 +518,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 0}
+  previousState: 0
   flashlight: {fileID: 8031757334689842023}
   flashlightOutOfBattery: 1
   batteryTimer: 30
   timeOfBattery: 0
+  isFacingRight: 1
+  isInVent: 0
 --- !u!114 &1412985718357133979
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42,11 +42,11 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerInventory = playerObject.GetComponent<PlayerInventory>();
-        photonView = playerObject.GetComponent<PhotonView>();
-        playerStateMachine = playerObject.GetComponent<PlayerStateMachine>();
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        playerStateMachine = player;
+        photonView = playerStateMachine.gameObject.GetComponent<PhotonView>();
         hideoutCollider = collision;
         hideoutTag = collision.tag;
         timer = 0;
