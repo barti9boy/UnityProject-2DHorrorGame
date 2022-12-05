@@ -40,7 +40,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isFacingRight = true;
     public bool isInVent = false;
 
-    private PhotonView photonView;
+    public PhotonView photonView;
 
    
     void Awake()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using Photon.Pun;
 
 
 public class HideoutScript : MonoBehaviour
@@ -16,9 +17,79 @@ public class HideoutScript : MonoBehaviour
     private SpriteRenderer playerSpriteRenderer;
     private Collider2D collider;*/
     public bool finishedOpening = false;
-    public Animator animator;
+    private Animator animator;
     [SerializeField] public Transform handle;
     [SerializeField] public AnimationClip hiding;
+
+    private PhotonView photonView;
+
+    private int animIDHiding;
+    private int animIDHidden;
+    private int animIDLeaving;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        AssignAnimationIDs();
+    }
+
+    private void AssignAnimationIDs()
+    {
+        animIDHiding = Animator.StringToHash("isHiding");
+        animIDHidden = Animator.StringToHash("isHidden");
+        animIDLeaving = Animator.StringToHash("isLeaving");
+    }
+
+    public void PlayHidingAnim()
+    {
+        animator.SetBool(animIDHiding, true);
+        animator.SetBool(animIDHidden, false);
+        animator.SetBool(animIDLeaving, false);
+
+    }
+    public void PlayHiddenAnim()
+    {
+        animator.SetBool(animIDHiding, false);
+        animator.SetBool(animIDHidden, true);
+        animator.SetBool(animIDLeaving, false);
+    }
+
+    public void PlayLeaveAnim()
+    {
+        animator.SetBool(animIDHiding, false);
+        animator.SetBool(animIDHidden, false);
+        animator.SetBool(animIDLeaving, true);
+    }
+
+    public void EndAllAnim()
+    {
+        animator.SetBool(animIDHiding, false);
+        animator.SetBool(animIDHidden, false);
+        animator.SetBool(animIDLeaving, false);
+    }
+
+
+
+
+    //[PunRPC]
+    //private void RPC_PlayGetIntoAnimation(int viewID) 
+    //{
+    //    if(photonView.ViewID == viewID)
+    //        PlayGetIntoAnimation();
+    //}
+
+    //[PunRPC]
+    //private void RPC_PlayGetOutAnimation(int viewID)
+    //{
+    //    if (photonView.ViewID == viewID)
+    //        PlayGetOutAnimation();
+    //}
+
 
 
     /* private void Awake()

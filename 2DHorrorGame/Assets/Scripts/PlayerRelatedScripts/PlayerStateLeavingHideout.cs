@@ -13,9 +13,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
 
     //hideout variables
     private float hideoutEntrence;
-    private Animator hideoutAnimator;
-    public AnimationClip hidingAnimation;
-
+    private HideoutScript hideout;
 
 
     //hiding phases variables
@@ -51,50 +49,50 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         hideoutTag = collision.tag;
         timer = 0;
 
-        hideoutAnimator = collision.GetComponent<Animator>();
-        hidingAnimation = collision.GetComponent<HideoutScript>().hiding;
+        hideout = collision.GetComponent<HideoutScript>();
 
         playerSpriteRenderer.sortingOrder = 1;
         flashlight.GetComponent<SpriteRenderer>().sortingOrder = 1;
         OnLeaveStateHiding?.Invoke(this, EventArgs.Empty);
 
-        hideoutAnimator.SetBool("isHidden", false);
-        hideoutAnimator.SetBool("isLeaving", true);
+        if(player.photonView.IsMine)
+            hideout.PlayLeaveAnim();
+        
+        CoroutineHandler.Instance.StartCoroutine(CoroutineHandler.Instance.WaitUntilAnimated(hideout.hiding.length, () => Leave(player)));
     }
 
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
-        OnLeaveStateHiding?.Invoke(this, EventArgs.Empty);
-        WaitUntilAnimated(player);
+ //       WaitUntilAnimated(player);
     }
 
-    public void WaitUntilAnimated(PlayerStateMachine player)
-    {
-        timer += Time.deltaTime;
+    //public void WaitUntilAnimated(PlayerStateMachine player)
+    //{
+    //    timer += Time.deltaTime;
 
-        if (timer >= hidingAnimation.length)
-        {
-            if(photonView.IsMine)
-            {
-                photonView.RPC("RPC_Leave", RpcTarget.Others, photonView.ViewID);
-                Debug.Log("Leave RPC sent");
-            }
-            Leave(player);
-        }
-    }
-    [PunRPC]
-    private void RPC_Leave(int viewId)
-    {
-        if (viewId == photonView.ViewID)
-        {
-            Debug.Log("Leave RPC recieved");
-            Leave(playerStateMachine);
-        }
-    }
+    //    if (timer >= hidingAnimation.length)
+    //    {
+    //        if(photonView.IsMine)
+    //        {
+    //            photonView.RPC("RPC_Leave", RpcTarget.Others, photonView.ViewID);
+    //            Debug.Log("Leave RPC sent");
+    //        }
+    //        Leave(player);
+    //    }
+    //}
+    //[PunRPC]
+    //private void RPC_Leave(int viewId)
+    //{
+    //    if (viewId == photonView.ViewID)
+    //    {
+    //        Debug.Log("Leave RPC recieved");
+    //        Leave(playerStateMachine);
+    //    }
+    //}
     
     private void Leave(PlayerStateMachine player)
     {
-
+        Debug.Log("Player left hideout");
         inputManager.isInteractionButtonClicked = false;
         flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
         if (player.isFacingRight)
@@ -110,7 +108,9 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         player.previousState = States.leavingHideout;
         player.SwitchState(States.idle);
         isHidden = false;
-        hideoutAnimator.SetBool("isLeaving", false);
+
+        if (player.photonView.IsMine)
+            hideout.EndAllAnim();
     }
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
