@@ -1,7 +1,37 @@
 fileFormatVersion: 2
 guid: 8f93f78c328baa14dbc0d0c919808eb4
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -94841981730097166
+    second: Vent_Opening_Vents32_0
+  - first:
+      213: -894370015850567375
+    second: Vent_Opening_Vents32_1
+  - first:
+      213: 7775475945469752975
+    second: Vent_Opening_Vents32_2
+  - first:
+      213: 7970158659432649437
+    second: Vent_Opening_Vents32_3
+  - first:
+      213: 2840847365565998731
+    second: Vent_Opening_Vents32_4
+  - first:
+      213: 3290823121010909762
+    second: Vent_Opening_Vents32_5
+  - first:
+      213: -2746393117651993833
+    second: Vent_Opening_Vents32_6
+  - first:
+      213: 7997256396802312253
+    second: Vent_Opening_Vents32_7
+  - first:
+      213: -8007462490409637553
+    second: Vent_Opening_Vents32_8
+  - first:
+      213: 1086050273882578630
+    second: Vent_Opening_Vents32_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +71,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -137,7 +167,217 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7fe2958bd0faef0800000000000000
+      internalID: -94841981730097166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 139677b853f8693f0800000000000000
+      internalID: -894370015850567375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f86b1591d2a08eb60800000000000000
+      internalID: 7775475945469752975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd29cf2b211bb9e60800000000000000
+      internalID: 7970158659432649437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_4
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b866aa5a0a7bc6720800000000000000
+      internalID: 2840847365565998731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2426f7a613a5bad20800000000000000
+      internalID: 3290823121010909762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b76c0b20ad2e9d0800000000000000
+      internalID: -2746393117651993833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_7
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 38
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d384f155256fbfe60800000000000000
+      internalID: 7997256396802312253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_8
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 6
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f496ed25a47cfd090800000000000000
+      internalID: -8007462490409637553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vent_Opening_Vents32_9
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 6
+        width: 16
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ce9cfe48fc621f00800000000000000
+      internalID: 1086050273882578630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

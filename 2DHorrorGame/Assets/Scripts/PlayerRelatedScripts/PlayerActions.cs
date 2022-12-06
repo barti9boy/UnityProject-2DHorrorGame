@@ -103,10 +103,11 @@ public static class PlayerActions
                 }
             }
         }
-            if (player.currentState.inputManager.isInteractionButtonClicked)
+        if (player.currentState.inputManager.isInteractionButtonClicked)
         {
             if (collision.CompareTag("Ladder"))
             {
+                Debug.Log("interacted");
                 player.currentState.inputManager.isInteractionButtonClicked = false;
                 player.previousState = States.idle;
                 player.SwitchState(States.usingLadder, collision);
