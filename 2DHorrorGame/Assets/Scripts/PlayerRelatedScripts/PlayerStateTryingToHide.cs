@@ -127,50 +127,41 @@ public class PlayerStateTryingToHide : PlayerStateBase
         }
         if (isTryingToHide)
         {
-            if (player.photonView.IsMine)
-                hideout.PlayHidingAnim();
-
-            OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
-            WaitUntilAnimated();
-        }
-        if (isHiding)
-        {
-            if (player.photonView.IsMine)
-                hideout.PlayHiddenAnim();
-
-            if (hideoutTag == "Table")
-            {
-                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-                flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
-                player.previousState = States.tryingToHide;
-                player.SwitchState(States.hiding, hideoutCollider);
-                isHiding = false;
-            }
-            else
-            {
-                playerSpriteRenderer.sortingOrder = -7;
-                flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
-                flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
-                flashlight.transform.position = playerTransform.position;
-                player.previousState = States.tryingToHide;
-                player.SwitchState(States.hiding, hideoutCollider);
-                isHiding = false;
-            }
-
-        }
-    }
-
-    public void WaitUntilAnimated()
-    {
-        timer += Time.deltaTime;
-
-        if (timer >= hideout.hiding.length)
-        {
+            StartGettingInside(player);
             isTryingToHide = false;
-            isHiding = true;
         }
     }
 
+    private void StartGettingInside(PlayerStateMachine player)
+    {
+        if (player.photonView.IsMine)
+            hideout.PlayHidingAnim();
+
+        OnEnterStateHiding?.Invoke(this, new OnEnterStateHidingEventArgs { hideoutFurnitureTag = hideoutTag });
+        CoroutineHandler.Instance.StartCoroutine(CoroutineHandler.Instance.WaitUntilAnimated(hideout.hiding.length, () => GetInside(player)));
+    }
+
+    private void GetInside(PlayerStateMachine player)
+    {
+        if (hideoutTag == "Table")
+        {
+            flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+            flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
+            player.previousState = States.tryingToHide;
+            player.SwitchState(States.hiding, hideoutCollider);
+            isHiding = false;
+        }
+        else
+        {
+            playerSpriteRenderer.sortingOrder = -7;
+            flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
+            flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
+            flashlight.transform.position = playerTransform.position;
+            player.previousState = States.tryingToHide;
+            player.SwitchState(States.hiding, hideoutCollider);
+            isHiding = false;
+        }
+    }
 
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)

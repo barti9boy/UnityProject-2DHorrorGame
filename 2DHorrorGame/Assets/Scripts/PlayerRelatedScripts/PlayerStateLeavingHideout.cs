@@ -108,9 +108,6 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         player.previousState = States.leavingHideout;
         player.SwitchState(States.idle);
         isHidden = false;
-
-        if (player.photonView.IsMine)
-            hideout.EndAllAnim();
     }
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)

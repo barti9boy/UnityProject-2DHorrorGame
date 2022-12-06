@@ -24,7 +24,6 @@ public class HideoutScript : MonoBehaviour
     private PhotonView photonView;
 
     private int animIDHiding;
-    private int animIDHidden;
     private int animIDLeaving;
 
     private void Awake()
@@ -40,55 +39,49 @@ public class HideoutScript : MonoBehaviour
 
     private void AssignAnimationIDs()
     {
-        animIDHiding = Animator.StringToHash("isHiding");
-        animIDHidden = Animator.StringToHash("isHidden");
-        animIDLeaving = Animator.StringToHash("isLeaving");
+        animIDHiding = Animator.StringToHash("TriggerHide");
+        animIDLeaving = Animator.StringToHash("TriggerLeave");
     }
 
     public void PlayHidingAnim()
     {
-        animator.SetBool(animIDHiding, true);
-        animator.SetBool(animIDHidden, false);
-        animator.SetBool(animIDLeaving, false);
-
-    }
-    public void PlayHiddenAnim()
-    {
-        animator.SetBool(animIDHiding, false);
-        animator.SetBool(animIDHidden, true);
-        animator.SetBool(animIDLeaving, false);
+        animator.SetTrigger(animIDHiding);
+        animator.ResetTrigger(animIDLeaving);
+        photonView.RPC("RPC_PlayHidingAnim", RpcTarget.Others, photonView.ViewID);
+        Debug.Log("PlayHidingAnim RPC sent");
     }
 
     public void PlayLeaveAnim()
     {
-        animator.SetBool(animIDHiding, false);
-        animator.SetBool(animIDHidden, false);
-        animator.SetBool(animIDLeaving, true);
+        animator.SetTrigger(animIDLeaving);
+        animator.ResetTrigger(animIDHiding);
+        photonView.RPC("RPC_PlayLeaveAnim", RpcTarget.Others, photonView.ViewID);
+        Debug.Log("PlayLeaveAnim RPC sent");
     }
 
-    public void EndAllAnim()
+
+
+    [PunRPC]
+    private void RPC_PlayHidingAnim(int viewID)
     {
-        animator.SetBool(animIDHiding, false);
-        animator.SetBool(animIDHidden, false);
-        animator.SetBool(animIDLeaving, false);
+        if (photonView.ViewID == viewID)
+        {
+            animator.SetTrigger(animIDHiding);
+            animator.ResetTrigger(animIDLeaving);
+            Debug.Log("PlayHidingAnim RPC recieved");
+        }
     }
 
-
-
-
-    //[PunRPC]
-    //private void RPC_PlayGetIntoAnimation(int viewID) 
-    //{
-    //    if(photonView.ViewID == viewID)
-    //        PlayGetIntoAnimation();
-    //}
-
-    //[PunRPC]
-    //private void RPC_PlayGetOutAnimation(int viewID)
-    //{
-    //    if (photonView.ViewID == viewID)
-    //        PlayGetOutAnimation();
-    //}
+    [PunRPC]
+    private void RPC_PlayLeaveAnim(int viewID)
+    {
+        if (photonView.ViewID == viewID)
+        {
+            animator.SetTrigger(animIDLeaving);
+            animator.ResetTrigger(animIDHiding);
+            Debug.Log("PlayLeaveAnim RPC recieved");
+        }
+    }
 
 
 
