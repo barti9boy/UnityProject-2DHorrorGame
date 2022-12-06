@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Monster1StateMachine : MonoBehaviour
 {
-    [SerializeField] GameObject flashlight;
     [SerializeField] LayerMask playerMask;
     public Monster1StateBase previousState;
     public Monster1StateBase currentState;
@@ -34,67 +33,128 @@ public class Monster1StateMachine : MonoBehaviour
 
     void Update()
     {
-        if (isLookingForAPlayer)
+        //if (isLookingForAPlayer)
+        //{
+        if (currentState == chasingState)
         {
-
-            if (flashlight.activeSelf == true)
+            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 10.0f, playerMask);
+            //Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
+            if (hitPlayer)
             {
-                if (currentState == chasingState)
+                if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
                 {
-                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 10.0f, playerMask);
-                    Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
-                    if (hitPlayer.collider == null)
+                    if (player.flashlight.gameObject.activeInHierarchy)
                     {
-                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
-                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
-                        //Debug.Log(hitPlayer.collider);
+                        Debug.Log("Player hit front with flashlight on");
+                    }
+                    else
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 5.0f, playerMask);
+                        if (hitPlayer)
+                        {
+                            Debug.Log("Player hit front with flashlight off");
+                        }
                     }
                 }
                 else
                 {
-                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
-                    Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
-                    if (hitPlayer.collider == null)
-                    {
-                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
-                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
-                        //Debug.Log(hitPlayer.collider);
-                    }
+                    Debug.Log("Raycast hit something other than player");
                 }
             }
+
             else
             {
-                if (currentState == chasingState)
+                hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 5.0f, playerMask);
+                //Debug.DrawRay(this.transform.position, -this.transform.right * 5.0f);
+                if (hitPlayer)
                 {
-                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
-                    Debug.DrawRay(this.transform.position, this.transform.right * 8.0f);
-                    if (hitPlayer.collider == null)
+                    if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
                     {
-                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
-                        Debug.DrawRay(this.transform.position, -this.transform.right * 3.0f);
-                        //Debug.Log(hitPlayer.collider);
+                        if (player.flashlight.gameObject.activeInHierarchy)
+                        {
+                            Debug.Log("Player hit back with flashlight on");
+                        }
+                        else
+                        {
+                            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 3.0f, playerMask);
+                            if (hitPlayer)
+                            {
+                                Debug.Log("Player hit back with flashlight off");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Raycast hit something other than player");
+                    }
+                }
+            }
+        }
+
+        else
+        {
+            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
+            //Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
+            if (hitPlayer)
+            {
+                if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
+                {
+                    if (player.flashlight.gameObject.activeInHierarchy)
+                    {
+                        Debug.Log("Player hit front with flashlight on");
+                    }
+                    else
+                    {
+                        hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 4.0f, playerMask);
+                        if (hitPlayer)
+                        {
+                            Debug.Log("Player hit front with flashlight off");
+                        }
                     }
                 }
                 else
                 {
-                    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 4.0f, playerMask);
-                    Debug.DrawRay(this.transform.position, this.transform.right * 4.0f);
-                    if (hitPlayer.collider == null)
-                    {
-                        hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 2.0f, playerMask);
-                        Debug.DrawRay(this.transform.position, -this.transform.right * 2.0f);
-                        //Debug.Log(hitPlayer.collider);
-                    }
+                    Debug.Log("Raycast hit something other than player");
+                }
+            }
 
+            else
+            {
+                hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
+                //Debug.DrawRay(this.transform.position, -this.transform.right * 5.0f);
+                if (hitPlayer)
+                {
+                    if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
+                    {
+                        if (player.flashlight.gameObject.activeInHierarchy)
+                        {
+                            Debug.Log("Player hit back with flashlight on");
+                        }
+                        else
+                        {
+                            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 2.0f, playerMask);
+                            if (hitPlayer)
+                            {
+                                Debug.Log("Player hit back with flashlight off");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Raycast hit something other than player");
+                    }
                 }
             }
         }
-        else
-        {
-            hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right,0.5f, playerMask);
-            Debug.DrawRay(this.transform.position, this.transform.right * 0.5f);
-        }
         currentState.UpdateState(this, hitPlayer);
+
+
+        //}
+        //else
+        //{
+        //    hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right,0.5f, playerMask);
+        //    Debug.DrawRay(this.transform.position, this.transform.right * 0.5f);
+        //}
     }
 
     public void SwitchState(Monster1StateBase state, RaycastHit2D hitPlayer, Collider2D collision = null)
