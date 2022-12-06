@@ -39,8 +39,9 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - RPC_PlayHidingAnim
+  - RPC_PlayLeaveAnim
   - RPC_SwitchState
-  - RPC_Leave
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

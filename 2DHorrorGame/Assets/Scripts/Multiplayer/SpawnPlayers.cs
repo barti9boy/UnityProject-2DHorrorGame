@@ -23,12 +23,10 @@ public class SpawnPlayers : MonoBehaviour
     public Image itemImage2;
 
     /*-----Cameras-----*/
-    public GameObject roomCamerasPrefab;
-    private GameObject roomCameras;
+    public GameObject roomCameras;
 
     private void Awake()
     {
-        roomCameras = PhotonNetwork.Instantiate(roomCamerasPrefab.name, Vector2.zero, Quaternion.identity);
         Vector2 randomSpawnPosition = new Vector2(UnityEngine.Random.Range(minX, maxX), playerSpawnHeight);
         player = PhotonNetwork.Instantiate(playerPrefab.name, randomSpawnPosition, Quaternion.identity);
         player.GetComponent<PlayerInventory>().inventoryItems[0] = itemImage0;
