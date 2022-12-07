@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void Awake()
     {
+
     }
     private void Start()
     {
@@ -70,17 +71,29 @@ public class PlayerInventory : MonoBehaviour
         PlayerBatteries++;
         //Update Batteries UI
     }
-    public void ChangeBattery()
+    public void TryChangeBattery()
     {
-        PlayerBatteries--;
+        int i = 0;
+        foreach (var item in items)
+        {
+            if (item.DisplayName == "Battery")
+            {
+                DestroyItemFromInventory(i);
+                PlayerBatteries--;
+            }
+            i++;
+        }
         //Update Batteries UI
     }
     public void RemoveItemFromInventory(int slotNumber)
     {
         if(items[slotNumber] != null)
         {
-        items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
-        items[slotNumber] = null;
+            if(items[slotNumber].DisplayName == "Battery")
+                PlayerBatteries--;
+
+            items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
+            items[slotNumber] = null;
         }
     }
 

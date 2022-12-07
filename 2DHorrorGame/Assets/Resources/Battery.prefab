@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5265402015532430492}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  interactionTextContent: 
 --- !u!58 &83186419
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ GameObject:
   - component: {fileID: -2475862819304744619}
   m_Layer: 0
   m_Name: Battery
-  m_TagString: Battery
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,8 +190,8 @@ SpriteRenderer:
   m_SortingLayerID: 1768864685
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7192f159cbd16f849affcadecb648923, type: 3}
-  m_Color: {r: 1, g: 0.586016, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
+  m_Color: {r: 1, g: 0.9980392, b: 0.995283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   displayName: Battery
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
   pickupAnimationClip: {fileID: 7400000, guid: 11a43bdb65666834d9b56a1ed94d0acc, type: 2}
 --- !u!114 &-2475862819304744619
 MonoBehaviour:

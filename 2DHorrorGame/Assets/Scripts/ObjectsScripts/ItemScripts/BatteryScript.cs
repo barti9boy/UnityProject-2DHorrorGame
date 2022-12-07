@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbScript : MonoBehaviour, IPickableObject
+public class BatteryScript : MonoBehaviour, IPickableObject
 {
     [SerializeField] private int itemID;
     [SerializeField] private string displayName;

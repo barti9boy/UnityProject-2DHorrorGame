@@ -82,7 +82,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 if (currentState.playerInventory.PlayerBatteries != 0)
                 {
-                    currentState.playerInventory.ChangeBattery();
+                    currentState.playerInventory.TryChangeBattery();
                     batteryTimer = 0;
                 }
                 else

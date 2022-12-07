@@ -32,17 +32,16 @@ public class PlayerStateItemPickup : PlayerStateBase
         inputManager.movementInputEnabled = false;
         OnEnterStateItemPickup?.Invoke(this, EventArgs.Empty);
         item = collision;
-        if (!collision.CompareTag("Battery"))
-        {
-            canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
-        }
-        else
+        //if (!collision.CompareTag("Battery"))
+        //{
+        canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
+        if(collision.TryGetComponent(out BatteryScript battery))
         {
             player.currentState.playerInventory.AddBateryToInventory();
             collision.gameObject.SetActive(false);
             player.flashlightOutOfBattery = false;
         }
-
+        //}
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
