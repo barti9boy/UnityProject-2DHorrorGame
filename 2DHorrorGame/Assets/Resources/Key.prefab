@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: Hideout
   m_EditorClassIdentifier: 
   itemID: 0
-  displayName: Name
+  displayName: Key
   inventoryIcon: {fileID: 21300000, guid: 1fdc290a710622245926c08a9c68c9ee, type: 3}
   pickupAnimationClip: {fileID: 7400000, guid: 11a43bdb65666834d9b56a1ed94d0acc, type: 2}
 --- !u!114 &7428130498156946535
@@ -356,6 +356,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5334976815553623248}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   interactionTextContent: 
+  isTextActive: 0
 --- !u!1 &7821905804314417139
 GameObject:
   m_ObjectHideFlags: 0

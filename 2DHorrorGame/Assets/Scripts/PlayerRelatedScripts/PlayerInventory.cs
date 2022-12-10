@@ -76,12 +76,15 @@ public class PlayerInventory : MonoBehaviour
         int i = 0;
         foreach (var item in items)
         {
-            if (item.DisplayName == "Battery")
+            if(item != null)
             {
-                DestroyItemFromInventory(i);
-                PlayerBatteries--;
+                if (item.DisplayName == "Battery")
+                {
+                    DestroyItemFromInventory(i);
+                    PlayerBatteries--;
+                }
+                i++;
             }
-            i++;
         }
         //Update Batteries UI
     }

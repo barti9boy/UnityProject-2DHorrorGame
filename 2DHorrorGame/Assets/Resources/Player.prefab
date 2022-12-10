@@ -646,15 +646,51 @@ MonoBehaviour:
     m_ActionId: ae5c36de-bc8e-4539-ace4-c731bf7cd582
     m_ActionName: PlayerActionMap/Interaction[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412985718357133979}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Inventory1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 506a58be-0073-4937-9712-261767953d7f
     m_ActionName: PlayerActionMap/Inventory1[/Keyboard/1]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412985718357133979}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Inventory2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b145d6dc-2507-4fdb-b7a0-00707ae0baa3
     m_ActionName: PlayerActionMap/Inventory2[/Keyboard/2]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412985718357133979}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Inventory3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c33caacb-d80a-4174-98d2-ef4af560b450
     m_ActionName: PlayerActionMap/Inventory3[/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0

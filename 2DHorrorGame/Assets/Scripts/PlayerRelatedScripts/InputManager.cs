@@ -107,28 +107,37 @@ public class InputManager : MonoBehaviour
 
     public void Inventory1(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (view.IsMine)
         {
-            OnInventoryButtonClicked?.Invoke(0);
-            Debug.Log("Item1 dropped");
+            if (context.performed)
+            {
+                OnInventoryButtonClicked?.Invoke(0);
+                Debug.Log("Item1 dropped");
+            }
         }
     }
 
     public void Inventory2(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (view.IsMine)
         {
-            OnInventoryButtonClicked?.Invoke(1);
-            Debug.Log("Item2 dropped");
+            if (context.performed)
+            {
+                OnInventoryButtonClicked?.Invoke(1);
+                Debug.Log("Item2 dropped");
+            }
         }
     }
 
     public void Inventory3(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (view.IsMine)
         {
-            OnInventoryButtonClicked?.Invoke(2);
-            Debug.Log("Item3 dropped");
+            if (context.performed)
+            {
+                OnInventoryButtonClicked?.Invoke(2);
+                Debug.Log("Item3 dropped");
+            }
         }
     }
     IEnumerator ClickDuration(float s)
