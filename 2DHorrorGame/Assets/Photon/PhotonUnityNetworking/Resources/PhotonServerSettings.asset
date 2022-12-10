@@ -47,6 +47,7 @@ MonoBehaviour:
   - RPC_PlayCloseDoorAnim
   - RPC_PlayCloseAnim
   - RPC_PlayOpenAnim
+  - RPC_ResetTrigger
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

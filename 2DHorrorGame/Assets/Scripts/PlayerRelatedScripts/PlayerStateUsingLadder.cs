@@ -186,6 +186,10 @@ public class PlayerStateUsingLadder : PlayerStateBase
         {
             if (isVentEntrance) 
             {
+                if (!player.isFacingRight)
+                {
+                    ForceFlip(player);
+                }
                 OnGoIntoVents?.Invoke(this, EventArgs.Empty);
                 if (player.photonView.IsMine) ladder.PlayOpenAnim();
                 isTimerOn = true;

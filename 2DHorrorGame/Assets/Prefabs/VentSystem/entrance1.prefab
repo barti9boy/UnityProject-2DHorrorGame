@@ -163,8 +163,9 @@ MonoBehaviour:
   isEntrance: 1
   DownPoint: {fileID: 3030744146730547231}
   UpPoint: {fileID: 3030744146868505377}
-  usingVentEntraceAnimation: {fileID: 0}
-  usingVentExitAnimation: {fileID: 0}
+  usingVentEntraceAnimation: {fileID: 7400000, guid: 1c4d35538b579db4e87b4c5f2523901e, type: 2}
+  usingVentExitAnimation: {fileID: 7400000, guid: 1c91e7e581a453c41852872e0d145d9f, type: 2}
+  ventEntranceAnimation: {fileID: 7400000, guid: e021b79817ce1ab47a887ffc4451f137, type: 2}
 --- !u!61 &3030744146914831296
 BoxCollider2D:
   m_ObjectHideFlags: 0

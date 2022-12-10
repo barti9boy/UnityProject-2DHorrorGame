@@ -11,6 +11,8 @@ public class LadderScript : MonoBehaviour
     [SerializeField] public Transform UpPoint;
     public AnimationClip usingVentEntraceAnimation;
     public AnimationClip usingVentExitAnimation;
+    public AnimationClip ventEntranceAnimation;
+
 
     private Animator animator;
     private PhotonView photonView;
@@ -37,10 +39,18 @@ public class LadderScript : MonoBehaviour
     public void PlayOpenAnim()
     {
         animator.SetTrigger(animIDOpen);
-        animator.ResetTrigger(animIDOpen);
         //animator.ResetTrigger(animIDClose);
         photonView.RPC("RPC_PlayOpenAnim", RpcTarget.Others, photonView.ViewID);
         Debug.Log("PlayOpenAnim RPC sent");
+        CoroutineHandler.Instance.WaitUntilAnimated(ventEntranceAnimation.length, () => ResetTrigger());
+
+    }
+
+    private void ResetTrigger()
+    {
+        animator.ResetTrigger(animIDOpen);
+        photonView.RPC("RPC_ResetTrigger", RpcTarget.Others, photonView.ViewID);
+        Debug.Log("ResetTrigger RPC sent");
     }
 
     //public void PlayCloseAnim()
@@ -58,6 +68,17 @@ public class LadderScript : MonoBehaviour
             animator.SetTrigger(animIDOpen);
             //animator.ResetTrigger(animIDClose);
             Debug.Log("PlayOpenAnim RPC recieved");
+        }
+    }
+
+    [PunRPC]
+    private void RPC_ResetTrigger(int viewID) 
+    {
+        if (photonView.ViewID == viewID)
+        {
+            animator.ResetTrigger(animIDOpen);
+            //animator.ResetTrigger(animIDClose);
+            Debug.Log("ResetTrigger RPC recieved");
         }
     }
 

@@ -22,6 +22,12 @@ public static class PlayerActions
         }
     }
 
+    public static void ForceFlip(PlayerStateMachine player)
+    {
+        player.transform.Rotate(0.0f, 180.0f, 0.0f);
+        player.isFacingRight = !player.isFacingRight;
+    }
+
     public static void Flashlight(PlayerStateMachine player)
     {
         if (player.currentState.inputManager.isFlashlightButtonClicked && !player.flashlightOutOfBattery)
