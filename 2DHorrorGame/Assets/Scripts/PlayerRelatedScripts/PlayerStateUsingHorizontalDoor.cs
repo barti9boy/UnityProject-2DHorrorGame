@@ -18,6 +18,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     private float leftPointX;
     private Collider2D doorCollider;
     private Animator doorAnimator;
+    private DoorScript hDoors;
 
 
     //----------door interaction variables----------//
@@ -43,6 +44,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         timer = 0;
+        hDoors = collision.GetComponent<DoorScript>();
         doorAnimator = collision.GetComponent<Animator>();
         openingAnimation = collision.GetComponent<DoorScript>().doorOpeningAnimation;
         itemIdToUnlock = collision.GetComponent<DoorScript>().itemIdToUnlock;
@@ -76,8 +78,8 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
             velocityDirection = -1;
         }
         OnOpeningHorizontalDoor.Invoke(this, EventArgs.Empty);
-        doorAnimator.SetBool("isOpened", true);
-        
+        if (player.photonView.IsMine) hDoors.PlayOpenDoorAnim();
+
 
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
@@ -92,7 +94,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 {
                     isChangingRoom = false;
                     interactible.EnableInteractionHighlight();
-                    doorAnimator.SetBool("isOpened", false);
+                    if (player.photonView.IsMine) hDoors.PlayCloseDoorAnim();
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
@@ -107,7 +109,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                 {
                     isChangingRoom = false;
                     interactible.EnableInteractionHighlight();
-                    doorAnimator.SetBool("isOpened", false);
+                    if (player.photonView.IsMine) hDoors.PlayCloseDoorAnim();
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;

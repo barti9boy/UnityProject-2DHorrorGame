@@ -12,8 +12,10 @@ public class InteractionHighlight : MonoBehaviour
     public Material material;
     private float colorAlpha = 0.15f;
 
+    
     private TextMeshProUGUI interactionText;
     [SerializeField] private string interactionTextContent;
+    [SerializeField] private bool isTextActive;
     private void Awake()
     {
         spriteRenderer.sprite = GetComponentInParent<SpriteRenderer>().sprite;
@@ -33,6 +35,7 @@ public class InteractionHighlight : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             spriteRenderer.enabled = true;
+            if(isTextActive)
             interactionText.gameObject.SetActive(true);
         }
     }

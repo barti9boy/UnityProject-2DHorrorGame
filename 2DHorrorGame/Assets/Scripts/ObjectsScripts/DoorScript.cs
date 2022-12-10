@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class DoorScript : MonoBehaviour, IInteractible
 {
@@ -23,16 +24,68 @@ public class DoorScript : MonoBehaviour, IInteractible
 
     private Collider2D doorCollider;
     private string doorTag;
-     
+
+    private Animator animator;
+    private int animOpenDoor;
+    private int animCloseDoor;
+
+    private PhotonView photonView;
+
+
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
+        animator = GetComponent<Animator>();
         doorCollider = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
         if (!isLocked) isOpened = false;
         unlockingCanvasImageTransform = gameObject.transform.GetChild(3).GetChild(0);
         unlockingCanvasBackgroundTransform = gameObject.transform.GetChild(3).GetChild(1);
-        doorTag = gameObject.tag;
+    }
+    private void Start()
+    {
+        AssignAnimationIDs();
     }
 
+    private void AssignAnimationIDs()
+    {
+        animOpenDoor = Animator.StringToHash("TriggerOpenDoor");
+        animCloseDoor = Animator.StringToHash("TriggerCloseDoor");
+    }
+    public void PlayOpenDoorAnim()
+    {
+        animator.SetTrigger(animOpenDoor);
+        animator.ResetTrigger(animCloseDoor);
+        photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
+        Debug.Log("PlayOpenDoorAnim RPC sent");
+    }
+    public void PlayCloseDoorAnim()
+    {
+        animator.SetTrigger(animCloseDoor);
+        animator.ResetTrigger(animOpenDoor);
+        photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
+        Debug.Log("PlayOpenDoorAnim RPC sent");
+    }
+
+    [PunRPC]
+    private void RPC_PlayOpenDoorAnim(int viewID)
+    {
+        if (photonView.ViewID == viewID)
+        {
+            animator.SetTrigger(animOpenDoor);
+            animator.ResetTrigger(animCloseDoor);
+            Debug.Log("PlayOpenDoorAnim RPC recieved");
+        }
+    }
+    [PunRPC]
+    private void RPC_PlayCloseDoorAnim(int viewID)
+    {
+        if (photonView.ViewID == viewID)
+        {
+            animator.SetTrigger(animCloseDoor);
+            animator.ResetTrigger(animOpenDoor);
+            Debug.Log("PlayCloseDoorAnim RPC recieved");
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))

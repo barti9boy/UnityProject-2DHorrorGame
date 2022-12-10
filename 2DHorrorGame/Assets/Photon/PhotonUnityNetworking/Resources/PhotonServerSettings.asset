@@ -42,6 +42,11 @@ MonoBehaviour:
   - RPC_PlayHidingAnim
   - RPC_PlayLeaveAnim
   - RPC_SwitchState
+  - RPC_PlayDoorOpenAnim
+  - RPC_PlayOpenDoorAnim
+  - RPC_PlayCloseDoorAnim
+  - RPC_PlayCloseAnim
+  - RPC_PlayOpenAnim
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

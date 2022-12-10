@@ -22,6 +22,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     //----------door interaction variables----------//
     private float timer;
 
+    private DoorScript vDoors;
     private bool isChangingRoomUsingVerticalDoor;
     private bool isChangingRoomUsingHorizontalDoor;
     private bool isEnteringAnotherRoom;
@@ -47,6 +48,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     {
         // itemIdToUnlock = collision.GetComponent<DoorScript>().itemIdToUnlock;
         //s unlockTimeRequired = collision.GetComponent<DoorScript>().unlockTimeRequired;
+        vDoors = collision.GetComponent<DoorScript>();
         timer = 0;
         verticalDoorPoint = collision.gameObject.transform.GetChild(0).transform.position;
         horizontalDoorPointIn = collision.gameObject.transform.GetChild(1).transform.position;
@@ -188,7 +190,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                 //}
             }
             horizontalDoorCollider.enabled = false;
-            horizontalDoorAnimator.SetBool("isOpened", true);
+            if (player.photonView.IsMine) vDoors.PlayOpenDoorAnim();
             if (isEnteringAnotherRoom)
             {
 
@@ -204,14 +206,14 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     player.previousState = States.usingVerticalDoor;
                     player.SwitchState(States.idle);
                     horizontalDoorCollider.enabled = true;
-                    horizontalDoorAnimator.SetBool("isOpened", false);
+                    if (player.photonView.IsMine) vDoors.PlayCloseDoorAnim();
                 }
             }
         }
         else if (isChangingRoomUsingHorizontalDoor)
         {
             OnOpeningHorizontalDoor.Invoke(this, EventArgs.Empty);
-            horizontalDoorAnimator.SetBool("isOpened", true);
+            if (player.photonView.IsMine) vDoors.PlayOpenDoorAnim();
             WaitUntilAnimated();
             rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
             if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.25)
@@ -224,7 +226,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                 inputManager.movementInputEnabled = true;
                 inputManager.interactionInputEnabled = true;
                 horizontalDoorCollider.enabled = true;
-                horizontalDoorAnimator.SetBool("isOpened", false);
+                if (player.photonView.IsMine) vDoors.PlayCloseDoorAnim();
                 // doorCollider.enabled = true;
             }
         }
