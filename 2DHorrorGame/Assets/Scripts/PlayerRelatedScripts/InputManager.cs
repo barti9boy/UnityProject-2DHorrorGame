@@ -84,23 +84,23 @@ public class InputManager : MonoBehaviour
         if(view.IsMine)
         {
             Debug.Log("Interaction performed");
-            if(context.performed && interactionInputEnabled)
+            if (context.performed && interactionInputEnabled)
             {
-                if(context.performed && interactionInputEnabled)
+                if (context.performed && interactionInputEnabled)
                 {
                     isInteractionButtonClicked = true;
                     StartCoroutine(ClickDuration(0.1f));
                     //inspector sometimes does not register bool change and does not tick the box, but this works correctly
-                
+
                 }
-                if(context.performed && interactionInputEnabled)
+                if (context.performed && interactionInputEnabled)
                 {
                     isInteractionButtonHeld = true;
                 }
-                if (context.canceled)
-                {
-                    isInteractionButtonHeld = false;
-                }
+            }
+            else if (context.canceled)
+            {
+                isInteractionButtonHeld = false;
             }
         }
     }
