@@ -37,6 +37,7 @@ public class LadderScript : MonoBehaviour
     public void PlayOpenAnim()
     {
         animator.SetTrigger(animIDOpen);
+        animator.ResetTrigger(animIDOpen);
         //animator.ResetTrigger(animIDClose);
         photonView.RPC("RPC_PlayOpenAnim", RpcTarget.Others, photonView.ViewID);
         Debug.Log("PlayOpenAnim RPC sent");
