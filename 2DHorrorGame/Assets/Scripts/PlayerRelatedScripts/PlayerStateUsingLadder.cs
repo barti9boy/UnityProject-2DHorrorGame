@@ -15,6 +15,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
     private float ladderDownPointY;
 
     //------------ladder interaction phases variables------------//
+    private LadderScript ladder;
     private bool isApproachingLadder;
     private bool isGoingUp;
     private bool isGoingDown;
@@ -46,17 +47,18 @@ public class PlayerStateUsingLadder : PlayerStateBase
     }
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
+        ladder = collision.GetComponent<LadderScript>();
         timer = 0;
         usingVentEntranceAnimation = collision.GetComponent<LadderScript>().usingVentEntraceAnimation;
         //on EnterState get ladder components, set up ladder and player variables 
         isApproachingLadder = false;
         isGoingUp = false;
         isGoingDown = false;
-        isVentEntrance = collision.GetComponent<LadderScript>().isEntrance;
+        isVentEntrance = ladder.isEntrance;
         ladderMiddleX = collision.gameObject.transform.position.x;
         ladderMiddleY = collision.gameObject.transform.position.y;
-        ladderUpPointY = collision.GetComponent<LadderScript>().UpPoint.transform.position.y;
-        ladderDownPointY = collision.GetComponent<LadderScript>().DownPoint.transform.position.y;
+        ladderUpPointY = ladder.UpPoint.transform.position.y;
+        ladderDownPointY = ladder.DownPoint.transform.position.y;
 
         if (playerTransform.position.x < ladderMiddleX)
         {
@@ -95,7 +97,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
                 {
-                    PrepareToUseLadder();
+                    PrepareToUseLadder(player);
                 }
             }
             if (velocityDirection == -1 && playerTransform.position.x > ladderMiddleX)
@@ -103,7 +105,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
                 if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
                 {
-                    PrepareToUseLadder();
+                    PrepareToUseLadder(player);
                 }
             }
         }
@@ -176,7 +178,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
             }
         }
     }
-    public void PrepareToUseLadder()
+    public void PrepareToUseLadder(PlayerStateMachine player)
     {
         flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
         isApproachingLadder = false;
@@ -190,7 +192,8 @@ public class PlayerStateUsingLadder : PlayerStateBase
 
             }
             else
-            { 
+            {
+                if (player.photonView.IsMine) ladder.PlayOpenAnim();
                 isGoingDown = true;
             }
             
