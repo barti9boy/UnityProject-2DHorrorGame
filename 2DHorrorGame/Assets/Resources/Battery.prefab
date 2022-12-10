@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5265402015532430492}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  interactionTextContent: 
+  isTextActive: 0
 --- !u!58 &83186419
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,8 +191,8 @@ SpriteRenderer:
   m_SortingLayerID: 1768864685
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7192f159cbd16f849affcadecb648923, type: 3}
-  m_Color: {r: 1, g: 0.586016, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
