@@ -187,13 +187,12 @@ public class PlayerStateUsingLadder : PlayerStateBase
             if (isVentEntrance) 
             {
                 OnGoIntoVents?.Invoke(this, EventArgs.Empty);
+                if (player.photonView.IsMine) ladder.PlayOpenAnim();
                 isTimerOn = true;
-
 
             }
             else
             {
-                if (player.photonView.IsMine) ladder.PlayOpenAnim();
                 isGoingDown = true;
             }
             
