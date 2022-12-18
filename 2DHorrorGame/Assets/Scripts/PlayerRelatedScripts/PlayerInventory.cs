@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ItemEventArgs
 {
@@ -16,6 +17,7 @@ public class PlayerInventory : MonoBehaviour
     public IPickableObject[] items;
     public Image[] inventoryItems;
 
+    private PhotonView photonView;
     private int inventorySlotCount = 3;
     private ItemEventArgs args;
     public int PlayerBatteries { get; private set; } = 0;
@@ -36,6 +38,7 @@ public class PlayerInventory : MonoBehaviour
             inventoryItems[slotNumber].enabled = false;
             inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
         }
+        photonView = GetComponent<PhotonView>();
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += DestroyItemFromInventory;
@@ -97,6 +100,8 @@ public class PlayerInventory : MonoBehaviour
 
             items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
             items[slotNumber] = null;
+            photonView.RPC("RPC_RemoveItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+
         }
     }
 
@@ -106,7 +111,14 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
-
+    [PunRPC]
+    private void RPC_RemoveItemFromInventory(int viewId, int slotNumber)
+    {
+        if(photonView.ViewID == viewId)
+        {
+            RemoveItemFromInventory(slotNumber);
+        }
+    }
 
 
     public void DebugLogInventory()
