@@ -35,6 +35,7 @@ public class PlayerUIScript : MonoBehaviour
         {
             image.enabled = false;
         }
+        PlayerInventory.OnBatteryChanged += RemoveItemFromInventory;
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += RemoveItemFromInventory;
@@ -44,6 +45,7 @@ public class PlayerUIScript : MonoBehaviour
     {
         player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
         player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+        PlayerInventory.OnBatteryChanged -= RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
         InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked -= RemoveItemFromInventory;

@@ -14,6 +14,7 @@ public class ItemEventArgs
 
 public class PlayerInventory : MonoBehaviour
 {
+    public static Action<int> OnBatteryChanged;
     public IPickableObject[] items;
     public Image[] inventoryItems;
 
@@ -84,10 +85,12 @@ public class PlayerInventory : MonoBehaviour
                 if (item.DisplayName == "Battery")
                 {
                     DestroyItemFromInventory(i);
+                    OnBatteryChanged(i);
                     PlayerBatteries--;
+                    break;
                 }
-                i++;
             }
+            i++;
         }
         //Update Batteries UI
     }
@@ -107,7 +110,13 @@ public class PlayerInventory : MonoBehaviour
 
     public void DestroyItemFromInventory(int slotNumber)
     {
-        items[slotNumber].DestroyItem();
+        if(items[slotNumber] != null)
+        {
+            Debug.Log($"Item {items[slotNumber]} destroyed");
+            items[slotNumber].DestroyItem();
+            items[slotNumber] = null;
+            photonView.RPC("RPC_DestroyItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+        }
     }
 
 
@@ -117,6 +126,16 @@ public class PlayerInventory : MonoBehaviour
         if(photonView.ViewID == viewId)
         {
             RemoveItemFromInventory(slotNumber);
+        }
+    }
+
+    [PunRPC]
+    private void RPC_DestroyItemFromInventory(int viewId, int slotNumber)
+    {
+        if (photonView.ViewID == viewId)
+        {
+            items[slotNumber].DestroyItem();
+            items[slotNumber] = null;
         }
     }
 

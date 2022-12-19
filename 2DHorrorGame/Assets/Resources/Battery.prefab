@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e766a29f5b83b468a8b8f96b46f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 99
   displayName: Battery
   inventoryIcon: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
   pickupAnimationClip: {fileID: 7400000, guid: 11a43bdb65666834d9b56a1ed94d0acc, type: 2}
