@@ -77,12 +77,12 @@ public class PlayerInventory : MonoBehaviour
     }
     public void TryChangeBattery()
     {
-        int i = 0;
-        foreach (var item in items)
+        
+        for(int i = 2; i >= 0; i--)
         {
-            if(item != null)
+            if(items[i] != null)
             {
-                if (item.DisplayName == "Battery")
+                if (items[i].DisplayName == "Battery")
                 {
                     DestroyItemFromInventory(i);
                     OnBatteryChanged(i);
@@ -90,7 +90,6 @@ public class PlayerInventory : MonoBehaviour
                     break;
                 }
             }
-            i++;
         }
         //Update Batteries UI
     }

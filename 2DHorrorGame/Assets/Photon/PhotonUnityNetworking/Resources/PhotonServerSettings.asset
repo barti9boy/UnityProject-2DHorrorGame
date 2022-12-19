@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPC_PlayOpenAnim
   - RPC_ResetTrigger
   - RPC_RemoveItemFromInventory
+  - RPC_DestroyItemFromInventory
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
