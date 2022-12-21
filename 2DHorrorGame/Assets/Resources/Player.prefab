@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 0}
   previousState: 0
+  inputManager: {fileID: 0}
   flashlight: {fileID: 8031757334689842023}
   flashlightOutOfBattery: 1
   batteryTimer: 30
@@ -567,6 +568,7 @@ MonoBehaviour:
   isInteractionButtonHeld: 0
   movementInputEnabled: 1
   interactionInputEnabled: 1
+  inventoryButtonEnabled: 1
 --- !u!114 &1412985718357133981
 MonoBehaviour:
   m_ObjectHideFlags: 0
