@@ -32,13 +32,14 @@ public class SpawnPlayers : MonoBehaviour
         player.GetComponent<PlayerInventory>().inventoryItems[0] = itemImage0;
         player.GetComponent<PlayerInventory>().inventoryItems[1] = itemImage1;
         player.GetComponent<PlayerInventory>().inventoryItems[2] = itemImage2;
-        foreach(CinemachineVirtualCamera cam in roomCameras.GetComponentsInChildren<CinemachineVirtualCamera>())
-        {
-            cam.Follow = player.transform;
-        }
+        
     }
     private void Start()
     {
+        foreach (CinemachineVirtualCamera cam in roomCameras.GetComponentsInChildren<CinemachineVirtualCamera>())
+        {
+            cam.Follow = player.transform;
+        }
         OnPlayerLoaded?.Invoke(this, player);
     }
 }

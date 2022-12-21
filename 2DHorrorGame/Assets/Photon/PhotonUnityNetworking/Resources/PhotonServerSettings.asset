@@ -48,6 +48,8 @@ MonoBehaviour:
   - RPC_PlayCloseAnim
   - RPC_PlayOpenAnim
   - RPC_ResetTrigger
+  - RPC_OnPlayerLeave
+  - RPC_OnPlayerStand
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

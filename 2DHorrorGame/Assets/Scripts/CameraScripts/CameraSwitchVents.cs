@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Photon.Pun;
 
 public class CameraSwitchVents : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class CameraSwitchVents : MonoBehaviour
     [SerializeField] float middleOfTheTriggger;
     [SerializeField] GameObject monster;
     private Monster1StateMachine monsterScript;
-
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class CameraSwitchVents : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PhotonView>().IsMine)
         {
             if (collision.transform.position.y > middleOfTheTriggger)
             {

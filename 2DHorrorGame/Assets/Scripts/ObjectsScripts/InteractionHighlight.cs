@@ -26,9 +26,13 @@ public class InteractionHighlight : MonoBehaviour
     }
     private void Start()
     {
-        interactionText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        interactionText.gameObject.SetActive(false);
-        interactionText.text = interactionTextContent;
+        if (isTextActive)
+        {
+            interactionText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+            interactionText.gameObject.SetActive(false);
+            interactionText.text = interactionTextContent;
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
