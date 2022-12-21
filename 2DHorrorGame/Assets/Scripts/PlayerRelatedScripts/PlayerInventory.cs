@@ -28,7 +28,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void Awake()
     {
-
+        photonView = GetComponent<PhotonView>();
     }
     private void Start()
     {
@@ -46,7 +46,6 @@ public class PlayerInventory : MonoBehaviour
         args = new ItemEventArgs();
         items = new IPickableObject[inventorySlotCount];
 
-        photonView = GetComponent<PhotonView>();
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += DestroyItemFromInventory;
