@@ -33,10 +33,12 @@ public class FlashlightScript : MonoBehaviour
 
     public void TurnFlashlightOnOff(bool isOn)
     {
-        Debug.Log($"Flashlight {isOn}");
-        gameObject.SetActive(isOn);
         if(photonView.IsMine)
+        {
+            Debug.Log($"Flashlight {isOn}");
+            gameObject.SetActive(isOn);
             photonView.RPC("RPC_TurnFlashlightOnOff", RpcTarget.Others, photonView.ViewID, isOn);
+        }
     }
 
 
