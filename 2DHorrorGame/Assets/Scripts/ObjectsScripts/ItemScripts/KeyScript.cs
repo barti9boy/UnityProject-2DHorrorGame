@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class KeyScript : MonoBehaviour, IPickableObject
 {
@@ -17,12 +18,16 @@ public class KeyScript : MonoBehaviour, IPickableObject
 
     public AnimationClip PickupAnimationClip { get; private set; }
 
+    public PhotonView PhotonView { get; private set; }
+
+
     private void Awake()
     {
         ItemID = itemID;
         DisplayName = displayName;
         InventoryIcon = inventoryIcon;
         PickupAnimationClip = pickupAnimationClip;
+        PhotonView = GetComponent<PhotonView>();
     }
     public void ChangePosition(float x, float y) //function used to drop item from inventory in correct place
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public interface IPickableObject
 {
@@ -18,6 +19,10 @@ public interface IPickableObject
         get;
     }
     public AnimationClip PickupAnimationClip
+    {
+        get;
+    }
+    public PhotonView PhotonView
     {
         get;
     }

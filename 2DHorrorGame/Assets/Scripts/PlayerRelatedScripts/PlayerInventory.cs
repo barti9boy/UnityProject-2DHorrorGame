@@ -34,10 +34,13 @@ public class PlayerInventory : MonoBehaviour
     {
         args = new ItemEventArgs();
         items = new IPickableObject[inventorySlotCount];
-        for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
+        if (photonView.IsMine)
         {
-            inventoryItems[slotNumber].enabled = false;
-            inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
+            for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
+            {
+                inventoryItems[slotNumber].enabled = false;
+                inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
+            }
         }
         photonView = GetComponent<PhotonView>();
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
@@ -100,9 +103,10 @@ public class PlayerInventory : MonoBehaviour
             if(items[slotNumber].DisplayName == "Battery")
                 PlayerBatteries--;
 
+            int itemViewId = items[slotNumber].PhotonView.ViewID;
             items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
             items[slotNumber] = null;
-            photonView.RPC("RPC_RemoveItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+            photonView.RPC("RPC_RemoveItemFromInventory", RpcTarget.Others, photonView.ViewID, itemViewId);
 
         }
     }
@@ -112,29 +116,31 @@ public class PlayerInventory : MonoBehaviour
         if(items[slotNumber] != null)
         {
             Debug.Log($"Item {items[slotNumber]} destroyed");
+            int itemViewId = items[slotNumber].PhotonView.ViewID;
             items[slotNumber].DestroyItem();
             items[slotNumber] = null;
-            photonView.RPC("RPC_DestroyItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+            photonView.RPC("RPC_DestroyItemFromInventory", RpcTarget.Others, photonView.ViewID, itemViewId);
         }
     }
 
 
     [PunRPC]
-    private void RPC_RemoveItemFromInventory(int viewId, int slotNumber)
+    private void RPC_RemoveItemFromInventory(int viewId, int itemViewId)
     {
         if(photonView.ViewID == viewId)
         {
-            RemoveItemFromInventory(slotNumber);
+            var item = PhotonView.Find(itemViewId);
+            item.GetComponent<IPickableObject>().ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f);
         }
     }
 
     [PunRPC]
-    private void RPC_DestroyItemFromInventory(int viewId, int slotNumber)
+    private void RPC_DestroyItemFromInventory(int viewId, int itemViewId)
     {
         if (photonView.ViewID == viewId)
         {
-            items[slotNumber].DestroyItem();
-            items[slotNumber] = null;
+            var item = PhotonView.Find(itemViewId);
+            item.GetComponent<IPickableObject>().DestroyItem();
         }
     }
 
