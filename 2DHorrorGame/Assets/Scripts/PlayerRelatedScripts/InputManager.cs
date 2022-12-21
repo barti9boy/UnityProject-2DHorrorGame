@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public bool isInteractionButtonHeld;
     public bool movementInputEnabled = true;
     public bool interactionInputEnabled = true;
+    public bool inventoryButtonEnabled = true;
     private bool isInventory1ButtonClicked;
     public float InteractionTime { get; private set; }
 
@@ -109,7 +110,7 @@ public class InputManager : MonoBehaviour
 
     public void Inventory1(InputAction.CallbackContext context)
     {
-        if (view.IsMine)
+        if (view.IsMine && inventoryButtonEnabled)
         {
             if (context.performed)
             {
@@ -121,7 +122,7 @@ public class InputManager : MonoBehaviour
 
     public void Inventory2(InputAction.CallbackContext context)
     {
-        if (view.IsMine)
+        if (view.IsMine && inventoryButtonEnabled)
         {
             if (context.performed)
             {
@@ -133,7 +134,7 @@ public class InputManager : MonoBehaviour
 
     public void Inventory3(InputAction.CallbackContext context)
     {
-        if (view.IsMine)
+        if (view.IsMine && inventoryButtonEnabled)
         {
             if (context.performed)
             {

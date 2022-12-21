@@ -33,6 +33,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerStateUsingVerticalDoor usingVerticalDoorState;
     public PlayerStateItemPickup itemPickupState;
 
+    public InputManager inputManager;
     public FlashlightScript flashlight;
     public bool flashlightOutOfBattery;
     public float batteryTimer;
@@ -48,6 +49,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         flashlight = transform.GetComponentInChildren<FlashlightScript>();
+        inputManager = GetComponent<InputManager>();
         idleState = new PlayerStateIdle(gameObject);
         movingState = new PlayerStateMoving(gameObject);
         hidingState = new PlayerStateHiding(gameObject);
@@ -131,6 +133,14 @@ public class PlayerStateMachine : MonoBehaviour
             Debug.Log($"Sent state {state}, colliderID {colliderID}");
         }
 
+        if(state == States.idle || state == States.moving)
+        {
+            inputManager.inventoryButtonEnabled = true;
+        }
+        else
+        {
+            inputManager.inventoryButtonEnabled = false;
+        }
         currentState = newState;
         newState.EnterState(this, collider);
     }
