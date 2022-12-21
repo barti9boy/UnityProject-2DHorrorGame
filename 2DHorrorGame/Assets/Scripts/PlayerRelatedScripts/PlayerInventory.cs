@@ -133,7 +133,7 @@ public class PlayerInventory : MonoBehaviour
         if(photonView.ViewID == viewId)
         {
             var item = PhotonView.Find(itemViewId);
-            item.GetComponent<IPickableObject>().ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f);
+            item.gameObject.SetActive(true);
         }
     }
 
