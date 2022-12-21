@@ -32,11 +32,11 @@ public static class PlayerActions
     {
         if (player.currentState.inputManager.isFlashlightButtonClicked && !player.flashlightOutOfBattery)
         {
-            player.currentState.flashlight.SetActive(true);
+            player.flashlight.TurnFlashlightOnOff(true);
         }
         else if (!player.currentState.inputManager.isFlashlightButtonClicked)
         {
-            player.currentState.flashlight.SetActive(false);
+            player.flashlight.TurnFlashlightOnOff(false);
         }
     }
     public static void Interact(PlayerStateMachine player, Collider2D collision)

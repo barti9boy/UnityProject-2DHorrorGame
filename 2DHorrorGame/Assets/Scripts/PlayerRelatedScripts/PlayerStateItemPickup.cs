@@ -47,7 +47,11 @@ public class PlayerStateItemPickup : PlayerStateBase
     {
         rb.velocity = new Vector2(0, 0);
         timer += Time.deltaTime;
-        if(timer >= pickupAnimation.length/1.66 && canPickupItem) item.gameObject.SetActive(false);
+        if(timer >= pickupAnimation.length/1.66 && canPickupItem)
+        {
+            item.gameObject.SetActive(false);
+            canPickupItem = false;
+        }
         if (timer >= pickupAnimation.length)
         {
             player.SwitchState(player.previousState);

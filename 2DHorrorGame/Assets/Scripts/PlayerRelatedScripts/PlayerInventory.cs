@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ItemEventArgs
 {
@@ -13,9 +14,11 @@ public class ItemEventArgs
 
 public class PlayerInventory : MonoBehaviour
 {
+    public static Action<int> OnBatteryChanged;
     public IPickableObject[] items;
     public Image[] inventoryItems;
 
+    private PhotonView photonView;
     private int inventorySlotCount = 3;
     private ItemEventArgs args;
     public int PlayerBatteries { get; private set; } = 0;
@@ -36,6 +39,7 @@ public class PlayerInventory : MonoBehaviour
             inventoryItems[slotNumber].enabled = false;
             inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
         }
+        photonView = GetComponent<PhotonView>();
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
         DoorScript.OnDoorUnlocked += DestroyItemFromInventory;
@@ -73,17 +77,18 @@ public class PlayerInventory : MonoBehaviour
     }
     public void TryChangeBattery()
     {
-        int i = 0;
-        foreach (var item in items)
+        
+        for(int i = 2; i >= 0; i--)
         {
-            if(item != null)
+            if(items[i] != null)
             {
-                if (item.DisplayName == "Battery")
+                if (items[i].DisplayName == "Battery")
                 {
                     DestroyItemFromInventory(i);
+                    OnBatteryChanged(i);
                     PlayerBatteries--;
+                    break;
                 }
-                i++;
             }
         }
         //Update Batteries UI
@@ -97,16 +102,41 @@ public class PlayerInventory : MonoBehaviour
 
             items[slotNumber].ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f); //1.07 is the distance from playerObject to floor
             items[slotNumber] = null;
+            photonView.RPC("RPC_RemoveItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+
         }
     }
 
     public void DestroyItemFromInventory(int slotNumber)
     {
-        items[slotNumber].DestroyItem();
+        if(items[slotNumber] != null)
+        {
+            Debug.Log($"Item {items[slotNumber]} destroyed");
+            items[slotNumber].DestroyItem();
+            items[slotNumber] = null;
+            photonView.RPC("RPC_DestroyItemFromInventory", RpcTarget.Others, photonView.ViewID, slotNumber);
+        }
     }
 
 
+    [PunRPC]
+    private void RPC_RemoveItemFromInventory(int viewId, int slotNumber)
+    {
+        if(photonView.ViewID == viewId)
+        {
+            RemoveItemFromInventory(slotNumber);
+        }
+    }
 
+    [PunRPC]
+    private void RPC_DestroyItemFromInventory(int viewId, int slotNumber)
+    {
+        if (photonView.ViewID == viewId)
+        {
+            items[slotNumber].DestroyItem();
+            items[slotNumber] = null;
+        }
+    }
 
 
     public void DebugLogInventory()

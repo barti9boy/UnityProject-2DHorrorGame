@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1768864685
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7192f159cbd16f849affcadecb648923, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
   m_Color: {r: 1, g: 0.58431375, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029514071651293351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.342, y: -1.935, z: 0}
+  m_LocalPosition: {x: 0, y: 0.378, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8064287113388299676}
@@ -201,7 +201,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!70 &3029514071651293346
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e766a29f5b83b468a8b8f96b46f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 99
   displayName: Battery
   inventoryIcon: {fileID: 21300000, guid: 81aabb1c50ac3124c9af77ffb8a6a4a4, type: 3}
   pickupAnimationClip: {fileID: 7400000, guid: 11a43bdb65666834d9b56a1ed94d0acc, type: 2}
