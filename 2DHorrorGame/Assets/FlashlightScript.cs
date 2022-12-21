@@ -48,7 +48,7 @@ public class FlashlightScript : MonoBehaviour
     {
         if (photonView.ViewID == viewId)
         {
-            TurnFlashlightOnOff(isOn);
+            gameObject.SetActive(isOn);
         }
     }
 }

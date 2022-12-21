@@ -70,7 +70,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start()
     {
-        flashlight.TurnFlashlightOnOff(false);
+        flashlight.gameObject.SetActive(false);
     }
 
 
