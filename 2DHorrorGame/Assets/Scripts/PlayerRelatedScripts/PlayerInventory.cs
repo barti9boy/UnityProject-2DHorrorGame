@@ -101,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public void RemoveItemFromInventory(int slotNumber)
     {
-        if(items[slotNumber] != null)
+        if(items[slotNumber] != null && photonView.IsMine)
         {
             if(items[slotNumber].DisplayName == "Battery")
                 PlayerBatteries--;
@@ -116,7 +116,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void DestroyItemFromInventory(int slotNumber)
     {
-        if(items[slotNumber] != null)
+        if(items[slotNumber] != null && photonView.IsMine)
         {
             Debug.Log($"Item {items[slotNumber]} destroyed");
             int itemViewId = items[slotNumber].PhotonView.ViewID;
@@ -133,7 +133,7 @@ public class PlayerInventory : MonoBehaviour
         if(photonView.ViewID == viewId)
         {
             var item = PhotonView.Find(itemViewId);
-            item.gameObject.SetActive(true);
+            item.GetComponent<IPickableObject>().ChangePosition(this.gameObject.transform.position.x, this.transform.position.y - 1.07f);
         }
     }
 
