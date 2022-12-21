@@ -35,7 +35,7 @@ public class PlayerStateMoving : PlayerStateBase
             rb.velocity = new Vector2(movementSpeed * inputManager.movementInputDirection, 0);
         }
         PlayerActions.Flip(player);
-        PlayerActions.Flashlight(player);
+        //PlayerActions.Flashlight(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {

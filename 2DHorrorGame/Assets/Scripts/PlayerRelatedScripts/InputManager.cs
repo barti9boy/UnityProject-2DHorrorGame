@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     public float InteractionTime { get; private set; }
 
     public static Action<int> OnInventoryButtonClicked;
+    public static Action<bool> OnFlashlightButtonClicked;
 
     private PhotonView view;
 
@@ -71,6 +72,7 @@ public class InputManager : MonoBehaviour
             if (context.started)
             {
                 isFlashlightButtonClicked = !isFlashlightButtonClicked;
+                OnFlashlightButtonClicked?.Invoke(isFlashlightButtonClicked);
             }
         }
     }

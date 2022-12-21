@@ -65,6 +65,12 @@ public class PlayerStateMachine : MonoBehaviour
         timeOfBattery = 10;
         batteryTimer = 0;
         CreateDictionary();
+
+    }
+
+    private void Start()
+    {
+        flashlight.TurnFlashlightOnOff(false);
     }
 
 

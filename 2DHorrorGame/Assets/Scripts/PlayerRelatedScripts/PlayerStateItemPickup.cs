@@ -57,7 +57,7 @@ public class PlayerStateItemPickup : PlayerStateBase
             player.SwitchState(player.previousState);
             inputManager.movementInputEnabled = true;
         }
-        PlayerActions.Flashlight(player);
+        //PlayerActions.Flashlight(player);
         PlayerActions.Flip(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)

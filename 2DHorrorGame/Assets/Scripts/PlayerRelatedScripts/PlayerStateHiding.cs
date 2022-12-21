@@ -49,7 +49,7 @@ public class PlayerStateHiding : PlayerStateBase
             inputManager.isInteractionButtonClicked = false;
 
         }
-        PlayerActions.Flashlight(player);
+        //PlayerActions.Flashlight(player);
         // Flip();
        
 

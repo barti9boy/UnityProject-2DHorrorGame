@@ -12,7 +12,7 @@ public class PlayerStateIdle : PlayerStateBase
         playerInput = playerObject.GetComponent<PlayerInput>();
         inputManager = playerObject.GetComponent<InputManager>();
         playerTransform = playerObject.GetComponent<Transform>();
-        flashlight = playerObject.transform.GetChild(1).gameObject;
+        flashlight = playerObject.transform.GetComponentInChildren<FlashlightScript>().gameObject;
         playerGFX = playerObject.transform.GetChild(0).gameObject;
         playerSpriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         playerInventory = playerObject.GetComponent<PlayerInventory>();
@@ -34,7 +34,7 @@ public class PlayerStateIdle : PlayerStateBase
             player.previousState = States.idle;
             player.SwitchState(States.moving);
         }
-        PlayerActions.Flashlight(player);
+        //PlayerActions.Flashlight(player);
     }
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {

@@ -23,18 +23,26 @@ public class FlashlightScript : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        InputManager.OnFlashlightButtonClicked += TurnFlashlightOnOff;
     }
+
+    private void OnDestroy()
+    {
+        InputManager.OnFlashlightButtonClicked -= TurnFlashlightOnOff;
+    }
+
     public void TurnFlashlightOnOff(bool isOn)
     {
+        Debug.Log($"Flashlight {isOn}");
         gameObject.SetActive(isOn);
         if(photonView.IsMine)
-            photonView.RPC("RPC_RemoveItemFromInventory", RpcTarget.Others, photonView.ViewID, isOn);
+            photonView.RPC("RPC_TurnFlashlightOnOff", RpcTarget.Others, photonView.ViewID, isOn);
     }
 
 
 
     [PunRPC]
-    private void RPC_RemoveItemFromInventory(int viewId, bool isOn)
+    private void RPC_TurnFlashlightOnOff(int viewId, bool isOn)
     {
         if (photonView.ViewID == viewId)
         {
