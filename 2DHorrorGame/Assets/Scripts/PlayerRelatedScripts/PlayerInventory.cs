@@ -32,16 +32,20 @@ public class PlayerInventory : MonoBehaviour
     }
     private void Start()
     {
-        args = new ItemEventArgs();
-        items = new IPickableObject[inventorySlotCount];
         if (photonView.IsMine)
         {
-            for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
+            if (photonView.IsMine)
             {
-                inventoryItems[slotNumber].enabled = false;
-                inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
+                for (int slotNumber = 0; slotNumber < inventorySlotCount; slotNumber++)
+                {
+                    inventoryItems[slotNumber].enabled = false;
+                    inventoryItems[slotNumber].GetComponent<InventoryItemScript>().slotNumber = slotNumber;
+                }
             }
         }
+        args = new ItemEventArgs();
+        items = new IPickableObject[inventorySlotCount];
+
         photonView = GetComponent<PhotonView>();
         InventoryItemScript.OnItemDrop += RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked += RemoveItemFromInventory;
