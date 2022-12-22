@@ -22,9 +22,12 @@ public class HideoutScript : MonoBehaviour
     [SerializeField] public AnimationClip hiding;
 
     private PhotonView photonView;
-
     private int animIDHiding;
     private int animIDLeaving;
+
+    private bool isTaken;
+    public bool IsTaken { get => isTaken; set => isTaken = value; }
+
 
     private void Awake()
     {
@@ -45,6 +48,7 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayHidingAnim()
     {
+        isTaken = true;
         animator.SetTrigger(animIDHiding);
         animator.ResetTrigger(animIDLeaving);
         photonView.RPC("RPC_PlayHidingAnim", RpcTarget.Others, photonView.ViewID);
@@ -53,6 +57,7 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayLeaveAnim()
     {
+        isTaken = false;
         animator.SetTrigger(animIDLeaving);
         animator.ResetTrigger(animIDHiding);
         photonView.RPC("RPC_PlayLeaveAnim", RpcTarget.Others, photonView.ViewID);
@@ -66,6 +71,7 @@ public class HideoutScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            isTaken = true;
             animator.SetTrigger(animIDHiding);
             animator.ResetTrigger(animIDLeaving);
             Debug.Log("PlayHidingAnim RPC recieved");
@@ -77,6 +83,7 @@ public class HideoutScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            isTaken = false;
             animator.SetTrigger(animIDLeaving);
             animator.ResetTrigger(animIDHiding);
             Debug.Log("PlayLeaveAnim RPC recieved");

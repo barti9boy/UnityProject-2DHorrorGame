@@ -62,10 +62,13 @@ public static class PlayerActions
 
             if (collision.CompareTag("Hideout") || collision.CompareTag("Closet") || collision.CompareTag("Table"))
             {
-                player.currentState.inputManager.movementInputEnabled = false;
-                player.previousState = States.idle;
-                player.currentState.inputManager.isInteractionButtonClicked = false;
-                player.SwitchState(States.tryingToHide, collision);
+                if(collision.TryGetComponent(out HideoutScript hideout) && hideout.IsTaken == false) ;
+                {
+                    player.currentState.inputManager.movementInputEnabled = false;
+                    player.previousState = States.idle;
+                    player.currentState.inputManager.isInteractionButtonClicked = false;
+                    player.SwitchState(States.tryingToHide, collision);
+                }
             }
             if (collision.CompareTag("Switch"))
             {
