@@ -17,6 +17,7 @@ public class PressurePlateDoorScript : MonoBehaviour
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider2D>();
         foreach(PressurePlateScript plate in pressurePlates)
@@ -51,14 +52,14 @@ public class PressurePlateDoorScript : MonoBehaviour
     {
         animator.SetTrigger(animOpenDoor);
         animator.ResetTrigger(animCloseDoor);
-        photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.All, photonView.ViewID);
+        photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
         Debug.Log("PlayOpenDoorAnim RPC sent");
     }
     public void PlayCloseDoorAnim()
     {
         animator.SetTrigger(animCloseDoor);
         animator.ResetTrigger(animOpenDoor);
-        photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.All, photonView.ViewID);
+        photonView.RPC("RPC_PlayCloseDoorAnim", RpcTarget.Others, photonView.ViewID);
         Debug.Log("PlayOpenDoorAnim RPC sent");
     }
 
