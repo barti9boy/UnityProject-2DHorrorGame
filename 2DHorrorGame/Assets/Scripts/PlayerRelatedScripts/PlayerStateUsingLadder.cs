@@ -86,10 +86,6 @@ public class PlayerStateUsingLadder : PlayerStateBase
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {
-        if(isTimerOn)
-        {
-            WaitUntilAnimated();
-        }
         if(isApproachingLadder)
         {
             if (velocityDirection == 1 && playerTransform.position.x < ladderMiddleX)
@@ -126,7 +122,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
                 if (isVentEntrance)
                 {
-                    player.isInVent = !player.isInVent;
+                    player.isInVent = true;
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
@@ -160,7 +156,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
                 flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
                 if (isVentEntrance)
                 {
-                    player.isInVent = !player.isInVent;
+                    player.isInVent = false;
                     OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
                 }
                 OnFinishClimbing?.Invoke(this, EventArgs.Empty);
@@ -184,16 +180,23 @@ public class PlayerStateUsingLadder : PlayerStateBase
         isApproachingLadder = false;
         if (playerTransform.position.y > ladderMiddleY)
         {
-            if (isVentEntrance) 
+            if (isVentEntrance)
             {
                 if (!player.isFacingRight)
                 {
                     ForceFlip(player);
                 }
                 OnGoIntoVents?.Invoke(this, EventArgs.Empty);
-                if (player.photonView.IsMine) ladder.PlayOpenAnim();
-                isTimerOn = true;
 
+                if (player.photonView.IsMine)
+                    ladder.PlayOpenAnim();
+
+                CoroutineHandler.Instance.StartCoroutine(CoroutineHandler.Instance.WaitUntilAnimated(usingVentEntranceAnimation.length, () =>
+                    {
+                        isGoingDown = true;
+                        timer = 0;
+                        player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.LadderPosition);
+                    }));
             }
             else
             {
@@ -201,22 +204,15 @@ public class PlayerStateUsingLadder : PlayerStateBase
             }
             
         }
-        if (playerTransform.position.y < ladderMiddleY) isGoingUp = true;
+        else
+        {
+            isGoingUp = true;
+            player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.LadderPosition);
+        }
+
         rb.velocity = new Vector2(0f, 0f);
     }
 
-
-    public void WaitUntilAnimated()
-    {
-        timer += Time.deltaTime;
-
-        if (timer >= usingVentEntranceAnimation.length)
-        {
-            isGoingDown = true;
-            timer = 0;
-            isTimerOn = false;
-        }
-    }
 
     public override void OnCollisionEnter(PlayerStateMachine player, Collision2D collision)
     {

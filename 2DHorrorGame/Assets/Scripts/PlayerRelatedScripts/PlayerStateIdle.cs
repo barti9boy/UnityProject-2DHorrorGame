@@ -23,7 +23,11 @@ public class PlayerStateIdle : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
-        player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.StandingPosition);
+        if(player.isInVent)
+            player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.VentPosition);
+        else
+            player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.StandingPosition);
+
         //Debug.Log("Hello from idle state");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
