@@ -257,21 +257,24 @@ public class PlayerGFXScript : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        animator.SetBool("isMoving", isMoving);
-        animator.SetBool("isIdle", isIdle);
-        animator.SetBool("isHidden", isHidden);
-        animator.SetBool("isHiding", isHiding);
-        animator.SetBool("isLeaving", isLeaving);
-        animator.SetBool("isClimbingDown", isClimbingDown);
-        animator.SetBool("isClimbingUp", isClimbingUp);
-        animator.SetBool("isInVent", isInVent);
-        animator.SetBool("isEnteringVent", isEnteringVent);
-        animator.SetBool("isExitingVent", isExitingVents);
-        animator.SetBool("isPickingUpItem", isPickingUpItem);
-        animator.SetBool("isOpeningHorizontalDoor", isOpeningHorizontalDoor);
-        animator.SetBool("isHideout", isHideout);
-        animator.SetBool("isCloset", isCloset);
-        animator.SetBool("isTable", isTable);
+        if (playerStateMachine.photonView.IsMine)
+        {
+            animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isIdle", isIdle);
+            animator.SetBool("isHidden", isHidden);
+            animator.SetBool("isHiding", isHiding);
+            animator.SetBool("isLeaving", isLeaving);
+            animator.SetBool("isClimbingDown", isClimbingDown);
+            animator.SetBool("isClimbingUp", isClimbingUp);
+            animator.SetBool("isInVent", isInVent);
+            animator.SetBool("isEnteringVent", isEnteringVent);
+            animator.SetBool("isExitingVent", isExitingVents);
+            animator.SetBool("isPickingUpItem", isPickingUpItem);
+            animator.SetBool("isOpeningHorizontalDoor", isOpeningHorizontalDoor);
+            animator.SetBool("isHideout", isHideout);
+            animator.SetBool("isCloset", isCloset);
+            animator.SetBool("isTable", isTable);
+        }
 
     }
 }

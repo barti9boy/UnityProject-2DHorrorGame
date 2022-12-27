@@ -62,8 +62,9 @@ public static class PlayerActions
 
             if (collision.CompareTag("Hideout") || collision.CompareTag("Closet") || collision.CompareTag("Table"))
             {
-                if(collision.TryGetComponent(out HideoutScript hideout) && hideout.IsTaken == false) ;
+                if(collision.TryGetComponent(out HideoutScript hideout) && hideout.IsTaken == false)
                 {
+                    Debug.Log($"IsTaken: {hideout.IsTaken}");
                     player.currentState.inputManager.movementInputEnabled = false;
                     player.previousState = States.idle;
                     player.currentState.inputManager.isInteractionButtonClicked = false;
