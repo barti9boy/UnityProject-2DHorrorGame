@@ -20,7 +20,12 @@ public class PlayerStateMoving : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         OnEnterStateMoving?.Invoke(this, EventArgs.Empty);
-        player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.WalkingPosition);
+        if(player.isInVent)
+            player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.VentPosition);
+        else
+        {
+            player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.WalkingPosition);
+        }
         //Debug.Log("Hello from moving state");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)

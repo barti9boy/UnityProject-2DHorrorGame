@@ -10,6 +10,8 @@ public class FlashlightScript : MonoBehaviour
         StandingPosition = 0,
         WalkingPosition = 1,
         SitingPosition = 2,
+        LadderPosition = 3,
+        VentPosition = 4
     }
 
     private PhotonView photonView;

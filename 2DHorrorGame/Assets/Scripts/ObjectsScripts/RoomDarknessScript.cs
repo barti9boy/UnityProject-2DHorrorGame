@@ -15,6 +15,7 @@ public class RoomDarknessScript : MonoBehaviour
             plate.OnPlayerStand += Plate_OnPlayerStand;
             plate.OnPlayerLeave += Plate_OnPlayerLeave;
         }
+        photonView = GetComponent<PhotonView>();
     }
 
     private void Plate_OnPlayerLeave(object sender, EventArgs e)

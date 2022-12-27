@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5265402015532430492}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  interactionTextContent: 
+  interactionTextContent: Battery
   isTextActive: 0
 --- !u!58 &83186419
 CircleCollider2D:
