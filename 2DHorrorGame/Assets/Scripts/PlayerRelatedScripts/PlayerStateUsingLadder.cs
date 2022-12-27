@@ -88,90 +88,66 @@ public class PlayerStateUsingLadder : PlayerStateBase
     {
         if(isApproachingLadder)
         {
-            if (velocityDirection == 1 && playerTransform.position.x < ladderMiddleX)
-            {
-                rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
-                {
-                    PrepareToUseLadder(player);
-                }
-            }
-            if (velocityDirection == -1 && playerTransform.position.x > ladderMiddleX)
-            {
-                rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - ladderMiddleX) < 0.25)
-                {
-                    PrepareToUseLadder(player);
-                }
-            }
+            CoroutineHandler.Instance.Lerp(playerTransform.position.x, ladderMiddleX, 5f, (newPosition) => playerTransform.position = new Vector2(newPosition, playerTransform.position.y),
+               (endPosition) => PrepareToUseLadder(player));
         }
         if(isGoingDown)
         {
             OnLadderMoveDown?.Invoke(this, EventArgs.Empty);
-            if (playerTransform.position.y > ladderDownPointY)
-            {
-                rb.velocity = new Vector2(0, -1f * movementSpeed);
-            }
-            if (playerTransform.position.y < ladderDownPointY)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x, ladderDownPointY);
-                isGoingDown = false;
-                isGoingUp = false;
-                inputManager.movementInputEnabled = true;
-                inputManager.interactionInputEnabled = true;
-                flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
-                if (isVentEntrance)
+            isGoingDown = false;
+            CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderDownPointY, 2.5f, (newPosition) => playerTransform.position = new Vector2(playerTransform.position.x, newPosition),
+                (endPosition) =>
                 {
-                    player.isInVent = true;
-                    OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
-                }
-                OnFinishClimbing?.Invoke(this, EventArgs.Empty);
-                if (player.isFacingRight)
-                {
-                    flashlight.transform.position = new Vector3(playerTransform.position.x + 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
-                }
-                else if (!player.isFacingRight)
-                {
-                    flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
-                }
-                playerTransform.position = new Vector2(playerTransform.position.x, ladderDownPointY);
-                player.previousState = States.usingLadder;
-                player.SwitchState(States.idle);
-            }
+                    inputManager.movementInputEnabled = true;
+                    inputManager.interactionInputEnabled = true;
+                    flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+                    if (isVentEntrance)
+                    {
+                        player.isInVent = true;
+                        OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
+                    }
+                    OnFinishClimbing?.Invoke(this, EventArgs.Empty);
+                    if (player.isFacingRight)
+                    {
+                        flashlight.transform.position = new Vector3(playerTransform.position.x + 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
+                    }
+                    else if (!player.isFacingRight)
+                    {
+                        flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
+                    }
+                    playerTransform.position = new Vector2(playerTransform.position.x, ladderDownPointY);
+                    player.previousState = States.usingLadder;
+                    player.SwitchState(States.idle);
+                });
         }
         if(isGoingUp)
         {
             OnLadderMoveUp?.Invoke(this, EventArgs.Empty);
-            if (playerTransform.position.y < ladderUpPointY)
-            {
-                rb.velocity = new Vector2(0, 1f * movementSpeed);
-            }
-            if (playerTransform.position.y > ladderUpPointY)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x, ladderUpPointY);
-                isGoingUp = false;
-                isGoingDown = false;
-                inputManager.movementInputEnabled = true;
-                inputManager.interactionInputEnabled = true;
-                flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
-                if (isVentEntrance)
-                {
-                    player.isInVent = false;
-                    OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
-                }
-                OnFinishClimbing?.Invoke(this, EventArgs.Empty);
-                if (player.isFacingRight)
-                {
-                    flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
-                }
-                else if (!player.isFacingRight)
-                {
-                    flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
-                }
-                playerTransform.position = new Vector2(playerTransform.position.x, ladderUpPointY);
-                player.previousState = States.usingLadder;
-                player.SwitchState(States.idle);
-            }
+            isGoingUp = false;
+            CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderUpPointY, 2.5f, (newPosition) => playerTransform.position = new Vector2(playerTransform.position.x, newPosition),
+                 (endPosition) =>
+                 {
+                    inputManager.movementInputEnabled = true;
+                    inputManager.interactionInputEnabled = true;
+                    flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
+                    if (isVentEntrance)
+                    {
+                        player.isInVent = false;
+                        OnVentEnterOrLeave?.Invoke(this, EventArgs.Empty);
+                    }
+                    OnFinishClimbing?.Invoke(this, EventArgs.Empty);
+                    if (player.isFacingRight)
+                    {
+                        flashlight.transform.position = new Vector3(playerTransform.position.x + 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
+                    }
+                    else if (!player.isFacingRight)
+                    {
+                        flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
+                    }
+                    playerTransform.position = new Vector2(playerTransform.position.x, ladderUpPointY);
+                    player.previousState = States.usingLadder;
+                    player.SwitchState(States.idle);
+                 });
         }
     }
     public void PrepareToUseLadder(PlayerStateMachine player)
