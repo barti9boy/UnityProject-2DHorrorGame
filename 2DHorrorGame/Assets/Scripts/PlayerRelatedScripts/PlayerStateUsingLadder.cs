@@ -88,13 +88,14 @@ public class PlayerStateUsingLadder : PlayerStateBase
     {
         if(isApproachingLadder)
         {
+            isApproachingLadder = false;
             CoroutineHandler.Instance.Lerp(playerTransform.position.x, ladderMiddleX, 5f, (newPosition) => playerTransform.position = new Vector2(newPosition, playerTransform.position.y),
                (endPosition) => PrepareToUseLadder(player));
         }
         if(isGoingDown)
         {
-            OnLadderMoveDown?.Invoke(this, EventArgs.Empty);
             isGoingDown = false;
+            OnLadderMoveDown?.Invoke(this, EventArgs.Empty);
             CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderDownPointY, 2.5f, (newPosition) => playerTransform.position = new Vector2(playerTransform.position.x, newPosition),
                 (endPosition) =>
                 {
@@ -122,8 +123,8 @@ public class PlayerStateUsingLadder : PlayerStateBase
         }
         if(isGoingUp)
         {
-            OnLadderMoveUp?.Invoke(this, EventArgs.Empty);
             isGoingUp = false;
+            OnLadderMoveUp?.Invoke(this, EventArgs.Empty);
             CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderUpPointY, 2.5f, (newPosition) => playerTransform.position = new Vector2(playerTransform.position.x, newPosition),
                  (endPosition) =>
                  {
