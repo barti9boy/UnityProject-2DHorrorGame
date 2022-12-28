@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5334976815553623248}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  interactionTextContent: 
+  interactionTextContent: press "E" to pick up
   isTextActive: 0
 --- !u!1 &7821905804314417139
 GameObject:

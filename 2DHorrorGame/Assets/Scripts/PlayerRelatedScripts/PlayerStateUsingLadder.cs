@@ -82,6 +82,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
         }
         isApproachingLadder = true;
         OnStartMoving?.Invoke(this, EventArgs.Empty);
+        rb.velocity = Vector2.zero;
         //Debug.Log("ladderstate");
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
@@ -186,8 +187,6 @@ public class PlayerStateUsingLadder : PlayerStateBase
             isGoingUp = true;
             player.flashlight.ChangeFlashlightPosition(FlashlightScript.FlashlightPosition.LadderPosition);
         }
-
-        rb.velocity = new Vector2(0f, 0f);
     }
 
 
