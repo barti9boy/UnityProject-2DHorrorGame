@@ -14,9 +14,10 @@ public class InteractionHighlight : MonoBehaviour
 
     [SerializeField] private string interactionTextContent;
     [SerializeField] private bool isTextActive;
+    [SerializeField] private RectTransform canvasRect;
 
     private TextMeshProUGUI interactionText;
-
+    public RectTransform CanvasRect { get => canvasRect; set => canvasRect = value; }
     public TextMeshProUGUI InteractionText { get => interactionText; }
     private void Awake()
     {

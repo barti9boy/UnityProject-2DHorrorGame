@@ -96,9 +96,26 @@ public class DoorScript : MonoBehaviour, IInteractible
             Debug.Log("PlayCloseDoorAnim RPC recieved");
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
+        {
+            //on right
+            if(other.transform.position.x > transform.position.x)
+            {
+                highlight.CanvasRect.localPosition = new Vector3(1f, -0.5f, 0f);
+                Debug.Log(highlight.CanvasRect.localPosition);
+            }
+            else
+            {
+                highlight.CanvasRect.localPosition = new Vector3(-1f, -0.5f, 0f);
+                Debug.Log(highlight.CanvasRect.localPosition);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
         {
             interactionTime = 0;
         }

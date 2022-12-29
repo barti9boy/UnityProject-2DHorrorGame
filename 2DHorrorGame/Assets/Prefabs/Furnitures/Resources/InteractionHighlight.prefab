@@ -116,6 +116,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1314820866014153715}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   interactionTextContent: INTERACTION TEXT
+  isTextActive: 0
+  canvasRect: {fileID: 3902237731508831099}
 --- !u!1 &7276668353019777250
 GameObject:
   m_ObjectHideFlags: 0
