@@ -105,8 +105,8 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         }
         OnTurnOffFurnitureTag?.Invoke(this, EventArgs.Empty);
         inputManager.movementInputEnabled = true;
-        player.previousState = States.leavingHideout;
-        player.SwitchState(States.idle);
+        player.previousState = PlayerStates.leavingHideout;
+        player.SwitchState(PlayerStates.idle);
         isHidden = false;
     }
 
@@ -115,7 +115,7 @@ public class PlayerStateLeavingHideout : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

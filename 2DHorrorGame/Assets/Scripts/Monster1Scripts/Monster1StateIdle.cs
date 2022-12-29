@@ -19,7 +19,7 @@ public class Monster1StateIdle : Monster1StateBase
     }
 
 
-    public override void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         OnEnterStateIdle?.Invoke(this, EventArgs.Empty);
         //hitPlayer = monster1.previousState.hitPlayer;
@@ -27,7 +27,7 @@ public class Monster1StateIdle : Monster1StateBase
         timer = 0;
 
     }
-    public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0, 0);
 
@@ -45,16 +45,16 @@ public class Monster1StateIdle : Monster1StateBase
         //    Debug.Log(isFacingRight);
         //    Debug.Log("spotted player idle");
         //}
-        if (hitPlayer.collider != null)
+        if (monster1.hitPlayer.collider != null)
         {
             //Switch to chasing state
             monster1.previousState = this;
-            monster1.SwitchState(monster1.chasingState, hitPlayer);
+            monster1.SwitchState(MonsterStates.chasing);
 
         }
         else
         {
-            WaitUntilAnimated(monster1, hitPlayer);
+            WaitUntilAnimated(monster1);
         }
 
 
@@ -68,13 +68,13 @@ public class Monster1StateIdle : Monster1StateBase
     {
 
     }
-    public void WaitUntilAnimated(Monster1StateMachine monster1, RaycastHit2D hitPlayer)
+    public void WaitUntilAnimated(Monster1StateMachine monster1)
     {
         timer += Time.deltaTime;
         if (timer >= 2)
         {
             monster1.previousState = this;
-            monster1.SwitchState(monster1.patrollingState, hitPlayer);
+            monster1.SwitchState(MonsterStates.patrolling);
         }
     }
 }

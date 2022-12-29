@@ -118,8 +118,8 @@ public class PlayerStateUsingLadder : PlayerStateBase
                         flashlight.transform.position = new Vector3(playerTransform.position.x - 0.3f, playerTransform.position.y - 0.9f, playerTransform.position.z);
                     }
                     playerTransform.position = new Vector2(playerTransform.position.x, ladderDownPointY);
-                    player.previousState = States.usingLadder;
-                    player.SwitchState(States.idle);
+                    player.previousState = PlayerStates.usingLadder;
+                    player.SwitchState(PlayerStates.idle);
                 });
         }
         if(isGoingUp)
@@ -147,8 +147,8 @@ public class PlayerStateUsingLadder : PlayerStateBase
                         flashlight.transform.position = new Vector3(playerTransform.position.x - 0.375f, playerTransform.position.y - 0.4f, playerTransform.position.z);
                     }
                     playerTransform.position = new Vector2(playerTransform.position.x, ladderUpPointY);
-                    player.previousState = States.usingLadder;
-                    player.SwitchState(States.idle);
+                    player.previousState = PlayerStates.usingLadder;
+                    player.SwitchState(PlayerStates.idle);
                  });
         }
     }
@@ -194,7 +194,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

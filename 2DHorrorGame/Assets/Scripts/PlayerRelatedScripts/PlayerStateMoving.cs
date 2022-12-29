@@ -32,8 +32,8 @@ public class PlayerStateMoving : PlayerStateBase
     {
         if(inputManager.movementInputDirection == 0)
         {
-            player.previousState = States.moving;
-            player.SwitchState(States.idle);
+            player.previousState = PlayerStates.moving;
+            player.SwitchState(PlayerStates.idle);
         }
         else
         {
@@ -46,7 +46,7 @@ public class PlayerStateMoving : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

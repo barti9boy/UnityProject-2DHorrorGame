@@ -11,6 +11,7 @@ public class GameOverScript : MonoBehaviour
     private void Awake()
     {
         PlayerStateDead.OnGameOver += GameOver;
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -21,7 +22,9 @@ public class GameOverScript : MonoBehaviour
     public void GameOver()
     {
         gameObject.SetActive(true);
-        CoroutineHandler.Instance.WaitUntilAnimated(2f, () => RestartButton());
+        CoroutineHandler.Instance.WaitUntilAnimated(2f,
+            () => 
+            RestartButton());
     }
 
     public void RestartButton()

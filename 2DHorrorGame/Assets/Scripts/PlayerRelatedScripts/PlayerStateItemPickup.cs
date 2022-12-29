@@ -65,7 +65,7 @@ public class PlayerStateItemPickup : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

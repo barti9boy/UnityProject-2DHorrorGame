@@ -33,7 +33,7 @@ public class Monster1StatePatrolling : Monster1StateBase
     }
     //public event EventHandler OnEnterStatePatrolling;
 
-    public override void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         playerLayer = LayerMask.NameToLayer("Player");
         OnEnterStatePatrolling?.Invoke(this, EventArgs.Empty);
@@ -58,7 +58,7 @@ public class Monster1StatePatrolling : Monster1StateBase
             movementDirection = 1;
         }
     }
-    public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         raycastRange = new Vector2(monster1Transform.position.x - playerCheckDistance, 0);
         rb.velocity = new Vector2(movementDirection * movementSpeed, 0);
@@ -66,16 +66,16 @@ public class Monster1StatePatrolling : Monster1StateBase
         {
             m_PreviousWaypointIndex = m_CurrentWaypointIndex;
             monster1.previousState = this;
-            monster1.SwitchState(monster1.idleState, hitPlayer);
+            monster1.SwitchState(MonsterStates.idle);
         }
 
-        if (hitPlayer.collider != null)
+        if (monster1.hitPlayer.collider != null)
         {
             Debug.Log("spotted player patrolling");
 
             //Switch to chasing state
             monster1.previousState = this;
-            monster1.SwitchState(monster1.chasingState, hitPlayer);
+            monster1.SwitchState(MonsterStates.chasing);
 
         }
 

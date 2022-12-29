@@ -20,14 +20,14 @@ public class Monster1StateChasing : Monster1StateBase
         monster1SpriteRenderer = monster1GFX.GetComponent<SpriteRenderer>();
         rayStartTransform = monster1Object.transform.GetChild(2).transform;
     }
-    public override void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void EnterState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         //Get player position and flip if needed
         //hitPlayer = monster1.previousState.hitPlayer;
         waited = false;
         playerCollision = false;
         doorHit = false;
-        playerTransformX = hitPlayer.transform.position.x;
+        playerTransformX = monster1.hitPlayer.transform.position.x;
         isFacingRight = monster1.previousState.isFacingRight;
         timer1 = 0;
         timer2 = 0;
@@ -55,20 +55,20 @@ public class Monster1StateChasing : Monster1StateBase
 
 
     }
-    public override void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null)
+    public override void UpdateState(Monster1StateMachine monster1, Collider2D collision = null)
     {
         if (!waited)
         {
-            WaitBeforeChasing(monster1, hitPlayer, 2);
+            WaitBeforeChasing(monster1, monster1.hitPlayer, 2);
         }
 
 
         //Check if player is still in range, if not wait for a few seconds and come back to patrolling 
-        if (!hitPlayer && waited)
+        if (!monster1.hitPlayer && waited)
         {
             //rb.velocity = new Vector2(movementDirection * movementSpeed * 1.8f, 0);
-            WaitBeforeStopping(monster1, hitPlayer, 1.5f);
-            WaitUntilAnimated(monster1, hitPlayer, 4.5f);
+            WaitBeforeStopping(monster1, monster1.hitPlayer, 1.5f);
+            WaitUntilAnimated(monster1, monster1.hitPlayer, 4.5f);
 
         }
 
@@ -100,7 +100,7 @@ public class Monster1StateChasing : Monster1StateBase
         if (timer1 >= timeOfAnimation)
         {
             monster1.previousState = this;
-            monster1.SwitchState(monster1.idleState, hitPlayer);
+            monster1.SwitchState(MonsterStates.idle);
             timer1 = 0;
         }
     }

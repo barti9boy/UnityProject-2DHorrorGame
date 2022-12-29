@@ -44,8 +44,8 @@ public class PlayerStateHiding : PlayerStateBase
         if (inputManager.isInteractionButtonClicked)
         {
             playerCollider.enabled = true;
-            player.previousState = States.hiding;
-            player.SwitchState(States.leavingHideout, hideoutCollider);
+            player.previousState = PlayerStates.hiding;
+            player.SwitchState(PlayerStates.leavingHideout, hideoutCollider);
             inputManager.isInteractionButtonClicked = false;
 
         }
@@ -59,7 +59,7 @@ public class PlayerStateHiding : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

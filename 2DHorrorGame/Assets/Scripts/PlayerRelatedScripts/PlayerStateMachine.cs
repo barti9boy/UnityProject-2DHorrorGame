@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public enum States
+public enum PlayerStates
 {
     idle,
     moving,
@@ -20,7 +20,7 @@ public enum States
 public class PlayerStateMachine : MonoBehaviour
 {
     public GameOverScript GameOverScreen;
-    public States previousState;
+    public PlayerStates previousState;
     public PlayerStateBase currentState;
     public PlayerStateIdle idleState;
     public PlayerStateMoving movingState;
@@ -42,8 +42,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isInVent = false;
 
     public PhotonView photonView;
-    private Dictionary<States, PlayerStateBase> states =
-    new Dictionary<States, PlayerStateBase>();
+    private Dictionary<PlayerStates, PlayerStateBase> states;
 
     void Awake()
     {
@@ -60,14 +59,13 @@ public class PlayerStateMachine : MonoBehaviour
         usingHorizontalDoorState = new PlayerStateUsingHorizontalDoor(gameObject);
         usingVerticalDoorState = new PlayerStateUsingVerticalDoor(gameObject);
         itemPickupState = new PlayerStateItemPickup(gameObject);
-        previousState = States.idle;
+        previousState = PlayerStates.idle;
         currentState = idleState;
         currentState.EnterState(this);
         flashlightOutOfBattery = false;
         timeOfBattery = 10;
         batteryTimer = 0;
         CreateDictionary();
-
     }
 
     private void Start()
@@ -114,15 +112,15 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 collider = PhotonView.Find(colliderID).GetComponent<Collider2D>();
                 Debug.Log($"Collider hit {collider.gameObject.name}");
-                SwitchState((States)state, collider);
+                SwitchState((PlayerStates)state, collider);
             }
             else
-                SwitchState((States)state);
+                SwitchState((PlayerStates)state);
 
-            Debug.Log($"Recieved state {(States)state}, colliderID {colliderID}");
+            Debug.Log($"Recieved state {(PlayerStates)state}, colliderID {colliderID}");
         }
     }
-    public void SwitchState(States state, Collider2D collider = null)
+    public void SwitchState(PlayerStates state, Collider2D collider = null)
     {
         var newState = states[state];
 
@@ -133,7 +131,7 @@ public class PlayerStateMachine : MonoBehaviour
             Debug.Log($"Sent state {state}, colliderID {colliderID}");
         }
 
-        if(state == States.idle || state == States.moving)
+        if(state == PlayerStates.idle || state == PlayerStates.moving)
         {
             inputManager.inventoryButtonEnabled = true;
         }
@@ -155,16 +153,18 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void CreateDictionary()
     {
-        states.Add(States.idle, idleState);
-        states.Add(States.moving, movingState);
-        states.Add(States.hiding, hidingState);
-        states.Add(States.tryingToHide, tryingToHideState);
-        states.Add(States.leavingHideout, leavingHideoutState);
-        states.Add(States.dead, deadState);
-        states.Add(States.usingLadder, usingLadderState);
-        states.Add(States.usingHorizontalDoor, usingHorizontalDoorState);
-        states.Add(States.usingVerticalDoor, usingVerticalDoorState);
-        states.Add(States.itemPickup, itemPickupState);
+        states = new Dictionary<PlayerStates, PlayerStateBase>();
+
+        states.Add(PlayerStates.idle, idleState);
+        states.Add(PlayerStates.moving, movingState);
+        states.Add(PlayerStates.hiding, hidingState);
+        states.Add(PlayerStates.tryingToHide, tryingToHideState);
+        states.Add(PlayerStates.leavingHideout, leavingHideoutState);
+        states.Add(PlayerStates.dead, deadState);
+        states.Add(PlayerStates.usingLadder, usingLadderState);
+        states.Add(PlayerStates.usingHorizontalDoor, usingHorizontalDoorState);
+        states.Add(PlayerStates.usingVerticalDoor, usingVerticalDoorState);
+        states.Add(PlayerStates.itemPickup, itemPickupState);
     }
 }
 

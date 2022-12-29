@@ -1,7 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
+public enum MonsterStates
+{
+    idle,
+    patrolling,
+    chasing
+}
 public class Monster1StateMachine : MonoBehaviour
 {
     [SerializeField] LayerMask playerMask;
@@ -14,6 +21,8 @@ public class Monster1StateMachine : MonoBehaviour
     public bool isFacingRightOnAwake;
     public bool isLookingForAPlayer;
 
+    public PhotonView photonView;
+    private Dictionary<MonsterStates, Monster1StateBase> states;
 
     void Awake()
     {
@@ -22,13 +31,15 @@ public class Monster1StateMachine : MonoBehaviour
         chasingState = new Monster1StateChasing(gameObject);
         previousState = idleState;
         currentState = idleState;
-        currentState.EnterState(this, hitPlayer);
+        currentState.EnterState(this);
         currentState.isFacingRight = isFacingRightOnAwake;
+        photonView = GetComponent<PhotonView>();
         if (!isFacingRightOnAwake)
         {
-            transform.Rotate(0,180,0);
+            transform.Rotate(0, 180, 0);
         }
         isLookingForAPlayer = false;
+        CreateDictionary();
     }
 
     void Update()
@@ -146,7 +157,7 @@ public class Monster1StateMachine : MonoBehaviour
                 }
             }
         }
-        currentState.UpdateState(this, hitPlayer);
+        currentState.UpdateState(this);
 
 
         //}
@@ -157,10 +168,43 @@ public class Monster1StateMachine : MonoBehaviour
         //}
     }
 
-    public void SwitchState(Monster1StateBase state, RaycastHit2D hitPlayer, Collider2D collision = null)
+    //public void SwitchState(Monster1StateBase state, Collider2D collision = null)
+    //{
+    //    currentState = state;
+    //    state.EnterState(this, collision);
+    //}
+
+    public void SwitchState(MonsterStates state, Collider2D collider = null)
     {
-        currentState = state;
-        state.EnterState(this, hitPlayer, collision);
+        var newState = states[state];
+
+        if (photonView.IsMine)
+        {
+            int colliderID = collider == null ? 0 : collider.gameObject.GetPhotonView().ViewID;
+            photonView.RPC("RPC_SwitchState", RpcTarget.Others, photonView.ViewID, (int)state, colliderID);
+            Debug.Log($"Sent state {state}, colliderID {colliderID}");
+        }
+        currentState = newState;
+        newState.EnterState(this, collider);
+    }
+
+    [PunRPC]
+    private void RPC_SwitchState(int photonID, int state, int colliderID = 0)
+    {
+        if (photonID == photonView.ViewID)
+        {
+            Collider2D collider;
+            if (colliderID != 0)
+            {
+                collider = PhotonView.Find(colliderID).GetComponent<Collider2D>();
+                Debug.Log($"Collider hit {collider.gameObject.name}");
+                SwitchState((MonsterStates)state, collider);
+            }
+            else
+                SwitchState((MonsterStates)state);
+
+            Debug.Log($"Recieved state {(MonsterStates)state}, colliderID {colliderID}");
+        }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -169,5 +213,14 @@ public class Monster1StateMachine : MonoBehaviour
     public void OnTriggerStay2D(Collider2D collision)
     {
         currentState.OnTriggerStay(this, collision);
+    }
+
+    private void CreateDictionary()
+    {
+        states = new Dictionary<MonsterStates, Monster1StateBase>();
+
+        states.Add(MonsterStates.idle, idleState);
+        states.Add(MonsterStates.patrolling, patrollingState);
+        states.Add(MonsterStates.chasing, chasingState);
     }
 }

@@ -98,8 +98,8 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
-                    player.previousState = States.tryingToHide;
-                    player.SwitchState(States.idle);
+                    player.previousState = PlayerStates.tryingToHide;
+                    player.SwitchState(PlayerStates.idle);
                 }
             }
             if (velocityDirection == -1 && playerTransform.position.x > leftPointX)
@@ -113,8 +113,8 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     doorCollider.enabled = true;
-                    player.previousState = States.tryingToHide;
-                    player.SwitchState(States.idle);
+                    player.previousState = PlayerStates.tryingToHide;
+                    player.SwitchState(PlayerStates.idle);
                 }
             }
         }
@@ -124,7 +124,7 @@ public class PlayerStateUsingHorizontalDoor : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

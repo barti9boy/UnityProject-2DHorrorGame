@@ -203,8 +203,8 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     //sdoorCollider.enabled = true;
-                    player.previousState = States.usingVerticalDoor;
-                    player.SwitchState(States.idle);
+                    player.previousState = PlayerStates.usingVerticalDoor;
+                    player.SwitchState(PlayerStates.idle);
                     horizontalDoorCollider.enabled = true;
                     if (player.photonView.IsMine) vDoors.PlayCloseDoorAnim();
                 }
@@ -219,8 +219,8 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
             if (Math.Abs(playerTransform.position.x - horizontalDoorPointOut.x) < 0.25)
             {
                 rb.velocity = new Vector2(0, 0);
-                player.previousState = States.usingVerticalDoor;
-                player.SwitchState(States.idle);
+                player.previousState = PlayerStates.usingVerticalDoor;
+                player.SwitchState(PlayerStates.idle);
                 player.transform.position = verticalDoorPoint;
                 isChangingRoomUsingHorizontalDoor = false;
                 inputManager.movementInputEnabled = true;
@@ -245,7 +245,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
     {
         if (collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

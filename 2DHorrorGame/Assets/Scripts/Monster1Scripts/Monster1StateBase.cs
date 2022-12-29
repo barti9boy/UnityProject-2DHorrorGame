@@ -22,8 +22,8 @@ public abstract class Monster1StateBase
     {
 
     }
-    public abstract void EnterState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null);
-    public abstract void UpdateState(Monster1StateMachine monster1, RaycastHit2D hitPlayer, Collider2D collision = null);
+    public abstract void EnterState(Monster1StateMachine monster1, Collider2D collision = null);
+    public abstract void UpdateState(Monster1StateMachine monster1, Collider2D collision = null);
     public abstract void OnCollisionEnter(Monster1StateMachine monster1, Collision2D collision);
     public abstract void OnTriggerStay(Monster1StateMachine monster1, Collider2D collision);
 }

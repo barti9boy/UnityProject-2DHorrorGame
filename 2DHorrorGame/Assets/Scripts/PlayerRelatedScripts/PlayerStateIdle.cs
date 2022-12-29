@@ -35,8 +35,8 @@ public class PlayerStateIdle : PlayerStateBase
         rb.velocity = new Vector2(0,0);
         if(inputManager.movementInputDirection != 0)
         {
-            player.previousState = States.idle;
-            player.SwitchState(States.moving);
+            player.previousState = PlayerStates.idle;
+            player.SwitchState(PlayerStates.moving);
         }
         //PlayerActions.Flashlight(player);
     }
@@ -44,7 +44,7 @@ public class PlayerStateIdle : PlayerStateBase
     {
         if(collision.collider.tag == "Monster")
         {
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)

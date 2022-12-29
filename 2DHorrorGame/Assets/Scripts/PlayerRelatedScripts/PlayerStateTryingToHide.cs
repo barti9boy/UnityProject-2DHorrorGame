@@ -123,8 +123,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
         {
             flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
             flashlight.transform.position = playerTransform.position - new Vector3(0.0f, 0.5f, 0.0f);
-            player.previousState = States.tryingToHide;
-            player.SwitchState(States.hiding, hideoutCollider);
+            player.previousState = PlayerStates.tryingToHide;
+            player.SwitchState(PlayerStates.hiding, hideoutCollider);
             isHiding = false;
         }
         else
@@ -133,8 +133,8 @@ public class PlayerStateTryingToHide : PlayerStateBase
             flashlight.GetComponent<SpriteRenderer>().sortingOrder = -7;
             flashlight.transform.Rotate(0.0f, 0.0f, -90.0f);
             flashlight.transform.position = playerTransform.position;
-            player.previousState = States.tryingToHide;
-            player.SwitchState(States.hiding, hideoutCollider);
+            player.previousState = PlayerStates.tryingToHide;
+            player.SwitchState(PlayerStates.hiding, hideoutCollider);
             isHiding = false;
         }
     }
@@ -145,7 +145,7 @@ public class PlayerStateTryingToHide : PlayerStateBase
         if (collision.collider.tag == "Monster")
         {
             inputManager.movementInputEnabled = true;
-            player.SwitchState(States.dead);
+            player.SwitchState(PlayerStates.dead);
         }
     }
     public override void OnTriggerStay(PlayerStateMachine player, Collider2D collision)
