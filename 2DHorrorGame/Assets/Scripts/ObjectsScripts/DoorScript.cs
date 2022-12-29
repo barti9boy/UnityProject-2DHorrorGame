@@ -14,6 +14,10 @@ public class DoorScript : MonoBehaviour, IInteractible
     public AnimationClip doorOpeningAnimation;
     public GameObject interactionHighlight;
 
+    private readonly string lockedText = "hold \"E\" to unlock";
+    private readonly string unlockedText = "press \"E\" to enter";
+
+    private InteractionHighlight highlight;
     public float interactionTime;
     public float unlockTimeRequired;
     public int itemIdToUnlock;
@@ -34,6 +38,7 @@ public class DoorScript : MonoBehaviour, IInteractible
 
     private void Awake()
     {
+        highlight = GetComponentInChildren<InteractionHighlight>();
         photonView = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
         doorCollider = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
@@ -43,6 +48,11 @@ public class DoorScript : MonoBehaviour, IInteractible
     }
     private void Start()
     {
+        if (isLocked)
+            highlight.InteractionText.text = lockedText;
+        else
+            highlight.InteractionText.text = unlockedText;
+
         AssignAnimationIDs();
     }
 
@@ -86,9 +96,26 @@ public class DoorScript : MonoBehaviour, IInteractible
             Debug.Log("PlayCloseDoorAnim RPC recieved");
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
+        {
+            //on right
+            if(other.transform.position.x > transform.position.x)
+            {
+                highlight.CanvasRect.localPosition = new Vector3(1f, -0.5f, 0f);
+                Debug.Log(highlight.CanvasRect.localPosition);
+            }
+            else
+            {
+                highlight.CanvasRect.localPosition = new Vector3(-1f, -0.5f, 0f);
+                Debug.Log(highlight.CanvasRect.localPosition);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
         {
             interactionTime = 0;
         }
@@ -105,6 +132,7 @@ public class DoorScript : MonoBehaviour, IInteractible
                     interactionTime += Time.deltaTime;
                     if (interactionTime >= unlockTimeRequired)
                     {
+                        highlight.InteractionText.text = unlockedText;
                         isLocked = false;
                         OnDoorUnlocked?.Invoke(slotPosition);
                     }  

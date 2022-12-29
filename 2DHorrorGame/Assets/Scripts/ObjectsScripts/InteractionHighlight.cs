@@ -12,10 +12,13 @@ public class InteractionHighlight : MonoBehaviour
     public Material material;
     private float colorAlpha = 0.15f;
 
-    
-    private TextMeshProUGUI interactionText;
     [SerializeField] private string interactionTextContent;
     [SerializeField] private bool isTextActive;
+    [SerializeField] private RectTransform canvasRect;
+
+    private TextMeshProUGUI interactionText;
+    public RectTransform CanvasRect { get => canvasRect; set => canvasRect = value; }
+    public TextMeshProUGUI InteractionText { get => interactionText; }
     private void Awake()
     {
         spriteRenderer.sprite = GetComponentInParent<SpriteRenderer>().sprite;
@@ -26,11 +29,11 @@ public class InteractionHighlight : MonoBehaviour
     }
     private void Start()
     {
+        interactionText = GetComponentInChildren<TextMeshProUGUI>();
         if (isTextActive)
         {
-            interactionText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-            interactionText.gameObject.SetActive(false);
             interactionText.text = interactionTextContent;
+            interactionText.gameObject.SetActive(false);
         }
         
     }

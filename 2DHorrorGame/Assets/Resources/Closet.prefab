@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8166846045867108060}
   - component: {fileID: 8166846045867108057}
   - component: {fileID: 8166846045867108062}
+  - component: {fileID: 413600230944219288}
   m_Layer: 0
   m_Name: Closet
   m_TagString: Closet
@@ -175,9 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52911b8eb779a5d41804a43b0f96cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
   finishedOpening: 0
-  animator: {fileID: 8166846045867108060}
   handle: {fileID: 8166846044371883055}
   hiding: {fileID: 7400000, guid: 664fd9555be1b774386b502288da3244, type: 2}
 --- !u!114 &8166846045867108062
@@ -205,7 +204,29 @@ MonoBehaviour:
   - {x: -1.4090466, y: 1.8649249, z: 0}
   m_ShapePathHash: -1098224103
   m_Mesh: {fileID: 0}
-  m_InstanceId: -143058
+  m_InstanceId: 37882
+--- !u!114 &413600230944219288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8166846045867108067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &4741166646921228084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 4913907871324600332, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628614157114967266, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: interactionTextContent
+      value: press "E" to hide
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3599123db6e1b134f992291502358895, type: 3}

@@ -84,51 +84,27 @@ public class PlayerStateTryingToHide : PlayerStateBase
     {
         if (isApproachingHideout)
         {
+            isApproachingHideout = false;
+            CoroutineHandler.Instance.Lerp(playerTransform.position.x, hideoutEntrence, 5f, (newPosition) => playerTransform.position = new Vector2(newPosition, playerTransform.position.y),
+              (endPosition) => 
+              {
+                  if ((hideoutTag == "Hideout" || hideoutTag == "Closet") && !player.isFacingRight)
+                  {
+                        ForceFlip(player);
+                  }
+
+                  isApproachingHideout = false;
+                  inputManager.interactionInputEnabled = true;
+                  rb.velocity = new Vector2(0, 0);
+                  isTryingToHide = true;
+              });
             //    Debug.Log(player.currentState.isFacingRight);
 
-            if (velocityDirection == 1 && playerTransform.position.x < hideoutEntrence)
-            {
-                rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
-                {
-                    if (hideoutTag == "Hideout" && !player.isFacingRight)
-                    {
-                        playerTransform.Rotate(0, 180, 0);
-                        player.isFacingRight = !player.isFacingRight;
-                    }
-                    isApproachingHideout = false;
-                    inputManager.interactionInputEnabled = true;
-                    rb.velocity = new Vector2(0, 0);
-                    isTryingToHide = true;
-
-                }
-            }
-            if (velocityDirection == -1 && playerTransform.position.x > hideoutEntrence)
-            {
-                rb.velocity = new Vector2(velocityDirection * movementSpeed, 0);
-                if (Math.Abs(playerTransform.position.x - hideoutEntrence) < 0.25)
-                {
-                    if( hideoutTag == "Closet" && !player.isFacingRight)
-                    {
-                        playerTransform.Rotate(0, 180, 0);
-                        player.isFacingRight = !player.isFacingRight;
-                    }
-                    else if (hideoutTag == "Hideout"  && !player.isFacingRight)
-                    {
-                        playerTransform.Rotate(0, 180, 0);
-                        player.isFacingRight = !player.isFacingRight;
-                    }
-                    isApproachingHideout = false;
-                    inputManager.interactionInputEnabled = true;
-                    rb.velocity = new Vector2(0, 0);
-                    isTryingToHide = true;
-                }
-            }
         }
         if (isTryingToHide)
         {
-            StartGettingInside(player);
             isTryingToHide = false;
+            StartGettingInside(player);
         }
     }
 

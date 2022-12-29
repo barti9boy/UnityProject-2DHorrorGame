@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 60864580116208165}
   - component: {fileID: 60864580116208186}
   - component: {fileID: 60864580116208187}
+  - component: {fileID: 8649916889365059531}
   m_Layer: 0
   m_Name: TableWide
   m_TagString: Table
@@ -104,9 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52911b8eb779a5d41804a43b0f96cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
   finishedOpening: 0
-  animator: {fileID: 60864580116208186}
   handle: {fileID: 60864579998396891}
   hiding: {fileID: 7400000, guid: f4cf7f1bfbf0d1d4597ad436347550b1, type: 2}
 --- !u!95 &60864580116208186
@@ -179,6 +178,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8649916889365059531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60864580116208184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1722372967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +287,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1314820867534018708}
+    - target: {fileID: 5628614157114967266, guid: 3599123db6e1b134f992291502358895, type: 3}
+      propertyPath: interactionTextContent
+      value: press "E" to hide
+      objectReference: {fileID: 0}
     - target: {fileID: 5718118847039163188, guid: 3599123db6e1b134f992291502358895, type: 3}
       propertyPath: m_Radius
       value: 2.5324697
