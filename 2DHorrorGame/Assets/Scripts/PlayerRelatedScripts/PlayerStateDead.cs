@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerStateDead : PlayerStateBase
 {
+    public static Action OnGameOver;
     public PlayerStateDead(GameObject playerObject) : base(playerObject) 
     {
         rb = playerObject.GetComponent<Rigidbody2D>();
@@ -17,7 +18,8 @@ public class PlayerStateDead : PlayerStateBase
     public override void EnterState(PlayerStateMachine player, Collider2D collision = null)
     {
         rb.velocity = new Vector2(0f, 0f);
-        OnEnterStateDead?.Invoke(this, EventArgs.Empty);
+        //OnEnterStateDead?.Invoke(this, EventArgs.Empty);
+        OnGameOver?.Invoke();
     }
     public override void UpdateState(PlayerStateMachine player, Collider2D collision = null)
     {

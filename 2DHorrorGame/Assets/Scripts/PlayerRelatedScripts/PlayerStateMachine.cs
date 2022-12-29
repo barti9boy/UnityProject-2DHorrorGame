@@ -79,10 +79,10 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
-        if (currentState == deadState)
-        {
-            GameOverScreen.GameOver();
-        }
+        //if (currentState == deadState)
+        //{
+        //    GameOverScreen.GameOver();
+        //}
         if (flashlight.gameObject.activeSelf == true)
         {
             batteryTimer += Time.deltaTime;
