@@ -134,6 +134,7 @@ public class DoorScript : MonoBehaviour, IInteractible
                     {
                         highlight.InteractionText.text = unlockedText;
                         isLocked = false;
+                        photonView.RPC("RPC_DoorUnlock", RpcTarget.Others, photonView.ViewID);
                         OnDoorUnlocked?.Invoke(slotPosition);
                     }  
                 }
@@ -145,6 +146,17 @@ public class DoorScript : MonoBehaviour, IInteractible
             interactionTime = 0;
         }
     }
+
+    [PunRPC]
+    private void RPC_DoorUnlock(int viewID)
+    {
+        if (photonView.ViewID == viewID)
+        {
+            isLocked = false;
+            Debug.Log("Door unlocked");
+        }
+    }
+
     public void ChangeInteractionCanvasTransform(float playerX, float doorX)
     {
         if(doorTag  == "vDoor")
