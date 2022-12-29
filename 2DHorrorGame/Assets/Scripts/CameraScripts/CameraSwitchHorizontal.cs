@@ -25,15 +25,18 @@ public class CameraSwitchHorizontal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.position.x < middleOfTheTriggger)
+            if (collision.GetComponent<PlayerStateMachine>().photonView.IsMine)
             {
-                playerCamera1.Priority = 0;
-                playerCamera2.Priority = 1;
-            }
-            if (collision.transform.position.x > middleOfTheTriggger)
-            {
-                playerCamera1.Priority = 1;
-                playerCamera2.Priority = 0;
+                if (collision.transform.position.x < middleOfTheTriggger)
+                {
+                    playerCamera1.Priority = 0;
+                    playerCamera2.Priority = 1;
+                }
+                if (collision.transform.position.x > middleOfTheTriggger)
+                {
+                    playerCamera1.Priority = 1;
+                    playerCamera2.Priority = 0;
+                }
             }
             if(monster != null)
             {

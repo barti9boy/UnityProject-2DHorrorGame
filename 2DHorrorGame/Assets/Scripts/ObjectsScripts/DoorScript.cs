@@ -153,6 +153,7 @@ public class DoorScript : MonoBehaviour, IInteractible
         if (photonView.ViewID == viewID)
         {
             isLocked = false;
+            highlight.InteractionText.text = unlockedText;
             Debug.Log("Door unlocked");
         }
     }
