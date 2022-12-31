@@ -58,6 +58,12 @@ public class PopupScript : MonoBehaviour
     {
         popupText.text = message;
     }
+    public void PopupSetActive(string message)
+    {
+        this.gameObject.SetActive(true);
+        PopupSetMessage(message);
+        PopupIn();
+    }
     public void PopupSetInactive()
     {
         popupText.text = "";

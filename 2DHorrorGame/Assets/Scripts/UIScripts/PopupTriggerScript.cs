@@ -18,10 +18,9 @@ public class PopupTriggerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            popup.SetActive(true);
-            popupScript.PopupSetMessage(message);
-            popupScript.PopupIn();
-            this.gameObject.SetActive(false);
+            popupScript.PopupSetActive(message);
         }
     }
+
+
 }

@@ -9,15 +9,10 @@ using TMPro;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public TMP_InputField createRoomInput;
-    public TMP_InputField joinRoomInput;
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(createRoomInput.text, new RoomOptions { MaxPlayers = 2 });
-    }
-    public void JoinRoom()
-    {
-        PhotonNetwork.JoinRoom(joinRoomInput.text);
+        PhotonNetwork.JoinOrCreateRoom(createRoomInput.text, new RoomOptions { MaxPlayers = 2 }, null);
     }
     public override void OnJoinedRoom()
     {
