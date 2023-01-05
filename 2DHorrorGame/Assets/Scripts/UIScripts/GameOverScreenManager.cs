@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class GameOverScript : MonoBehaviour
+public class GameOverScreenManager : MonoBehaviour
 {
     public string sceneName;
+    [SerializeField] private GameObject gameOverScreen;
 
     private void Awake()
     {
         PlayerStateDead.OnGameOver += GameOver;
-        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -21,10 +21,10 @@ public class GameOverScript : MonoBehaviour
 
     public void GameOver()
     {
-        gameObject.SetActive(true);
-        CoroutineHandler.Instance.WaitUntilAnimated(2f,
+        gameOverScreen.SetActive(true);
+        CoroutineHandler.Instance.StartCoroutine(CoroutineHandler.Instance.WaitUntilAnimated(2f,
             () => 
-            RestartButton());
+            RestartButton()));
     }
 
     public void RestartButton()

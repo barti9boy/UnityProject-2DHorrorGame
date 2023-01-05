@@ -542,7 +542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39925decdaa9343438a5154048f98340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 0}
   previousState: 0
   inputManager: {fileID: 0}
   flashlight: {fileID: 8031757334689842023}

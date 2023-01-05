@@ -19,7 +19,7 @@ public enum PlayerStates
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    public GameOverScript GameOverScreen;
+    //public GameOverScript GameOverScreen;
     public PlayerStates previousState;
     public PlayerStateBase currentState;
     public PlayerStateIdle idleState;
