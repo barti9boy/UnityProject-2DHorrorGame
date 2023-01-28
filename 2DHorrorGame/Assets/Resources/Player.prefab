@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 1412985718357133978}
   - component: {fileID: -5983186469399619505}
   - component: {fileID: 5440199670764070947}
+  - component: {fileID: -1459945883015606833}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -781,6 +782,14 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!81 &-1459945883015606833
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412985718357133958}
+  m_Enabled: 1
 --- !u!1 &1412985718996638987
 GameObject:
   m_ObjectHideFlags: 0

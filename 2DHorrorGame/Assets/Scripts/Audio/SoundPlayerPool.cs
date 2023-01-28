@@ -46,12 +46,14 @@ public class SoundPlayerPool : MonoBehaviour
     {
         var soundPlayer = Instantiate(soundPlayerPrefab); 
         pooledSoundPlayers.Add(soundPlayer.GetComponent<SoundPlayer>());
+        amountOFPooledSoundPlayers++;
     }
 
     private void InstantiateMusicPlayer()
     {
         var musicPlayer = Instantiate(musicPlayerPrefab);
         pooledMusicPlayers.Add(musicPlayer.GetComponent<MusicPlayer>());
+        amountOFPooledMusicPlayers++;
     }
 
     public SoundPlayer RequestSoundPlayer() //think about creating another instance if none is available
