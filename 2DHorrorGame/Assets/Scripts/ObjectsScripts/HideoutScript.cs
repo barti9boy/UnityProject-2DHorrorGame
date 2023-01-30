@@ -48,6 +48,7 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayHidingAnim()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.monsterChasing, transform.position);
         isTaken = true;
         animator.SetTrigger(animIDHiding);
         animator.ResetTrigger(animIDLeaving);

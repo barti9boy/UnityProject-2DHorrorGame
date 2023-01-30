@@ -4,7 +4,8 @@ using UnityEngine;
 
 
 //Make scriptable object of sounds?
-public struct Sound
+[CreateAssetMenu(fileName = "New Sound", menuName = "SoundData")]
+public class Sound : ScriptableObject
 {
     //enum
     public Clip clip;

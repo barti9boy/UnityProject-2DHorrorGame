@@ -1,17 +1,20 @@
 using System;
 using UnityEngine.Audio;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    //make it singleton
+    [SerializeField]
+    public Sound[] soundsArray;
+
     public static AudioManager Instance { get; private set; }
 
-    public static Action<Sound, Vector3> OnPlaySoundAtPosition;
+    public static Action<Clip, Vector3> OnPlaySoundAtPosition;
 
-    public static Action<Sound, Transform> OnPlaySoundAtParent;
+    public static Action<Clip, Transform> OnPlaySoundAtParent;
 
-    public static Action<Sound> OnPlayAmbient;
+    public static Action<Clip> OnPlayAmbient;
 
     public static Action<bool> OnToggleMute;
 
@@ -47,25 +50,43 @@ public class AudioManager : MonoBehaviour
         OnToggleMute -= Mute;
     }
 
-    private void PlaySoundAtPosition(Sound sound, Vector3 position)
+    public void PlaySoundAtPosition(Clip soundName, Vector3 position)
     {
         SoundPlayer player = pool.RequestSoundPlayer();
+        player.gameObject.SetActive(true);
+        Sound sound = FindSound(soundName);
         player.PlayOnPosition(sound, position);
     }
 
-    private void PlaySoundAtParent(Sound sound, Transform parent)
+    public void PlaySoundAtParent(Clip soundName, Transform parent)
     {
         SoundPlayer player = pool.RequestSoundPlayer();
+        Sound sound = FindSound(soundName);
         player.PlayOnParent(sound, parent);
     }
 
-    private void PlayAmbient(Sound sound) 
+    public void PlayAmbient(Clip soundName) 
     {
 
     }
 
-    private void Mute(bool shouldBeMuted)
+    public void Mute(bool shouldBeMuted)
     {
         pool.MutePlayers(shouldBeMuted);
     }
+
+    public Sound FindSound(Clip clipName)
+    {
+        for(int i = 0; i < soundsArray.Length; i++)
+        {
+            if (soundsArray[i].clip == clipName)
+            {
+                return soundsArray[i];
+            }
+
+        }
+        return null;
+    }
+
+    
 }
