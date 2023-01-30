@@ -14,8 +14,8 @@ public class DoorScript : MonoBehaviour, IInteractible
     public AnimationClip doorOpeningAnimation;
     public GameObject interactionHighlight;
 
-    private readonly string lockedText = "hold \"E\" to unlock";
-    private readonly string unlockedText = "press \"E\" to enter";
+    private readonly string lockedText = "HOLD \"E\" TO UNLOCK";
+    private readonly string unlockedText = "PRESS \"E\" TO ENTER";
 
     private InteractionHighlight highlight;
     public float interactionTime;
