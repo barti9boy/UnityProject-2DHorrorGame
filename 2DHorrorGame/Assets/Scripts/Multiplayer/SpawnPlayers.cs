@@ -5,6 +5,8 @@ using Photon.Pun;
 using UnityEngine.UI;
 using System;
 using Cinemachine;
+using Photon.Realtime;
+
 
 public class SpawnPlayers : MonoBehaviour
 {

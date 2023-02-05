@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManagerScript : MonoBehaviour
+public class GameManagerScript : MonoBehaviourPunCallbacks
 {
     public SpawnPlayers spawnPlayersScript;
     public event EventHandler<GameObject> OnAfterPlayerLoaded;
@@ -23,5 +25,12 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("a player loaded into the level");
         player = e;
         OnAfterPlayerLoaded?.Invoke(this, player);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainMenu");
     }
 }

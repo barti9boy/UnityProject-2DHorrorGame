@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1768864685
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7192f159cbd16f849affcadecb648923, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e00443e552d847429c8d8ff31befcdc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -357,6 +357,7 @@ MonoBehaviour:
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   interactionTextContent: press "E" to pick up
   isTextActive: 0
+  canvasRect: {fileID: 0}
 --- !u!1 &7821905804314417139
 GameObject:
   m_ObjectHideFlags: 0
