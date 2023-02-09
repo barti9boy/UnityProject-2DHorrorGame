@@ -40,6 +40,8 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPC_DestroyItemFromInventory
+  - RPC_DoorUnlock
+  - RPC_OnPlayerEnter
   - RPC_OnPlayerLeave
   - RPC_OnPlayerStand
   - RPC_PlayCloseDoorAnim
@@ -47,13 +49,11 @@ MonoBehaviour:
   - RPC_PlayLeaveAnim
   - RPC_PlayOpenAnim
   - RPC_PlayOpenDoorAnim
+  - RPC_RemoveFromPlayerCount
   - RPC_RemoveItemFromInventory
   - RPC_ResetTrigger
   - RPC_SwitchState
   - RPC_TurnFlashlightOnOff
-  - RPC_DoorUnlock
-  - RPC_RemoveFromPlayerCount
-  - RPC_OnPlayerEnter
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
