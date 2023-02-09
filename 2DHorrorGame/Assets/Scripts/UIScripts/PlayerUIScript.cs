@@ -41,15 +41,15 @@ public class PlayerUIScript : MonoBehaviour
         DoorScript.OnDoorUnlocked += RemoveItemFromInventory;
     }
 
-    private void OnDestroy()
-    {
-        player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
-        player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
-        PlayerInventory.OnBatteryChanged -= RemoveItemFromInventory;
-        InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
-        InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
-        DoorScript.OnDoorUnlocked -= RemoveItemFromInventory;
-    }
+    //private void OnDestroy()
+    //{
+    //    player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
+    //    player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+    //    PlayerInventory.OnBatteryChanged -= RemoveItemFromInventory;
+    //    InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
+    //    InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;
+    //    DoorScript.OnDoorUnlocked -= RemoveItemFromInventory;
+    //}
 
     private void PlayerUIScript_OnAfterPlayerLoaded(object sender, GameObject e)
     {

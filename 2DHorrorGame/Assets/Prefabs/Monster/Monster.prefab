@@ -211,6 +211,7 @@ MonoBehaviour:
     m_Bits: 256
   isFacingRightOnAwake: 0
   isLookingForAPlayer: 0
+  photonView: {fileID: 0}
 --- !u!114 &8890354431427224646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,8 +327,8 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
-    InterpolateRotateTowardsSpeed: 180
+    InterpolateOption: 0
+    InterpolateRotateTowardsSpeed: 0
     InterpolateLerpSpeed: 5
   m_ScaleModel:
     SynchronizeEnabled: 0

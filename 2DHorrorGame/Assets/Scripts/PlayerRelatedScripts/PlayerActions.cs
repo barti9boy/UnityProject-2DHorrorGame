@@ -76,6 +76,13 @@ public static class PlayerActions
                 //collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeRoom(player.currentState.playerTransform, player.currentState.rb, player.currentState.inputManager, player);
                 collision.gameObject.GetComponent<CameraSwitchVertical>().ChangeCamera();
             }
+            if (collision.CompareTag("Ladder"))
+            {
+                Debug.Log("interacted");
+                player.currentState.inputManager.isInteractionButtonClicked = false;
+                player.previousState = PlayerStates.idle;
+                player.SwitchState(PlayerStates.usingLadder, collision);
+            }
         }
         if (collision.CompareTag("Doors"))
         {
@@ -115,13 +122,7 @@ public static class PlayerActions
         }
         if (player.currentState.inputManager.isInteractionButtonClicked)
         {
-            if (collision.CompareTag("Ladder"))
-            {
-                Debug.Log("interacted");
-                player.currentState.inputManager.isInteractionButtonClicked = false;
-                player.previousState = PlayerStates.idle;
-                player.SwitchState(PlayerStates.usingLadder, collision);
-            }
+            
         }
     }
     public static void Hiding(PlayerStateMachine player, Collider2D collision, Transform playerTransform, float movementSpeed, Rigidbody2D rb, Collision2D collider)

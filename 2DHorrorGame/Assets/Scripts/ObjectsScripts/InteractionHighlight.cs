@@ -21,7 +21,7 @@ public class InteractionHighlight : MonoBehaviour
     public TextMeshProUGUI InteractionText { get => interactionText; }
     private void Awake()
     {
-        spriteRenderer.sprite = GetComponentInParent<SpriteRenderer>().sprite;
+        //spriteRenderer.sprite = GetComponentInParent<SpriteRenderer>().sprite;
         spriteRenderer.sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder + 1;
         spriteRenderer.sortingLayerName = GetComponentInParent<SpriteRenderer>().sortingLayerName;
         spriteRenderer.color = new Vector4(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, colorAlpha);
