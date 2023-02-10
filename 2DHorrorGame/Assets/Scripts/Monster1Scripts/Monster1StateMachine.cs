@@ -49,7 +49,7 @@ public class Monster1StateMachine : MonoBehaviour
         if (currentState == chasingState)
         {
             hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 10.0f, playerMask);
-            //Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
+            Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
             if (hitPlayer)
             {
                 if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
@@ -76,7 +76,7 @@ public class Monster1StateMachine : MonoBehaviour
             else
             {
                 hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 5.0f, playerMask);
-                //Debug.DrawRay(this.transform.position, -this.transform.right * 5.0f);
+                Debug.DrawRay(this.transform.position, -this.transform.right * 5.0f);
                 if (hitPlayer)
                 {
                     if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
@@ -105,7 +105,9 @@ public class Monster1StateMachine : MonoBehaviour
         else
         {
             hitPlayer = Physics2D.Raycast(this.transform.position, this.transform.right, 8.0f, playerMask);
-            //Debug.DrawRay(this.transform.position, this.transform.right * 10.0f);
+            Debug.DrawRay(this.transform.position + new Vector3(0.1f , 0.2f, 0), this.transform.right * 8.0f, Color.green);
+            Debug.DrawRay(this.transform.position + new Vector3(0.1f, 0, 0), this.transform.right * 4.0f, Color.red);
+
             if (hitPlayer)
             {
                 if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))
@@ -132,7 +134,9 @@ public class Monster1StateMachine : MonoBehaviour
             else
             {
                 hitPlayer = Physics2D.Raycast(this.transform.position, -this.transform.right, 3.0f, playerMask);
-                //Debug.DrawRay(this.transform.position, -this.transform.right * 5.0f);
+                Debug.DrawRay(this.transform.position + new Vector3(0, 0.2f, 0), -this.transform.right * 3.0f, Color.green);
+                Debug.DrawRay(this.transform.position, -this.transform.right * 2.0f, Color.red);
+
                 if (hitPlayer)
                 {
                     if (hitPlayer.collider.gameObject.TryGetComponent(out PlayerStateMachine player))

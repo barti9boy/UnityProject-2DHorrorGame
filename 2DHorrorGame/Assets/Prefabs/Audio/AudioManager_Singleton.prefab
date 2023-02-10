@@ -46,6 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundsArray:
   - {fileID: 11400000, guid: bd64b5aa1af76b14ebeeafc18f8d1bb3, type: 2}
+  - {fileID: 11400000, guid: 215df891717349a43b4d2ce277d991c4, type: 2}
+  - {fileID: 11400000, guid: bbcd443b9e140084f8fc6c48b7427b75, type: 2}
+  - {fileID: 11400000, guid: 64d9c8dab1b32e848835bf7f3fdd5509, type: 2}
+  - {fileID: 11400000, guid: 97f71f154b4f8464cbf65c75e3ad2f3f, type: 2}
+  - {fileID: 11400000, guid: 1b18937cf50210842bc641c2924cfcdb, type: 2}
+  - {fileID: 11400000, guid: 665b721a6686e5f4bb3b93eb424f34c4, type: 2}
+  - {fileID: 11400000, guid: e221d2faf1cdd7648b5a378cdfe2c14a, type: 2}
+  - {fileID: 11400000, guid: 19e66041eb0ef2445a7b0f3127f2ea60, type: 2}
+  - {fileID: 11400000, guid: 6bc67dfddd7ea0e47bdff59efb0fc1de, type: 2}
+  - {fileID: 11400000, guid: 51781cf10e1dee444a12df7cd4af7dee, type: 2}
+  - {fileID: 11400000, guid: 4d1e148e28194dd4898c7aaa65f53e58, type: 2}
 --- !u!114 &1602319382994530887
 MonoBehaviour:
   m_ObjectHideFlags: 0

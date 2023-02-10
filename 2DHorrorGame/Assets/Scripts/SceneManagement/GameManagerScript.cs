@@ -19,6 +19,8 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
+        AudioManager.Instance.PlayAmbient(Clip.widnAmbient);
+
     }
     private void SpawnPlayersScript_OnPlayerLoaded(object sender, GameObject e)
     {

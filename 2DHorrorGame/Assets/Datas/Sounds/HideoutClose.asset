@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6480d73363301649884e818641b69df, type: 3}
-  m_Name: New Sound
+  m_Name: HideoutClose
   m_EditorClassIdentifier: 
-  clip: 52
-  audioClip: {fileID: 8300000, guid: d03a63a34fb7f1d419c98df72f1baeef, type: 3}
+  clip: 24
+  audioClip: {fileID: 8300000, guid: dbd47dfa8992a3048a2167b8d15ea22a, type: 3}

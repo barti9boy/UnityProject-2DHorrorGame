@@ -48,7 +48,7 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayHidingAnim()
     {
-        AudioManager.Instance.PlaySoundAtPosition(Clip.monsterChasing, transform.position);
+        AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
         isTaken = true;
         animator.SetTrigger(animIDHiding);
         animator.ResetTrigger(animIDLeaving);
@@ -58,6 +58,7 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayLeaveAnim()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
         isTaken = false;
         animator.SetTrigger(animIDLeaving);
         animator.ResetTrigger(animIDHiding);

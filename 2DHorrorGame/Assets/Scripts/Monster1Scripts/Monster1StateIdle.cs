@@ -49,6 +49,7 @@ public class Monster1StateIdle : Monster1StateBase
         {
             //Switch to chasing state
             monster1.previousState = this;
+            AudioManager.Instance.PlaySoundAtPosition(Clip.monsterChasing, monster1.transform.position);
             monster1.SwitchState(MonsterStates.chasing);
 
         }

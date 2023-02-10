@@ -34,6 +34,7 @@ public class PlayerStateItemPickup : PlayerStateBase
         item = collision;
         //if (!collision.CompareTag("Battery"))
         //{
+        AudioManager.Instance.PlaySoundAtPosition(Clip.ItemPickup, player.transform.position);
         canPickupItem = player.currentState.playerInventory.AddItemToInventory(collision.gameObject.GetComponent<IPickableObject>());
         if(collision.TryGetComponent(out BatteryScript battery))
         {

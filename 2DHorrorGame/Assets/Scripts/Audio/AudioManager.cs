@@ -67,7 +67,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayAmbient(Clip soundName) 
     {
-
+        Debug.Log(pool == null);
+        MusicPlayer player = pool.RequestMusicPlayer();
+        player.gameObject.SetActive(true);
+        Sound sound = FindSound(soundName);
+        player.PlayGlobalMusic(sound);
     }
 
     public void Mute(bool shouldBeMuted)

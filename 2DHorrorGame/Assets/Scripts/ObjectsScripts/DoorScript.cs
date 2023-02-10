@@ -32,6 +32,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     private Animator animator;
     private int animOpenDoor;
     private int animCloseDoor;
+    private bool unlockingSoundPlayed;
 
     private PhotonView photonView;
 
@@ -63,6 +64,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     }
     public void PlayOpenDoorAnim()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
         animator.SetTrigger(animOpenDoor);
         animator.ResetTrigger(animCloseDoor);
         photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
@@ -70,6 +72,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     }
     public void PlayCloseDoorAnim()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
         animator.SetTrigger(animCloseDoor);
         animator.ResetTrigger(animOpenDoor);
         photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
@@ -130,19 +133,26 @@ public class DoorScript : MonoBehaviour, IInteractible
                 if (item != null && item.ItemID == itemIdToUnlock)
                 {
                     interactionTime += Time.deltaTime;
+                    if (!unlockingSoundPlayed)
+                    {
+                        AudioManager.Instance.PlaySoundAtPosition(Clip.UnlockingDoors, transform.position);
+                        unlockingSoundPlayed = true;
+                    }
                     if (interactionTime >= unlockTimeRequired)
                     {
                         highlight.InteractionText.text = unlockedText;
                         isLocked = false;
                         photonView.RPC("RPC_DoorUnlock", RpcTarget.Others, photonView.ViewID);
                         OnDoorUnlocked?.Invoke(slotPosition);
-                    }  
+                        unlockingSoundPlayed = false;
+                    }
                 }
                 slotPosition++;
             }
         }
         else
         {
+            unlockingSoundPlayed = false;
             interactionTime = 0;
         }
     }

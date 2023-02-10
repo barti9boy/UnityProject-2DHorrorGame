@@ -76,7 +76,7 @@ public class Monster1StatePatrolling : Monster1StateBase
             //Switch to chasing state
             monster1.previousState = this;
             monster1.SwitchState(MonsterStates.chasing);
-
+            AudioManager.Instance.PlaySoundAtPosition(Clip.monsterChasing, monster1.transform.position);
         }
 
     }

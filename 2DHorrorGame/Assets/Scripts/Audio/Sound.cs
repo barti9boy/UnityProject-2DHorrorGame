@@ -15,18 +15,26 @@ public class Sound : ScriptableObject
 public enum Clip : byte
 {
     //Ambient sounds 0-20
-    horrorAmbient = 0,
+    lobbyMusic = 0,
     widnAmbient = 1,
 
     //PlayerSounds 21-50
-    playerStep = 21,
-    
+    doorOpen = 21,
+    doorClose = 22,
+    hideoutOpen = 23,
+    hideoutClose = 24,
+    ventEnter = 25,
+    ventExit = 26,
+
+
     //MonsterSound 51-70
     monsterStep = 51,
     monsterChasing = 52,
     monsterConfused = 53,
     
     //ItemSounds 71-100
-    KeyPickUp = 71,
+    ItemPickup = 71,
+    UnlockingDoors = 72,
+    ItemDrop = 73
 
 }

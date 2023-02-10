@@ -101,7 +101,8 @@ public class PlayerInventory : MonoBehaviour
     }
     public void RemoveItemFromInventory(int slotNumber)
     {
-        if(items[slotNumber] != null && photonView.IsMine)
+        AudioManager.Instance.PlaySoundAtPosition(Clip.ItemDrop, transform.position);
+        if (items[slotNumber] != null && photonView.IsMine)
         {
             if(items[slotNumber].DisplayName == "Battery")
                 PlayerBatteries--;

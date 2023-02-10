@@ -43,8 +43,11 @@ public class PlayerUIScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
-        player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+        if (player)
+        {
+            player.GetComponent<PlayerInventory>().OnItemAdd -= AddItemToInventory;
+            player.GetComponent<PlayerInventory>().OnItemSendNotification -= ShowNotification;
+        }
         PlayerInventory.OnBatteryChanged -= RemoveItemFromInventory;
         InputManager.OnInventoryButtonClicked -= RemoveItemFromInventory;
         InventoryItemScript.OnItemDrop -= RemoveItemFromInventory;

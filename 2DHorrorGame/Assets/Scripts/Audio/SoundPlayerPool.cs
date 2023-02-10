@@ -23,6 +23,7 @@ public class SoundPlayerPool : MonoBehaviour
         }
         else
         {
+            Debug.Log("Instantiated pool");
             Instance = this;
         }
     }
@@ -46,6 +47,7 @@ public class SoundPlayerPool : MonoBehaviour
     {
         var soundPlayer = Instantiate(soundPlayerPrefab); 
         pooledSoundPlayers.Add(soundPlayer.GetComponent<SoundPlayer>());
+        soundPlayer.gameObject.SetActive(false);
         amountOFPooledSoundPlayers++;
     }
 
@@ -53,6 +55,7 @@ public class SoundPlayerPool : MonoBehaviour
     {
         var musicPlayer = Instantiate(musicPlayerPrefab);
         pooledMusicPlayers.Add(musicPlayer.GetComponent<MusicPlayer>());
+        musicPlayer.gameObject.SetActive(false);
         amountOFPooledMusicPlayers++;
     }
 

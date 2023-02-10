@@ -38,6 +38,7 @@ public class LadderScript : MonoBehaviour
 
     public void PlayOpenAnim()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.ventEnter, transform.position);
         animator.SetTrigger(animIDOpen);
         //animator.ResetTrigger(animIDClose);
         photonView.RPC("RPC_PlayOpenAnim", RpcTarget.Others, photonView.ViewID);
@@ -48,6 +49,7 @@ public class LadderScript : MonoBehaviour
 
     private void ResetTrigger()
     {
+        AudioManager.Instance.PlaySoundAtPosition(Clip.ventExit, transform.position);
         animator.ResetTrigger(animIDOpen);
         photonView.RPC("RPC_ResetTrigger", RpcTarget.Others, photonView.ViewID);
         Debug.Log("ResetTrigger RPC sent");
