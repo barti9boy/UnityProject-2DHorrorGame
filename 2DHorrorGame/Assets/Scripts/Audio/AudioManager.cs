@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         pool = SoundPlayerPool.Instance;
-        pool.WarmUp(3);
+        pool.WarmUp(10);
     }
 
     private void OnDestroy()

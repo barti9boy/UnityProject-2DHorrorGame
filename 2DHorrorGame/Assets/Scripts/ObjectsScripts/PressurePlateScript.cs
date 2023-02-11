@@ -32,7 +32,6 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            AudioManager.OnPlaySoundAtPosition(Clip.pressurePlate, transform.position);
             photonView.RPC("RPC_OnPlayerStand", RpcTarget.All, photonView.ViewID);
         }
     }
@@ -52,6 +51,7 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.OnPlaySoundAtPosition(Clip.pressurePlate, transform.position);
             animator.ResetTrigger(animIDOff);
             animator.SetTrigger(animIDOn);
             OnPlayerStand?.Invoke(this, EventArgs.Empty);
