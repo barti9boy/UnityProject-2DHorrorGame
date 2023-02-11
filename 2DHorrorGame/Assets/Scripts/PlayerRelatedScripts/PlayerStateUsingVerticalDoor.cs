@@ -190,7 +190,7 @@ public class PlayerStateUsingVerticalDoor : PlayerStateBase
                 //}
             }
             horizontalDoorCollider.enabled = false;
-            if (player.photonView.IsMine) vDoors.PlayOpenDoorAnim();
+            //if (player.photonView.IsMine) vDoors.PlayOpenDoorAnim();
             if (isEnteringAnotherRoom)
             {
 
