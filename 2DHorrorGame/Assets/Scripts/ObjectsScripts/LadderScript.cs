@@ -67,6 +67,7 @@ public class LadderScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.Instance.PlaySoundAtPosition(Clip.ventEnter, transform.position);
             animator.SetTrigger(animIDOpen);
             //animator.ResetTrigger(animIDClose);
             Debug.Log("PlayOpenAnim RPC recieved");

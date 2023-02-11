@@ -25,6 +25,8 @@ public enum Clip : byte
     hideoutClose = 24,
     ventEnter = 25,
     ventExit = 26,
+    pressurePlate = 27,
+    doorCreek = 28,
 
 
     //MonsterSound 51-70
