@@ -108,6 +108,7 @@ MonoBehaviour:
   finishedOpening: 0
   handle: {fileID: 60864579998396891}
   hiding: {fileID: 7400000, guid: f4cf7f1bfbf0d1d4597ad436347550b1, type: 2}
+  isTable: 1
 --- !u!95 &60864580116208186
 Animator:
   serializedVersion: 3

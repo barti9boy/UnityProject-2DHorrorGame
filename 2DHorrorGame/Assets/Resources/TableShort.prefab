@@ -277,6 +277,7 @@ MonoBehaviour:
   finishedOpening: 0
   handle: {fileID: 8968996086147261800}
   hiding: {fileID: 7400000, guid: f4cf7f1bfbf0d1d4597ad436347550b1, type: 2}
+  isTable: 1
 --- !u!114 &452506054717094054
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -84,6 +84,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
             animator.SetTrigger(animOpenDoor);
             animator.ResetTrigger(animCloseDoor);
             Debug.Log("PlayOpenDoorAnim RPC recieved");
@@ -94,6 +95,7 @@ public class DoorScript : MonoBehaviour, IInteractible
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
             animator.SetTrigger(animCloseDoor);
             animator.ResetTrigger(animOpenDoor);
             Debug.Log("PlayCloseDoorAnim RPC recieved");
