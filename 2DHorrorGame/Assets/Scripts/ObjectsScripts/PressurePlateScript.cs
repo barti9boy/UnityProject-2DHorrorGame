@@ -39,11 +39,9 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            photonView.RPC("RPC_RemoveFromPlayerCount", RpcTarget.All, photonView.ViewID);
-            if (playerStandingCount == 0)
-            {
-                photonView.RPC("RPC_OnPlayerLeave", RpcTarget.All, photonView.ViewID);
-            }
+
+            photonView.RPC("RPC_OnPlayerLeave", RpcTarget.All, photonView.ViewID);
+
         }
     }
     [PunRPC]
@@ -55,7 +53,6 @@ public class PressurePlateScript : MonoBehaviour
             animator.ResetTrigger(animIDOff);
             animator.SetTrigger(animIDOn);
             OnPlayerStand?.Invoke(this, EventArgs.Empty);
-            playerStandingCount++;
         }
     }
     [PunRPC]
@@ -66,14 +63,6 @@ public class PressurePlateScript : MonoBehaviour
             animator.ResetTrigger(animIDOn);
             animator.SetTrigger(animIDOff);
             OnPlayerLeave?.Invoke(this, EventArgs.Empty);
-        }
-    }
-    [PunRPC]
-    private void RPC_RemoveFromPlayerCount (int viewID)
-    {
-        if (photonView.ViewID == viewID)
-        {
-            playerStandingCount--;
         }
     }
 }

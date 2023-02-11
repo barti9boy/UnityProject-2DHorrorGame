@@ -4,16 +4,23 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 
-public class PressurePlateDoorScript : MonoBehaviour
+public class PressurePlateDoorScript : MonoBehaviour, IInteractible
 {
     [SerializeField] private List<PressurePlateScript> pressurePlates = new List<PressurePlateScript>();
     private Collider2D collider;
+    public int standingPlayerCount;
+    public bool isOpened;
 
     private Animator animator;
     private int animOpenDoor;
     private int animCloseDoor;
 
     private PhotonView photonView;
+
+    public GameObject interactionHighlight;
+    //private InteractionHighlight highlight;
+    //private readonly string closedText = "STAND ON A PRESSURE PLATE TO OPEN";
+    //private readonly string openedText = "";
 
     private void Awake()
     {
@@ -25,6 +32,9 @@ public class PressurePlateDoorScript : MonoBehaviour
             plate.OnPlayerStand += Plate_OnPlayerStand;
             plate.OnPlayerLeave += Plate_OnPlayerLeave;
         }
+        //highlight = GetComponentInChildren<InteractionHighlight>();
+        isOpened = false;
+        standingPlayerCount = 0;
     }
     private void Start()
     {
@@ -37,12 +47,19 @@ public class PressurePlateDoorScript : MonoBehaviour
     }
     private void Plate_OnPlayerLeave(object sender, EventArgs e)
     {
-        collider.enabled = true;
-        PlayCloseDoorAnim();
+        standingPlayerCount--;
+        if(standingPlayerCount == 0)
+        {
+            isOpened = false;
+            collider.enabled = true;
+            PlayCloseDoorAnim();
+        }
     }
 
     private void Plate_OnPlayerStand(object sender, EventArgs e)
     {
+        standingPlayerCount++;
+        isOpened = true;
         collider.enabled = false;
         PlayOpenDoorAnim();
     }
@@ -86,5 +103,32 @@ public class PressurePlateDoorScript : MonoBehaviour
             animator.ResetTrigger(animOpenDoor);
             Debug.Log("PlayCloseDoorAnim RPC recieved");
         }
+    }
+
+    //public void ChangeInteractionCanvasTransform(float playerX, float doorX)
+    //{
+    //    Debug.Log("big bobas");
+    //    if (playerX > doorX)
+    //    {
+    //        highlight.transform.localPosition = new Vector3(1.25f, 0, 0);
+    //    }
+    //    else
+    //    {
+    //        highlight.transform.localPosition = new Vector3(-1.25f, 0, 0);
+    //    }
+    //}
+    //public void ChangeInteractionCanvasText()
+    //{
+    //    if (isOpened) highlight.InteractionText.text = openedText;
+    //    else highlight.InteractionText.text = closedText;
+    //}
+    public void EnableInteractionHighlight()
+    {
+        interactionHighlight.SetActive(true);
+    }
+
+    public void DisableInteractionHighlight()
+    {
+        interactionHighlight.SetActive(false);
     }
 }
