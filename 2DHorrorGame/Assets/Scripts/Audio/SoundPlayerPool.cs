@@ -43,12 +43,13 @@ public class SoundPlayerPool : MonoBehaviour
         }
     }
 
-    private void InstantiateSoundPlayer()  
+    private GameObject InstantiateSoundPlayer()  
     {
         var soundPlayer = Instantiate(soundPlayerPrefab); 
         pooledSoundPlayers.Add(soundPlayer.GetComponent<SoundPlayer>());
         soundPlayer.gameObject.SetActive(false);
         amountOFPooledSoundPlayers++;
+        return soundPlayer;
     }
 
     private void InstantiateMusicPlayer()
@@ -68,7 +69,9 @@ public class SoundPlayerPool : MonoBehaviour
                 return pooledSoundPlayers[i];
             }
         }
-        return null; 
+        GameObject playerGameObject = InstantiateSoundPlayer();
+        SoundPlayer newPlayer = playerGameObject.GetComponent<SoundPlayer>();
+        return newPlayer;
     }
 
     public MusicPlayer RequestMusicPlayer()
