@@ -20,6 +20,7 @@ public class HideoutScript : MonoBehaviour
     private Animator animator;
     [SerializeField] public Transform handle;
     [SerializeField] public AnimationClip hiding;
+    [SerializeField] bool isTable;
 
     private PhotonView photonView;
     private int animIDHiding;
@@ -48,7 +49,8 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayHidingAnim()
     {
-        AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
+        if(!isTable)
+            AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
         isTaken = true;
         animator.SetTrigger(animIDHiding);
         animator.ResetTrigger(animIDLeaving);
@@ -58,7 +60,8 @@ public class HideoutScript : MonoBehaviour
 
     public void PlayLeaveAnim()
     {
-        AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
+        if (!isTable)
+            AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
         isTaken = false;
         animator.SetTrigger(animIDLeaving);
         animator.ResetTrigger(animIDHiding);
@@ -73,6 +76,8 @@ public class HideoutScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            if (!isTable)
+                AudioManager.Instance.PlaySoundAtPosition(Clip.doorOpen, transform.position);
             isTaken = true;
             animator.SetTrigger(animIDHiding);
             animator.ResetTrigger(animIDLeaving);
@@ -85,6 +90,8 @@ public class HideoutScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            if (!isTable)
+                AudioManager.Instance.PlaySoundAtPosition(Clip.doorClose, transform.position);
             isTaken = false;
             animator.SetTrigger(animIDLeaving);
             animator.ResetTrigger(animIDHiding);
