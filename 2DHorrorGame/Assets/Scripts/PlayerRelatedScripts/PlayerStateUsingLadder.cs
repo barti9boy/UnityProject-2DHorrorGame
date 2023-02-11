@@ -30,6 +30,7 @@ public class PlayerStateUsingLadder : PlayerStateBase
     public event EventHandler OnGoIntoVents;
     private float timer;
     private bool isTimerOn;
+    private bool wasAnimPlayedUp = false;
     public AnimationClip usingVentEntranceAnimation;
 
 
@@ -126,10 +127,23 @@ public class PlayerStateUsingLadder : PlayerStateBase
         {
             isGoingUp = false;
             OnLadderMoveUp?.Invoke(this, EventArgs.Empty);
-            CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderUpPointY, 2.5f, (newPosition) => playerTransform.position = new Vector2(playerTransform.position.x, newPosition),
+            CoroutineHandler.Instance.Lerp(playerTransform.position.y, ladderUpPointY, 2.5f, 
+                (newPosition) =>
+                {
+                    playerTransform.position = new Vector2(playerTransform.position.x, newPosition);
+                    if(Mathf.Abs(playerTransform.position.y - ladderUpPointY) < 2f && !wasAnimPlayedUp)
+                    {
+                        if (player.photonView.IsMine)
+                        {
+                            ladder.PlayOpenAnim();
+                            wasAnimPlayedUp = true;
+                        }
+                    }
+                },
                  (endPosition) =>
                  {
-                    inputManager.movementInputEnabled = true;
+                     wasAnimPlayedUp = false;
+                     inputManager.movementInputEnabled = true;
                     inputManager.interactionInputEnabled = true;
                     flashlight.transform.Rotate(0.0f, 0.0f, 90.0f);
                     if (isVentEntrance)

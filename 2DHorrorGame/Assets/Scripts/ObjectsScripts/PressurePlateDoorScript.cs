@@ -50,6 +50,7 @@ public class PressurePlateDoorScript : MonoBehaviour
 
     public void PlayOpenDoorAnim()
     {
+        AudioManager.OnPlaySoundAtPosition(Clip.doorCreek, transform.position);
         animator.SetTrigger(animOpenDoor);
         animator.ResetTrigger(animCloseDoor);
         photonView.RPC("RPC_PlayOpenDoorAnim", RpcTarget.Others, photonView.ViewID);
@@ -57,6 +58,7 @@ public class PressurePlateDoorScript : MonoBehaviour
     }
     public void PlayCloseDoorAnim()
     {
+        AudioManager.OnPlaySoundAtPosition(Clip.doorCreek, transform.position);
         animator.SetTrigger(animCloseDoor);
         animator.ResetTrigger(animOpenDoor);
         photonView.RPC("RPC_PlayCloseDoorAnim", RpcTarget.Others, photonView.ViewID);
@@ -68,6 +70,7 @@ public class PressurePlateDoorScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.OnPlaySoundAtPosition(Clip.doorCreek, transform.position);
             animator.SetTrigger(animOpenDoor);
             animator.ResetTrigger(animCloseDoor);
             Debug.Log("PlayOpenDoorAnim RPC recieved");
@@ -78,6 +81,7 @@ public class PressurePlateDoorScript : MonoBehaviour
     {
         if (photonView.ViewID == viewID)
         {
+            AudioManager.OnPlaySoundAtPosition(Clip.doorCreek, transform.position);
             animator.SetTrigger(animCloseDoor);
             animator.ResetTrigger(animOpenDoor);
             Debug.Log("PlayCloseDoorAnim RPC recieved");

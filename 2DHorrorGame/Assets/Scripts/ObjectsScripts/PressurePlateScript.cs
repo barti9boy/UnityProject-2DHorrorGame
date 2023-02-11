@@ -32,6 +32,7 @@ public class PressurePlateScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            AudioManager.OnPlaySoundAtPosition(Clip.pressurePlate, transform.position);
             photonView.RPC("RPC_OnPlayerStand", RpcTarget.All, photonView.ViewID);
         }
     }

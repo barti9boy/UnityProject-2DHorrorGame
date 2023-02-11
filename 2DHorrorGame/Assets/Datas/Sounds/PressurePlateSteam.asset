@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6480d73363301649884e818641b69df, type: 3}
-  m_Name: StepOnPlate
+  m_Name: PressurePlateSteam
   m_EditorClassIdentifier: 
-  clip: 0
-  audioClip: {fileID: 0}
+  clip: 27
+  audioClip: {fileID: 8300000, guid: dabdd33b2356801409cd2920b019cc57, type: 3}
