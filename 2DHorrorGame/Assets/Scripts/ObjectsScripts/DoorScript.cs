@@ -122,7 +122,8 @@ public class DoorScript : MonoBehaviour, IInteractible
     {
         if(other.CompareTag("Player"))
         {
-            interactionTime = 0;
+            if (other.GetComponent<PhotonView>().IsMine) 
+                interactionTime = 0;
         }
     }
     public void DoorUnlock(IPickableObject[] items, bool isInteractionButtonHeld)
