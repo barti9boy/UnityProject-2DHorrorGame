@@ -27,16 +27,13 @@ public class InteractionHighlight : MonoBehaviour
         spriteRenderer.color = new Vector4(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, colorAlpha);
         spriteRenderer.material = material;
         interactionText = GetComponentInChildren<TextMeshProUGUI>();
-    }
-    private void Start()
-    {
-        
         if (isTextActive)
         {
             interactionText.text = interactionTextContent;
             interactionText.gameObject.SetActive(false);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
