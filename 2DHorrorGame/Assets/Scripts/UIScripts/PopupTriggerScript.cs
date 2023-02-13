@@ -8,10 +8,13 @@ public class PopupTriggerScript : MonoBehaviour
     public GameObject popup;
     private PopupScript popupScript;
     [Header("Input message in CAPS")]
-    [SerializeField] private string message;
+    private string message;
     private void Awake()
     {
         popupScript = popup.GetComponent<PopupScript>();
+        message = "DAY 1543, ID:203 \n ";
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +23,7 @@ public class PopupTriggerScript : MonoBehaviour
         {
             popupScript.PopupSetActive(message);
         }
+        this.gameObject.SetActive(false);
     }
 
 
