@@ -22,6 +22,7 @@ public class PopupTriggerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             popupScript.PopupSetActive(message);
+            AudioManager.Instance.PlaySoundAtPosition(Clip.NotePickUp, transform.position);
         }
         this.gameObject.SetActive(false);
     }
