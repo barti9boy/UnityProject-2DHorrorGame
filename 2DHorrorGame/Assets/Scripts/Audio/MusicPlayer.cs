@@ -13,10 +13,10 @@ public class MusicPlayer : AudioPlayer
     private void Update()
     {
         //Check if clip is still playing, if not OnClipEnd
-        if (!source.isPlaying)
-        {
-            OnClipEnd();
-        }
+        //if (!source.isPlaying)
+        //{
+        //    OnClipEnd();
+        //}
     }
     public void PlayGlobalMusic(Sound sound)//, SoundPlayerPool pool)
     {
