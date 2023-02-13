@@ -11,16 +11,20 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
     public SpawnPlayers spawnPlayersScript;
     public event EventHandler<GameObject> OnAfterPlayerLoaded;
     private GameObject player;
+    bool m_IsPlaying = false;
 
     private void Awake()
     {
         spawnPlayersScript = transform.GetComponentInChildren<SpawnPlayers>();
         spawnPlayersScript.OnPlayerLoaded += SpawnPlayersScript_OnPlayerLoaded;
     }
-    private void Start()
+    void Update()
     {
-        AudioManager.Instance.PlayAmbient(Clip.widnAmbient);
-
+        if (AudioManager.Instance != null && !m_IsPlaying)
+        {
+            AudioManager.Instance.PlayAmbient(Clip.widnAmbient);
+            m_IsPlaying = true;
+        }
     }
     private void SpawnPlayersScript_OnPlayerLoaded(object sender, GameObject e)
     {

@@ -26,13 +26,10 @@ public class SoundPlayerPool : MonoBehaviour
             Debug.Log("Instantiated pool");
             Instance = this;
         }
-    }
-
-    private void Start()
-    {
         pooledSoundPlayers = new List<SoundPlayer>();
         pooledMusicPlayers = new List<MusicPlayer>();
     }
+
 
     public void WarmUp(int amountOfPooledItems)
     {

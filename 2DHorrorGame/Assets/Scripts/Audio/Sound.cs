@@ -37,6 +37,7 @@ public enum Clip : byte
     //ItemSounds 71-100
     ItemPickup = 71,
     UnlockingDoors = 72,
-    ItemDrop = 73
+    ItemDrop = 73,
+    NotePickUp = 74
 
 }
