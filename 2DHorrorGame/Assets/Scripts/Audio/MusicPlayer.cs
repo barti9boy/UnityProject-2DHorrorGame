@@ -20,7 +20,8 @@ public class MusicPlayer : AudioPlayer
     }
     public void PlayGlobalMusic(Sound sound)//, SoundPlayerPool pool)
     {
-        source.PlayOneShot(sound.audioClip);
+        source.clip = sound.audioClip;
+        source.Play();
     }
 
     public void MutePlayer(bool shouldBeMuted)

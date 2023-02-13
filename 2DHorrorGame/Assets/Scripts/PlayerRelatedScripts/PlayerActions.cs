@@ -120,6 +120,15 @@ public static class PlayerActions
                 }
             }
         }
+
+        //if (collision.CompareTag("ppDoors"))
+        //{
+        //    if (collision.gameObject.GetComponent<PressurePlateDoorScript>())
+        //    {
+        //        collision.gameObject.GetComponent<PressurePlateDoorScript>().ChangeInteractionCanvasTransform(player.transform.position.x, collision.transform.position.x);
+        //    }
+        //}
+
         if (player.currentState.inputManager.isInteractionButtonClicked)
         {
             

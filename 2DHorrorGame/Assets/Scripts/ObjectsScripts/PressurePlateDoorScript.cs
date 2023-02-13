@@ -18,9 +18,9 @@ public class PressurePlateDoorScript : MonoBehaviour, IInteractible
     private PhotonView photonView;
 
     public GameObject interactionHighlight;
-    //private InteractionHighlight highlight;
-    //private readonly string closedText = "STAND ON A PRESSURE PLATE TO OPEN";
-    //private readonly string openedText = "";
+    private InteractionHighlight highlight;
+    private readonly string closedText = "STAND ON A PRESSURE PLATE TO OPEN";
+    private readonly string openedText = "";
 
     private void Awake()
     {
@@ -32,13 +32,14 @@ public class PressurePlateDoorScript : MonoBehaviour, IInteractible
             plate.OnPlayerStand += Plate_OnPlayerStand;
             plate.OnPlayerLeave += Plate_OnPlayerLeave;
         }
-        //highlight = GetComponentInChildren<InteractionHighlight>();
+        highlight = GetComponentInChildren<InteractionHighlight>();
         isOpened = false;
         standingPlayerCount = 0;
     }
     private void Start()
     {
         AssignAnimationIDs();
+        highlight.InteractionText.text = closedText;
     }
     private void AssignAnimationIDs()
     {
@@ -52,6 +53,7 @@ public class PressurePlateDoorScript : MonoBehaviour, IInteractible
         {
             isOpened = false;
             collider.enabled = true;
+            highlight.InteractionText.text = closedText;
             PlayCloseDoorAnim();
         }
     }
@@ -61,6 +63,7 @@ public class PressurePlateDoorScript : MonoBehaviour, IInteractible
         standingPlayerCount++;
         isOpened = true;
         collider.enabled = false;
+        highlight.InteractionText.text = openedText;
         PlayOpenDoorAnim();
     }
 
@@ -105,23 +108,26 @@ public class PressurePlateDoorScript : MonoBehaviour, IInteractible
         }
     }
 
-    //public void ChangeInteractionCanvasTransform(float playerX, float doorX)
-    //{
-    //    Debug.Log("big bobas");
-    //    if (playerX > doorX)
-    //    {
-    //        highlight.transform.localPosition = new Vector3(1.25f, 0, 0);
-    //    }
-    //    else
-    //    {
-    //        highlight.transform.localPosition = new Vector3(-1.25f, 0, 0);
-    //    }
-    //}
-    //public void ChangeInteractionCanvasText()
-    //{
-    //    if (isOpened) highlight.InteractionText.text = openedText;
-    //    else highlight.InteractionText.text = closedText;
-    //}
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("big bobas");
+            if (collision.transform.position.x > collision.transform.position.x)
+            {
+                highlight.CanvasRect.localPosition = new Vector3(2f, 0, 0);
+            }
+            else
+            {
+                highlight.CanvasRect.localPosition = new Vector3(2f, 0, 0);
+            }
+        }
+    }
+    public void ChangeInteractionCanvasText()
+    {
+        if (isOpened) highlight.InteractionText.text = openedText;
+        else highlight.InteractionText.text = closedText;
+    }
     public void EnableInteractionHighlight()
     {
         interactionHighlight.SetActive(true);
