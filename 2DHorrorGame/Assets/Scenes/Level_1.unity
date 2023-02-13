@@ -2614,8 +2614,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886532056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.23, y: -1.07, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -23.2184, y: -1.07, z: 0}
+  m_LocalScale: {x: 0.9911, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1885745260}
   m_RootOrder: 2
@@ -3985,6 +3985,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 40147046, guid: 2bfdbbf19e6dac144960e94f8caa1a93, type: 3}
+      propertyPath: isLocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 40147046, guid: 2bfdbbf19e6dac144960e94f8caa1a93, type: 3}
       propertyPath: itemIdToUnlock
       value: 9
