@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PopupTriggerScript : MonoBehaviour
 {
-    
     public GameObject popup;
     private PopupScript popupScript;
     [Header("Input message in CAPS")]
@@ -21,10 +21,15 @@ public class PopupTriggerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            popupScript.PopupSetActive(message);
-            AudioManager.Instance.PlaySoundAtPosition(Clip.NotePickUp, transform.position);
+            if(collision.GetComponent<PhotonView>().IsMine)
+            {
+                popupScript.PopupSetActive(message);
+                AudioManager.Instance.PlaySoundAtPosition(Clip.NotePickUp, transform.position);
+                this.gameObject.SetActive(false);
+            }
+            
         }
-        this.gameObject.SetActive(false);
+        
     }
 
 
