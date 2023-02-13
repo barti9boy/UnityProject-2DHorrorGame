@@ -16,6 +16,7 @@ TagManager:
   - Closet
   - Table
   - Battery
+  - ppDoors
   layers:
   - Default
   - TransparentFX
